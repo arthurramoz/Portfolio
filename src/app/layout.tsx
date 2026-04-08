@@ -1,8 +1,6 @@
-import Navbar from '@/components/Navbar/Navbar';
 import Providers from '@/components/Providers/Providers';
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
-
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -10,7 +8,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
+  title: 'Portfolio',
   description: "Arthur's Portfolio",
   icons: {
     icon: '/logo.svg',
@@ -24,13 +22,8 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="pt">
-      <body
-        className={`${plusJakarta.variable} ${plusJakarta.className}`}
-      >
-        <Providers>
-          <Navbar />
-          {children}
-        </Providers>
+      <body className={`${plusJakarta.variable} ${plusJakarta.className}`}>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

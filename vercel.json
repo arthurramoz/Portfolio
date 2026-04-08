@@ -1,0 +1,24 @@
+{
+  "redirects": [
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/sobre-mim",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/projetos",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/cursos",
+      "destination": "/",
+      "permanent": false
+    }
+  ]
+}

@@ -33,11 +33,24 @@ const UnderDevelopment = () => {
         </WipBadge>
       </motion.div>
 
-      <motion.div {...fade(0.2)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-        <WipTitle>Algo incrível<br />está chegando.</WipTitle>
+      <motion.div
+        {...fade(0.2)}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '1rem',
+        }}
+      >
+        <WipTitle>
+          Algo incrível
+          <br />
+          está chegando.
+        </WipTitle>
         <WipDivider />
         <WipSubtitle>
-          Estou construindo meu portfólio com muito cuidado. Em breve você vai poder conhecer meus projetos e trajetória.
+          Estou construindo meu portfólio com muito cuidado. Em breve você vai
+          poder conhecer meus projetos e trajetória.
         </WipSubtitle>
       </motion.div>
     </WipWrapper>

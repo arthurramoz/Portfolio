@@ -10,14 +10,13 @@ import StyledComponentsRegistry from '@/libs/registry';
 import { GlobalStyle } from '@/styles/global';
 import { theme } from '@/styles/theme';
 
-
 const Providers = ({ children }: PropsWithChildren) => {
   return (
     <StyledComponentsRegistry>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <NextNProgress
-          color={theme.colors.orange}
+          color={theme.colors.primary1}
           options={{ easing: 'ease', speed: 500 }}
         />
         {children}

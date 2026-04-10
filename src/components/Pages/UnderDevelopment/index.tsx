@@ -129,8 +129,8 @@ const UnderDevelopment = () => {
                     <Image
                       src="/me/2.jpg"
                       alt="Arthur Moreira Ramos"
-                      width={220}
-                      height={220}
+                      width={180}
+                      height={180}
                       style={{ objectFit: 'cover', objectPosition: 'center' }}
                     />
                   </AboutPhoto>

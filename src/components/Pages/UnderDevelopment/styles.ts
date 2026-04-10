@@ -30,7 +30,7 @@ export const WipLogo = styled.img`
 `;
 
 export const WipTitle = styled.h1`
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: 3.5rem;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.title};
   letter-spacing: -0.03em;
@@ -133,8 +133,8 @@ export const AboutCard = styled.div`
 `;
 
 export const AboutPhoto = styled.div`
-  width: 220px;
-  height: 220px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid transparent;

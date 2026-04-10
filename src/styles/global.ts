@@ -17,12 +17,6 @@ export const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
-  html {
-    @media (max-width: 1440px) {
-      font-size: 93.75%;
-    }
-  }
-
   body {
     min-height: 100vh;
     text-rendering: optimizeLegibility;

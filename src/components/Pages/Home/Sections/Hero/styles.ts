@@ -20,6 +20,7 @@ export const Content = styled.div`
   justify-content: space-between;
   width: 100%;
   gap: 20px;
+  padding-left: 40px;
 
   @media (max-width: 900px) {
     flex-direction: column;
@@ -115,5 +116,3 @@ export const IllustrationBlock = styled.div`
     max-width: 320px;
   }
 `;
-
-

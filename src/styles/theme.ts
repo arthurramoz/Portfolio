@@ -42,6 +42,15 @@ export const lightTheme = {
     navbarCtaText: '#333',
 
     dropdownBg: '#ffffff',
+
+    footerBg: '#1a1a1f',
+    footerText: 'rgba(255, 255, 255, 0.5)',
+    footerHeading: '#ffffff',
+    footerLink: 'rgba(255, 255, 255, 0.6)',
+    footerLinkHover: '#ffffff',
+    footerBorder: 'rgba(255, 255, 255, 0.08)',
+    footerIcon: 'rgba(255, 255, 255, 0.4)',
+    footerIconHover: '#ffffff',
   },
   max: '1440px',
 } as const;
@@ -83,6 +92,15 @@ export const darkTheme = {
     navbarCtaText: '#0a0a0b',
 
     dropdownBg: '#2a2a30',
+
+    footerBg: '#111114',
+    footerText: 'rgba(255, 255, 255, 0.4)',
+    footerHeading: '#e0e0e4',
+    footerLink: 'rgba(255, 255, 255, 0.5)',
+    footerLinkHover: '#e0e0e4',
+    footerBorder: 'rgba(255, 255, 255, 0.06)',
+    footerIcon: 'rgba(255, 255, 255, 0.35)',
+    footerIconHover: '#e0e0e4',
   },
   max: '1440px',
 } as const;

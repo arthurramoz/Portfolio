@@ -1,6 +1,7 @@
 'use client';
 
 import Navbar from '@/components/Navbar/Navbar';
+import Footer from '@/components/Footer/Footer';
 import { BlobLeft, BlobRight, Main } from '@/app/styles';
 import { PropsWithChildren } from 'react';
 
@@ -24,8 +25,10 @@ const PortfolioLayout = ({ children }: PropsWithChildren) => {
         />
         {children}
       </Main>
+      <Footer />
     </>
   );
 };
 
 export default PortfolioLayout;
+

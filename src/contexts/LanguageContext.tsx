@@ -29,6 +29,9 @@ const dictionaries = {
     'settings.theme.light': 'Claro',
     'settings.theme.dark': 'Escuro',
     'settings.language': 'Idioma',
+    'footer.navigation': 'Navegação',
+    'footer.contact': 'Contato',
+    'footer.copyright': 'Todos os direitos reservados.',
   },
   en: {
     'hero.greeting': 'Hi, I am',
@@ -54,6 +57,9 @@ const dictionaries = {
     'settings.theme.light': 'Light',
     'settings.theme.dark': 'Dark',
     'settings.language': 'Language',
+    'footer.navigation': 'Navigation',
+    'footer.contact': 'Contact',
+    'footer.copyright': 'All rights reserved.',
   },
 } as const;
 

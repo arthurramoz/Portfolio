@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useGitHubCommits } from '@/hooks/useGitHubCommits';
 import {
   ContentWrapper,
   Paragraph,
@@ -21,7 +22,6 @@ import {
 const STATS = [
   { value: '15+', labelKey: 'exp.stats.corporate' as const },
   { value: '1', labelKey: 'exp.stats.fullstack' as const },
-  { value: '2K+', labelKey: 'exp.stats.commits' as const },
   { value: '28', labelKey: 'exp.stats.certifications' as const },
 ];
 
@@ -61,6 +61,7 @@ const itemVariants = {
 
 const Experience = () => {
   const { t } = useLanguage();
+  const { commits } = useGitHubCommits();
 
   return (
     <Section id="experiencia">
@@ -116,6 +117,16 @@ const Experience = () => {
                 </StatCard>
               </motion.div>
             ))}
+            <motion.div variants={itemVariants}>
+              <StatCard>
+                <StatNumber>
+                  {commits !== null
+                    ? commits.toLocaleString()
+                    : '...'}
+                </StatNumber>
+                <StatLabel>{t('exp.stats.commits' as Parameters<typeof t>[0])}</StatLabel>
+              </StatCard>
+            </motion.div>
           </StatsGrid>
         </ContentWrapper>
       </motion.div>

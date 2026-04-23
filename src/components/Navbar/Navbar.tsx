@@ -1,15 +1,17 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { FiSettings, FiMoon, FiSun, FiGlobe } from 'react-icons/fi';
 import { useAppTheme } from '@/contexts/ThemeContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import {
+  DropdownDivider,
   DropdownItem,
   DropdownLabel,
   DropdownMenu,
   DropdownValue,
+  DropdownVersion,
   FlagImg,
   Nav,
   NavbarContainer,
@@ -20,6 +22,7 @@ import {
   NavLogoText,
   SettingsButton,
   SettingsWrapper,
+  VersionBadge,
 } from './styles';
 
 const NAV_LINKS = [
@@ -36,10 +39,11 @@ const Navbar = () => {
   const { language, toggleLanguage, t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const settingsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = NAV_LINKS.map((link) => document.getElementById(link.id));
+      const sections = NAV_LINKS.map(link => document.getElementById(link.id));
       const scrollPosition = window.scrollY + window.innerHeight / 3;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -54,6 +58,20 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        settingsRef.current &&
+        !settingsRef.current.contains(event.target as Node)
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const handleNavClick = (id: string) => {
@@ -87,7 +105,11 @@ const Navbar = () => {
             key={id}
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 + i * 0.07, duration: 0.35, ease: 'easeOut' }}
+            transition={{
+              delay: 0.2 + i * 0.07,
+              duration: 0.35,
+              ease: 'easeOut',
+            }}
           >
             <NavLink
               $selected={activeSection === id}
@@ -118,11 +140,8 @@ const Navbar = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.3, duration: 0.4, ease: 'easeOut' }}
       >
-        <SettingsWrapper
-          onMouseEnter={() => setIsMenuOpen(true)}
-          onMouseLeave={() => setIsMenuOpen(false)}
-        >
-          <SettingsButton>
+        <SettingsWrapper ref={settingsRef}>
+          <SettingsButton onClick={() => setIsMenuOpen(prev => !prev)}>
             <FiSettings size={18} />
           </SettingsButton>
 
@@ -135,10 +154,16 @@ const Navbar = () => {
                 transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
               >
                 <DropdownItem onClick={toggleTheme}>
-                  {themeMode === 'light' ? <FiMoon size={16} /> : <FiSun size={16} />}
+                  {themeMode === 'light' ? (
+                    <FiMoon size={16} />
+                  ) : (
+                    <FiSun size={16} />
+                  )}
                   <DropdownLabel>{t('settings.theme')}</DropdownLabel>
                   <DropdownValue>
-                    {themeMode === 'light' ? t('settings.theme.light') : t('settings.theme.dark')}
+                    {themeMode === 'light'
+                      ? t('settings.theme.light')
+                      : t('settings.theme.dark')}
                   </DropdownValue>
                 </DropdownItem>
 
@@ -154,6 +179,13 @@ const Navbar = () => {
                     alt={language === 'pt' ? 'Português' : 'English'}
                   />
                 </DropdownItem>
+
+                <DropdownDivider />
+
+                <DropdownVersion>
+                  <span>v0.5</span>
+                  <VersionBadge>beta</VersionBadge>
+                </DropdownVersion>
               </DropdownMenu>
             )}
           </AnimatePresence>

@@ -124,9 +124,7 @@ export const DropdownMenu = styled(motion.div)`
   min-width: 200px;
   padding: 8px;
   border-radius: 16px;
-  background: ${({ theme }) => theme.colors.navbarBg};
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: ${({ theme }) => theme.colors.dropdownBg};
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   box-shadow: 0 8px 32px ${({ theme }) => theme.colors.navbarShadow};
 `;
@@ -169,4 +167,31 @@ export const FlagImg = styled.img`
   height: 16px;
   object-fit: cover;
   border-radius: 3px;
+`;
+
+export const DropdownDivider = styled.div`
+  height: 1px;
+  margin: 6px 8px;
+  background: ${({ theme }) => theme.colors.navbarBorder};
+`;
+
+export const DropdownVersion = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.navbarLinkInactive};
+`;
+
+export const VersionBadge = styled.span`
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: ${({ theme }) => theme.colors.primary1}20;
+  color: ${({ theme }) => theme.colors.primary1};
 `;

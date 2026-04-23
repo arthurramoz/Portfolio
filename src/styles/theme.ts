@@ -40,6 +40,8 @@ export const lightTheme = {
     navbarLinkBgHover: 'rgba(26, 26, 26, 0.04)',
     navbarCtaBg: '#90e0ef',
     navbarCtaText: '#333',
+
+    dropdownBg: '#ffffff',
   },
   max: '1440px',
 } as const;
@@ -79,6 +81,8 @@ export const darkTheme = {
     navbarLinkBgHover: 'rgba(255, 255, 255, 0.05)',
     navbarCtaBg: '#48cae4',
     navbarCtaText: '#0a0a0b',
+
+    dropdownBg: '#2a2a30',
   },
   max: '1440px',
 } as const;

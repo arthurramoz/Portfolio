@@ -43,7 +43,7 @@ const ChangelogPage = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
         >
-          <PageTitle>Changelog</PageTitle>
+          <PageTitle>Versões</PageTitle>
           <PageDescription>
             Histórico completo de atualizações e melhorias do portfolio.
           </PageDescription>

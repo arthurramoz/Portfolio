@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
+import GitHubGraph from './GitHubGraph';
 import {
   ContentWrapper,
   Paragraph,
@@ -17,8 +18,8 @@ import {
 } from './styles';
 
 const STATS = [
-  { value: '10+', labelKey: 'about.stats.projects' as const },
-  { value: '4+', labelKey: 'about.stats.years' as const },
+  { value: '4', labelKey: 'about.stats.projects' as const },
+  { value: '2+', labelKey: 'about.stats.years' as const },
 ];
 
 const About = () => {
@@ -82,6 +83,9 @@ const About = () => {
                 </StatCard>
               </motion.div>
             ))}
+            <motion.div variants={itemVariants} style={{ gridColumn: '1 / -1' }}>
+              <GitHubGraph />
+            </motion.div>
           </StatsColumn>
         </ContentWrapper>
       </motion.div>

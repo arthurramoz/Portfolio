@@ -5,34 +5,45 @@ export interface VersionEntry {
   highlights: string[];
 }
 
-export const CURRENT_VERSION = 'v0.5';
+export const CURRENT_VERSION = 'v0.6';
 export const CURRENT_LABEL = 'beta';
 
 export const VERSION_HISTORY: VersionEntry[] = [
   {
-    version: 'v0.5',
+    version: 'v0.6',
     date: '23/04/2026',
     label: 'beta',
     highlights: [
-      'Página de projetos (pessoais, empresa, faculdade)',
-      'Footer completo com navegação, redes sociais e changelog',
-      'Galeria de fotos pessoais',
+      'Páginas de projetos (pessoais, empresa, faculdade)',
+      'Página de changelog com timeline editorial',
+      'Dropdown de projetos na topbar e footer',
+      'Footer com navegação colapsável e histórico de versões',
+      'Stats do About refatorados para array dinâmico',
+    ],
+  },
+  {
+    version: 'v0.5',
+    date: '21/04/2026',
+    label: 'beta',
+    highlights: [
+      'Footer completo com navegação, redes sociais e contato',
+      'Galeria de fotos pessoais com grid responsivo',
       'Menu de definições com clique e badge de versão',
     ],
   },
   {
     version: 'v0.4',
-    date: '23/04/2026',
+    date: '18/04/2026',
     label: 'beta',
     highlights: [
       'Seção About com bio e cards de estatísticas',
-      'Navbar com scroll tracking e dropdown de projetos',
+      'Navbar com scroll tracking e animações',
       'Botão Prosseguir com scroll suave',
     ],
   },
   {
     version: 'v0.3',
-    date: '23/04/2026',
+    date: '14/04/2026',
     label: 'alpha',
     highlights: [
       'Dark mode e light mode com persistência',
@@ -42,7 +53,7 @@ export const VERSION_HISTORY: VersionEntry[] = [
   },
   {
     version: 'v0.2',
-    date: '23/04/2026',
+    date: '10/04/2026',
     label: 'alpha',
     highlights: [
       'i18n: suporte PT-BR e EN-US com bandeiras',

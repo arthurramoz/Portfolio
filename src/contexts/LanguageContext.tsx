@@ -1,6 +1,12 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from 'react';
 
 export type Language = 'pt' | 'en';
 
@@ -8,15 +14,19 @@ const dictionaries = {
   pt: {
     'hero.greeting': 'Olá, eu sou',
     'hero.role': 'Software Engineer & Full Stack',
-    'hero.description': 'Construindo experiências digitais modernas, fluidas e focadas na excelência de produto, do design elegante à arquitetura robusta.',
+    'hero.description':
+      'Construindo experiências digitais modernas, fluidas e focadas na excelência de produto, do design elegante à arquitetura robusta.',
     'hero.btn.primary': 'Prosseguir',
     'hero.btn.secondary': 'Entrar em Contato',
     'about.title': 'Sobre mim',
     'about.subtitle': 'Engenheiro de Software & Full Stack',
-    'about.p1': 'Desenvolvedor de Software com forte especialização no Front-End (React.js, Next.js, TypeScript) e experiência sólida na arquitetura Back-End (Node.js, Prisma) para a construção de produtos SaaS completos.',
-    'about.p2': 'Tenho experiência em transformar designs do Figma em aplicações web rápidas e escaláveis, unindo código limpo com regras de negócios complexas.',
-    'about.p3': 'Já atuei em mais de 10 projetos corporativos e trabalhos como freelancer internacional. Faço a ponte entre o design UI/UX e boas soluções técnicas, liderando o desenvolvimento técnico de plataformas de ponta a ponta.',
-    'about.stats.projects': 'Projetos B2B',
+    'about.p1':
+      'Desenvolvedor de Software com forte especialização no Front-End (React.js, Next.js, TypeScript) e experiência sólida na arquitetura Back-End (Node.js, Prisma) para a construção de produtos SaaS completos.',
+    'about.p2':
+      'Tenho experiência em transformar designs do Figma em aplicações web rápidas e escaláveis, unindo código limpo com regras de negócios complexas.',
+    'about.p3':
+      'Já atuei em mais de 10 projetos corporativos e trabalhos como freelancer internacional. Faço a ponte entre o design UI/UX e boas soluções técnicas, liderando o desenvolvimento técnico de plataformas de ponta a ponta.',
+    'about.stats.projects': 'Projetos B2B & B2C',
     'about.stats.years': 'Anos de Exp',
     'gallery.title': 'Galeria',
     'gallery.subtitle': 'Momentos & Bastidores',
@@ -33,6 +43,8 @@ const dictionaries = {
     'footer.contact': 'Contato',
     'footer.copyright': 'Todos os direitos reservados.',
     'footer.changelog.viewAll': 'Ver todas as versões →',
+    'footer.bio': 'Software Engineer & Full Stack — construindo produtos digitais modernos, do design à arquitetura. Focado em React, Next.js e TypeScript.',
+    'footer.versions': 'Versões',
     'projects.personal': 'Pessoais',
     'projects.company': 'Empresa',
     'projects.university': 'Faculdade',
@@ -47,15 +59,19 @@ const dictionaries = {
   en: {
     'hero.greeting': 'Hi, I am',
     'hero.role': 'Software Engineer & Full Stack',
-    'hero.description': 'Building modern, fluid digital experiences focused on product excellence, from elegant design to robust architecture.',
+    'hero.description':
+      'Building modern, fluid digital experiences focused on product excellence, from elegant design to robust architecture.',
     'hero.btn.primary': 'Continue',
     'hero.btn.secondary': 'Get in Touch',
     'about.title': 'About me',
     'about.subtitle': 'Software Engineer & Full Stack',
-    'about.p1': 'Software Developer with strong specialization in Front-End (React.js, Next.js, TypeScript) and solid experience in Back-End architecture (Node.js, Prisma) for building complete SaaS products.',
-    'about.p2': 'I have experience transforming Figma designs into fast and scalable web applications, uniting clean code with complex business rules.',
-    'about.p3': 'I have worked on more than 10 corporate projects and as an international freelancer. I bridge the gap between UI/UX design and technical solutions, leading end-to-end technical development.',
-    'about.stats.projects': 'B2B Projects',
+    'about.p1':
+      'Software Developer with strong specialization in Front-End (React.js, Next.js, TypeScript) and solid experience in Back-End architecture (Node.js, Prisma) for building complete SaaS products.',
+    'about.p2':
+      'I have experience transforming Figma designs into fast and scalable web applications, uniting clean code with complex business rules.',
+    'about.p3':
+      'I have worked on more than 10 corporate projects and as an international freelancer. I bridge the gap between UI/UX design and technical solutions, leading end-to-end technical development.',
+    'about.stats.projects': 'B2B & B2C Projects',
     'about.stats.years': 'Years Exp',
     'gallery.title': 'Gallery',
     'gallery.subtitle': 'Moments & Behind the Scenes',
@@ -72,6 +88,8 @@ const dictionaries = {
     'footer.contact': 'Contact',
     'footer.copyright': 'All rights reserved.',
     'footer.changelog.viewAll': 'View all versions →',
+    'footer.bio': 'Software Engineer & Full Stack — building modern digital products, from design to architecture. Focused on React, Next.js and TypeScript.',
+    'footer.versions': 'Versions',
     'projects.personal': 'Personal',
     'projects.company': 'Company',
     'projects.university': 'University',

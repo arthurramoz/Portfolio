@@ -53,11 +53,7 @@ const Footer = () => {
       <FooterContent>
         <FooterBrand>
           <BrandName>Arthur Ramos</BrandName>
-          <BrandDescription>
-            Software Engineer & Full Stack — construindo produtos digitais
-            modernos, do design à arquitetura. Focado em React, Next.js e
-            TypeScript.
-          </BrandDescription>
+          <BrandDescription>{t('footer.bio')}</BrandDescription>
           <SocialRow>
             <SocialLink
               href="https://github.com/arthurramoz"
@@ -106,7 +102,12 @@ const Footer = () => {
                 animate={{ height: 'auto', opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.25, ease: 'easeInOut' }}
-                style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column', gap: '16px' }}
+                style={{
+                  overflow: 'hidden',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '16px',
+                }}
               >
                 <FooterLink onClick={() => router.push('/projetos/pessoais')}>
                   {t('projects.personal')}
@@ -135,9 +136,9 @@ const Footer = () => {
         </FooterColumn>
 
         <FooterColumn>
-          <ColumnTitle>Versões</ColumnTitle>
+          <ColumnTitle>{t('footer.versions')}</ColumnTitle>
           <VersionList>
-            {VERSION_HISTORY.slice(0, 5).map(entry => (
+            {VERSION_HISTORY.slice(0, 4).map(entry => (
               <VersionItem key={entry.version}>
                 <span>{entry.version}</span>
                 <VersionTag $active={entry.version === CURRENT_VERSION}>

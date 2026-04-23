@@ -1,8 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { usePathname } from 'next/navigation';
 import { FiSettings, FiMoon, FiSun, FiGlobe } from 'react-icons/fi';
 import { useAppTheme } from '@/contexts/ThemeContext';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -24,19 +23,46 @@ import {
 } from './styles';
 
 const NAV_LINKS = [
-  { key: 'nav.home' as const, link: '/home' },
-  { key: 'nav.about' as const, link: '/sobre-mim' },
-  { key: 'nav.projects' as const, link: '/projetos' },
-  { key: 'nav.courses' as const, link: '/cursos' },
+  { key: 'nav.home' as const, id: 'home' },
+  { key: 'nav.about' as const, id: 'sobre-mim' },
+  { key: 'nav.projects' as const, id: 'projetos' },
+  { key: 'nav.courses' as const, id: 'cursos' },
 ];
 
 const MotionNavbarContainer = motion.create(NavbarContainer);
 
 const Navbar = () => {
-  const pathname = usePathname();
   const { themeMode, toggleTheme } = useAppTheme();
   const { language, toggleLanguage, t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = NAV_LINKS.map((link) => document.getElementById(link.id));
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(NAV_LINKS[i].id);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleNavClick = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setActiveSection(id);
+    }
+  };
 
   return (
     <MotionNavbarContainer
@@ -49,40 +75,38 @@ const Navbar = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.15, duration: 0.4, ease: 'easeOut' }}
       >
-        <NavLogo>
+        <NavLogo onClick={() => handleNavClick('home')}>
           <NavLogoImg src="/logo.svg" alt="logo" />
           <NavLogoText>Arthur's Portfolio</NavLogoText>
         </NavLogo>
       </motion.div>
 
       <Nav>
-        {NAV_LINKS.map(({ key, link }, i) => (
+        {NAV_LINKS.map(({ key, id }, i) => (
           <motion.div
-            key={link}
+            key={id}
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 + i * 0.07, duration: 0.35, ease: 'easeOut' }}
           >
-            <NavLink $selected={pathname.startsWith(link)}>
+            <NavLink
+              $selected={activeSection === id}
+              onClick={() => handleNavClick(id)}
+            >
               {t(key)}
-              <AnimatePresence>
-                {pathname.startsWith(link) && (
-                  <motion.span
-                    layoutId="navbar-indicator"
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      borderRadius: '9999px',
-                      background: 'rgba(26, 26, 26, 0.06)',
-                      zIndex: -1,
-                    }}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.25 }}
-                  />
-                )}
-              </AnimatePresence>
+              {activeSection === id && (
+                <motion.span
+                  layoutId="navbar-indicator"
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    borderRadius: '9999px',
+                    background: 'rgba(26, 26, 26, 0.06)',
+                    zIndex: -1,
+                  }}
+                  transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                />
+              )}
             </NavLink>
           </motion.div>
         ))}

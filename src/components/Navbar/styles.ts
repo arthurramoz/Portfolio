@@ -73,14 +73,11 @@ export const NavLink = styled.p<NavLinkProps>`
     $selected
       ? theme.colors.navbarLinkActive
       : theme.colors.navbarLinkInactive};
-  background: ${({ $selected, theme }) =>
-    $selected ? theme.colors.navbarLinkBgActive : 'transparent'};
-  transition: all 0.2s ease;
+  transition: color 0.2s ease;
   cursor: pointer;
 
   &:hover {
     color: ${({ theme }) => theme.colors.navbarLinkActive};
-    background: ${({ theme }) => theme.colors.navbarLinkBgHover};
   }
 `;
 

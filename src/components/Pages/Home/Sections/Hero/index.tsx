@@ -22,7 +22,7 @@ const Hero = () => {
   const { t } = useLanguage();
 
   return (
-    <Section>
+    <Section id="home">
       <Content>
         <TextBlock>
           <motion.div
@@ -64,7 +64,7 @@ const Hero = () => {
             <Actions>
               <PrimaryButton
                 onClick={() => {
-                  const next = document.getElementById('next-section');
+                  const next = document.getElementById('sobre-mim');
                   next?.scrollIntoView({ behavior: 'smooth' });
                 }}
               >

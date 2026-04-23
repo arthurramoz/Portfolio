@@ -5,10 +5,24 @@ export interface VersionEntry {
   highlights: string[];
 }
 
-export const CURRENT_VERSION = 'v0.6';
+export const CURRENT_VERSION = 'v0.7';
 export const CURRENT_LABEL = 'beta';
 
 export const VERSION_HISTORY: VersionEntry[] = [
+  {
+    version: 'v0.7',
+    date: '23/04/2026',
+    label: 'beta',
+    highlights: [
+      'Página de cursos com 28 certificações',
+      'Filtros collapsíveis por organização e competências',
+      'Logos de plataformas (Udemy, Alura, Cisco, AWS, etc.)',
+      'Paginação reutilizável (10 por página)',
+      'Carrossel de imagens nos projetos com auto-play',
+      'Dados de projetos e cursos centralizados em /config',
+      'Traduções completas (PT/EN) para cursos e datas',
+    ],
+  },
   {
     version: 'v0.6',
     date: '23/04/2026',

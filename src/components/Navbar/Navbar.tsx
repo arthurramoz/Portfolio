@@ -226,8 +226,24 @@ const Navbar = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.41, duration: 0.35, ease: 'easeOut' }}
         >
-          <NavLink $selected={false}>
+          <NavLink
+            $selected={pathname === '/cursos'}
+            onClick={() => router.push('/cursos')}
+          >
             {t('nav.courses')}
+            {pathname === '/cursos' && (
+              <motion.span
+                layoutId="navbar-indicator"
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  borderRadius: '9999px',
+                  background: 'rgba(26, 26, 26, 0.06)',
+                  zIndex: -1,
+                }}
+                transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+              />
+            )}
           </NavLink>
         </motion.div>
       </Nav>

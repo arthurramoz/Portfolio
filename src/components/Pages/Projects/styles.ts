@@ -85,6 +85,19 @@ export const CardTitle = styled.h3`
   font-size: 20px;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.title};
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  a {
+    color: ${({ theme }) => theme.colors.subtitle};
+    display: flex;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: ${({ theme }) => theme.colors.primary1};
+    }
+  }
 `;
 
 export const CardDescription = styled.p`

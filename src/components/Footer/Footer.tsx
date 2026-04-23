@@ -121,6 +121,10 @@ const Footer = () => {
               </motion.div>
             )}
           </AnimatePresence>
+
+          <FooterLink onClick={() => router.push('/cursos')}>
+            {t('nav.courses')}
+          </FooterLink>
         </FooterColumn>
 
         <FooterColumn>

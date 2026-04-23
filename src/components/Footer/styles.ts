@@ -14,7 +14,7 @@ export const FooterContent = styled.div`
   max-width: ${({ theme }) => theme.max};
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 64px;
 
   @media (max-width: 900px) {
@@ -93,6 +93,15 @@ export const FooterLink = styled.span`
   }
 `;
 
+export const FooterSubLabel = styled.span`
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.footerText};
+  margin-top: 8px;
+`;
+
 export const ContactItem = styled.div`
   display: flex;
   align-items: center;
@@ -123,4 +132,37 @@ export const BottomRow = styled.div`
   @media (max-width: 900px) {
     padding: 0 24px;
   }
+`;
+
+export const VersionList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+export const VersionItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: ${({ theme }) => theme.colors.footerLink};
+`;
+
+export const VersionTag = styled.span<{ $active?: boolean }>`
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: ${({ $active, theme }) =>
+    $active ? `${theme.colors.primary1}20` : `${theme.colors.footerText}15`};
+  color: ${({ $active, theme }) =>
+    $active ? theme.colors.primary1 : theme.colors.footerText};
+`;
+
+export const VersionDate = styled.span`
+  font-size: 12px;
+  color: ${({ theme }) => theme.colors.footerText};
+  margin-left: auto;
 `;

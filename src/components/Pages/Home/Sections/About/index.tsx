@@ -16,6 +16,11 @@ import {
   TitleWrapper,
 } from './styles';
 
+const STATS = [
+  { value: '10+', labelKey: 'about.stats.projects' as const },
+  { value: '4+', labelKey: 'about.stats.years' as const },
+];
+
 const About = () => {
   const { t } = useLanguage();
 
@@ -69,18 +74,14 @@ const About = () => {
           </TextColumn>
 
           <StatsColumn>
-            <motion.div variants={itemVariants}>
-              <StatCard>
-                <StatNumber>10+</StatNumber>
-                <StatLabel>{t('about.stats.projects')}</StatLabel>
-              </StatCard>
-            </motion.div>
-            <motion.div variants={itemVariants}>
-              <StatCard>
-                <StatNumber>4+</StatNumber>
-                <StatLabel>{t('about.stats.years')}</StatLabel>
-              </StatCard>
-            </motion.div>
+            {STATS.map(({ value, labelKey }) => (
+              <motion.div key={labelKey} variants={itemVariants}>
+                <StatCard>
+                  <StatNumber>{value}</StatNumber>
+                  <StatLabel>{t(labelKey)}</StatLabel>
+                </StatCard>
+              </motion.div>
+            ))}
           </StatsColumn>
         </ContentWrapper>
       </motion.div>

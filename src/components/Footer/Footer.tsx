@@ -1,8 +1,18 @@
 'use client';
 
-import { FiGithub, FiLinkedin, FiInstagram, FiMail, FiPhone } from 'react-icons/fi';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { AnimatePresence, motion } from 'motion/react';
+import {
+  FiGithub,
+  FiLinkedin,
+  FiInstagram,
+  FiMail,
+  FiPhone,
+} from 'react-icons/fi';
 import { LuCopyright } from 'react-icons/lu';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { VERSION_HISTORY, CURRENT_VERSION } from '@/config/versions';
 import {
   BottomRow,
   BrandDescription,
@@ -15,24 +25,26 @@ import {
   FooterContainer,
   FooterContent,
   FooterLink,
+  FooterSubLabel,
   SocialLink,
   SocialRow,
+  VersionDate,
+  VersionItem,
+  VersionList,
+  VersionTag,
 } from './styles';
 
-const NAV_LINKS = [
-  { key: 'nav.home' as const, id: 'home' },
-  { key: 'nav.about' as const, id: 'sobre-mim' },
-  { key: 'nav.projects' as const, id: 'projetos' },
-  { key: 'nav.courses' as const, id: 'cursos' },
-];
-
 const Footer = () => {
+  const router = useRouter();
   const { t } = useLanguage();
+  const [projectsOpen, setProjectsOpen] = useState(false);
 
-  const handleNavClick = (id: string) => {
+  const handleScrollTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      router.push('/home');
     }
   };
 
@@ -42,7 +54,9 @@ const Footer = () => {
         <FooterBrand>
           <BrandName>Arthur Ramos</BrandName>
           <BrandDescription>
-            Software Engineer & Full Stack — construindo produtos digitais modernos, do design à arquitetura. Focado em React, Next.js e TypeScript.
+            Software Engineer & Full Stack — construindo produtos digitais
+            modernos, do design à arquitetura. Focado em React, Next.js e
+            TypeScript.
           </BrandDescription>
           <SocialRow>
             <SocialLink
@@ -71,11 +85,41 @@ const Footer = () => {
 
         <FooterColumn>
           <ColumnTitle>{t('footer.navigation')}</ColumnTitle>
-          {NAV_LINKS.map(({ key, id }) => (
-            <FooterLink key={id} onClick={() => handleNavClick(id)}>
-              {t(key)}
-            </FooterLink>
-          ))}
+          <FooterLink onClick={() => handleScrollTo('home')}>
+            {t('nav.home')}
+          </FooterLink>
+          <FooterLink onClick={() => handleScrollTo('sobre-mim')}>
+            {t('nav.about')}
+          </FooterLink>
+
+          <FooterSubLabel
+            onClick={() => setProjectsOpen(prev => !prev)}
+            style={{ cursor: 'pointer' }}
+          >
+            {t('nav.projects')} {projectsOpen ? '−' : '+'}
+          </FooterSubLabel>
+
+          <AnimatePresence>
+            {projectsOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.25, ease: 'easeInOut' }}
+                style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column', gap: '16px' }}
+              >
+                <FooterLink onClick={() => router.push('/projetos/pessoais')}>
+                  {t('projects.personal')}
+                </FooterLink>
+                <FooterLink onClick={() => router.push('/projetos/empresa')}>
+                  {t('projects.company')}
+                </FooterLink>
+                <FooterLink onClick={() => router.push('/projetos/faculdade')}>
+                  {t('projects.university')}
+                </FooterLink>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </FooterColumn>
 
         <FooterColumn>
@@ -89,13 +133,33 @@ const Footer = () => {
             (11) 94100-6962
           </ContactItem>
         </FooterColumn>
+
+        <FooterColumn>
+          <ColumnTitle>Versões</ColumnTitle>
+          <VersionList>
+            {VERSION_HISTORY.slice(0, 5).map(entry => (
+              <VersionItem key={entry.version}>
+                <span>{entry.version}</span>
+                <VersionTag $active={entry.version === CURRENT_VERSION}>
+                  {entry.label}
+                </VersionTag>
+                <VersionDate>{entry.date}</VersionDate>
+              </VersionItem>
+            ))}
+          </VersionList>
+          <FooterLink onClick={() => router.push('/changelog')}>
+            {t('footer.changelog.viewAll')}
+          </FooterLink>
+        </FooterColumn>
       </FooterContent>
 
       <Divider />
 
       <BottomRow>
         <LuCopyright size={14} />
-        <span>{new Date().getFullYear()} Arthur Ramos. {t('footer.copyright')}</span>
+        <span>
+          {new Date().getFullYear()} Arthur Ramos. {t('footer.copyright')}
+        </span>
       </BottomRow>
     </FooterContainer>
   );

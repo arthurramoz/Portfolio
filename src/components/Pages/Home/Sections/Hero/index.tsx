@@ -2,8 +2,10 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useLanguage } from '@/contexts/LanguageContext';
 import {
   Actions,
+  ArrowDownIcon,
   Content,
   Description,
   Greeting,
@@ -17,6 +19,8 @@ import {
 } from './styles';
 
 const Hero = () => {
+  const { t } = useLanguage();
+
   return (
     <Section>
       <Content>
@@ -24,26 +28,50 @@ const Hero = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1, ease: 'easeOut' }}
+            transition={{
+              duration: 0.7,
+              delay: 0.2,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
           >
-            <Greeting>Olá, eu sou</Greeting>
-            <Name>Arthur Moreira Ramos</Name>
-            <Role>Desenvolvedor Full Stack</Role>
+            <Greeting>{t('hero.greeting')}</Greeting>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1, ease: 'easeOut' }}
+            transition={{
+              duration: 0.7,
+              delay: 0.4,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
           >
-            <Description>
-              Criando experiências digitais modernas e elegantes com foco em
-              performance e design.
-            </Description>
+            <Name>Arthur Moreira Ramos</Name>
+            <Role>{t('hero.role')}</Role>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.7,
+              delay: 0.6,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+          >
+            <Description>{t('hero.description')}</Description>
 
             <Actions>
-              <PrimaryButton>Ver projetos</PrimaryButton>
-              <SecondaryButton>Falar comigo</SecondaryButton>
+              <PrimaryButton
+                onClick={() => {
+                  const next = document.getElementById('next-section');
+                  next?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                {t('hero.btn.primary')}
+                <ArrowDownIcon size={18} />
+              </PrimaryButton>
+              <SecondaryButton>{t('hero.btn.secondary')}</SecondaryButton>
             </Actions>
           </motion.div>
         </TextBlock>

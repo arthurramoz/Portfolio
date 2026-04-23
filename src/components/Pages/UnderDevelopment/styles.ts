@@ -17,9 +17,9 @@ export const WipWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 2rem;
+  gap: 32px;
   text-align: center;
-  padding: 2rem;
+  padding: 32px;
 `;
 
 export const WipLogo = styled.img`
@@ -30,7 +30,7 @@ export const WipLogo = styled.img`
 `;
 
 export const WipTitle = styled.h1`
-  font-size: 3.5rem;
+  font-size: 56px;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.title};
   letter-spacing: -0.03em;
@@ -38,7 +38,7 @@ export const WipTitle = styled.h1`
 `;
 
 export const WipSubtitle = styled.p`
-  font-size: 1.1rem;
+  font-size: 18px;
   font-weight: 400;
   color: ${({ theme }) => theme.colors.title};
   opacity: 0.55;
@@ -48,12 +48,12 @@ export const WipSubtitle = styled.p`
 export const WipBadge = styled.div`
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1.2rem;
+  gap: 8px;
+  padding: 8px 19px;
   border-radius: 9999px;
   background: ${({ theme }) => theme.colors.bgPrimary1};
   border: 1px solid ${({ theme }) => theme.colors.primary2};
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 600;
   color: ${({ theme }) => theme.colors.primary1};
 `;
@@ -81,8 +81,8 @@ export const WipDivider = styled.div`
 
 export const TabBar = styled.div`
   display: flex;
-  gap: 0.25rem;
-  padding: 0.3rem;
+  gap: 4px;
+  padding: 5px;
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(0, 0, 0, 0.06);
@@ -93,9 +93,9 @@ interface TabButtonProps {
 }
 
 export const TabButton = styled.button<TabButtonProps>`
-  padding: 0.5rem 1.4rem;
+  padding: 8px 22px;
   border-radius: 9999px;
-  font-size: 0.9rem;
+  font-size: 14px;
   font-weight: 600;
   border: none;
   cursor: pointer;
@@ -129,7 +129,7 @@ export const AboutCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.25rem;
+  gap: 20px;
 `;
 
 export const AboutPhoto = styled.div`
@@ -155,7 +155,7 @@ export const AboutPhoto = styled.div`
 `;
 
 export const AboutName = styled.h2`
-  font-size: 1.9rem;
+  font-size: 30px;
   font-weight: 800;
   letter-spacing: -0.03em;
   background: linear-gradient(
@@ -169,7 +169,7 @@ export const AboutName = styled.h2`
 `;
 
 export const AboutBio = styled.p`
-  font-size: 1rem;
+  font-size: 16px;
   line-height: 1.75;
   color: ${({ theme }) => theme.colors.title};
   opacity: 0.6;
@@ -179,13 +179,13 @@ export const AboutBio = styled.p`
 
 export const SocialLinks = styled.div`
   display: flex;
-  gap: 1.5rem;
-  margin-top: 0.5rem;
+  gap: 24px;
+  margin-top: 8px;
 `;
 
 export const SocialLink = styled.a`
   color: ${({ theme }) => theme.colors.title};
-  font-size: 1.5rem;
+  font-size: 24px;
   display: flex;
   align-items: center;
   justify-content: center;

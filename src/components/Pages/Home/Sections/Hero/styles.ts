@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { FiArrowRight } from 'react-icons/fi';
 import styled from 'styled-components';
 
 export const Section = styled.section`
@@ -34,40 +35,65 @@ export const TextBlock = styled.div`
   gap: 24px;
 `;
 
-export const Greeting = styled.p`
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.primary1};
-  letter-spacing: 0.08em;
+export const Greeting = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.primary1};
 `;
 
 export const Name = styled.h1`
-  font-size: 3.5rem;
+  font-size: 56px;
   font-weight: 800;
+  letter-spacing: -0.03em;
   color: ${({ theme }) => theme.colors.title};
-  line-height: 1.1;
-  margin: 4px 0 8px;
+  line-height: 1.05;
+  margin: 8px 0 12px;
+  background: linear-gradient(
+    135deg,
+    ${({ theme }) => theme.colors.title} 0%,
+    ${({ theme }) => theme.colors.textGradientEnd} 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  @media (max-width: 900px) {
+    font-size: 40px;
+  }
 `;
 
 export const Role = styled.h2`
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.secondary1};
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: ${({ theme }) => theme.colors.subtitle};
+
+  @media (max-width: 900px) {
+    font-size: 20px;
+  }
 `;
 
 export const Description = styled.p`
-  font-size: 1rem;
-  line-height: 1.75;
-  color: #666;
-  max-width: 440px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: ${({ theme }) => theme.colors.text};
+  max-width: 500px;
+  font-weight: 400;
+
+  @media (max-width: 900px) {
+    font-size: 16px;
+  }
 `;
 
 export const Actions = styled.div`
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
-  margin-top: 8px;
+  margin-top: 12px;
 
   @media (max-width: 900px) {
     justify-content: center;
@@ -75,35 +101,45 @@ export const Actions = styled.div`
 `;
 
 const BaseButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 14px 32px;
   border-radius: 50px;
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   border: none;
+  letter-spacing: -0.01em;
 `;
 
 export const PrimaryButton = styled(BaseButton)`
-  background: ${({ theme }) => theme.colors.primary1};
-  color: #fff;
-  box-shadow: 0 4px 20px ${({ theme }) => theme.colors.bgPrimary1};
+  background: ${({ theme }) => theme.colors.btnPrimaryBg};
+  color: ${({ theme }) => theme.colors.btnPrimaryText};
+  gap: 10px;
+  box-shadow: 0 8px 24px ${({ theme }) => theme.colors.btnPrimaryShadow};
 
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 28px ${({ theme }) => theme.colors.primary1}60;
+    transform: translateY(-4px) scale(1.06);
+    box-shadow: 0 16px 40px ${({ theme }) => theme.colors.btnPrimaryHoverShadow};
+    background: ${({ theme }) => theme.colors.btnPrimaryHoverBg};
+  }
+`;
+
+export const ArrowDownIcon = styled(FiArrowRight)`
+  transition: transform 0.3s ease;
+  ${PrimaryButton}:hover & {
+    transform: rotate(90deg);
   }
 `;
 
 export const SecondaryButton = styled(BaseButton)`
-  background: transparent;
-  color: ${({ theme }) => theme.colors.title};
-  border: 2px solid ${({ theme }) => theme.colors.primary2};
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.bgPrimary2};
-    transform: translateY(-3px);
-  }
+  background: ${({ theme }) => theme.colors.btnSecondaryBg};
+  color: ${({ theme }) => theme.colors.btnSecondaryText};
+  border: 1px solid ${({ theme }) => theme.colors.btnSecondaryBorder};
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 `;
 
 export const IllustrationBlock = styled.div`

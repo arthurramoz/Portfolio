@@ -37,6 +37,7 @@ import {
   MobileDrawerDivider,
   MobileDrawerHeader,
   MobileDrawerLink,
+  MobileDrawerContent,
   MobileLanguageHeader,
   MobileLanguageList,
   MobileOverlay,
@@ -166,11 +167,6 @@ const Navbar = () => {
     router.push(path);
     setIsProjectsOpen(false);
   };
-
-  useEffect(() => {
-    document.body.style.overflow = isMobileOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [isMobileOpen]);
 
   return (
     <>
@@ -474,6 +470,7 @@ const Navbar = () => {
             exit={{ x: '100%' }}
             transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           >
+            <MobileDrawerContent>
             <MobileDrawerHeader>
               <NavLogoMark>
                 <svg
@@ -595,11 +592,10 @@ const Navbar = () => {
             <AnimatePresence>
               {isMobileLangOpen && (
                 <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
+                  initial={{ height: 0, opacity: 0, overflow: 'hidden' }}
+                  animate={{ height: 'auto', opacity: 1, transitionEnd: { overflow: 'visible' } }}
+                  exit={{ height: 0, opacity: 0, overflow: 'hidden' }}
                   transition={{ duration: 0.2, ease: 'easeInOut' }}
-                  style={{ overflow: 'hidden' }}
                 >
                   <MobileLanguageList>
                     {LANGUAGES.map(lang => (
@@ -626,6 +622,7 @@ const Navbar = () => {
               <span>{CURRENT_VERSION}</span>
               <VersionBadge>{CURRENT_LABEL}</VersionBadge>
             </DropdownVersion>
+            </MobileDrawerContent>
           </MobileDrawer>
         </>
       )}

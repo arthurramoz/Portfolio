@@ -151,18 +151,24 @@ export const MobileDrawer = styled(motion.div)`
   height: 100vh;
   height: 100dvh;
   z-index: 1001;
-  padding: 32px 24px 48px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
   background: ${({ theme }) => theme.colors.dropdownBg};
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-left: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   box-shadow: -8px 0 40px ${({ theme }) => theme.colors.navbarShadow};
+`;
+
+export const MobileDrawerContent = styled.div`
+  flex: 1;
   overflow-y: auto;
-  overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding: 32px 24px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 
   &::-webkit-scrollbar {
     display: none;
@@ -361,7 +367,6 @@ export const MobileLanguageList = styled.div`
   flex-direction: column;
   gap: 2px;
   padding-left: 16px;
-  overflow: hidden;
 `;
 
 export const SettingsWrapper = styled.div`

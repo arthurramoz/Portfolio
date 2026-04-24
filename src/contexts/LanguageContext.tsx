@@ -90,6 +90,9 @@ const dictionaries = {
     'month.11': 'Novembro',
     'month.12': 'Dezembro',
     'date.preposition': ' de ',
+    'changelog.title': 'Versões',
+    'changelog.description': 'Histórico completo de atualizações e melhorias do portfolio.',
+    'changelog.current': 'atual',
   },
   en: {
     'hero.greeting': 'Hi, I am',
@@ -170,6 +173,9 @@ const dictionaries = {
     'month.11': 'November',
     'month.12': 'December',
     'date.preposition': ' ',
+    'changelog.title': 'Versions',
+    'changelog.description': 'Complete update and improvement history of the portfolio.',
+    'changelog.current': 'current',
   },
 } as const;
 

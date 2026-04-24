@@ -2,6 +2,7 @@
 
 import { motion } from 'motion/react';
 import { VERSION_HISTORY, CURRENT_VERSION } from '@/config/versions';
+import { useLanguage } from '@/contexts/LanguageContext';
 import {
   Entry,
   EntryActive,
@@ -35,6 +36,8 @@ const itemVariants = {
 };
 
 const ChangelogPage = () => {
+  const { language, t } = useLanguage();
+
   return (
     <PageContainer>
       <SidebarColumn>
@@ -43,9 +46,9 @@ const ChangelogPage = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
         >
-          <PageTitle>Versões</PageTitle>
+          <PageTitle>{t('changelog.title')}</PageTitle>
           <PageDescription>
-            Histórico completo de atualizações e melhorias do portfolio.
+            {t('changelog.description')}
           </PageDescription>
         </motion.div>
       </SidebarColumn>
@@ -66,10 +69,10 @@ const ChangelogPage = () => {
                   <EntryDate>{entry.date}</EntryDate>
                   <EntryVersion>{entry.version}</EntryVersion>
                   <EntryBadge $active={isCurrent}>
-                    {isCurrent ? 'atual' : entry.label}
+                    {isCurrent ? t('changelog.current') : entry.label}
                   </EntryBadge>
                   <HighlightList>
-                    {entry.highlights.map((highlight, i) => (
+                    {entry.highlights[language].map((highlight, i) => (
                       <HighlightItem key={i}>• {highlight}</HighlightItem>
                     ))}
                   </HighlightList>

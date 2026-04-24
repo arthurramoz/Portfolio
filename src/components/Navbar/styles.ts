@@ -149,8 +149,9 @@ export const MobileDrawer = styled(motion.div)`
   width: 300px;
   max-width: 85vw;
   height: 100vh;
+  height: 100dvh;
   z-index: 1001;
-  padding: 32px 24px;
+  padding: 32px 24px 48px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -160,6 +161,14 @@ export const MobileDrawer = styled(motion.div)`
   border-left: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   box-shadow: -8px 0 40px ${({ theme }) => theme.colors.navbarShadow};
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  scrollbar-width: none;
 `;
 
 export const MobileDrawerHeader = styled.div`

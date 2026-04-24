@@ -12,6 +12,12 @@ import {
   FiUser,
   FiBriefcase,
   FiBookOpen,
+  FiMenu,
+  FiX,
+  FiHome,
+  FiInfo,
+  FiLayers,
+  FiAward,
 } from 'react-icons/fi';
 import { useAppTheme } from '@/contexts/ThemeContext';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -22,9 +28,18 @@ import {
   DropdownValue,
   DropdownVersion,
   FlagImg,
+  HamburgerButton,
   LanguageItemWrapper,
   LanguageOption,
   LanguageSubmenu,
+  MobileDrawer,
+  MobileDrawerClose,
+  MobileDrawerDivider,
+  MobileDrawerHeader,
+  MobileDrawerLink,
+  MobileLanguageHeader,
+  MobileLanguageList,
+  MobileOverlay,
   Nav,
   NavbarContainer,
   NavCta,
@@ -44,6 +59,11 @@ import {
   SettingsItem,
   SettingsItemIcon,
   SettingsWrapper,
+  ThemeSwitch,
+  ThemeSwitchKnob,
+  ThemeSwitchStar,
+  ThemeToggleLabel,
+  ThemeToggleRow,
   VersionBadge,
 } from './styles';
 
@@ -61,6 +81,8 @@ const PROJECT_CATEGORIES = [
 const LANGUAGES = [
   { code: 'pt' as const, label: 'Português', flag: 'https://flagcdn.com/w40/br.png' },
   { code: 'en' as const, label: 'English', flag: 'https://flagcdn.com/w40/us.png' },
+  { code: 'fr' as const, label: 'Français', flag: 'https://flagcdn.com/w40/fr.png' },
+  { code: 'ru' as const, label: 'Русский', flag: 'https://flagcdn.com/w40/ru.png' },
 ];
 
 const MotionNavbarContainer = motion.create(NavbarContainer);
@@ -72,6 +94,8 @@ const Navbar = () => {
   const { language, setLanguage: setLang, t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isMobileLangOpen, setIsMobileLangOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const settingsRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
@@ -143,7 +167,13 @@ const Navbar = () => {
     setIsProjectsOpen(false);
   };
 
+  useEffect(() => {
+    document.body.style.overflow = isMobileOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileOpen]);
+
   return (
+    <>
     <MotionNavbarContainer
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
@@ -421,8 +451,186 @@ const Navbar = () => {
         >
           {t('nav.cta')}
         </NavCta>
+
+        <HamburgerButton onClick={() => setIsMobileOpen(true)}>
+          <FiMenu size={20} />
+        </HamburgerButton>
       </motion.div>
     </MotionNavbarContainer>
+
+    <AnimatePresence>
+      {isMobileOpen && (
+        <>
+          <MobileOverlay
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setIsMobileOpen(false)}
+          />
+          <MobileDrawer
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <MobileDrawerHeader>
+              <NavLogoMark>
+                <svg
+                  width="38"
+                  height="38"
+                  viewBox="0 0 38 38"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <linearGradient
+                      id="mob-grad"
+                      x1="0"
+                      y1="0"
+                      x2="38"
+                      y2="38"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop offset="0%" stopColor="#48cae4" />
+                      <stop offset="100%" stopColor="#fb6f92" />
+                    </linearGradient>
+                  </defs>
+                  <text
+                    x="50%"
+                    y="50%"
+                    dominantBaseline="central"
+                    textAnchor="middle"
+                    fontFamily="'Inter', 'Segoe UI', sans-serif"
+                    fontSize="18"
+                    fontWeight="800"
+                    letterSpacing="-0.5"
+                    fill="url(#mob-grad)"
+                  >
+                    AR
+                  </text>
+                </svg>
+              </NavLogoMark>
+              <MobileDrawerClose onClick={() => setIsMobileOpen(false)}>
+                <FiX size={18} />
+              </MobileDrawerClose>
+            </MobileDrawerHeader>
+
+            {SCROLL_LINKS.map(link => (
+              <MobileDrawerLink
+                key={link.id}
+                $active={isHomePage && activeSection === link.id}
+                onClick={() => {
+                  handleScrollNav(link.id);
+                  setIsMobileOpen(false);
+                }}
+              >
+                {link.id === 'home' ? <FiHome size={18} /> : <FiInfo size={18} />}
+                {t(link.key)}
+              </MobileDrawerLink>
+            ))}
+
+            <MobileDrawerDivider />
+
+            {PROJECT_CATEGORIES.map(cat => (
+              <MobileDrawerLink
+                key={cat.path}
+                $active={pathname === cat.path}
+                onClick={() => {
+                  router.push(cat.path);
+                  setIsMobileOpen(false);
+                }}
+              >
+                <cat.icon size={18} />
+                {t(cat.key)}
+              </MobileDrawerLink>
+            ))}
+
+            <MobileDrawerLink
+              $active={pathname === '/cursos'}
+              onClick={() => {
+                router.push('/cursos');
+                setIsMobileOpen(false);
+              }}
+            >
+              <FiAward size={18} />
+              {t('nav.courses')}
+            </MobileDrawerLink>
+
+            <MobileDrawerDivider />
+
+            <ThemeToggleRow onClick={toggleTheme}>
+              <ThemeToggleLabel>
+                {themeMode === 'light' ? <FiSun size={18} /> : <FiMoon size={18} />}
+                {t('settings.theme')}
+              </ThemeToggleLabel>
+              <ThemeSwitch $active={themeMode === 'dark'}>
+                <ThemeSwitchStar $active={themeMode === 'dark'} />
+                <ThemeSwitchKnob $active={themeMode === 'dark'}>
+                  {themeMode === 'dark' ? (
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="#c9d6df" stroke="#a0b0c0" strokeWidth="1" />
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="5" fill="#fff" />
+                      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                  )}
+                </ThemeSwitchKnob>
+              </ThemeSwitch>
+            </ThemeToggleRow>
+
+            <MobileLanguageHeader onClick={() => setIsMobileLangOpen(prev => !prev)}>
+              <FiGlobe size={18} />
+              {t('settings.language')}
+              <FiChevronDown
+                size={14}
+                style={{
+                  transform: isMobileLangOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                }}
+              />
+            </MobileLanguageHeader>
+
+            <AnimatePresence>
+              {isMobileLangOpen && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.2, ease: 'easeInOut' }}
+                  style={{ overflow: 'hidden' }}
+                >
+                  <MobileLanguageList>
+                    {LANGUAGES.map(lang => (
+                      <MobileDrawerLink
+                        key={lang.code}
+                        $active={language === lang.code}
+                        onClick={() => {
+                          setLang(lang.code);
+                          setIsMobileOpen(false);
+                        }}
+                      >
+                        <FlagImg src={lang.flag} alt={lang.label} />
+                        {lang.label}
+                      </MobileDrawerLink>
+                    ))}
+                  </MobileLanguageList>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <MobileDrawerDivider />
+
+            <DropdownVersion>
+              <span>{CURRENT_VERSION}</span>
+              <VersionBadge>{CURRENT_LABEL}</VersionBadge>
+            </DropdownVersion>
+          </MobileDrawer>
+        </>
+      )}
+    </AnimatePresence>
+    </>
   );
 };
 

@@ -5,8 +5,12 @@ export const FooterContainer = styled.footer`
   background: ${({ theme }) => theme.colors.footerBg};
   padding: 80px 40px 40px;
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     padding: 64px 24px 32px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    padding: 48px 16px 24px;
   }
 `;
 
@@ -17,9 +21,14 @@ export const FooterContent = styled.div`
   grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 64px;
 
-  @media (max-width: 900px) {
-    grid-template-columns: 1fr;
+  ${({ theme }) => theme.media.lg} {
+    grid-template-columns: 1fr 1fr;
     gap: 48px;
+  }
+
+  ${({ theme }) => theme.media.md} {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 `;
 
@@ -129,7 +138,7 @@ export const BottomRow = styled.div`
   color: ${({ theme }) => theme.colors.footerText};
   padding: 0 40px;
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     padding: 0 24px;
   }
 `;

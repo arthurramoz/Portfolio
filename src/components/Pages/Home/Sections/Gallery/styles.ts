@@ -9,6 +9,10 @@ export const Section = styled.section`
   padding: 128px 24px 96px;
   max-width: ${({ theme }) => theme.max};
   margin: 0 auto;
+
+  ${({ theme }) => theme.media.md} {
+    padding: 100px 20px 64px;
+  }
 `;
 
 export const TitleWrapper = styled.div`
@@ -16,6 +20,10 @@ export const TitleWrapper = styled.div`
   flex-direction: column;
   gap: 8px;
   margin-bottom: 64px;
+
+  ${({ theme }) => theme.media.md} {
+    margin-bottom: 40px;
+  }
 `;
 
 export const SectionTitle = styled.h2`
@@ -24,8 +32,12 @@ export const SectionTitle = styled.h2`
   letter-spacing: -0.03em;
   color: ${({ theme }) => theme.colors.title};
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     font-size: 32px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    font-size: 28px;
   }
 `;
 
@@ -42,7 +54,7 @@ export const Grid = styled.div`
   grid-template-columns: repeat(2, 1fr);
   border: 1px solid ${({ theme }) => theme.colors.btnSecondaryBorder};
 
-  @media (max-width: 640px) {
+  ${({ theme }) => theme.media.md} {
     grid-template-columns: 1fr;
   }
 `;

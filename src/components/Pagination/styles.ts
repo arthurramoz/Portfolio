@@ -6,6 +6,11 @@ export const PaginationContainer = styled.div`
   justify-content: center;
   gap: 6px;
   margin-top: 40px;
+
+  ${({ theme }) => theme.media.sm} {
+    gap: 4px;
+    margin-top: 32px;
+  }
 `;
 
 export const PageButton = styled.button<{ $active: boolean }>`
@@ -35,6 +40,13 @@ export const PageButton = styled.button<{ $active: boolean }>`
     opacity: 0.4;
     cursor: not-allowed;
   }
+
+  ${({ theme }) => theme.media.sm} {
+    min-width: 36px;
+    height: 36px;
+    font-size: 13px;
+    padding: 0 8px;
+  }
 `;
 
 export const NavButton = styled.button`
@@ -60,10 +72,20 @@ export const NavButton = styled.button`
     opacity: 0.4;
     cursor: not-allowed;
   }
+
+  ${({ theme }) => theme.media.sm} {
+    width: 36px;
+    height: 36px;
+  }
 `;
 
 export const PageInfo = styled.span`
   font-size: 13px;
   color: ${({ theme }) => theme.colors.subtitle};
   margin: 0 8px;
+
+  ${({ theme }) => theme.media.sm} {
+    margin: 0 4px;
+    font-size: 12px;
+  }
 `;

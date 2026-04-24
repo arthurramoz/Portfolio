@@ -83,7 +83,10 @@ const About = () => {
                 </StatCard>
               </motion.div>
             ))}
-            <motion.div variants={itemVariants} style={{ gridColumn: '1 / -1' }}>
+            <motion.div
+              variants={itemVariants}
+              style={{ gridColumn: '1 / -1', minWidth: 0, overflow: 'hidden' }}
+            >
               <GitHubGraph />
             </motion.div>
           </StatsColumn>

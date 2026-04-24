@@ -1,3 +1,17 @@
+const breakpoints = {
+  sm: '480px',
+  md: '768px',
+  lg: '1024px',
+  xl: '1440px',
+};
+
+const media = {
+  sm: `@media (max-width: ${breakpoints.sm})`,
+  md: `@media (max-width: ${breakpoints.md})`,
+  lg: `@media (max-width: ${breakpoints.lg})`,
+  xl: `@media (max-width: ${breakpoints.xl})`,
+};
+
 const baseColors = {
   primary1: '#48cae4',
   primary2: '#90e0ef',
@@ -52,6 +66,8 @@ export const lightTheme = {
     footerIcon: 'rgba(255, 255, 255, 0.4)',
     footerIconHover: '#ffffff',
   },
+  breakpoints,
+  media,
   max: '1440px',
 } as const;
 
@@ -102,6 +118,8 @@ export const darkTheme = {
     footerIcon: 'rgba(255, 255, 255, 0.35)',
     footerIconHover: '#e0e0e4',
   },
+  breakpoints,
+  media,
   max: '1440px',
 } as const;
 

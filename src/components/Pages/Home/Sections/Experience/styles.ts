@@ -10,6 +10,10 @@ export const Section = styled.section`
   padding: 128px 24px 96px;
   max-width: ${({ theme }) => theme.max};
   margin: 0 auto;
+
+  ${({ theme }) => theme.media.md} {
+    padding: 100px 20px 64px;
+  }
 `;
 
 export const TitleWrapper = styled.div`
@@ -19,6 +23,12 @@ export const TitleWrapper = styled.div`
   margin-bottom: 64px;
   align-items: flex-end;
   text-align: right;
+
+  ${({ theme }) => theme.media.md} {
+    align-items: flex-start;
+    text-align: left;
+    margin-bottom: 40px;
+  }
 `;
 
 export const SectionTitle = styled.h2`
@@ -27,8 +37,12 @@ export const SectionTitle = styled.h2`
   letter-spacing: -0.03em;
   color: ${({ theme }) => theme.colors.title};
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     font-size: 32px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    font-size: 28px;
   }
 `;
 
@@ -46,7 +60,7 @@ export const ContentWrapper = styled.div`
   gap: 64px;
   align-items: flex-start;
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     flex-direction: column;
     gap: 40px;
   }
@@ -65,6 +79,10 @@ export const Paragraph = styled.p`
   color: ${({ theme }) => theme.colors.text};
   font-weight: 400;
 
+  ${({ theme }) => theme.media.md} {
+    font-size: 16px;
+  }
+
   strong {
     color: ${({ theme }) => theme.colors.title};
     font-weight: 600;
@@ -77,8 +95,12 @@ export const StatsGrid = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     width: 100%;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    grid-template-columns: 1fr;
   }
 `;
 
@@ -98,6 +120,10 @@ export const StatCard = styled.div`
   &:hover {
     transform: translateY(-4px);
   }
+
+  ${({ theme }) => theme.media.md} {
+    padding: 24px 16px;
+  }
 `;
 
 export const StatNumber = styled.span`
@@ -105,6 +131,10 @@ export const StatNumber = styled.span`
   font-weight: 800;
   color: ${({ theme }) => theme.colors.title};
   line-height: 1;
+
+  ${({ theme }) => theme.media.md} {
+    font-size: 32px;
+  }
 `;
 
 export const StatLabel = styled.span`

@@ -20,6 +20,11 @@ export const WipWrapper = styled.div`
   gap: 32px;
   text-align: center;
   padding: 32px;
+
+  ${({ theme }) => theme.media.md} {
+    padding: 24px 16px;
+    gap: 24px;
+  }
 `;
 
 export const WipLogoMark = styled.div`
@@ -41,6 +46,14 @@ export const WipTitle = styled.h1`
   color: ${({ theme }) => theme.colors.title};
   letter-spacing: -0.03em;
   line-height: 1.1;
+
+  ${({ theme }) => theme.media.lg} {
+    font-size: 40px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    font-size: 32px;
+  }
 `;
 
 export const WipSubtitle = styled.p`
@@ -49,6 +62,10 @@ export const WipSubtitle = styled.p`
   color: ${({ theme }) => theme.colors.title};
   opacity: 0.55;
   max-width: 420px;
+
+  ${({ theme }) => theme.media.md} {
+    font-size: 16px;
+  }
 `;
 
 export const WipBadge = styled.div`
@@ -129,6 +146,10 @@ export const TabContent = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
+
+  ${({ theme }) => theme.media.md} {
+    min-height: 360px;
+  }
 `;
 
 export const AboutCard = styled.div`
@@ -152,6 +173,11 @@ export const AboutPhoto = styled.div`
       )
       border-box;
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+
+  ${({ theme }) => theme.media.md} {
+    width: 140px;
+    height: 140px;
+  }
 
   img {
     width: 100%;

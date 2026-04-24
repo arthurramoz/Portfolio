@@ -13,6 +13,10 @@ export const Section = styled.section`
   padding: 6rem 24px 0;
   max-width: ${({ theme }) => theme.max};
   background: transparent;
+
+  ${({ theme }) => theme.media.lg} {
+    padding-top: 8rem;
+  }
 `;
 
 export const Content = styled.div`
@@ -23,9 +27,10 @@ export const Content = styled.div`
   gap: 20px;
   padding-left: 40px;
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     flex-direction: column;
     text-align: center;
+    padding-left: 0;
   }
 `;
 
@@ -33,6 +38,10 @@ export const TextBlock = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+
+  ${({ theme }) => theme.media.lg} {
+    align-items: center;
+  }
 `;
 
 export const Greeting = styled.div`
@@ -61,8 +70,12 @@ export const Name = styled.h1`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     font-size: 40px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    font-size: 32px;
   }
 `;
 
@@ -72,7 +85,7 @@ export const Role = styled.h2`
   letter-spacing: -0.01em;
   color: ${({ theme }) => theme.colors.subtitle};
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     font-size: 20px;
   }
 `;
@@ -84,7 +97,7 @@ export const Description = styled.p`
   max-width: 500px;
   font-weight: 400;
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     font-size: 16px;
   }
 `;
@@ -95,8 +108,13 @@ export const Actions = styled.div`
   flex-wrap: wrap;
   margin-top: 12px;
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     justify-content: center;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    flex-direction: column;
+    width: 100%;
   }
 `;
 
@@ -148,7 +166,7 @@ export const IllustrationBlock = styled.div`
   align-items: center;
   justify-content: center;
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     max-width: 320px;
   }
 `;

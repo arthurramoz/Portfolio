@@ -32,6 +32,11 @@ export const NavbarContainer = styled.header`
     background: ${({ theme }) => theme.colors.navbarBgHover};
     box-shadow: 0 8px 40px ${({ theme }) => theme.colors.navbarShadowHover};
   }
+
+  ${({ theme }) => theme.media.lg} {
+    width: calc(100% - 2rem);
+    padding: 10px 16px;
+  }
 `;
 
 export const NavLogo = styled.div`
@@ -63,6 +68,10 @@ export const Nav = styled.nav`
   display: flex;
   align-items: center;
   gap: 4px;
+
+  ${({ theme }) => theme.media.lg} {
+    display: none;
+  }
 `;
 
 interface NavLinkProps {
@@ -98,10 +107,260 @@ export const NavCta = styled(motion.button)`
   cursor: pointer;
   white-space: nowrap;
   box-shadow: 0 2px 12px ${({ theme }) => theme.colors.navbarShadow};
+
+  ${({ theme }) => theme.media.lg} {
+    display: none;
+  }
+`;
+
+export const HamburgerButton = styled.button`
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  background: transparent;
+  color: ${({ theme }) => theme.colors.navbarLinkActive};
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.navbarLinkBgHover};
+  }
+
+  ${({ theme }) => theme.media.lg} {
+    display: flex;
+  }
+`;
+
+export const MobileOverlay = styled(motion.div)`
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+`;
+
+export const MobileDrawer = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  max-width: 85vw;
+  height: 100vh;
+  z-index: 1001;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: ${({ theme }) => theme.colors.dropdownBg};
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-left: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  box-shadow: -8px 0 40px ${({ theme }) => theme.colors.navbarShadow};
+  overflow-y: auto;
+`;
+
+export const MobileDrawerHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+`;
+
+export const MobileDrawerClose = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  background: transparent;
+  color: ${({ theme }) => theme.colors.navbarLinkActive};
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.navbarLinkBgHover};
+  }
+`;
+
+export const MobileDrawerLink = styled.button<{ $active?: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: none;
+  background: ${({ $active, theme }) =>
+    $active ? theme.colors.navbarLinkBgActive : 'transparent'};
+  color: ${({ $active, theme }) =>
+    $active ? theme.colors.navbarLinkActive : theme.colors.navbarLinkInactive};
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.navbarLinkBgHover};
+    color: ${({ theme }) => theme.colors.navbarLinkActive};
+  }
+`;
+
+export const MobileDrawerDivider = styled.div`
+  height: 1px;
+  margin: 8px 0;
+  background: ${({ theme }) => theme.colors.navbarBorder};
+`;
+
+export const ThemeToggleRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.navbarLinkBgHover};
+  }
+`;
+
+export const ThemeToggleLabel = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.navbarLinkInactive};
+`;
+
+export const ThemeSwitch = styled.div<{ $active: boolean }>`
+  width: 56px;
+  height: 28px;
+  border-radius: 14px;
+  background: ${({ $active }) =>
+    $active
+      ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)'
+      : 'linear-gradient(135deg, #87CEEB 0%, #48cae4 50%, #00b4d8 100%)'};
+  position: relative;
+  transition: background 0.4s ease;
+  flex-shrink: 0;
+  overflow: hidden;
+  box-shadow: ${({ $active }) =>
+    $active
+      ? 'inset 0 1px 4px rgba(0, 0, 0, 0.4)'
+      : 'inset 0 1px 4px rgba(0, 0, 0, 0.1)'};
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: #fff;
+    transition: opacity 0.4s ease;
+    opacity: ${({ $active }) => ($active ? 0.7 : 0)};
+  }
+
+  &::before {
+    width: 2px;
+    height: 2px;
+    top: 8px;
+    left: 12px;
+  }
+
+  &::after {
+    width: 3px;
+    height: 3px;
+    top: 16px;
+    left: 8px;
+  }
+`;
+
+export const ThemeSwitchStar = styled.span<{ $active: boolean }>`
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #fff;
+  top: 6px;
+  left: 18px;
+  opacity: ${({ $active }) => ($active ? 0.5 : 0)};
+  transition: opacity 0.4s ease;
+`;
+
+export const ThemeSwitchKnob = styled.div<{ $active: boolean }>`
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: ${({ $active }) => ($active ? '31px' : '3px')};
+  transition: left 0.35s cubic-bezier(0.68, -0.15, 0.27, 1.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${({ $active }) =>
+    $active
+      ? 'linear-gradient(135deg, #c9d6df 0%, #e8e8e8 100%)'
+      : 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)'};
+  box-shadow: ${({ $active }) =>
+    $active
+      ? '0 1px 6px rgba(201, 214, 223, 0.4)'
+      : '0 1px 8px rgba(255, 165, 0, 0.5)'};
+
+  svg {
+    width: 13px;
+    height: 13px;
+  }
+`;
+
+export const MobileLanguageHeader = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  color: ${({ theme }) => theme.colors.navbarLinkInactive};
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.navbarLinkBgHover};
+    color: ${({ theme }) => theme.colors.navbarLinkActive};
+  }
+
+  svg:last-child {
+    margin-left: auto;
+    transition: transform 0.25s ease;
+  }
+`;
+
+export const MobileLanguageList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-left: 16px;
+  overflow: hidden;
 `;
 
 export const SettingsWrapper = styled.div`
   position: relative;
+
+  ${({ theme }) => theme.media.lg} {
+    display: none;
+  }
 `;
 
 export const SettingsButton = styled.button`

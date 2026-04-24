@@ -120,11 +120,17 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  grid-column: 1 / -1;
+  max-width: 100%;
+  overflow: hidden;
   transition: transform 0.3s ease;
 
   &:hover {
     transform: translateY(-4px);
+  }
+
+  ${({ theme }) => theme.media.md} {
+    padding: 20px 16px 16px;
+    border-radius: 16px;
   }
 `;
 
@@ -163,12 +169,20 @@ const Grid = styled.div`
   display: flex;
   gap: 3px;
   min-width: fit-content;
+
+  ${({ theme }) => theme.media.md} {
+    gap: 2px;
+  }
 `;
 
 const Column = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3px;
+
+  ${({ theme }) => theme.media.md} {
+    gap: 2px;
+  }
 `;
 
 const Cell = styled.div<{ $level: number }>`
@@ -186,6 +200,12 @@ const Cell = styled.div<{ $level: number }>`
 
   &:hover {
     transform: scale(1.5);
+  }
+
+  ${({ theme }) => theme.media.md} {
+    width: 9px;
+    height: 9px;
+    border-radius: 2px;
   }
 `;
 

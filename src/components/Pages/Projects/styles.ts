@@ -7,8 +7,12 @@ export const PageContainer = styled.div`
   margin: 0 auto;
   padding: 140px 40px 96px;
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     padding: 120px 24px 64px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    padding: 100px 16px 48px;
   }
 `;
 
@@ -17,6 +21,10 @@ export const TitleWrapper = styled.div`
   flex-direction: column;
   gap: 8px;
   margin-bottom: 64px;
+
+  ${({ theme }) => theme.media.md} {
+    margin-bottom: 40px;
+  }
 `;
 
 export const PageTitle = styled.h1`
@@ -25,8 +33,12 @@ export const PageTitle = styled.h1`
   letter-spacing: -0.03em;
   color: ${({ theme }) => theme.colors.title};
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     font-size: 36px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    font-size: 28px;
   }
 `;
 
@@ -43,8 +55,9 @@ export const ProjectsGrid = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 32px;
 
-  @media (max-width: 768px) {
+  ${({ theme }) => theme.media.md} {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
 `;
 
@@ -79,6 +92,10 @@ export const CardContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  ${({ theme }) => theme.media.sm} {
+    padding: 16px;
+  }
 `;
 
 export const CardTitle = styled.h3`
@@ -134,4 +151,9 @@ export const EmptyState = styled.div`
   text-align: center;
   border: 2px dashed ${({ theme }) => theme.colors.btnSecondaryBorder};
   border-radius: 20px;
+
+  ${({ theme }) => theme.media.md} {
+    padding: 48px 16px;
+    font-size: 16px;
+  }
 `;

@@ -7,8 +7,12 @@ export const PageContainer = styled.div`
   margin: 0 auto;
   padding: 140px 40px 96px;
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     padding: 120px 24px 64px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    padding: 100px 16px 48px;
   }
 `;
 
@@ -17,6 +21,10 @@ export const TitleWrapper = styled.div`
   flex-direction: column;
   gap: 8px;
   margin-bottom: 48px;
+
+  ${({ theme }) => theme.media.md} {
+    margin-bottom: 32px;
+  }
 `;
 
 export const PageTitle = styled.h1`
@@ -25,8 +33,12 @@ export const PageTitle = styled.h1`
   letter-spacing: -0.03em;
   color: ${({ theme }) => theme.colors.title};
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     font-size: 36px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    font-size: 28px;
   }
 `;
 
@@ -43,6 +55,10 @@ export const FiltersSection = styled.div`
   flex-direction: column;
   gap: 24px;
   margin-bottom: 48px;
+
+  ${({ theme }) => theme.media.md} {
+    margin-bottom: 32px;
+  }
 `;
 
 export const FilterGroup = styled.div`
@@ -96,6 +112,11 @@ export const FilterChip = styled.button<{ $active: boolean }>`
     border-color: ${({ theme }) => theme.colors.primary1};
     color: ${({ theme }) => theme.colors.primary1};
   }
+
+  ${({ theme }) => theme.media.sm} {
+    padding: 6px 14px;
+    font-size: 13px;
+  }
 `;
 
 export const CoursesList = styled.div`
@@ -119,10 +140,11 @@ export const CourseCard = styled.div`
     box-shadow: 0 8px 24px ${({ theme }) => theme.colors.btnPrimaryShadow};
   }
 
-  @media (max-width: 600px) {
+  ${({ theme }) => theme.media.md} {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
+    padding: 20px;
   }
 `;
 
@@ -132,6 +154,11 @@ export const PlatformLogo = styled.img`
   border-radius: 12px;
   object-fit: contain;
   flex-shrink: 0;
+
+  ${({ theme }) => theme.media.md} {
+    width: 56px;
+    height: 56px;
+  }
 `;
 
 export const CourseInfo = styled.div`
@@ -158,6 +185,10 @@ export const CourseTitle = styled.h3`
     &:hover {
       color: ${({ theme }) => theme.colors.primary1};
     }
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    font-size: 16px;
   }
 `;
 

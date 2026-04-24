@@ -9,10 +9,14 @@ export const PageContainer = styled.div`
   display: flex;
   gap: 80px;
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     padding: 120px 24px 64px;
     flex-direction: column;
     gap: 48px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    padding: 100px 16px 48px;
   }
 `;
 
@@ -22,8 +26,9 @@ export const SidebarColumn = styled.div`
   align-self: flex-start;
   min-width: 240px;
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     position: static;
+    min-width: unset;
   }
 `;
 
@@ -34,8 +39,12 @@ export const PageTitle = styled.h1`
   color: ${({ theme }) => theme.colors.title};
   margin-bottom: 16px;
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     font-size: 36px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    font-size: 28px;
   }
 `;
 
@@ -44,6 +53,10 @@ export const PageDescription = styled.p`
   line-height: 1.6;
   color: ${({ theme }) => theme.colors.subtitle};
   max-width: 220px;
+
+  ${({ theme }) => theme.media.lg} {
+    max-width: unset;
+  }
 `;
 
 export const TimelineColumn = styled.div`
@@ -68,6 +81,11 @@ export const Entry = styled.div`
     height: 9px;
     border-radius: 50%;
     background: ${({ theme }) => theme.colors.btnSecondaryBorder};
+  }
+
+  ${({ theme }) => theme.media.md} {
+    padding-left: 24px;
+    padding-bottom: 32px;
   }
 `;
 
@@ -96,6 +114,10 @@ export const EntryVersion = styled.h2`
   letter-spacing: -0.02em;
   color: ${({ theme }) => theme.colors.title};
   margin: 8px 0 4px;
+
+  ${({ theme }) => theme.media.sm} {
+    font-size: 22px;
+  }
 `;
 
 export const EntryBadge = styled.span<{ $active?: boolean }>`
@@ -126,4 +148,8 @@ export const HighlightItem = styled.li`
   font-size: 16px;
   line-height: 1.6;
   color: ${({ theme }) => theme.colors.text};
+
+  ${({ theme }) => theme.media.sm} {
+    font-size: 14px;
+  }
 `;

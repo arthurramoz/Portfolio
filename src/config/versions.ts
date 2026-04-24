@@ -7,10 +7,57 @@ export interface VersionEntry {
   highlights: Record<Language, string[]>;
 }
 
-export const CURRENT_VERSION = 'v0.8';
-export const CURRENT_LABEL = 'beta';
+export const CURRENT_VERSION = 'v1.0';
+export const CURRENT_LABEL = 'release';
 
 export const VERSION_HISTORY: VersionEntry[] = [
+  {
+    version: 'v1.0',
+    date: '24/04/2026',
+    label: 'release',
+    highlights: {
+      pt: [
+        'Responsividade global com breakpoints via theme.media (sm/md/lg/xl)',
+        'Menu hamburguer mobile com drawer lateral animado',
+        'Toggle dia/noite premium com sol, lua e estrelas',
+        'Menu de idiomas colapsável no drawer mobile',
+        'Suporte a Français (FR) e Русский (RU)',
+        'Scroll bloqueado ao abrir drawer mobile',
+        'GitHub Graph responsivo com cells reduzidos no mobile',
+        'Hero, About, Experience, Gallery, Projects, Courses, Changelog e Footer adaptados',
+      ],
+      en: [
+        'Global responsiveness with theme.media breakpoints (sm/md/lg/xl)',
+        'Mobile hamburger menu with animated side drawer',
+        'Premium day/night toggle with sun, moon and stars',
+        'Collapsible language menu in mobile drawer',
+        'French (FR) and Russian (RU) language support',
+        'Scroll lock when mobile drawer is open',
+        'Responsive GitHub Graph with reduced cells on mobile',
+        'Hero, About, Experience, Gallery, Projects, Courses, Changelog and Footer adapted',
+      ],
+      fr: [
+        'Responsivité globale avec breakpoints theme.media (sm/md/lg/xl)',
+        'Menu hamburger mobile avec drawer latéral animé',
+        'Toggle jour/nuit premium avec soleil, lune et étoiles',
+        'Menu de langues repliable dans le drawer mobile',
+        'Support du Français (FR) et du Russe (RU)',
+        'Scroll bloqué à l\'ouverture du drawer mobile',
+        'GitHub Graph responsive avec cellules réduites sur mobile',
+        'Hero, About, Experience, Gallery, Projects, Courses, Changelog et Footer adaptés',
+      ],
+      ru: [
+        'Глобальная адаптивность через theme.media breakpoints (sm/md/lg/xl)',
+        'Мобильное гамбургер-меню с анимированным боковым drawer',
+        'Премиум переключатель день/ночь с солнцем, луной и звёздами',
+        'Сворачиваемое меню языков в мобильном drawer',
+        'Поддержка Français (FR) и Русский (RU)',
+        'Блокировка скролла при открытии мобильного drawer',
+        'Адаптивный GitHub Graph с уменьшенными ячейками на мобильных',
+        'Hero, About, Experience, Gallery, Projects, Courses, Changelog и Footer адаптированы',
+      ],
+    },
+  },
   {
     version: 'v0.8',
     date: '24/04/2026',
@@ -33,6 +80,24 @@ export const VERSION_HISTORY: VersionEntry[] = [
         'Lateral language submenu with direct selection (hover)',
         'Under Development page logo updated to inline SVG',
         'Direct language selection support (prepared for multi-language)',
+      ],
+      fr: [
+        'Logo typographique AR avec monogramme dégradé dans la navbar',
+        'Favicon SVG personnalisé avec identité visuelle',
+        'Menu déroulant projets premium avec icônes, descriptions et flèche',
+        'Menu paramètres redessiné avec glassmorphisme et animations décalées',
+        'Sous-menu latéral des langues avec sélection directe (survol)',
+        'Logo de la page Under Development mise à jour en SVG inline',
+        'Support de sélection directe de langue (préparé pour le multilingue)',
+      ],
+      ru: [
+        'Типографский логотип AR с градиентной монограммой в навбаре',
+        'Пользовательский SVG фавикон с фирменным стилем',
+        'Премиум выпадающее меню проектов с иконками, описаниями и стрелкой',
+        'Обновлённое меню настроек с glassmorphism и каскадными анимациями',
+        'Боковое подменю языков с прямым выбором (при наведении)',
+        'Логотип страницы Under Development обновлён до inline SVG',
+        'Поддержка прямого выбора языка (подготовлено к мультиязычности)',
       ],
     },
   },
@@ -59,6 +124,24 @@ export const VERSION_HISTORY: VersionEntry[] = [
         'Projects and courses data centralized in /config',
         'Full translations (PT/EN) for courses and dates',
       ],
+      fr: [
+        'Page de formations avec 28 certifications',
+        'Filtres repliables par organisation et compétences',
+        'Logos de plateformes (Udemy, Alura, Cisco, AWS, etc.)',
+        'Pagination réutilisable (10 par page)',
+        'Carrousel d\'images des projets avec lecture automatique',
+        'Données des projets et formations centralisées dans /config',
+        'Traductions complètes (PT/EN) pour formations et dates',
+      ],
+      ru: [
+        'Страница курсов с 28 сертификатами',
+        'Сворачиваемые фильтры по организации и навыкам',
+        'Логотипы платформ (Udemy, Alura, Cisco, AWS и др.)',
+        'Переиспользуемая пагинация (10 на страницу)',
+        'Карусель изображений проектов с автовоспроизведением',
+        'Данные проектов и курсов централизованы в /config',
+        'Полные переводы (PT/EN) для курсов и дат',
+      ],
     },
   },
   {
@@ -80,6 +163,20 @@ export const VERSION_HISTORY: VersionEntry[] = [
         'Footer with collapsible navigation and version history',
         'About stats refactored to dynamic array',
       ],
+      fr: [
+        'Pages de projets (personnels, entreprise, université)',
+        'Page de changelog avec timeline éditoriale',
+        'Menu déroulant projets dans la topbar et le footer',
+        'Footer avec navigation repliable et historique des versions',
+        'Stats du À propos refactorisés en tableau dynamique',
+      ],
+      ru: [
+        'Страницы проектов (личные, компания, университет)',
+        'Страница changelog с редакционной timeline',
+        'Выпадающее меню проектов в topbar и footer',
+        'Footer со сворачиваемой навигацией и историей версий',
+        'Статистика About рефакторирована в динамический массив',
+      ],
     },
   },
   {
@@ -96,6 +193,16 @@ export const VERSION_HISTORY: VersionEntry[] = [
         'Full footer with navigation, social media and contact',
         'Personal photo gallery with responsive grid',
         'Settings menu with click and version badge',
+      ],
+      fr: [
+        'Footer complet avec navigation, réseaux sociaux et contact',
+        'Galerie de photos personnelles avec grille responsive',
+        'Menu paramètres avec clic et badge de version',
+      ],
+      ru: [
+        'Полный footer с навигацией, соцсетями и контактами',
+        'Галерея личных фотографий с адаптивной сеткой',
+        'Меню настроек с кликом и бейджем версии',
       ],
     },
   },
@@ -114,6 +221,16 @@ export const VERSION_HISTORY: VersionEntry[] = [
         'Navbar with scroll tracking and animations',
         'Continue button with smooth scroll',
       ],
+      fr: [
+        'Section À propos avec bio et cartes de statistiques',
+        'Navbar avec suivi du scroll et animations',
+        'Bouton Continuer avec défilement fluide',
+      ],
+      ru: [
+        'Секция About с биографией и карточками статистики',
+        'Navbar с отслеживанием скролла и анимациями',
+        'Кнопка Продолжить с плавной прокруткой',
+      ],
     },
   },
   {
@@ -131,6 +248,16 @@ export const VERSION_HISTORY: VersionEntry[] = [
         'Settings menu (theme, language)',
         'Adaptive colors for buttons and text',
       ],
+      fr: [
+        'Mode sombre et clair avec persistance',
+        'Menu paramètres (thème, langue)',
+        'Couleurs adaptatives pour boutons et textes',
+      ],
+      ru: [
+        'Тёмная и светлая тема с сохранением',
+        'Меню настроек (тема, язык)',
+        'Адаптивные цвета для кнопок и текстов',
+      ],
     },
   },
   {
@@ -145,6 +272,14 @@ export const VERSION_HISTORY: VersionEntry[] = [
       en: [
         'i18n: PT-BR and EN-US support with flags',
         'Navbar and hero dynamically translated',
+      ],
+      fr: [
+        'i18n : support PT-BR et EN-US avec drapeaux',
+        'Navbar et hero traduits dynamiquement',
+      ],
+      ru: [
+        'i18n: поддержка PT-BR и EN-US с флагами',
+        'Navbar и hero с динамическим переводом',
       ],
     },
   },
@@ -164,6 +299,18 @@ export const VERSION_HISTORY: VersionEntry[] = [
         'Glassmorphism navbar with animated blobs',
         'Under Development page with countdown',
         'Initial Next.js + styled-components setup',
+      ],
+      fr: [
+        'Section hero avec animations framer-motion',
+        'Navbar glassmorphisme avec blobs animés',
+        'Page Under Development avec compte à rebours',
+        'Structure initiale Next.js + styled-components',
+      ],
+      ru: [
+        'Секция hero с анимациями framer-motion',
+        'Navbar glassmorphism с анимированными блобами',
+        'Страница Under Development с обратным отсчётом',
+        'Начальная структура Next.js + styled-components',
       ],
     },
   },

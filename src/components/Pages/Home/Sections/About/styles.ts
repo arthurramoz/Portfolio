@@ -10,6 +10,11 @@ export const Section = styled.section`
   padding: 128px 24px 96px;
   max-width: ${({ theme }) => theme.max};
   margin: 0 auto;
+  overflow-x: hidden;
+
+  ${({ theme }) => theme.media.md} {
+    padding: 100px 16px 64px;
+  }
 `;
 
 export const TitleWrapper = styled.div`
@@ -17,6 +22,10 @@ export const TitleWrapper = styled.div`
   flex-direction: column;
   gap: 8px;
   margin-bottom: 64px;
+
+  ${({ theme }) => theme.media.md} {
+    margin-bottom: 40px;
+  }
 `;
 
 export const SectionTitle = styled.h2`
@@ -25,8 +34,12 @@ export const SectionTitle = styled.h2`
   letter-spacing: -0.03em;
   color: ${({ theme }) => theme.colors.title};
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     font-size: 32px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    font-size: 28px;
   }
 `;
 
@@ -42,8 +55,9 @@ export const ContentWrapper = styled.div`
   display: flex;
   gap: 64px;
   align-items: flex-start;
+  max-width: 100%;
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     flex-direction: column;
     gap: 40px;
   }
@@ -54,6 +68,7 @@ export const TextColumn = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+  min-width: 0;
 `;
 
 export const Paragraph = styled.p`
@@ -61,6 +76,10 @@ export const Paragraph = styled.p`
   line-height: 1.7;
   color: ${({ theme }) => theme.colors.text};
   font-weight: 400;
+
+  ${({ theme }) => theme.media.md} {
+    font-size: 16px;
+  }
 
   strong {
     color: ${({ theme }) => theme.colors.title};
@@ -73,9 +92,17 @@ export const StatsColumn = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
+  min-width: 0;
+  max-width: 100%;
 
-  @media (max-width: 900px) {
+  ${({ theme }) => theme.media.lg} {
     width: 100%;
+    flex: unset;
+  }
+
+  ${({ theme }) => theme.media.md} {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 `;
 
@@ -91,9 +118,17 @@ export const StatCard = styled.div`
   text-align: center;
   gap: 12px;
   transition: transform 0.3s ease;
+  overflow: hidden;
 
   &:hover {
     transform: translateY(-4px);
+  }
+
+  ${({ theme }) => theme.media.md} {
+    padding: 20px;
+    flex-direction: row;
+    text-align: left;
+    border-radius: 16px;
   }
 `;
 
@@ -102,6 +137,11 @@ export const StatNumber = styled.span`
   font-weight: 800;
   color: ${({ theme }) => theme.colors.title};
   line-height: 1;
+  flex-shrink: 0;
+
+  ${({ theme }) => theme.media.md} {
+    font-size: 32px;
+  }
 `;
 
 export const StatLabel = styled.span`
@@ -110,4 +150,11 @@ export const StatLabel = styled.span`
   color: ${({ theme }) => theme.colors.subtitle};
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  overflow-wrap: break-word;
+  word-break: break-word;
+
+  ${({ theme }) => theme.media.sm} {
+    font-size: 12px;
+    letter-spacing: 0.02em;
+  }
 `;

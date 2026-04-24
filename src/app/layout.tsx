@@ -8,10 +8,10 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Portfolio',
+  title: 'Arthur',
   description: "Arthur's Portfolio",
   icons: {
-    icon: '/logo.svg',
+    icon: '/favicon.svg',
   },
 };
 

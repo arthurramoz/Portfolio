@@ -48,6 +48,9 @@ const dictionaries = {
     'projects.personal': 'Pessoais',
     'projects.company': 'Empresa',
     'projects.university': 'Faculdade',
+    'projects.personal.desc': 'Projetos & Experimentos',
+    'projects.company.desc': 'Trabalho Profissional',
+    'projects.university.desc': 'Trabalho Acadêmico',
     'projects.title.personal': 'Projetos Pessoais',
     'projects.title.company': 'Projetos de Empresa',
     'projects.title.university': 'Projetos da Faculdade',
@@ -131,6 +134,9 @@ const dictionaries = {
     'projects.personal': 'Personal',
     'projects.company': 'Company',
     'projects.university': 'University',
+    'projects.personal.desc': 'Projects & Experiments',
+    'projects.company.desc': 'Professional Work',
+    'projects.university.desc': 'Academic Work',
     'projects.title.personal': 'Personal Projects',
     'projects.title.company': 'Company Projects',
     'projects.title.university': 'University Projects',
@@ -188,12 +194,14 @@ const getTranslation = (lang: Language, key: DictionaryKeys) => {
 interface LanguageContextData {
   language: Language;
   toggleLanguage: () => void;
+  setLanguage: (lang: Language) => void;
   t: (key: DictionaryKeys) => string;
 }
 
 const LanguageContext = createContext<LanguageContextData>({
   language: 'pt',
   toggleLanguage: () => {},
+  setLanguage: () => {},
   t: (key: DictionaryKeys) => getTranslation('pt', key),
 });
 
@@ -216,10 +224,15 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem('@Portfolio:lang', newLang);
   };
 
+  const handleSetLanguage = (lang: Language) => {
+    setLanguage(lang);
+    localStorage.setItem('@Portfolio:lang', lang);
+  };
+
   const t = (key: DictionaryKeys) => getTranslation(language, key);
 
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
+    <LanguageContext.Provider value={{ language, toggleLanguage, setLanguage: handleSetLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );

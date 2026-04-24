@@ -3,26 +3,46 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useRouter, usePathname } from 'next/navigation';
-import { FiSettings, FiMoon, FiSun, FiGlobe, FiChevronDown } from 'react-icons/fi';
+import {
+  FiSettings,
+  FiMoon,
+  FiSun,
+  FiGlobe,
+  FiChevronDown,
+  FiUser,
+  FiBriefcase,
+  FiBookOpen,
+} from 'react-icons/fi';
 import { useAppTheme } from '@/contexts/ThemeContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { CURRENT_VERSION, CURRENT_LABEL } from '@/config/versions';
 import {
   DropdownDivider,
-  DropdownItem,
   DropdownLabel,
-  DropdownMenu,
   DropdownValue,
   DropdownVersion,
   FlagImg,
+  LanguageItemWrapper,
+  LanguageOption,
+  LanguageSubmenu,
   Nav,
   NavbarContainer,
   NavCta,
   NavLink,
   NavLogo,
-  NavLogoImg,
-  NavLogoText,
+  NavLogoMark,
+  ProjectsDropdown,
+  ProjectsDropdownArrow,
+  ProjectsDropdownItem,
+  ProjectsDropdownIcon,
+  ProjectsDropdownText,
+  ProjectsDropdownName,
+  ProjectsDropdownDesc,
   SettingsButton,
+  SettingsDropdown,
+  SettingsDropdownArrow,
+  SettingsItem,
+  SettingsItemIcon,
   SettingsWrapper,
   VersionBadge,
 } from './styles';
@@ -33,9 +53,14 @@ const SCROLL_LINKS = [
 ];
 
 const PROJECT_CATEGORIES = [
-  { key: 'projects.personal' as const, path: '/projetos/pessoais' },
-  { key: 'projects.company' as const, path: '/projetos/empresa' },
-  { key: 'projects.university' as const, path: '/projetos/faculdade' },
+  { key: 'projects.personal' as const, path: '/projetos/pessoais', icon: FiUser, descKey: 'projects.personal.desc' as const },
+  { key: 'projects.company' as const, path: '/projetos/empresa', icon: FiBriefcase, descKey: 'projects.company.desc' as const },
+  { key: 'projects.university' as const, path: '/projetos/faculdade', icon: FiBookOpen, descKey: 'projects.university.desc' as const },
+];
+
+const LANGUAGES = [
+  { code: 'pt' as const, label: 'Português', flag: 'https://flagcdn.com/w40/br.png' },
+  { code: 'en' as const, label: 'English', flag: 'https://flagcdn.com/w40/us.png' },
 ];
 
 const MotionNavbarContainer = motion.create(NavbarContainer);
@@ -44,7 +69,7 @@ const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
   const { themeMode, toggleTheme } = useAppTheme();
-  const { language, toggleLanguage, t } = useLanguage();
+  const { language, setLanguage: setLang, t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -58,7 +83,9 @@ const Navbar = () => {
     if (!isHomePage) return;
 
     const handleScroll = () => {
-      const sections = SCROLL_LINKS.map(link => document.getElementById(link.id));
+      const sections = SCROLL_LINKS.map(link =>
+        document.getElementById(link.id),
+      );
       const scrollPosition = window.scrollY + window.innerHeight / 3;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -128,8 +155,42 @@ const Navbar = () => {
         transition={{ delay: 0.15, duration: 0.4, ease: 'easeOut' }}
       >
         <NavLogo onClick={() => handleScrollNav('home')}>
-          <NavLogoImg src="/logo.svg" alt="logo" />
-          <NavLogoText>Arthur's Portfolio</NavLogoText>
+          <NavLogoMark>
+            <svg
+              width="38"
+              height="38"
+              viewBox="0 0 38 38"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient
+                  id="logo-grad"
+                  x1="0"
+                  y1="0"
+                  x2="38"
+                  y2="38"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop offset="0%" stopColor="#48cae4" />
+                  <stop offset="100%" stopColor="#fb6f92" />
+                </linearGradient>
+              </defs>
+              <text
+                x="50%"
+                y="50%"
+                dominantBaseline="central"
+                textAnchor="middle"
+                fontFamily="'Inter', 'Segoe UI', sans-serif"
+                fontSize="18"
+                fontWeight="800"
+                letterSpacing="-0.5"
+                fill="url(#logo-grad)"
+              >
+                AR
+              </text>
+            </svg>
+          </NavLogoMark>
         </NavLogo>
       </motion.div>
 
@@ -197,25 +258,35 @@ const Navbar = () => {
 
             <AnimatePresence>
               {isProjectsOpen && (
-                <DropdownMenu
-                  initial={{ opacity: 0, y: -8, scale: 0.96 }}
+                <ProjectsDropdown
+                  initial={{ opacity: 0, y: 6, scale: 0.97 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -8, scale: 0.96 }}
-                  transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+                  exit={{ opacity: 0, y: 6, scale: 0.97 }}
+                  transition={{ duration: 0.18, ease: [0.25, 0.1, 0.25, 1] }}
                 >
-                  {PROJECT_CATEGORIES.map(({ key, path }) => (
-                    <DropdownItem
+                  <ProjectsDropdownArrow />
+                  {PROJECT_CATEGORIES.map(({ key, path, icon: Icon, descKey }, i) => (
+                    <motion.div
                       key={path}
-                      onClick={() => handleProjectNav(path)}
-                      style={{
-                        fontWeight: pathname === path ? 600 : 500,
-                        color: pathname === path ? undefined : undefined,
-                      }}
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.04, duration: 0.2, ease: 'easeOut' }}
                     >
-                      <DropdownLabel>{t(key)}</DropdownLabel>
-                    </DropdownItem>
+                      <ProjectsDropdownItem
+                        $active={pathname === path}
+                        onClick={() => handleProjectNav(path)}
+                      >
+                        <ProjectsDropdownIcon $active={pathname === path}>
+                          <Icon size={18} />
+                        </ProjectsDropdownIcon>
+                        <ProjectsDropdownText>
+                          <ProjectsDropdownName>{t(key)}</ProjectsDropdownName>
+                          <ProjectsDropdownDesc>{t(descKey)}</ProjectsDropdownDesc>
+                        </ProjectsDropdownText>
+                      </ProjectsDropdownItem>
+                    </motion.div>
                   ))}
-                </DropdownMenu>
+                </ProjectsDropdown>
               )}
             </AnimatePresence>
           </SettingsWrapper>
@@ -261,46 +332,84 @@ const Navbar = () => {
 
           <AnimatePresence>
             {isMenuOpen && (
-              <DropdownMenu
-                initial={{ opacity: 0, y: -8, scale: 0.96 }}
+              <SettingsDropdown
+                initial={{ opacity: 0, y: 6, scale: 0.97 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -8, scale: 0.96 }}
-                transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+                exit={{ opacity: 0, y: 6, scale: 0.97 }}
+                transition={{ duration: 0.18, ease: [0.25, 0.1, 0.25, 1] }}
               >
-                <DropdownItem onClick={toggleTheme}>
-                  {themeMode === 'light' ? (
-                    <FiMoon size={16} />
-                  ) : (
-                    <FiSun size={16} />
-                  )}
-                  <DropdownLabel>{t('settings.theme')}</DropdownLabel>
-                  <DropdownValue>
-                    {themeMode === 'light'
-                      ? t('settings.theme.light')
-                      : t('settings.theme.dark')}
-                  </DropdownValue>
-                </DropdownItem>
+                <SettingsDropdownArrow />
 
-                <DropdownItem onClick={toggleLanguage}>
-                  <FiGlobe size={16} />
-                  <DropdownLabel>{t('settings.language')}</DropdownLabel>
-                  <FlagImg
-                    src={
-                      language === 'pt'
-                        ? 'https://flagcdn.com/w40/br.png'
-                        : 'https://flagcdn.com/w40/us.png'
-                    }
-                    alt={language === 'pt' ? 'Português' : 'English'}
-                  />
-                </DropdownItem>
+                <motion.div
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0, duration: 0.2, ease: 'easeOut' }}
+                >
+                  <SettingsItem onClick={toggleTheme}>
+                    <SettingsItemIcon>
+                      {themeMode === 'light' ? (
+                        <FiMoon size={16} />
+                      ) : (
+                        <FiSun size={16} />
+                      )}
+                    </SettingsItemIcon>
+                    <DropdownLabel>{t('settings.theme')}</DropdownLabel>
+                    <DropdownValue>
+                      {themeMode === 'light'
+                        ? t('settings.theme.light')
+                        : t('settings.theme.dark')}
+                    </DropdownValue>
+                  </SettingsItem>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.04, duration: 0.2, ease: 'easeOut' }}
+                >
+                  <LanguageItemWrapper>
+                    <SettingsItem as="div">
+                      <SettingsItemIcon>
+                        <FiGlobe size={16} />
+                      </SettingsItemIcon>
+                      <DropdownLabel>{t('settings.language')}</DropdownLabel>
+                      <FiChevronDown
+                        size={12}
+                        style={{ transform: 'rotate(-90deg)', opacity: 0.5 }}
+                      />
+                    </SettingsItem>
+
+                    <LanguageSubmenu>
+                      {LANGUAGES.map(lang => (
+                        <LanguageOption
+                          key={lang.code}
+                          $active={language === lang.code}
+                          onClick={() => {
+                            setLang(lang.code);
+                            setIsMenuOpen(false);
+                          }}
+                        >
+                          <FlagImg src={lang.flag} alt={lang.label} />
+                          <span>{lang.label}</span>
+                        </LanguageOption>
+                      ))}
+                    </LanguageSubmenu>
+                  </LanguageItemWrapper>
+                </motion.div>
 
                 <DropdownDivider />
 
-                <DropdownVersion>
-                  <span>{CURRENT_VERSION}</span>
-                  <VersionBadge>{CURRENT_LABEL}</VersionBadge>
-                </DropdownVersion>
-              </DropdownMenu>
+                <motion.div
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.08, duration: 0.2, ease: 'easeOut' }}
+                >
+                  <DropdownVersion>
+                    <span>{CURRENT_VERSION}</span>
+                    <VersionBadge>{CURRENT_LABEL}</VersionBadge>
+                  </DropdownVersion>
+                </motion.div>
+              </SettingsDropdown>
             )}
           </AnimatePresence>
         </SettingsWrapper>

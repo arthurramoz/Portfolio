@@ -22,11 +22,17 @@ export const WipWrapper = styled.div`
   padding: 32px;
 `;
 
-export const WipLogo = styled.img`
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
+export const WipLogoMark = styled.div`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   animation: ${float} 4s ease-in-out infinite;
+  filter: drop-shadow(0 8px 24px rgba(72, 202, 228, 0.2));
+  transition: filter 0.3s ease;
+
+  &:hover {
+    filter: drop-shadow(0 12px 32px rgba(72, 202, 228, 0.35));
+  }
 `;
 
 export const WipTitle = styled.h1`

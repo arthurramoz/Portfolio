@@ -7,10 +7,35 @@ export interface VersionEntry {
   highlights: Record<Language, string[]>;
 }
 
-export const CURRENT_VERSION = 'v0.7';
+export const CURRENT_VERSION = 'v0.8';
 export const CURRENT_LABEL = 'beta';
 
 export const VERSION_HISTORY: VersionEntry[] = [
+  {
+    version: 'v0.8',
+    date: '24/04/2026',
+    label: 'beta',
+    highlights: {
+      pt: [
+        'Logo tipográfica AR com monograma gradiente na navbar',
+        'Favicon SVG personalizado com identidade visual',
+        'Dropdown de projetos premium com ícones, descrições e arrow',
+        'Menu de definições redesenhado com glassmorphism e staggered animations',
+        'Submenu lateral de idiomas com seleção direta (hover)',
+        'Logo da página Under Development atualizada para SVG inline',
+        'Suporte a seleção direta de idioma (preparado para multi-idiomas)',
+      ],
+      en: [
+        'AR typographic logo with gradient monogram in navbar',
+        'Custom SVG favicon with visual identity',
+        'Premium projects dropdown with icons, descriptions and arrow',
+        'Redesigned settings menu with glassmorphism and staggered animations',
+        'Lateral language submenu with direct selection (hover)',
+        'Under Development page logo updated to inline SVG',
+        'Direct language selection support (prepared for multi-language)',
+      ],
+    },
+  },
   {
     version: 'v0.7',
     date: '23/04/2026',

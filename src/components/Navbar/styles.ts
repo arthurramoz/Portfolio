@@ -41,16 +41,22 @@ export const NavLogo = styled.div`
   cursor: pointer;
 `;
 
-export const NavLogoImg = styled.img`
-  height: 40px;
-  width: 40px;
-  object-fit: contain;
-`;
+export const NavLogoMark = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #48cae420 0%, #fb6f9220 100%);
+  border: 1px solid #48cae430;
+  flex-shrink: 0;
+  transition: border-color 0.25s ease, background 0.25s ease;
 
-export const NavLogoText = styled.span`
-  font-size: 18px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.navbarLogoText};
+  ${NavLogo}:hover & {
+    background: linear-gradient(135deg, #48cae435 0%, #fb6f9235 100%);
+    border-color: #48cae450;
+  }
 `;
 
 export const Nav = styled.nav`
@@ -117,35 +123,178 @@ export const SettingsButton = styled.button`
   }
 `;
 
-export const DropdownMenu = styled(motion.div)`
+export const ProjectsDropdown = styled(motion.div)`
   position: absolute;
-  top: calc(100% + 12px);
-  right: 0;
-  min-width: 200px;
-  padding: 8px;
+  top: calc(100% + 8px);
+  left: 50%;
+  margin-left: -130px;
+  min-width: 260px;
+  padding: 6px;
   border-radius: 16px;
   background: ${({ theme }) => theme.colors.dropdownBg};
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
-  box-shadow: 0 8px 32px ${({ theme }) => theme.colors.navbarShadow};
+  box-shadow:
+    0 12px 40px ${({ theme }) => theme.colors.navbarShadow},
+    0 0 0 1px ${({ theme }) => theme.colors.navbarBorder};
+  z-index: 100;
 `;
 
-export const DropdownItem = styled.button`
+export const ProjectsDropdownArrow = styled.div`
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: ${({ theme }) => theme.colors.dropdownBg};
+  border-top: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  border-left: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  border-radius: 2px;
+`;
+
+interface ProjectItemProps {
+  $active: boolean;
+}
+
+export const ProjectsDropdownItem = styled.button<ProjectItemProps>`
   display: flex;
   align-items: center;
   gap: 12px;
   width: 100%;
   padding: 12px 14px;
+  border-radius: 12px;
+  border: none;
+  background: ${({ $active, theme }) =>
+    $active ? `${theme.colors.primary1}10` : 'transparent'};
+  border-left: 2px solid ${({ $active, theme }) =>
+    $active ? theme.colors.primary1 : 'transparent'};
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.navbarLinkBgHover};
+  }
+`;
+
+export const ProjectsDropdownIcon = styled.div<ProjectItemProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
   border-radius: 10px;
+  flex-shrink: 0;
+  background: ${({ $active, theme }) =>
+    $active
+      ? `linear-gradient(135deg, ${theme.colors.primary1}25, ${theme.colors.secondary1}25)`
+      : `${theme.colors.navbarLinkBgHover}`};
+  color: ${({ $active, theme }) =>
+    $active ? theme.colors.primary1 : theme.colors.navbarLinkInactive};
+  transition: all 0.2s ease;
+
+  ${ProjectsDropdownItem}:hover & {
+    background: linear-gradient(
+      135deg,
+      ${({ theme }) => theme.colors.primary1}20,
+      ${({ theme }) => theme.colors.secondary1}20
+    );
+    color: ${({ theme }) => theme.colors.primary1};
+  }
+`;
+
+export const ProjectsDropdownText = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+`;
+
+export const ProjectsDropdownName = styled.span`
+  font-size: 14px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.navbarLinkActive};
+  line-height: 1.3;
+`;
+
+export const ProjectsDropdownDesc = styled.span`
+  font-size: 11px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.navbarLinkInactive};
+  line-height: 1.3;
+`;
+
+export const SettingsDropdown = styled(motion.div)`
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 220px;
+  padding: 6px;
+  border-radius: 16px;
+  background: ${({ theme }) => theme.colors.dropdownBg};
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  box-shadow:
+    0 12px 40px ${({ theme }) => theme.colors.navbarShadow},
+    0 0 0 1px ${({ theme }) => theme.colors.navbarBorder};
+  z-index: 100;
+`;
+
+export const SettingsDropdownArrow = styled.div`
+  position: absolute;
+  top: -6px;
+  right: 14px;
+  transform: rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: ${({ theme }) => theme.colors.dropdownBg};
+  border-top: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  border-left: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  border-radius: 2px;
+`;
+
+export const SettingsItem = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
   border: none;
   background: transparent;
   color: ${({ theme }) => theme.colors.navbarLinkActive};
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
+  text-align: left;
 
   &:hover {
     background: ${({ theme }) => theme.colors.navbarLinkBgHover};
+  }
+`;
+
+export const SettingsItemIcon = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  background: ${({ theme }) => theme.colors.navbarLinkBgHover};
+  color: ${({ theme }) => theme.colors.navbarLinkInactive};
+  transition: all 0.2s ease;
+
+  ${SettingsItem}:hover & {
+    background: linear-gradient(
+      135deg,
+      ${({ theme }) => theme.colors.primary1}20,
+      ${({ theme }) => theme.colors.secondary1}20
+    );
+    color: ${({ theme }) => theme.colors.primary1};
   }
 `;
 
@@ -194,4 +343,76 @@ export const VersionBadge = styled.span`
   border-radius: 6px;
   background: ${({ theme }) => theme.colors.primary1}20;
   color: ${({ theme }) => theme.colors.primary1};
+`;
+
+export const LanguageSubmenu = styled.div`
+  position: absolute;
+  right: calc(100% + 8px);
+  top: 0;
+  min-width: 160px;
+  padding: 6px;
+  border-radius: 12px;
+  background: ${({ theme }) => theme.colors.dropdownBg};
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  box-shadow:
+    0 8px 32px ${({ theme }) => theme.colors.navbarShadow},
+    0 0 0 1px ${({ theme }) => theme.colors.navbarBorder};
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(8px);
+  transition: all 0.2s ease;
+  z-index: 110;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 12px;
+    right: -6px;
+    transform: rotate(45deg);
+    width: 10px;
+    height: 10px;
+    background: ${({ theme }) => theme.colors.dropdownBg};
+    border-right: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+    border-top: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+    border-radius: 2px;
+  }
+`;
+
+export const LanguageItemWrapper = styled.div`
+  position: relative;
+
+  &:hover ${LanguageSubmenu} {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+`;
+
+interface LanguageOptionProps {
+  $active: boolean;
+}
+
+export const LanguageOption = styled.button<LanguageOptionProps>`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: none;
+  background: ${({ $active, theme }) =>
+    $active ? `${theme.colors.primary1}12` : 'transparent'};
+  color: ${({ $active, theme }) =>
+    $active ? theme.colors.primary1 : theme.colors.navbarLinkActive};
+  font-size: 13px;
+  font-weight: ${({ $active }) => ($active ? 600 : 500)};
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.navbarLinkBgHover};
+  }
 `;

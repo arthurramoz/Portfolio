@@ -72,7 +72,7 @@ const ChangelogPage = () => {
                     {isCurrent ? t('changelog.current') : entry.label}
                   </EntryBadge>
                   <HighlightList>
-                    {entry.highlights[language].map((highlight, i) => (
+                    {(entry.highlights[language] ?? entry.highlights['pt']).map((highlight, i) => (
                       <HighlightItem key={i}>• {highlight}</HighlightItem>
                     ))}
                   </HighlightList>

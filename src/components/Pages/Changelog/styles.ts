@@ -5,18 +5,18 @@ export const PageContainer = styled.div`
   width: 100%;
   max-width: ${({ theme }) => theme.max};
   margin: 0 auto;
-  padding: 140px 40px 96px;
+  padding: ${({ theme }) => theme.pagePadding.default};
   display: flex;
   gap: 80px;
 
   ${({ theme }) => theme.media.lg} {
-    padding: 120px 24px 64px;
+    padding: ${({ theme }) => theme.pagePadding.lg};
     flex-direction: column;
     gap: 48px;
   }
 
   ${({ theme }) => theme.media.sm} {
-    padding: 100px 16px 48px;
+    padding: ${({ theme }) => theme.pagePadding.sm};
   }
 `;
 

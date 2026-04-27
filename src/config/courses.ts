@@ -103,7 +103,7 @@ export const COURSES: CourseItem[] = [
     platform: 'Udemy',
     month: 10,
     year: 2024,
-    hours: 40,
+    hours: 1,
     skills: ['Postman', 'APIs'],
   },
   {
@@ -111,7 +111,7 @@ export const COURSES: CourseItem[] = [
     platform: 'Udemy',
     month: 10,
     year: 2024,
-    hours: 40,
+    hours: 20,
     skills: ['Figma', 'UI Design'],
   },
   {
@@ -119,7 +119,7 @@ export const COURSES: CourseItem[] = [
     platform: 'Cisco',
     month: 9,
     year: 2024,
-    hours: 40,
+    hours: 60,
     skills: ['Segurança', 'Redes'],
   },
   {

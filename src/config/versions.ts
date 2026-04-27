@@ -4,13 +4,80 @@ export interface VersionEntry {
   version: string;
   date: string;
   label: string;
-  highlights: Record<Language, string[]>;
+  highlights: Record<Exclude<Language, 'es'>, string[]> & { es?: string[] };
 }
 
-export const CURRENT_VERSION = 'v1.0';
-export const CURRENT_LABEL = 'release';
+export const CURRENT_VERSION = 'v1.5';
+export const CURRENT_LABEL = 'Nexus';
 
 export const VERSION_HISTORY: VersionEntry[] = [
+  {
+    version: 'v1.5',
+    date: '27/04/2026',
+    label: 'Nexus',
+    highlights: {
+      pt: [
+        'Nova página de Jornada — timeline interativa com categorias, ícones, tags e animações staggered',
+        'Idioma Espanhol (ES) adicionado em todo o portfolio',
+        'Padding global de páginas centralizado no theme.ts (pagePadding)',
+        'Styled-components compartilhados extraídos para global.ts (PageWrapper, PageTag, PageHeading)',
+        'Títulos azuis de seção (PageTag) adicionados em Configurações e Jornada',
+        '"Jornada" adicionado à topbar desktop e drawer mobile',
+        'Remoção de todos os comentários do código',
+        'Largura das páginas Configurações e Jornada corrigida para 100% com max-width do tema',
+        'Chaves de tradução curtas para tema (Claro / Escuro) no menu da navbar',
+        'Timeline config dinâmica — eventos editáveis em /config/timeline.ts',
+      ],
+      en: [
+        'New Journey page — interactive timeline with categories, icons, tags and staggered animations',
+        'Spanish (ES) language added across the entire portfolio',
+        'Global page padding centralized in theme.ts (pagePadding)',
+        'Shared styled-components extracted to global.ts (PageWrapper, PageTag, PageHeading)',
+        'Blue section tags (PageTag) added to Settings and Journey pages',
+        '"Journey" link added to desktop topbar and mobile drawer',
+        'All code comments removed',
+        'Settings and Journey page width fixed to 100% with theme max-width',
+        'Short translation keys for theme (Light / Dark) in navbar menu',
+        'Dynamic timeline config — events editable in /config/timeline.ts',
+      ],
+      fr: [
+        'Nouvelle page Parcours — timeline interactive avec catégories, icônes, tags et animations décalées',
+        'Langue Espagnol (ES) ajoutée sur tout le portfolio',
+        'Padding global des pages centralisé dans theme.ts (pagePadding)',
+        'Styled-components partagés extraits vers global.ts (PageWrapper, PageTag, PageHeading)',
+        'Tags de section bleus (PageTag) ajoutés sur Paramètres et Parcours',
+        'Lien "Parcours" ajouté à la topbar desktop et au drawer mobile',
+        'Tous les commentaires de code supprimés',
+        'Largeur des pages Paramètres et Parcours corrigée à 100% avec max-width du thème',
+        'Clés de traduction courtes pour le thème (Clair / Sombre) dans le menu navbar',
+        'Config timeline dynamique — événements modifiables dans /config/timeline.ts',
+      ],
+      ru: [
+        'Новая страница Путь — интерактивная timeline с категориями, иконками, тегами и каскадными анимациями',
+        'Испанский язык (ES) добавлен по всему портфолио',
+        'Глобальный padding страниц централизован в theme.ts (pagePadding)',
+        'Общие styled-components вынесены в global.ts (PageWrapper, PageTag, PageHeading)',
+        'Синие теги секций (PageTag) добавлены на страницы Настройки и Путь',
+        'Ссылка "Путь" добавлена в desktop topbar и мобильный drawer',
+        'Все комментарии из кода удалены',
+        'Ширина страниц Настройки и Путь исправлена до 100% с max-width темы',
+        'Короткие ключи перевода для темы (Светлая / Тёмная) в меню navbar',
+        'Динамичный конфиг timeline — события редактируются в /config/timeline.ts',
+      ],
+      es: [
+        'Nueva página Trayectoria — timeline interactiva con categorías, iconos, tags y animaciones escalonadas',
+        'Idioma Español (ES) añadido en todo el portfolio',
+        'Padding global de páginas centralizado en theme.ts (pagePadding)',
+        'Styled-components compartidos extraídos a global.ts (PageWrapper, PageTag, PageHeading)',
+        'Tags de sección azules (PageTag) añadidos en Configuración y Trayectoria',
+        '"Trayectoria" añadido a la topbar escritorio y el drawer mobile',
+        'Todos los comentarios del código eliminados',
+        'Ancho de las páginas Configuración y Trayectoria corregido a 100% con max-width del tema',
+        'Claves de traducción cortas para el tema (Claro / Oscuro) en el menú navbar',
+        'Config de timeline dinámica — eventos editables en /config/timeline.ts',
+      ],
+    },
+  },
   {
     version: 'v1.0',
     date: '24/04/2026',

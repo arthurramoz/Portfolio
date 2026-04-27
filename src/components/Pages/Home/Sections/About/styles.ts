@@ -51,11 +51,10 @@ export const SectionSubtitle = styled.span`
   color: ${({ theme }) => theme.colors.primary1};
 `;
 
-export const ContentWrapper = styled.div`
+export const PhotoBioWrapper = styled.div`
   display: flex;
   gap: 64px;
   align-items: flex-start;
-  max-width: 100%;
 
   ${({ theme }) => theme.media.lg} {
     flex-direction: column;
@@ -63,98 +62,64 @@ export const ContentWrapper = styled.div`
   }
 `;
 
-export const TextColumn = styled.div`
+export const PhotoWrap = styled.div`
+  flex-shrink: 0;
+  width: 320px;
+  height: 400px;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  box-shadow: 0 24px 64px ${({ theme }) => theme.colors.navbarShadow},
+    0 0 0 1px ${({ theme }) => theme.colors.navbarBorder};
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 60%,
+      ${({ theme }) => theme.colors.navbarShadow} 100%
+    );
+    pointer-events: none;
+  }
+
+  ${({ theme }) => theme.media.lg} {
+    width: 100%;
+    height: 340px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    height: 280px;
+    border-radius: 18px;
+  }
+`;
+
+export const BioColumn = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 22px;
   min-width: 0;
 `;
 
-export const Paragraph = styled.p`
-  font-size: 18px;
-  line-height: 1.7;
+export const BioTag = styled.span`
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: ${({ theme }) => theme.colors.title};
+`;
+
+export const BioParagraph = styled.p`
+  font-size: 17px;
+  line-height: 1.75;
   color: ${({ theme }) => theme.colors.text};
   font-weight: 400;
 
   ${({ theme }) => theme.media.md} {
-    font-size: 16px;
-  }
-
-  strong {
-    color: ${({ theme }) => theme.colors.title};
-    font-weight: 600;
-  }
-`;
-
-export const StatsColumn = styled.div`
-  flex: 0.6;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  min-width: 0;
-  max-width: 100%;
-
-  ${({ theme }) => theme.media.lg} {
-    width: 100%;
-    flex: unset;
-  }
-
-  ${({ theme }) => theme.media.md} {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-`;
-
-export const StatCard = styled.div`
-  background: ${({ theme }) => theme.colors.btnSecondaryBg};
-  border: 1px solid ${({ theme }) => theme.colors.btnSecondaryBorder};
-  border-radius: 24px;
-  padding: 32px 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 12px;
-  transition: transform 0.3s ease;
-  overflow: hidden;
-
-  &:hover {
-    transform: translateY(-4px);
-  }
-
-  ${({ theme }) => theme.media.md} {
-    padding: 20px;
-    flex-direction: row;
-    text-align: left;
-    border-radius: 16px;
-  }
-`;
-
-export const StatNumber = styled.span`
-  font-size: 48px;
-  font-weight: 800;
-  color: ${({ theme }) => theme.colors.title};
-  line-height: 1;
-  flex-shrink: 0;
-
-  ${({ theme }) => theme.media.md} {
-    font-size: 32px;
-  }
-`;
-
-export const StatLabel = styled.span`
-  font-size: 14px;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.subtitle};
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  overflow-wrap: break-word;
-  word-break: break-word;
-
-  ${({ theme }) => theme.media.sm} {
-    font-size: 12px;
-    letter-spacing: 0.02em;
+    font-size: 15px;
   }
 `;

@@ -1,48 +1,40 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import GitHubGraph from './GitHubGraph';
 import {
-  ContentWrapper,
-  Paragraph,
   Section,
-  SectionSubtitle,
-  SectionTitle,
-  StatCard,
-  StatLabel,
-  StatNumber,
-  StatsColumn,
-  TextColumn,
   TitleWrapper,
+  SectionTitle,
+  SectionSubtitle,
+  PhotoBioWrapper,
+  PhotoWrap,
+  BioColumn,
+  BioTag,
+  BioParagraph,
 } from './styles';
 
-const STATS = [
-  { value: '4', labelKey: 'about.stats.projects' as const },
-  { value: '2+', labelKey: 'about.stats.years' as const },
-];
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const },
+  },
+};
 
 const About = () => {
   const { t } = useLanguage();
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const },
-    },
-  };
 
   return (
     <Section id="sobre-mim">
@@ -54,43 +46,49 @@ const About = () => {
       >
         <TitleWrapper>
           <motion.div variants={itemVariants}>
-            <SectionSubtitle>{t('about.subtitle')}</SectionSubtitle>
+            <SectionSubtitle>{t('who.subtitle' as Parameters<typeof t>[0])}</SectionSubtitle>
           </motion.div>
           <motion.div variants={itemVariants}>
-            <SectionTitle>{t('about.title')}</SectionTitle>
+            <SectionTitle>{t('who.title' as Parameters<typeof t>[0])}</SectionTitle>
           </motion.div>
         </TitleWrapper>
 
-        <ContentWrapper>
-          <TextColumn>
-            <motion.div variants={itemVariants}>
-              <Paragraph>{t('about.p1')}</Paragraph>
-            </motion.div>
-            <motion.div variants={itemVariants}>
-              <Paragraph>{t('about.p2')}</Paragraph>
-            </motion.div>
-            <motion.div variants={itemVariants}>
-              <Paragraph>{t('about.p3')}</Paragraph>
-            </motion.div>
-          </TextColumn>
+        <PhotoBioWrapper>
+          <motion.div variants={itemVariants}>
+            <PhotoWrap>
+              <Image
+                src="/me/2.jpg"
+                alt="Arthur Moreira Ramos"
+                width={360}
+                height={420}
+                style={{ objectFit: 'cover', objectPosition: 'center top', width: '100%', height: '100%' }}
+                priority
+              />
+            </PhotoWrap>
+          </motion.div>
 
-          <StatsColumn>
-            {STATS.map(({ value, labelKey }) => (
-              <motion.div key={labelKey} variants={itemVariants}>
-                <StatCard>
-                  <StatNumber>{value}</StatNumber>
-                  <StatLabel>{t(labelKey)}</StatLabel>
-                </StatCard>
-              </motion.div>
-            ))}
-            <motion.div
-              variants={itemVariants}
-              style={{ gridColumn: '1 / -1', minWidth: 0, overflow: 'hidden' }}
-            >
-              <GitHubGraph />
+          <BioColumn>
+            <motion.div variants={itemVariants}>
+              <BioTag>Arthur Moreira Ramos</BioTag>
             </motion.div>
-          </StatsColumn>
-        </ContentWrapper>
+            <motion.div variants={itemVariants}>
+              <BioParagraph>{t('who.bio.p1' as Parameters<typeof t>[0])}</BioParagraph>
+            </motion.div>
+            <motion.div variants={itemVariants}>
+              <BioParagraph>{t('who.bio.p2' as Parameters<typeof t>[0])}</BioParagraph>
+            </motion.div>
+            <motion.div variants={itemVariants}>
+              <BioParagraph>{t('who.bio.p3' as Parameters<typeof t>[0])}</BioParagraph>
+            </motion.div>
+          </BioColumn>
+        </PhotoBioWrapper>
+
+        <motion.div
+          variants={itemVariants}
+          style={{ marginTop: '48px', minWidth: 0, overflow: 'hidden' }}
+        >
+          <GitHubGraph />
+        </motion.div>
       </motion.div>
     </Section>
   );

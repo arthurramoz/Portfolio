@@ -69,6 +69,11 @@ export const lightTheme = {
   breakpoints,
   media,
   max: '1440px',
+  pagePadding: {
+    default: '140px 40px 96px',
+    lg: '120px 24px 64px',
+    sm: '100px 16px 48px',
+  },
 } as const;
 
 export const darkTheme = {
@@ -121,6 +126,11 @@ export const darkTheme = {
   breakpoints,
   media,
   max: '1440px',
+  pagePadding: {
+    default: '140px 40px 96px',
+    lg: '120px 24px 64px',
+    sm: '100px 16px 48px',
+  },
 } as const;
 
 export type AppTheme = typeof lightTheme;

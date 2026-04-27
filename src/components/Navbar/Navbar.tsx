@@ -18,6 +18,8 @@ import {
   FiInfo,
   FiLayers,
   FiAward,
+  FiSliders,
+  FiMapPin,
 } from 'react-icons/fi';
 import { useAppTheme } from '@/contexts/ThemeContext';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -82,6 +84,7 @@ const PROJECT_CATEGORIES = [
 const LANGUAGES = [
   { code: 'pt' as const, label: 'Português', flag: 'https://flagcdn.com/w40/br.png' },
   { code: 'en' as const, label: 'English', flag: 'https://flagcdn.com/w40/us.png' },
+  { code: 'es' as const, label: 'Español', flag: 'https://flagcdn.com/w40/es.png' },
   { code: 'fr' as const, label: 'Français', flag: 'https://flagcdn.com/w40/fr.png' },
   { code: 'ru' as const, label: 'Русский', flag: 'https://flagcdn.com/w40/ru.png' },
 ];
@@ -343,6 +346,32 @@ const Navbar = () => {
             )}
           </NavLink>
         </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.46, duration: 0.35, ease: 'easeOut' }}
+        >
+          <NavLink
+            $selected={pathname === '/jornada'}
+            onClick={() => router.push('/jornada')}
+          >
+            {t('nav.timeline' as Parameters<typeof t>[0])}
+            {pathname === '/jornada' && (
+              <motion.span
+                layoutId="navbar-indicator"
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  borderRadius: '9999px',
+                  background: 'rgba(26, 26, 26, 0.06)',
+                  zIndex: -1,
+                }}
+                transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+              />
+            )}
+          </NavLink>
+        </motion.div>
       </Nav>
 
       <motion.div
@@ -382,8 +411,8 @@ const Navbar = () => {
                     <DropdownLabel>{t('settings.theme')}</DropdownLabel>
                     <DropdownValue>
                       {themeMode === 'light'
-                        ? t('settings.theme.light')
-                        : t('settings.theme.dark')}
+                        ? t('settings.theme.light.short' as any)
+                        : t('settings.theme.dark.short' as any)}
                     </DropdownValue>
                   </SettingsItem>
                 </motion.div>
@@ -429,6 +458,26 @@ const Navbar = () => {
                   initial={{ opacity: 0, x: -8 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.08, duration: 0.2, ease: 'easeOut' }}
+                >
+                  <SettingsItem
+                    onClick={() => {
+                      router.push('/configuracoes');
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    <SettingsItemIcon>
+                      <FiSliders size={16} />
+                    </SettingsItemIcon>
+                    <DropdownLabel>{t('nav.settings')}</DropdownLabel>
+                  </SettingsItem>
+                </motion.div>
+
+                <DropdownDivider />
+
+                <motion.div
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.12, duration: 0.2, ease: 'easeOut' }}
                 >
                   <DropdownVersion>
                     <span>{CURRENT_VERSION}</span>
@@ -554,6 +603,17 @@ const Navbar = () => {
               {t('nav.courses')}
             </MobileDrawerLink>
 
+            <MobileDrawerLink
+              $active={pathname === '/jornada'}
+              onClick={() => {
+                router.push('/jornada');
+                setIsMobileOpen(false);
+              }}
+            >
+              <FiMapPin size={18} />
+              {t('nav.timeline' as Parameters<typeof t>[0])}
+            </MobileDrawerLink>
+
             <MobileDrawerDivider />
 
             <ThemeToggleRow onClick={toggleTheme}>
@@ -615,6 +675,19 @@ const Navbar = () => {
                 </motion.div>
               )}
             </AnimatePresence>
+
+            <MobileDrawerDivider />
+
+            <MobileDrawerLink
+              $active={pathname === '/configuracoes'}
+              onClick={() => {
+                router.push('/configuracoes');
+                setIsMobileOpen(false);
+              }}
+            >
+              <FiSliders size={18} />
+              {t('nav.settings')}
+            </MobileDrawerLink>
 
             <MobileDrawerDivider />
 

@@ -5,6 +5,7 @@ export const Section = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-height: 100vh;
   width: 100%;
   padding: 96px 24px 96px;
   max-width: ${({ theme }) => theme.max};
@@ -20,8 +21,12 @@ export const TitleWrapper = styled.div`
   flex-direction: column;
   gap: 8px;
   margin-bottom: 64px;
+  align-items: flex-end;
+  text-align: right;
 
   ${({ theme }) => theme.media.md} {
+    align-items: flex-start;
+    text-align: left;
     margin-bottom: 40px;
   }
 `;
@@ -51,12 +56,13 @@ export const SectionSubtitle = styled.span`
 
 export const ContentWrapper = styled.div`
   display: flex;
+  flex-direction: row-reverse;
   gap: 64px;
   align-items: flex-start;
 
   ${({ theme }) => theme.media.lg} {
     flex-direction: column;
-    gap: 48px;
+    gap: 40px;
   }
 `;
 
@@ -64,13 +70,12 @@ export const TextColumn = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 28px;
-  min-width: 0;
+  gap: 24px;
 `;
 
 export const Paragraph = styled.p`
   font-size: 18px;
-  line-height: 1.75;
+  line-height: 1.7;
   color: ${({ theme }) => theme.colors.text};
   font-weight: 400;
 
@@ -79,25 +84,19 @@ export const Paragraph = styled.p`
   }
 `;
 
-export const InnerDivider = styled.div`
-  height: 1px;
-  background: ${({ theme }) => theme.colors.navbarBorder};
-  margin: 4px 0;
-`;
-
-export const StacksLabel = styled.span`
+export const StatLabel = styled.span`
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   color: ${({ theme }) => theme.colors.subtitle};
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
 `;
 
 export const StacksRow = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 4px;
+  margin-top: 8px;
 `;
 
 export const StackChip = styled.span`
@@ -116,17 +115,14 @@ export const StackChip = styled.span`
   }
 `;
 
-export const SideColumn = styled.div`
-  flex: 0 0 320px;
-  display: flex;
-  flex-direction: column;
+export const StatsGrid = styled.div`
+  flex: 0.6;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 
   ${({ theme }) => theme.media.lg} {
-    flex: unset;
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
   }
 
   ${({ theme }) => theme.media.sm} {
@@ -150,6 +146,10 @@ export const StatCard = styled.div`
   &:hover {
     transform: translateY(-4px);
   }
+
+  ${({ theme }) => theme.media.md} {
+    padding: 24px 16px;
+  }
 `;
 
 export const StatNumber = styled.span`
@@ -161,14 +161,4 @@ export const StatNumber = styled.span`
   ${({ theme }) => theme.media.md} {
     font-size: 32px;
   }
-`;
-
-export const StatLabel = styled.span`
-  font-size: 12px;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.subtitle};
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  overflow-wrap: break-word;
-  word-break: break-word;
 `;

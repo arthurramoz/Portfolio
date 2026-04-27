@@ -11,15 +11,19 @@ import {
   ContentWrapper,
   TextColumn,
   Paragraph,
-  InnerDivider,
-  StacksLabel,
+  StatLabel,
   StacksRow,
   StackChip,
-  SideColumn,
+  StatsGrid,
   StatCard,
   StatNumber,
-  StatLabel,
 } from './styles';
+
+const STATS = [
+  { value: '15+', labelKey: 'exp.stats.corporate' as const },
+  { value: '1', labelKey: 'exp.stats.fullstack' as const },
+  { value: '28', labelKey: 'exp.stats.certifications' as const },
+];
 
 const STACKS = [
   'React.js',
@@ -36,12 +40,6 @@ const STACKS = [
   'Git',
   'Docker',
   'AWS',
-];
-
-const STATS = [
-  { value: '15+', labelKey: 'exp.stats.corporate' as const },
-  { value: '1', labelKey: 'exp.stats.fullstack' as const },
-  { value: '28', labelKey: 'exp.stats.certifications' as const },
 ];
 
 const containerVariants = {
@@ -61,12 +59,12 @@ const itemVariants = {
   },
 };
 
-const Experience = () => {
+const Stacks = () => {
   const { t } = useLanguage();
   const { commits } = useGitHubCommits();
 
   return (
-    <Section id="experiencia">
+    <Section id="stacks">
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -76,12 +74,12 @@ const Experience = () => {
         <TitleWrapper>
           <motion.div variants={itemVariants}>
             <SectionSubtitle>
-              {t('exp.subtitle' as Parameters<typeof t>[0])}
+              {t('stacks.subtitle' as Parameters<typeof t>[0])}
             </SectionSubtitle>
           </motion.div>
           <motion.div variants={itemVariants}>
             <SectionTitle>
-              {t('exp.title' as Parameters<typeof t>[0])}
+              {t('stacks.title' as Parameters<typeof t>[0])}
             </SectionTitle>
           </motion.div>
         </TitleWrapper>
@@ -89,30 +87,15 @@ const Experience = () => {
         <ContentWrapper>
           <TextColumn>
             <motion.div variants={itemVariants}>
-              <Paragraph>{t('about.p1' as Parameters<typeof t>[0])}</Paragraph>
-            </motion.div>
-            <motion.div variants={itemVariants}>
-              <Paragraph>{t('about.p2' as Parameters<typeof t>[0])}</Paragraph>
-            </motion.div>
-            <motion.div variants={itemVariants}>
-              <Paragraph>{t('about.p3' as Parameters<typeof t>[0])}</Paragraph>
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <InnerDivider />
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
               <Paragraph>{t('exp.p1' as Parameters<typeof t>[0])}</Paragraph>
             </motion.div>
             <motion.div variants={itemVariants}>
               <Paragraph>{t('exp.p2' as Parameters<typeof t>[0])}</Paragraph>
             </motion.div>
-
             <motion.div variants={itemVariants}>
-              <StacksLabel>
+              <StatLabel style={{ marginTop: 8, marginBottom: -4 }}>
                 {t('exp.stacks.label' as Parameters<typeof t>[0])}
-              </StacksLabel>
+              </StatLabel>
               <StacksRow>
                 {STACKS.map(stack => (
                   <StackChip key={stack}>{stack}</StackChip>
@@ -121,7 +104,7 @@ const Experience = () => {
             </motion.div>
           </TextColumn>
 
-          <SideColumn>
+          <StatsGrid>
             {STATS.map(({ value, labelKey }) => (
               <motion.div key={labelKey} variants={itemVariants}>
                 <StatCard>
@@ -142,11 +125,11 @@ const Experience = () => {
                 </StatLabel>
               </StatCard>
             </motion.div>
-          </SideColumn>
+          </StatsGrid>
         </ContentWrapper>
       </motion.div>
     </Section>
   );
 };
 
-export default Experience;
+export default Stacks;

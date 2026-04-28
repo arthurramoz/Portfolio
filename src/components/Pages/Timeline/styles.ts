@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
 export const LegendRow = styled(motion.div)`
@@ -96,21 +96,40 @@ export const YearLabel = styled.span`
   }
 `;
 
-export const EntryCard = styled(motion.div)<{ $accentColor: string }>`
+/* ─── highlighted card glow mixin ─── */
+const highlightGlow = css<{ $accentColor: string }>`
+  border-color: ${({ $accentColor }) => $accentColor}40;
+  box-shadow:
+    0 4px 32px ${({ $accentColor }) => $accentColor}18,
+    0 0 0 1px ${({ $accentColor }) => $accentColor}12;
+
+  &:hover {
+    border-color: ${({ $accentColor }) => $accentColor}70;
+    box-shadow:
+      0 8px 48px ${({ $accentColor }) => $accentColor}28,
+      0 0 0 1px ${({ $accentColor }) => $accentColor}20;
+  }
+`;
+
+export const EntryCard = styled(motion.div)<{
+  $accentColor: string;
+  $highlight?: boolean;
+}>`
   position: relative;
   background: ${({ theme }) => theme.colors.dropdownBg};
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   border-radius: 20px;
-  padding: 28px 28px 24px;
+  padding: ${({ $highlight }) => ($highlight ? '32px 32px 28px' : '22px 24px 18px')};
   margin-bottom: 20px;
   box-shadow: 0 4px 24px ${({ theme }) => theme.colors.navbarShadow};
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: box-shadow 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
 
   &:hover {
     border-color: ${({ $accentColor }) => $accentColor}50;
     box-shadow: 0 8px 40px ${({ theme }) => theme.colors.navbarShadowHover};
+    transform: translateY(-2px);
   }
 
   &::before {
@@ -118,22 +137,41 @@ export const EntryCard = styled(motion.div)<{ $accentColor: string }>`
     position: absolute;
     left: -43px;
     top: 32px;
-    width: 10px;
-    height: 10px;
+    width: ${({ $highlight }) => ($highlight ? '12px' : '8px')};
+    height: ${({ $highlight }) => ($highlight ? '12px' : '8px')};
     border-radius: 50%;
     background: ${({ $accentColor }) => $accentColor};
-    box-shadow: 0 0 0 3px ${({ $accentColor }) => $accentColor}25;
+    box-shadow: 0 0 0 ${({ $highlight }) => ($highlight ? '4px' : '3px')}
+      ${({ $accentColor }) => $accentColor}25;
 
     ${({ theme }) => theme.media.md} {
       left: -35px;
-      width: 8px;
-      height: 8px;
+      width: ${({ $highlight }) => ($highlight ? '10px' : '7px')};
+      height: ${({ $highlight }) => ($highlight ? '10px' : '7px')};
     }
   }
 
+  ${({ $highlight }) => $highlight && highlightGlow}
+
   ${({ theme }) => theme.media.md} {
-    padding: 22px 20px 18px;
+    padding: ${({ $highlight }) =>
+      $highlight ? '24px 20px 20px' : '18px 18px 14px'};
   }
+`;
+
+/* ─── highlight accent bar ─── */
+export const HighlightBar = styled.div<{ $accentColor: string }>`
+  position: absolute;
+  left: 0;
+  top: 16px;
+  bottom: 16px;
+  width: 3px;
+  border-radius: 0 4px 4px 0;
+  background: linear-gradient(
+    to bottom,
+    ${({ $accentColor }) => $accentColor},
+    ${({ $accentColor }) => $accentColor}60
+  );
 `;
 
 export const EntryHeader = styled.div`
@@ -143,9 +181,12 @@ export const EntryHeader = styled.div`
   margin-bottom: 10px;
 `;
 
-export const EntryIconWrap = styled.div<{ $accentColor: string }>`
-  width: 40px;
-  height: 40px;
+export const EntryIconWrap = styled.div<{
+  $accentColor: string;
+  $highlight?: boolean;
+}>`
+  width: ${({ $highlight }) => ($highlight ? '44px' : '36px')};
+  height: ${({ $highlight }) => ($highlight ? '44px' : '36px')};
   border-radius: 12px;
   background: ${({ $accentColor }) => $accentColor}15;
   border: 1px solid ${({ $accentColor }) => $accentColor}30;
@@ -163,17 +204,11 @@ export const EntryTitleGroup = styled.div`
   flex: 1;
 `;
 
-export const EntryTitle = styled.span`
-  font-size: 1.05rem;
-  font-weight: 700;
+export const EntryTitle = styled.span<{ $highlight?: boolean }>`
+  font-size: ${({ $highlight }) => ($highlight ? '1.1rem' : '0.92rem')};
+  font-weight: ${({ $highlight }) => ($highlight ? '800' : '600')};
   color: ${({ theme }) => theme.colors.text};
   letter-spacing: -0.01em;
-`;
-
-export const EntrySubtitle = styled.span`
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.navbarLinkInactive};
 `;
 
 export const EntryDate = styled.span`
@@ -190,8 +225,8 @@ export const EntryDate = styled.span`
   }
 `;
 
-export const EntryDescription = styled.p`
-  font-size: 0.88rem;
+export const EntryDescription = styled.p<{ $highlight?: boolean }>`
+  font-size: ${({ $highlight }) => ($highlight ? '0.88rem' : '0.82rem')};
   line-height: 1.65;
   color: ${({ theme }) => theme.colors.navbarLinkInactive};
   margin-bottom: 14px;

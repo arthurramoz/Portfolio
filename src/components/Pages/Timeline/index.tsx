@@ -27,11 +27,11 @@ import {
   EntryIconWrap,
   EntryTitleGroup,
   EntryTitle,
-  EntrySubtitle,
   EntryDate,
   EntryDescription,
   EntryTags,
   EntryTag,
+  HighlightBar,
 } from './styles';
 
 const LEGEND_KEYS: Record<TimelineCategory, string> = {
@@ -45,7 +45,7 @@ const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.08 },
+    transition: { staggerChildren: 0.06 },
   },
 };
 
@@ -131,32 +131,33 @@ const TimelinePage = () => {
               {entries.map(entry => {
                 const color = CATEGORY_COLORS[entry.category];
                 const Icon = entry.icon;
+                const hl = !!entry.highlight;
                 return (
                   <EntryCard
                     key={entry.id}
                     $accentColor={color}
+                    $highlight={hl}
                     variants={itemVariants}
                   >
+                    {hl && <HighlightBar $accentColor={color} />}
+
                     <EntryHeader>
                       {Icon && (
-                        <EntryIconWrap $accentColor={color}>
-                          <Icon size={18} />
+                        <EntryIconWrap $accentColor={color} $highlight={hl}>
+                          <Icon size={hl ? 20 : 16} />
                         </EntryIconWrap>
                       )}
                       <EntryTitleGroup>
-                        <EntryTitle>
+                        <EntryTitle $highlight={hl}>
                           {t(entry.titleKey as Parameters<typeof t>[0])}
                         </EntryTitle>
-                        <EntrySubtitle>
-                          {t(entry.subtitleKey as Parameters<typeof t>[0])}
-                        </EntrySubtitle>
                       </EntryTitleGroup>
                       <EntryDate>
                         {formatDate(entry.year, entry.month)}
                       </EntryDate>
                     </EntryHeader>
 
-                    <EntryDescription>
+                    <EntryDescription $highlight={hl}>
                       {t(entry.descriptionKey as Parameters<typeof t>[0])}
                     </EntryDescription>
 

@@ -154,7 +154,6 @@ const SettingsPage = () => {
         <ThemeToggleBtn
           as="div"
           $active={themeMode === 'dark'}
-          onClick={e => e.stopPropagation()}
           aria-hidden
         />
       </DirectRedirectCard>

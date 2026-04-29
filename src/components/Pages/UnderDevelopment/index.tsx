@@ -2,13 +2,16 @@
 
 import { AnimatePresence, motion, type Easing } from 'motion/react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { HiArrowLeft } from 'react-icons/hi';
 import {
   AboutBio,
   AboutCard,
   AboutName,
   AboutPhoto,
+  BackButton,
   SocialLink,
   SocialLinks,
   TabBar,
@@ -35,6 +38,7 @@ const TABS = ['Portfolio', 'Sobre mim'] as const;
 type Tab = (typeof TABS)[number];
 
 const UnderDevelopment = () => {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<Tab>('Portfolio');
   const [diffDays, setDiffDays] = useState<number | null>(null);
 
@@ -52,6 +56,17 @@ const UnderDevelopment = () => {
 
   return (
     <WipWrapper>
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.1, duration: 0.5, ease: EASE }}
+      >
+        <BackButton onClick={() => router.push('/home')}>
+          <HiArrowLeft />
+          Voltar
+        </BackButton>
+      </motion.div>
+
       <motion.div {...fade(0)}>
         <WipLogoMark>
           <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -224,3 +224,41 @@ export const SocialLink = styled.a`
   transition: all 0.25s ease;
   opacity: 0.6;
 `;
+
+export const BackButton = styled.button`
+  position: fixed;
+  top: 32px;
+  left: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: ${({ theme }) => theme.colors.title};
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 0.25s ease;
+  z-index: 10;
+
+  svg {
+    font-size: 16px;
+    transition: transform 0.25s ease;
+  }
+
+  &:hover {
+    opacity: 0.85;
+
+    svg {
+      transform: translateX(-2px);
+    }
+  }
+
+  ${({ theme }) => theme.media.md} {
+    top: 20px;
+    left: 20px;
+  }
+`;
+

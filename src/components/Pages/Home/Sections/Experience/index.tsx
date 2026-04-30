@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useGitHubCommits } from '@/hooks/useGitHubCommits';
 import {
   Section,
   TitleWrapper,
@@ -63,7 +62,6 @@ const itemVariants = {
 
 const Experience = () => {
   const { t } = useLanguage();
-  const { commits } = useGitHubCommits();
 
   return (
     <Section id="experiencia">
@@ -132,16 +130,6 @@ const Experience = () => {
                 </StatCard>
               </motion.div>
             ))}
-            <motion.div variants={itemVariants}>
-              <StatCard>
-                <StatNumber>
-                  {commits !== null ? commits.toLocaleString() : '...'}
-                </StatNumber>
-                <StatLabel>
-                  {t('exp.stats.commits' as Parameters<typeof t>[0])}
-                </StatLabel>
-              </StatCard>
-            </motion.div>
           </SideColumn>
         </ContentWrapper>
       </motion.div>

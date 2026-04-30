@@ -7,10 +7,67 @@ export interface VersionEntry {
   highlights: Record<Exclude<Language, 'es'>, string[]> & { es?: string[] };
 }
 
-export const CURRENT_VERSION = 'v1.5';
-export const CURRENT_LABEL = 'Nexus';
+export const CURRENT_VERSION = 'v1.6';
+export const CURRENT_LABEL = 'Pulse';
 
 export const VERSION_HISTORY: VersionEntry[] = [
+  {
+    version: 'v1.6',
+    date: '29/04/2026',
+    label: 'Pulse',
+    highlights: {
+      pt: [
+        'Nova página de Habilidades com círculos estilizados e logos de cada tecnologia',
+        'Layout escalonado em duas fileiras com auto-scroll a cada 5 segundos',
+        'Hover nos círculos revela o nome da stack com overlay blur',
+        'Seção GitHub dedicada na Home com gráfico de contribuições e contagem total de commits',
+        'Bio pessoal reescrita com foco em design, soft skills, hobbies e experiência com clientes',
+        'Dados de skills centralizados em /config/skills.ts',
+        'Link "Habilidades" adicionado na navbar, drawer mobile e footer',
+        'Traduções completas (PT/EN/FR/RU/ES) para a página de Habilidades',
+      ],
+      en: [
+        'New Skills page with stylized circles and tech logos',
+        'Staggered two-row layout with auto-scroll every 5 seconds',
+        'Hover on circles reveals stack name with blur overlay',
+        'Dedicated GitHub section on Home with contribution graph and total commit count',
+        'Personal bio rewritten focusing on design, soft skills, hobbies and client experience',
+        'Skills data centralized in /config/skills.ts',
+        '"Skills" link added to navbar, mobile drawer and footer',
+        'Full translations (PT/EN/FR/RU/ES) for the Skills page',
+      ],
+      fr: [
+        'Nouvelle page Compétences avec cercles stylisés et logos technologiques',
+        'Mise en page décalée sur deux rangées avec défilement auto toutes les 5 secondes',
+        'Survol des cercles révèle le nom du stack avec overlay flou',
+        'Section GitHub dédiée sur la Home avec graphique de contributions et total de commits',
+        'Bio personnelle réécrite axée sur le design, soft skills, hobbies et expérience client',
+        'Données de compétences centralisées dans /config/skills.ts',
+        'Lien "Compétences" ajouté à la navbar, drawer mobile et footer',
+        'Traductions complètes (PT/EN/FR/RU/ES) pour la page Compétences',
+      ],
+      ru: [
+        'Новая страница Навыки с стильными кругами и логотипами технологий',
+        'Шахматная раскладка в два ряда с автопрокруткой каждые 5 секунд',
+        'При наведении на круг отображается название стека с размытием',
+        'Отдельная секция GitHub на главной с графиком вкладов и общим числом коммитов',
+        'Личная биография переписана с фокусом на дизайн, soft skills, хобби и клиентский опыт',
+        'Данные навыков централизованы в /config/skills.ts',
+        'Ссылка "Навыки" добавлена в navbar, мобильный drawer и footer',
+        'Полные переводы (PT/EN/FR/RU/ES) для страницы Навыки',
+      ],
+      es: [
+        'Nueva página de Habilidades con círculos estilizados y logos de cada tecnología',
+        'Diseño escalonado en dos filas con desplazamiento automático cada 5 segundos',
+        'Hover en los círculos revela el nombre del stack con overlay blur',
+        'Sección GitHub dedicada en Home con gráfico de contribuciones y total de commits',
+        'Bio personal reescrita con enfoque en diseño, soft skills, hobbies y experiencia con clientes',
+        'Datos de habilidades centralizados en /config/skills.ts',
+        'Enlace "Habilidades" añadido a la navbar, drawer móvil y footer',
+        'Traducciones completas (PT/EN/FR/RU/ES) para la página de Habilidades',
+      ],
+    },
+  },
   {
     version: 'v1.5',
     date: '27/04/2026',

@@ -104,14 +104,7 @@ export const BioColumn = styled.div`
   min-width: 0;
 `;
 
-export const BioTag = styled.span`
-  display: inline-flex;
-  align-items: center;
-  font-size: 1.35rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: ${({ theme }) => theme.colors.title};
-`;
+
 
 export const BioParagraph = styled.p`
   font-size: 17px;

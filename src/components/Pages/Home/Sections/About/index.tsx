@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import GitHubGraph from './GitHubGraph';
 import {
   Section,
   TitleWrapper,
@@ -12,7 +11,6 @@ import {
   PhotoBioWrapper,
   PhotoWrap,
   BioColumn,
-  BioTag,
   BioParagraph,
 } from './styles';
 
@@ -69,9 +67,6 @@ const About = () => {
 
           <BioColumn>
             <motion.div variants={itemVariants}>
-              <BioTag>Arthur Moreira Ramos</BioTag>
-            </motion.div>
-            <motion.div variants={itemVariants}>
               <BioParagraph>{t('who.bio.p1' as Parameters<typeof t>[0])}</BioParagraph>
             </motion.div>
             <motion.div variants={itemVariants}>
@@ -82,16 +77,10 @@ const About = () => {
             </motion.div>
           </BioColumn>
         </PhotoBioWrapper>
-
-        <motion.div
-          variants={itemVariants}
-          style={{ marginTop: '48px', minWidth: 0, overflow: 'hidden' }}
-        >
-          <GitHubGraph />
-        </motion.div>
       </motion.div>
     </Section>
   );
 };
 
 export default About;
+

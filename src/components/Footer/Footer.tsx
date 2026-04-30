@@ -125,6 +125,12 @@ const Footer = () => {
           <FooterLink onClick={() => router.push('/cursos')}>
             {t('nav.courses')}
           </FooterLink>
+          <FooterLink onClick={() => router.push('/skills')}>
+            {t('nav.skills' as Parameters<typeof t>[0])}
+          </FooterLink>
+          <FooterLink onClick={() => router.push('/jornada')}>
+            {t('nav.timeline' as Parameters<typeof t>[0])}
+          </FooterLink>
         </FooterColumn>
 
         <FooterColumn>

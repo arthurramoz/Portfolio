@@ -350,6 +350,32 @@ const Navbar = () => {
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.44, duration: 0.35, ease: 'easeOut' }}
+        >
+          <NavLink
+            $selected={pathname === '/skills'}
+            onClick={() => router.push('/skills')}
+          >
+            {t('nav.skills' as Parameters<typeof t>[0])}
+            {pathname === '/skills' && (
+              <motion.span
+                layoutId="navbar-indicator"
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  borderRadius: '9999px',
+                  background: 'rgba(26, 26, 26, 0.06)',
+                  zIndex: -1,
+                }}
+                transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+              />
+            )}
+          </NavLink>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.46, duration: 0.35, ease: 'easeOut' }}
         >
           <NavLink
@@ -601,6 +627,17 @@ const Navbar = () => {
             >
               <FiAward size={18} />
               {t('nav.courses')}
+            </MobileDrawerLink>
+
+            <MobileDrawerLink
+              $active={pathname === '/skills'}
+              onClick={() => {
+                router.push('/skills');
+                setIsMobileOpen(false);
+              }}
+            >
+              <FiLayers size={18} />
+              {t('nav.skills' as Parameters<typeof t>[0])}
             </MobileDrawerLink>
 
             <MobileDrawerLink

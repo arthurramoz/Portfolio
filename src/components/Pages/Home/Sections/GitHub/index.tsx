@@ -192,7 +192,7 @@ const GitHub = () => {
                 </StatLabel>
               </StatBox>
               <StatBox>
-                <StatValue>5+</StatValue>
+                <StatValue>2+</StatValue>
                 <StatLabel>
                   {t('github.activeYears' as Parameters<typeof t>[0])}
                 </StatLabel>

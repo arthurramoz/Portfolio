@@ -79,8 +79,6 @@ export const Paragraph = styled.p`
   }
 `;
 
-
-
 export const StacksLabel = styled.span`
   font-size: 13px;
   font-weight: 600;

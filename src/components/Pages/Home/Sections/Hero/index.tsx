@@ -75,7 +75,7 @@ const Hero = () => {
             </Actions>
           </motion.div>
         </TextBlock>
-
+        {/* 
         <IllustrationBlock>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -99,7 +99,7 @@ const Hero = () => {
               />
             </motion.div>
           </motion.div>
-        </IllustrationBlock>
+        </IllustrationBlock> */}
       </Content>
     </Section>
   );

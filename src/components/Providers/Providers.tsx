@@ -10,6 +10,7 @@ import { GlobalStyle } from '@/styles/global';
 import { AppThemeProvider } from '@/contexts/ThemeContext';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { lightTheme } from '@/styles/theme';
+import CursorGlow from '@/components/CursorGlow';
 
 const Providers = ({ children }: PropsWithChildren) => {
   return (
@@ -21,7 +22,10 @@ const Providers = ({ children }: PropsWithChildren) => {
             color={lightTheme.colors.primary1}
             options={{ easing: 'ease', speed: 500 }}
           />
-          {children}
+          <div style={{ position: 'relative', minHeight: '100vh' }}>
+            <CursorGlow />
+            {children}
+          </div>
           <ToastContainer
             style={{
               zIndex: 999999,
@@ -34,3 +38,4 @@ const Providers = ({ children }: PropsWithChildren) => {
 };
 
 export default Providers;
+

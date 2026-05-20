@@ -79,11 +79,7 @@ export const Paragraph = styled.p`
   }
 `;
 
-export const InnerDivider = styled.div`
-  height: 1px;
-  background: ${({ theme }) => theme.colors.navbarBorder};
-  margin: 4px 0;
-`;
+
 
 export const StacksLabel = styled.span`
   font-size: 13px;

@@ -10,7 +10,6 @@ import {
   ContentWrapper,
   TextColumn,
   Paragraph,
-  InnerDivider,
   StacksLabel,
   StacksRow,
   StackChip,
@@ -64,42 +63,77 @@ const Experience = () => {
   const { t } = useLanguage();
 
   return (
-    <Section id="experiencia">
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-100px' }}
-      >
-        <TitleWrapper>
-          <motion.div variants={itemVariants}>
-            <SectionSubtitle>
-              {t('exp.subtitle' as Parameters<typeof t>[0])}
-            </SectionSubtitle>
-          </motion.div>
-          <motion.div variants={itemVariants}>
-            <SectionTitle>
-              {t('exp.title' as Parameters<typeof t>[0])}
-            </SectionTitle>
-          </motion.div>
-        </TitleWrapper>
+    <>
+      <Section id="sobre">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+        >
+          <TitleWrapper>
+            <motion.div variants={itemVariants}>
+              <SectionSubtitle>
+                {t('about.subtitle' as Parameters<typeof t>[0])}
+              </SectionSubtitle>
+            </motion.div>
+            <motion.div variants={itemVariants}>
+              <SectionTitle>
+                {t('about.title' as Parameters<typeof t>[0])}
+              </SectionTitle>
+            </motion.div>
+          </TitleWrapper>
 
-        <ContentWrapper>
+          <ContentWrapper>
+            <TextColumn>
+              <motion.div variants={itemVariants}>
+                <Paragraph>{t('about.p1' as Parameters<typeof t>[0])}</Paragraph>
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <Paragraph>{t('about.p2' as Parameters<typeof t>[0])}</Paragraph>
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <Paragraph>{t('about.p3' as Parameters<typeof t>[0])}</Paragraph>
+              </motion.div>
+            </TextColumn>
+
+            <SideColumn>
+              {STATS.map(({ value, labelKey }) => (
+                <motion.div key={labelKey} variants={itemVariants}>
+                  <StatCard>
+                    <StatNumber>{value}</StatNumber>
+                    <StatLabel>
+                      {t(labelKey as Parameters<typeof t>[0])}
+                    </StatLabel>
+                  </StatCard>
+                </motion.div>
+              ))}
+            </SideColumn>
+          </ContentWrapper>
+        </motion.div>
+      </Section>
+
+      <Section id="experiencia">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+        >
+          <TitleWrapper>
+            <motion.div variants={itemVariants}>
+              <SectionSubtitle>
+                {t('exp.subtitle' as Parameters<typeof t>[0])}
+              </SectionSubtitle>
+            </motion.div>
+            <motion.div variants={itemVariants}>
+              <SectionTitle>
+                {t('exp.title' as Parameters<typeof t>[0])}
+              </SectionTitle>
+            </motion.div>
+          </TitleWrapper>
+
           <TextColumn>
-            <motion.div variants={itemVariants}>
-              <Paragraph>{t('about.p1' as Parameters<typeof t>[0])}</Paragraph>
-            </motion.div>
-            <motion.div variants={itemVariants}>
-              <Paragraph>{t('about.p2' as Parameters<typeof t>[0])}</Paragraph>
-            </motion.div>
-            <motion.div variants={itemVariants}>
-              <Paragraph>{t('about.p3' as Parameters<typeof t>[0])}</Paragraph>
-            </motion.div>
-
-            <motion.div variants={itemVariants}>
-              <InnerDivider />
-            </motion.div>
-
             <motion.div variants={itemVariants}>
               <Paragraph>{t('exp.p1' as Parameters<typeof t>[0])}</Paragraph>
             </motion.div>
@@ -118,22 +152,9 @@ const Experience = () => {
               </StacksRow>
             </motion.div>
           </TextColumn>
-
-          <SideColumn>
-            {STATS.map(({ value, labelKey }) => (
-              <motion.div key={labelKey} variants={itemVariants}>
-                <StatCard>
-                  <StatNumber>{value}</StatNumber>
-                  <StatLabel>
-                    {t(labelKey as Parameters<typeof t>[0])}
-                  </StatLabel>
-                </StatCard>
-              </motion.div>
-            ))}
-          </SideColumn>
-        </ContentWrapper>
-      </motion.div>
-    </Section>
+        </motion.div>
+      </Section>
+    </>
   );
 };
 

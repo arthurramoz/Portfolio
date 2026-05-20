@@ -49,6 +49,8 @@ import {
   NavLink,
   NavLogo,
   NavLogoMark,
+  HomeSectionsWrapper,
+  HomeSectionLink,
   ProjectsDropdown,
   ProjectsDropdownArrow,
   ProjectsDropdownItem,
@@ -70,9 +72,13 @@ import {
   VersionBadge,
 } from './styles';
 
-const SCROLL_LINKS = [
-  { key: 'nav.home' as const, id: 'home' },
-  { key: 'nav.about' as const, id: 'sobre-mim' },
+const HOME_MAIN = { key: 'nav.home' as const, id: 'home' };
+
+const HOME_SECTIONS = [
+  { key: 'who.title' as const, id: 'sobre-mim' },
+  { key: 'about.title' as const, id: 'sobre' },
+  { key: 'exp.title' as const, id: 'experiencia' },
+  { key: 'github.viewProfile' as const, id: 'github' },
 ];
 
 const PROJECT_CATEGORIES = [
@@ -101,17 +107,21 @@ const Navbar = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isMobileLangOpen, setIsMobileLangOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [isHomeSectionsOpen, setIsHomeSectionsOpen] = useState(false);
+  const homeSectionsTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const settingsRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
 
   const isHomePage = pathname === '/home';
   const isProjectsPage = pathname.startsWith('/projetos');
 
+  const allHomeSections = [HOME_MAIN, ...HOME_SECTIONS];
+
   useEffect(() => {
     if (!isHomePage) return;
 
     const handleScroll = () => {
-      const sections = SCROLL_LINKS.map(link =>
+      const sections = allHomeSections.map(link =>
         document.getElementById(link.id),
       );
       const scrollPosition = window.scrollY + window.innerHeight / 3;
@@ -119,7 +129,7 @@ const Navbar = () => {
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
         if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(SCROLL_LINKS[i].id);
+          setActiveSection(allHomeSections[i].id);
           break;
         }
       }
@@ -129,6 +139,20 @@ const Navbar = () => {
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isHomePage]);
+
+  const handleHomeSectionsEnter = () => {
+    if (homeSectionsTimeout.current) {
+      clearTimeout(homeSectionsTimeout.current);
+      homeSectionsTimeout.current = null;
+    }
+    setIsHomeSectionsOpen(true);
+  };
+
+  const handleHomeSectionsLeave = () => {
+    homeSectionsTimeout.current = setTimeout(() => {
+      setIsHomeSectionsOpen(false);
+    }, 200);
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -224,23 +248,21 @@ const Navbar = () => {
       </motion.div>
 
       <Nav>
-        {SCROLL_LINKS.map(({ key, id }, i) => (
-          <motion.div
-            key={id}
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              delay: 0.2 + i * 0.07,
-              duration: 0.35,
-              ease: 'easeOut',
-            }}
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.35, ease: 'easeOut' }}
+        >
+          <HomeSectionsWrapper
+            onMouseEnter={handleHomeSectionsEnter}
+            onMouseLeave={handleHomeSectionsLeave}
           >
             <NavLink
-              $selected={isHomePage && activeSection === id}
-              onClick={() => handleScrollNav(id)}
+              $selected={isHomePage && activeSection === 'home'}
+              onClick={() => handleScrollNav('home')}
             >
-              {t(key)}
-              {isHomePage && activeSection === id && (
+              {t(HOME_MAIN.key)}
+              {isHomePage && activeSection === 'home' && (
                 <motion.span
                   layoutId="navbar-indicator"
                   style={{
@@ -254,13 +276,62 @@ const Navbar = () => {
                 />
               )}
             </NavLink>
-          </motion.div>
-        ))}
+
+            <AnimatePresence>
+              {isHomeSectionsOpen && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '100%',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    zIndex: 10,
+                  }}
+                >
+                  <motion.div
+                    key="home-sections-panel"
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -10 }}
+                    transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                  {HOME_SECTIONS.map(({ key, id }, i) => (
+                    <motion.div
+                      key={id}
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{
+                        duration: 0.25,
+                        delay: i * 0.05,
+                        ease: [0.25, 0.1, 0.25, 1],
+                      }}
+                    >
+                      <HomeSectionLink
+                        $selected={isHomePage && activeSection === id}
+                        onClick={() => handleScrollNav(id)}
+                      >
+                        {t(key as Parameters<typeof t>[0])}
+                      </HomeSectionLink>
+                    </motion.div>
+                  ))}
+                </motion.div>
+                </div>
+              )}
+            </AnimatePresence>
+          </HomeSectionsWrapper>
+        </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.34, duration: 0.35, ease: 'easeOut' }}
+          animate={{
+            opacity: isHomeSectionsOpen ? 0 : 1,
+            pointerEvents: isHomeSectionsOpen ? 'none' as const : 'auto' as const,
+          }}
+          transition={{ duration: 0.2, ease: 'easeOut' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
         >
           <SettingsWrapper ref={projectsRef}>
             <NavLink
@@ -319,13 +390,7 @@ const Navbar = () => {
               )}
             </AnimatePresence>
           </SettingsWrapper>
-        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.41, duration: 0.35, ease: 'easeOut' }}
-        >
           <NavLink
             $selected={pathname === '/cursos'}
             onClick={() => router.push('/cursos')}
@@ -345,13 +410,7 @@ const Navbar = () => {
               />
             )}
           </NavLink>
-        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.44, duration: 0.35, ease: 'easeOut' }}
-        >
           <NavLink
             $selected={pathname === '/skills'}
             onClick={() => router.push('/skills')}
@@ -371,13 +430,7 @@ const Navbar = () => {
               />
             )}
           </NavLink>
-        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.46, duration: 0.35, ease: 'easeOut' }}
-        >
           <NavLink
             $selected={pathname === '/jornada'}
             onClick={() => router.push('/jornada')}
@@ -588,7 +641,7 @@ const Navbar = () => {
               </MobileDrawerClose>
             </MobileDrawerHeader>
 
-            {SCROLL_LINKS.map(link => (
+            {allHomeSections.map(link => (
               <MobileDrawerLink
                 key={link.id}
                 $active={isHomePage && activeSection === link.id}
@@ -598,7 +651,7 @@ const Navbar = () => {
                 }}
               >
                 {link.id === 'home' ? <FiHome size={18} /> : <FiInfo size={18} />}
-                {t(link.key)}
+                {t(link.key as Parameters<typeof t>[0])}
               </MobileDrawerLink>
             ))}
 

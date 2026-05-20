@@ -74,6 +74,31 @@ export const Nav = styled.nav`
   }
 `;
 
+export const HomeSectionsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+`;
+
+export const HomeSectionLink = styled.p<NavLinkProps>`
+  position: relative;
+  padding: 16px 14px;
+  border-radius: 9999px;
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: ${({ $selected, theme }) =>
+    $selected
+      ? theme.colors.navbarLinkActive
+      : theme.colors.navbarLinkInactive};
+  transition: color 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.navbarLinkActive};
+  }
+`;
+
 interface NavLinkProps {
   $selected?: boolean;
 }

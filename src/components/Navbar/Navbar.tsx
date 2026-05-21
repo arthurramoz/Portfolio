@@ -70,6 +70,8 @@ import {
   ThemeToggleLabel,
   ThemeToggleRow,
   VersionBadge,
+  PortfolioSubmenu,
+  PortfolioItemWrapper,
 } from './styles';
 
 const HOME_MAIN = { key: 'nav.home' as const, id: 'home' };
@@ -113,7 +115,7 @@ const Navbar = () => {
   const projectsRef = useRef<HTMLDivElement>(null);
 
   const isHomePage = pathname === '/home';
-  const isProjectsPage = pathname.startsWith('/projetos');
+  const isPortfolioPage = pathname.startsWith('/projetos') || pathname === '/cursos';
 
   const allHomeSections = [HOME_MAIN, ...HOME_SECTIONS];
 
@@ -335,13 +337,13 @@ const Navbar = () => {
         >
           <SettingsWrapper ref={projectsRef}>
             <NavLink
-              $selected={isProjectsPage}
+              $selected={isPortfolioPage}
               onClick={() => setIsProjectsOpen(prev => !prev)}
               style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
             >
-              {t('nav.projects')}
+              {t('nav.portfolio' as Parameters<typeof t>[0])}
               <FiChevronDown size={14} />
-              {isProjectsPage && (
+              {isPortfolioPage && (
                 <motion.span
                   layoutId="navbar-indicator"
                   style={{
@@ -365,51 +367,74 @@ const Navbar = () => {
                   transition={{ duration: 0.18, ease: [0.25, 0.1, 0.25, 1] }}
                 >
                   <ProjectsDropdownArrow />
-                  {PROJECT_CATEGORIES.map(({ key, path, icon: Icon, descKey }, i) => (
-                    <motion.div
-                      key={path}
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.04, duration: 0.2, ease: 'easeOut' }}
-                    >
+
+                  <motion.div
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0, duration: 0.2, ease: 'easeOut' }}
+                  >
+                    <PortfolioItemWrapper>
                       <ProjectsDropdownItem
-                        $active={pathname === path}
-                        onClick={() => handleProjectNav(path)}
+                        $active={pathname.startsWith('/projetos')}
+                        as="div"
+                        style={{ cursor: 'pointer' }}
                       >
-                        <ProjectsDropdownIcon $active={pathname === path}>
-                          <Icon size={18} />
+                        <ProjectsDropdownIcon $active={pathname.startsWith('/projetos')}>
+                          <FiBriefcase size={18} />
                         </ProjectsDropdownIcon>
                         <ProjectsDropdownText>
-                          <ProjectsDropdownName>{t(key)}</ProjectsDropdownName>
-                          <ProjectsDropdownDesc>{t(descKey)}</ProjectsDropdownDesc>
+                          <ProjectsDropdownName>{t('nav.projects')}</ProjectsDropdownName>
                         </ProjectsDropdownText>
+                        <FiChevronDown
+                          size={12}
+                          style={{ transform: 'rotate(-90deg)', opacity: 0.5, marginLeft: 'auto' }}
+                        />
                       </ProjectsDropdownItem>
-                    </motion.div>
-                  ))}
+
+                      <PortfolioSubmenu>
+                        {PROJECT_CATEGORIES.map(({ key, path, icon: Icon, descKey }) => (
+                          <ProjectsDropdownItem
+                            key={path}
+                            $active={pathname === path}
+                            onClick={() => handleProjectNav(path)}
+                          >
+                            <ProjectsDropdownIcon $active={pathname === path}>
+                              <Icon size={18} />
+                            </ProjectsDropdownIcon>
+                            <ProjectsDropdownText>
+                              <ProjectsDropdownName>{t(key)}</ProjectsDropdownName>
+                              <ProjectsDropdownDesc>{t(descKey)}</ProjectsDropdownDesc>
+                            </ProjectsDropdownText>
+                          </ProjectsDropdownItem>
+                        ))}
+                      </PortfolioSubmenu>
+                    </PortfolioItemWrapper>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.04, duration: 0.2, ease: 'easeOut' }}
+                  >
+                    <ProjectsDropdownItem
+                      $active={pathname === '/cursos'}
+                      onClick={() => {
+                        router.push('/cursos');
+                        setIsProjectsOpen(false);
+                      }}
+                    >
+                      <ProjectsDropdownIcon $active={pathname === '/cursos'}>
+                        <FiAward size={18} />
+                      </ProjectsDropdownIcon>
+                      <ProjectsDropdownText>
+                        <ProjectsDropdownName>{t('nav.courses')}</ProjectsDropdownName>
+                      </ProjectsDropdownText>
+                    </ProjectsDropdownItem>
+                  </motion.div>
                 </ProjectsDropdown>
               )}
             </AnimatePresence>
           </SettingsWrapper>
-
-          <NavLink
-            $selected={pathname === '/cursos'}
-            onClick={() => router.push('/cursos')}
-          >
-            {t('nav.courses')}
-            {pathname === '/cursos' && (
-              <motion.span
-                layoutId="navbar-indicator"
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  borderRadius: '9999px',
-                  background: 'rgba(26, 26, 26, 0.06)',
-                  zIndex: -1,
-                }}
-                transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-              />
-            )}
-          </NavLink>
 
           <NavLink
             $selected={pathname === '/skills'}

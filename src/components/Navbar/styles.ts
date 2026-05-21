@@ -714,3 +714,57 @@ export const LanguageOption = styled.button<LanguageOptionProps>`
     background: ${({ theme }) => theme.colors.navbarLinkBgHover};
   }
 `;
+
+export const PortfolioSubmenu = styled.div`
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 0;
+  min-width: 240px;
+  padding: 6px;
+  border-radius: 14px;
+  background: ${({ theme }) => theme.colors.dropdownBg};
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  box-shadow:
+    0 8px 32px ${({ theme }) => theme.colors.navbarShadow},
+    0 0 0 1px ${({ theme }) => theme.colors.navbarBorder};
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(6px);
+  transition: all 0.2s ease;
+  z-index: 110;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -12px;
+    width: 12px;
+    height: 100%;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: -5px;
+    transform: rotate(45deg);
+    width: 10px;
+    height: 10px;
+    background: ${({ theme }) => theme.colors.dropdownBg};
+    border-left: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+    border-radius: 2px;
+  }
+`;
+
+export const PortfolioItemWrapper = styled.div`
+  position: relative;
+
+  &:hover ${PortfolioSubmenu} {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+`;

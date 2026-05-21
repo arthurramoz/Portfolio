@@ -17,6 +17,14 @@ export const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
+  html, body {
+    cursor: none;
+  }
+
+  * {
+    cursor: none !important;
+  }
+
   body {
     min-height: 100vh;
     text-rendering: optimizeLegibility;

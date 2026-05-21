@@ -75,3 +75,37 @@ export const AuthorRole = styled.span`
   font-weight: 500;
   color: ${({ theme }) => theme.colors.navbarLinkInactive};
 `;
+
+export const EmptyState = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 80px 32px;
+  border-radius: 20px;
+  background: ${({ theme }) => theme.colors.dropdownBg};
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  text-align: center;
+`;
+
+export const EmptyIcon = styled.div`
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: ${({ theme }) => theme.colors.primary1}10;
+  border: 1px solid ${({ theme }) => theme.colors.primary1}20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${({ theme }) => theme.colors.primary1};
+`;
+
+export const EmptyText = styled.p`
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: ${({ theme }) => theme.colors.navbarLinkInactive};
+  max-width: 360px;
+`;

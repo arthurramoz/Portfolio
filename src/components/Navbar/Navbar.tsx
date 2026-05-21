@@ -41,10 +41,7 @@ import {
   MobileDrawerClose,
   MobileDrawerDivider,
   MobileDrawerHeader,
-  MobileDrawerLink,
   MobileDrawerContent,
-  MobileLanguageHeader,
-  MobileLanguageList,
   MobileOverlay,
   Nav,
   NavbarContainer,
@@ -72,6 +69,18 @@ import {
   VersionBadge,
   PortfolioSubmenu,
   PortfolioItemWrapper,
+  AmbientGlow,
+  MobileNavLink,
+  MobileNavLinkText,
+  MobileNavLinkIndex,
+  MobileSubmenuContainer,
+  MobileSubmenuLink,
+  MobileControlCenter,
+  MobileControlRow,
+  MobileControlCard,
+  MobileControlCardLabel,
+  MobileLanguageGrid,
+  MobileVersionWrapper,
 } from './styles';
 import Switch from '@/components/Switch';
 
@@ -101,6 +110,27 @@ const LANGUAGES = [
 
 const MotionNavbarContainer = motion.create(NavbarContainer);
 
+const mobileContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.04,
+      delayChildren: 0.08,
+    },
+  },
+} as const;
+
+const mobileItemVariants = {
+  hidden: { opacity: 0, y: 16, scale: 0.98 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: 'spring' as const, stiffness: 300, damping: 24 },
+  },
+} as const;
+
 const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
@@ -111,6 +141,9 @@ const Navbar = () => {
   const [isAboutMeOpen, setIsAboutMeOpen] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isMobileLangOpen, setIsMobileLangOpen] = useState(false);
+  const [isMobileHomeOpen, setIsMobileHomeOpen] = useState(false);
+  const [isMobileProjectsSubOpen, setIsMobileProjectsSubOpen] = useState(false);
+  const [isMobileAboutSubOpen, setIsMobileAboutSubOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [isHomeSectionsOpen, setIsHomeSectionsOpen] = useState(false);
   const homeSectionsTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -210,252 +243,349 @@ const Navbar = () => {
 
   return (
     <>
-    <MotionNavbarContainer
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-    >
-      <motion.div
-        initial={{ opacity: 0, x: -12 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.15, duration: 0.4, ease: 'easeOut' }}
+      <MotionNavbarContainer
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       >
-        <NavLogo onClick={() => handleScrollNav('home')}>
-          <NavLogoMark>
-            <svg
-              width="38"
-              height="38"
-              viewBox="0 0 38 38"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <linearGradient
-                  id="logo-grad"
-                  x1="0"
-                  y1="0"
-                  x2="38"
-                  y2="38"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop offset="0%" stopColor="#48cae4" />
-                  <stop offset="100%" stopColor="#fb6f92" />
-                </linearGradient>
-              </defs>
-              <text
-                x="50%"
-                y="50%"
-                dominantBaseline="central"
-                textAnchor="middle"
-                fontFamily="'Inter', 'Segoe UI', sans-serif"
-                fontSize="18"
-                fontWeight="800"
-                letterSpacing="-0.5"
-                fill="url(#logo-grad)"
-              >
-                AR
-              </text>
-            </svg>
-          </NavLogoMark>
-        </NavLogo>
-      </motion.div>
-
-      <Nav>
         <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.35, ease: 'easeOut' }}
+          initial={{ opacity: 0, x: -12 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.15, duration: 0.4, ease: 'easeOut' }}
         >
-          <HomeSectionsWrapper
-            onMouseEnter={handleHomeSectionsEnter}
-            onMouseLeave={handleHomeSectionsLeave}
-          >
-            <NavLink
-              $selected={isHomePage && activeSection === 'home'}
-              onClick={() => handleScrollNav('home')}
-            >
-              {t(HOME_MAIN.key)}
-              {isHomePage && activeSection === 'home' && (
-                <motion.span
-                  layoutId="navbar-indicator"
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    borderRadius: '9999px',
-                    background: 'rgba(26, 26, 26, 0.06)',
-                    zIndex: -1,
-                  }}
-                  transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                />
-              )}
-            </NavLink>
-
-            <AnimatePresence>
-              {isHomeSectionsOpen && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    left: '100%',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    zIndex: 10,
-                  }}
-                >
-                  <motion.div
-                    key="home-sections-panel"
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -10 }}
-                    transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                    }}
+          <NavLogo onClick={() => handleScrollNav('home')}>
+            <NavLogoMark>
+              <svg
+                width="38"
+                height="38"
+                viewBox="0 0 38 38"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <linearGradient
+                    id="logo-grad"
+                    x1="0"
+                    y1="0"
+                    x2="38"
+                    y2="38"
+                    gradientUnits="userSpaceOnUse"
                   >
-                  {HOME_SECTIONS.map(({ key, id }, i) => (
-                    <motion.div
-                      key={id}
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{
-                        duration: 0.25,
-                        delay: i * 0.05,
-                        ease: [0.25, 0.1, 0.25, 1],
-                      }}
-                    >
-                      <HomeSectionLink
-                        $selected={isHomePage && activeSection === id}
-                        onClick={() => handleScrollNav(id)}
-                      >
-                        {t(key as Parameters<typeof t>[0])}
-                      </HomeSectionLink>
-                    </motion.div>
-                  ))}
-                </motion.div>
-                </div>
-              )}
-            </AnimatePresence>
-          </HomeSectionsWrapper>
+                    <stop offset="0%" stopColor="#48cae4" />
+                    <stop offset="100%" stopColor="#fb6f92" />
+                  </linearGradient>
+                </defs>
+                <text
+                  x="50%"
+                  y="50%"
+                  dominantBaseline="central"
+                  textAnchor="middle"
+                  fontFamily="'Inter', 'Segoe UI', sans-serif"
+                  fontSize="18"
+                  fontWeight="800"
+                  letterSpacing="-0.5"
+                  fill="url(#logo-grad)"
+                >
+                  AR
+                </text>
+              </svg>
+            </NavLogoMark>
+          </NavLogo>
         </motion.div>
 
-        <motion.div
-          animate={{
-            opacity: isHomeSectionsOpen ? 0 : 1,
-            pointerEvents: isHomeSectionsOpen ? 'none' as const : 'auto' as const,
-          }}
-          transition={{ duration: 0.2, ease: 'easeOut' }}
-          style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
-        >
-          <SettingsWrapper ref={projectsRef}>
-            <NavLink
-              $selected={isPortfolioPage}
-              onClick={() => setIsProjectsOpen(prev => !prev)}
-              style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
+        <Nav>
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.35, ease: 'easeOut' }}
+          >
+            <HomeSectionsWrapper
+              onMouseEnter={handleHomeSectionsEnter}
+              onMouseLeave={handleHomeSectionsLeave}
             >
-              {t('nav.portfolio' as Parameters<typeof t>[0])}
-              <FiChevronDown size={14} />
-              {isPortfolioPage && (
-                <motion.span
-                  layoutId="navbar-indicator"
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    borderRadius: '9999px',
-                    background: 'rgba(26, 26, 26, 0.06)',
-                    zIndex: -1,
-                  }}
-                  transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                />
-              )}
-            </NavLink>
+              <NavLink
+                $selected={isHomePage && activeSection === 'home'}
+                onClick={() => handleScrollNav('home')}
+              >
+                {t(HOME_MAIN.key)}
+                {isHomePage && activeSection === 'home' && (
+                  <motion.span
+                    layoutId="navbar-indicator"
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      borderRadius: '9999px',
+                      background: 'rgba(26, 26, 26, 0.06)',
+                      zIndex: -1,
+                    }}
+                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                  />
+                )}
+              </NavLink>
 
-            <AnimatePresence>
-              {isProjectsOpen && (
-                <ProjectsDropdown
-                  initial={{ opacity: 0, y: 6, scale: 0.97 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 6, scale: 0.97 }}
-                  transition={{ duration: 0.18, ease: [0.25, 0.1, 0.25, 1] }}
-                >
-                  <ProjectsDropdownArrow />
-
-                  <motion.div
-                    initial={{ opacity: 0, x: -8 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0, duration: 0.2, ease: 'easeOut' }}
+              <AnimatePresence>
+                {isHomeSectionsOpen && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      left: '100%',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      zIndex: 10,
+                    }}
                   >
-                    <PortfolioItemWrapper>
+                    <motion.div
+                      key="home-sections-panel"
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -10 }}
+                      transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                    >
+                      {HOME_SECTIONS.map(({ key, id }, i) => (
+                        <motion.div
+                          key={id}
+                          initial={{ opacity: 0, x: -8 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{
+                            duration: 0.25,
+                            delay: i * 0.05,
+                            ease: [0.25, 0.1, 0.25, 1],
+                          }}
+                        >
+                          <HomeSectionLink
+                            $selected={isHomePage && activeSection === id}
+                            onClick={() => handleScrollNav(id)}
+                          >
+                            {t(key as Parameters<typeof t>[0])}
+                          </HomeSectionLink>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  </div>
+                )}
+              </AnimatePresence>
+            </HomeSectionsWrapper>
+          </motion.div>
+
+          <motion.div
+            animate={{
+              opacity: isHomeSectionsOpen ? 0 : 1,
+              pointerEvents: isHomeSectionsOpen ? 'none' as const : 'auto' as const,
+            }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
+          >
+            <SettingsWrapper ref={projectsRef}>
+              <NavLink
+                $selected={isPortfolioPage}
+                onClick={() => setIsProjectsOpen(prev => !prev)}
+                style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
+              >
+                {t('nav.portfolio' as Parameters<typeof t>[0])}
+                <FiChevronDown size={14} />
+                {isPortfolioPage && (
+                  <motion.span
+                    layoutId="navbar-indicator"
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      borderRadius: '9999px',
+                      background: 'rgba(26, 26, 26, 0.06)',
+                      zIndex: -1,
+                    }}
+                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                  />
+                )}
+              </NavLink>
+
+              <AnimatePresence>
+                {isProjectsOpen && (
+                  <ProjectsDropdown
+                    initial={{ opacity: 0, y: 6, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 6, scale: 0.97 }}
+                    transition={{ duration: 0.18, ease: [0.25, 0.1, 0.25, 1] }}
+                  >
+                    <ProjectsDropdownArrow />
+
+                    <motion.div
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0, duration: 0.2, ease: 'easeOut' }}
+                    >
+                      <PortfolioItemWrapper>
+                        <ProjectsDropdownItem
+                          $active={pathname.startsWith('/projetos')}
+                          as="div"
+                          style={{ cursor: 'pointer' }}
+                        >
+                          <ProjectsDropdownIcon $active={pathname.startsWith('/projetos')}>
+                            <FiBriefcase size={18} />
+                          </ProjectsDropdownIcon>
+                          <ProjectsDropdownText>
+                            <ProjectsDropdownName>{t('nav.projects')}</ProjectsDropdownName>
+                          </ProjectsDropdownText>
+                          <FiChevronDown
+                            size={12}
+                            style={{ transform: 'rotate(-90deg)', opacity: 0.5, marginLeft: 'auto' }}
+                          />
+                        </ProjectsDropdownItem>
+
+                        <PortfolioSubmenu>
+                          {PROJECT_CATEGORIES.map(({ key, path, icon: Icon, descKey }) => (
+                            <ProjectsDropdownItem
+                              key={path}
+                              $active={pathname === path}
+                              onClick={() => handleProjectNav(path)}
+                            >
+                              <ProjectsDropdownIcon $active={pathname === path}>
+                                <Icon size={18} />
+                              </ProjectsDropdownIcon>
+                              <ProjectsDropdownText>
+                                <ProjectsDropdownName>{t(key)}</ProjectsDropdownName>
+                                <ProjectsDropdownDesc>{t(descKey)}</ProjectsDropdownDesc>
+                              </ProjectsDropdownText>
+                            </ProjectsDropdownItem>
+                          ))}
+                        </PortfolioSubmenu>
+                      </PortfolioItemWrapper>
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.04, duration: 0.2, ease: 'easeOut' }}
+                    >
                       <ProjectsDropdownItem
-                        $active={pathname.startsWith('/projetos')}
-                        as="div"
-                        style={{ cursor: 'pointer' }}
+                        $active={pathname === '/cursos'}
+                        onClick={() => {
+                          router.push('/cursos');
+                          setIsProjectsOpen(false);
+                        }}
                       >
-                        <ProjectsDropdownIcon $active={pathname.startsWith('/projetos')}>
-                          <FiBriefcase size={18} />
+                        <ProjectsDropdownIcon $active={pathname === '/cursos'}>
+                          <FiAward size={18} />
                         </ProjectsDropdownIcon>
                         <ProjectsDropdownText>
-                          <ProjectsDropdownName>{t('nav.projects')}</ProjectsDropdownName>
+                          <ProjectsDropdownName>{t('nav.courses')}</ProjectsDropdownName>
                         </ProjectsDropdownText>
-                        <FiChevronDown
-                          size={12}
-                          style={{ transform: 'rotate(-90deg)', opacity: 0.5, marginLeft: 'auto' }}
-                        />
                       </ProjectsDropdownItem>
+                    </motion.div>
+                  </ProjectsDropdown>
+                )}
+              </AnimatePresence>
+            </SettingsWrapper>
 
-                      <PortfolioSubmenu>
-                        {PROJECT_CATEGORIES.map(({ key, path, icon: Icon, descKey }) => (
-                          <ProjectsDropdownItem
-                            key={path}
-                            $active={pathname === path}
-                            onClick={() => handleProjectNav(path)}
-                          >
-                            <ProjectsDropdownIcon $active={pathname === path}>
-                              <Icon size={18} />
-                            </ProjectsDropdownIcon>
-                            <ProjectsDropdownText>
-                              <ProjectsDropdownName>{t(key)}</ProjectsDropdownName>
-                              <ProjectsDropdownDesc>{t(descKey)}</ProjectsDropdownDesc>
-                            </ProjectsDropdownText>
-                          </ProjectsDropdownItem>
-                        ))}
-                      </PortfolioSubmenu>
-                    </PortfolioItemWrapper>
-                  </motion.div>
+            <SettingsWrapper ref={aboutMeRef}>
+              <NavLink
+                $selected={isAboutMePage}
+                onClick={() => setIsAboutMeOpen(prev => !prev)}
+                style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
+              >
+                {t('nav.aboutme' as Parameters<typeof t>[0])}
+                <FiChevronDown size={14} />
+                {isAboutMePage && (
+                  <motion.span
+                    layoutId="navbar-indicator"
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      borderRadius: '9999px',
+                      background: 'rgba(26, 26, 26, 0.06)',
+                      zIndex: -1,
+                    }}
+                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                  />
+                )}
+              </NavLink>
 
-                  <motion.div
-                    initial={{ opacity: 0, x: -8 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.04, duration: 0.2, ease: 'easeOut' }}
+              <AnimatePresence>
+                {isAboutMeOpen && (
+                  <ProjectsDropdown
+                    initial={{ opacity: 0, y: 6, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 6, scale: 0.97 }}
+                    transition={{ duration: 0.18, ease: [0.25, 0.1, 0.25, 1] }}
                   >
-                    <ProjectsDropdownItem
-                      $active={pathname === '/cursos'}
-                      onClick={() => {
-                        router.push('/cursos');
-                        setIsProjectsOpen(false);
-                      }}
-                    >
-                      <ProjectsDropdownIcon $active={pathname === '/cursos'}>
-                        <FiAward size={18} />
-                      </ProjectsDropdownIcon>
-                      <ProjectsDropdownText>
-                        <ProjectsDropdownName>{t('nav.courses')}</ProjectsDropdownName>
-                      </ProjectsDropdownText>
-                    </ProjectsDropdownItem>
-                  </motion.div>
-                </ProjectsDropdown>
-              )}
-            </AnimatePresence>
-          </SettingsWrapper>
+                    <ProjectsDropdownArrow />
 
-          <SettingsWrapper ref={aboutMeRef}>
+                    <motion.div
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0, duration: 0.2, ease: 'easeOut' }}
+                    >
+                      <ProjectsDropdownItem
+                        $active={pathname === '/skills'}
+                        onClick={() => {
+                          router.push('/skills');
+                          setIsAboutMeOpen(false);
+                        }}
+                      >
+                        <ProjectsDropdownIcon $active={pathname === '/skills'}>
+                          <FiLayers size={18} />
+                        </ProjectsDropdownIcon>
+                        <ProjectsDropdownText>
+                          <ProjectsDropdownName>{t('nav.skills' as Parameters<typeof t>[0])}</ProjectsDropdownName>
+                        </ProjectsDropdownText>
+                      </ProjectsDropdownItem>
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.04, duration: 0.2, ease: 'easeOut' }}
+                    >
+                      <ProjectsDropdownItem
+                        $active={pathname === '/jornada'}
+                        onClick={() => {
+                          router.push('/jornada');
+                          setIsAboutMeOpen(false);
+                        }}
+                      >
+                        <ProjectsDropdownIcon $active={pathname === '/jornada'}>
+                          <FiMapPin size={18} />
+                        </ProjectsDropdownIcon>
+                        <ProjectsDropdownText>
+                          <ProjectsDropdownName>{t('nav.timeline' as Parameters<typeof t>[0])}</ProjectsDropdownName>
+                        </ProjectsDropdownText>
+                      </ProjectsDropdownItem>
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.08, duration: 0.2, ease: 'easeOut' }}
+                    >
+                      <ProjectsDropdownItem
+                        $active={pathname === '/depoimentos'}
+                        onClick={() => {
+                          router.push('/depoimentos');
+                          setIsAboutMeOpen(false);
+                        }}
+                      >
+                        <ProjectsDropdownIcon $active={pathname === '/depoimentos'}>
+                          <FiMessageSquare size={18} />
+                        </ProjectsDropdownIcon>
+                        <ProjectsDropdownText>
+                          <ProjectsDropdownName>{t('nav.testimonials' as Parameters<typeof t>[0])}</ProjectsDropdownName>
+                        </ProjectsDropdownText>
+                      </ProjectsDropdownItem>
+                    </motion.div>
+                  </ProjectsDropdown>
+                )}
+              </AnimatePresence>
+            </SettingsWrapper>
+
             <NavLink
-              $selected={isAboutMePage}
-              onClick={() => setIsAboutMeOpen(prev => !prev)}
-              style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
+              $selected={pathname === '/cases'}
+              onClick={() => router.push('/cases')}
             >
-              {t('nav.aboutme' as Parameters<typeof t>[0])}
-              <FiChevronDown size={14} />
-              {isAboutMePage && (
+              {t('nav.cases' as Parameters<typeof t>[0])}
+              {pathname === '/cases' && (
                 <motion.span
                   layoutId="navbar-indicator"
                   style={{
@@ -469,36 +599,55 @@ const Navbar = () => {
                 />
               )}
             </NavLink>
+          </motion.div>
+        </Nav>
+
+        <motion.div
+          style={{ display: 'flex', alignItems: 'center', gap: '12px' }}
+          initial={{ opacity: 0, x: 12 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.3, duration: 0.4, ease: 'easeOut' }}
+        >
+          <FlagImg
+            src={LANGUAGES.find(l => l.code === language)?.flag ?? ''}
+            alt={language}
+            style={{ width: 18, height: 14, borderRadius: 2, objectFit: 'cover', opacity: 0.85 }}
+          />
+          <SettingsWrapper ref={settingsRef}>
+            <SettingsButton onClick={() => setIsMenuOpen(prev => !prev)}>
+              <FiSettings size={18} />
+            </SettingsButton>
 
             <AnimatePresence>
-              {isAboutMeOpen && (
-                <ProjectsDropdown
+              {isMenuOpen && (
+                <SettingsDropdown
                   initial={{ opacity: 0, y: 6, scale: 0.97 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 6, scale: 0.97 }}
                   transition={{ duration: 0.18, ease: [0.25, 0.1, 0.25, 1] }}
                 >
-                  <ProjectsDropdownArrow />
+                  <SettingsDropdownArrow />
 
                   <motion.div
                     initial={{ opacity: 0, x: -8 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0, duration: 0.2, ease: 'easeOut' }}
                   >
-                    <ProjectsDropdownItem
-                      $active={pathname === '/skills'}
-                      onClick={() => {
-                        router.push('/skills');
-                        setIsAboutMeOpen(false);
-                      }}
-                    >
-                      <ProjectsDropdownIcon $active={pathname === '/skills'}>
-                        <FiLayers size={18} />
-                      </ProjectsDropdownIcon>
-                      <ProjectsDropdownText>
-                        <ProjectsDropdownName>{t('nav.skills' as Parameters<typeof t>[0])}</ProjectsDropdownName>
-                      </ProjectsDropdownText>
-                    </ProjectsDropdownItem>
+                    <SettingsItem onClick={toggleTheme}>
+                      <SettingsItemIcon>
+                        {themeMode === 'light' ? (
+                          <FiMoon size={16} />
+                        ) : (
+                          <FiSun size={16} />
+                        )}
+                      </SettingsItemIcon>
+                      <DropdownLabel>{t('settings.theme')}</DropdownLabel>
+                      <DropdownValue>
+                        {themeMode === 'light'
+                          ? t('settings.theme.light.short' as any)
+                          : t('settings.theme.dark.short' as any)}
+                      </DropdownValue>
+                    </SettingsItem>
                   </motion.div>
 
                   <motion.div
@@ -506,431 +655,436 @@ const Navbar = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.04, duration: 0.2, ease: 'easeOut' }}
                   >
-                    <ProjectsDropdownItem
-                      $active={pathname === '/jornada'}
-                      onClick={() => {
-                        router.push('/jornada');
-                        setIsAboutMeOpen(false);
-                      }}
-                    >
-                      <ProjectsDropdownIcon $active={pathname === '/jornada'}>
-                        <FiMapPin size={18} />
-                      </ProjectsDropdownIcon>
-                      <ProjectsDropdownText>
-                        <ProjectsDropdownName>{t('nav.timeline' as Parameters<typeof t>[0])}</ProjectsDropdownName>
-                      </ProjectsDropdownText>
-                    </ProjectsDropdownItem>
+                    <LanguageItemWrapper>
+                      <SettingsItem as="div">
+                        <SettingsItemIcon>
+                          <FiGlobe size={16} />
+                        </SettingsItemIcon>
+                        <DropdownLabel>{t('settings.language')}</DropdownLabel>
+                        <FiChevronDown
+                          size={12}
+                          style={{ transform: 'rotate(-90deg)', opacity: 0.5 }}
+                        />
+                      </SettingsItem>
+
+                      <LanguageSubmenu>
+                        {LANGUAGES.map(lang => (
+                          <LanguageOption
+                            key={lang.code}
+                            $active={language === lang.code}
+                            onClick={() => {
+                              setLang(lang.code);
+                              setIsMenuOpen(false);
+                            }}
+                          >
+                            <FlagImg src={lang.flag} alt={lang.label} />
+                            <span>{lang.label}</span>
+                          </LanguageOption>
+                        ))}
+                      </LanguageSubmenu>
+                    </LanguageItemWrapper>
                   </motion.div>
+
+                  <DropdownDivider />
 
                   <motion.div
                     initial={{ opacity: 0, x: -8 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.08, duration: 0.2, ease: 'easeOut' }}
                   >
-                    <ProjectsDropdownItem
-                      $active={pathname === '/depoimentos'}
+                    <SettingsItem
                       onClick={() => {
-                        router.push('/depoimentos');
-                        setIsAboutMeOpen(false);
+                        router.push('/configuracoes');
+                        setIsMenuOpen(false);
                       }}
                     >
-                      <ProjectsDropdownIcon $active={pathname === '/depoimentos'}>
-                        <FiMessageSquare size={18} />
-                      </ProjectsDropdownIcon>
-                      <ProjectsDropdownText>
-                        <ProjectsDropdownName>{t('nav.testimonials' as Parameters<typeof t>[0])}</ProjectsDropdownName>
-                      </ProjectsDropdownText>
-                    </ProjectsDropdownItem>
+                      <SettingsItemIcon>
+                        <FiSliders size={16} />
+                      </SettingsItemIcon>
+                      <DropdownLabel>{t('nav.settings')}</DropdownLabel>
+                    </SettingsItem>
                   </motion.div>
-                </ProjectsDropdown>
+
+                  <DropdownDivider />
+
+                  <motion.div
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.12, duration: 0.2, ease: 'easeOut' }}
+                  >
+                    <DropdownVersion>
+                      <span>{CURRENT_VERSION}</span>
+                      <VersionBadge>{CURRENT_LABEL}</VersionBadge>
+                    </DropdownVersion>
+                  </motion.div>
+                </SettingsDropdown>
               )}
             </AnimatePresence>
           </SettingsWrapper>
 
-          <NavLink
-            $selected={pathname === '/cases'}
-            onClick={() => router.push('/cases')}
+          <NavCta
+            onClick={() => router.push('/contato')}
+            whileHover={{ scale: 1.04, y: -1 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.15 }}
           >
-            {t('nav.cases' as Parameters<typeof t>[0])}
-            {pathname === '/cases' && (
-              <motion.span
-                layoutId="navbar-indicator"
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  borderRadius: '9999px',
-                  background: 'rgba(26, 26, 26, 0.06)',
-                  zIndex: -1,
-                }}
-                transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-              />
-            )}
-          </NavLink>
+            {t('nav.cta')}
+          </NavCta>
+
+          <HamburgerButton onClick={() => setIsMobileOpen(true)}>
+            <FiMenu size={20} />
+          </HamburgerButton>
         </motion.div>
-      </Nav>
+      </MotionNavbarContainer>
 
-      <motion.div
-        style={{ display: 'flex', alignItems: 'center', gap: '12px' }}
-        initial={{ opacity: 0, x: 12 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.3, duration: 0.4, ease: 'easeOut' }}
-      >
-        <FlagImg
-          src={LANGUAGES.find(l => l.code === language)?.flag ?? ''}
-          alt={language}
-          style={{ width: 18, height: 14, borderRadius: 2, objectFit: 'cover', opacity: 0.85 }}
-        />
-        <SettingsWrapper ref={settingsRef}>
-          <SettingsButton onClick={() => setIsMenuOpen(prev => !prev)}>
-            <FiSettings size={18} />
-          </SettingsButton>
+      <AnimatePresence>
+        {isMobileOpen && (
+          <>
+            <MobileOverlay
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={() => setIsMobileOpen(false)}
+            />
+            <MobileDrawer
+              initial={{ opacity: 0, scale: 0.95, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 30 }}
+              transition={{ type: 'spring', stiffness: 350, damping: 28 }}
+            >
+              <AmbientGlow $color="#48cae4" $top="-15%" $left="-25%" $size="350px" />
+              <AmbientGlow $color="#fb6f92" $top="45%" $left="45%" $size="400px" />
 
-          <AnimatePresence>
-            {isMenuOpen && (
-              <SettingsDropdown
-                initial={{ opacity: 0, y: 6, scale: 0.97 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 6, scale: 0.97 }}
-                transition={{ duration: 0.18, ease: [0.25, 0.1, 0.25, 1] }}
-              >
-                <SettingsDropdownArrow />
-
-                <motion.div
-                  initial={{ opacity: 0, x: -8 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0, duration: 0.2, ease: 'easeOut' }}
-                >
-                  <SettingsItem onClick={toggleTheme}>
-                    <SettingsItemIcon>
-                      {themeMode === 'light' ? (
-                        <FiMoon size={16} />
-                      ) : (
-                        <FiSun size={16} />
-                      )}
-                    </SettingsItemIcon>
-                    <DropdownLabel>{t('settings.theme')}</DropdownLabel>
-                    <DropdownValue>
-                      {themeMode === 'light'
-                        ? t('settings.theme.light.short' as any)
-                        : t('settings.theme.dark.short' as any)}
-                    </DropdownValue>
-                  </SettingsItem>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, x: -8 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.04, duration: 0.2, ease: 'easeOut' }}
-                >
-                  <LanguageItemWrapper>
-                    <SettingsItem as="div">
-                      <SettingsItemIcon>
-                        <FiGlobe size={16} />
-                      </SettingsItemIcon>
-                      <DropdownLabel>{t('settings.language')}</DropdownLabel>
-                      <FiChevronDown
-                        size={12}
-                        style={{ transform: 'rotate(-90deg)', opacity: 0.5 }}
-                      />
-                    </SettingsItem>
-
-                    <LanguageSubmenu>
-                      {LANGUAGES.map(lang => (
-                        <LanguageOption
-                          key={lang.code}
-                          $active={language === lang.code}
-                          onClick={() => {
-                            setLang(lang.code);
-                            setIsMenuOpen(false);
-                          }}
-                        >
-                          <FlagImg src={lang.flag} alt={lang.label} />
-                          <span>{lang.label}</span>
-                        </LanguageOption>
-                      ))}
-                    </LanguageSubmenu>
-                  </LanguageItemWrapper>
-                </motion.div>
-
-                <DropdownDivider />
-
-                <motion.div
-                  initial={{ opacity: 0, x: -8 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.08, duration: 0.2, ease: 'easeOut' }}
-                >
-                  <SettingsItem
-                    onClick={() => {
-                      router.push('/configuracoes');
-                      setIsMenuOpen(false);
-                    }}
-                  >
-                    <SettingsItemIcon>
-                      <FiSliders size={16} />
-                    </SettingsItemIcon>
-                    <DropdownLabel>{t('nav.settings')}</DropdownLabel>
-                  </SettingsItem>
-                </motion.div>
-
-                <DropdownDivider />
-
-                <motion.div
-                  initial={{ opacity: 0, x: -8 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.12, duration: 0.2, ease: 'easeOut' }}
-                >
-                  <DropdownVersion>
-                    <span>{CURRENT_VERSION}</span>
-                    <VersionBadge>{CURRENT_LABEL}</VersionBadge>
-                  </DropdownVersion>
-                </motion.div>
-              </SettingsDropdown>
-            )}
-          </AnimatePresence>
-        </SettingsWrapper>
-
-        <NavCta
-          onClick={() => router.push('/contato')}
-          whileHover={{ scale: 1.04, y: -1 }}
-          whileTap={{ scale: 0.97 }}
-          transition={{ duration: 0.15 }}
-        >
-          {t('nav.cta')}
-        </NavCta>
-
-        <HamburgerButton onClick={() => setIsMobileOpen(true)}>
-          <FiMenu size={20} />
-        </HamburgerButton>
-      </motion.div>
-    </MotionNavbarContainer>
-
-    <AnimatePresence>
-      {isMobileOpen && (
-        <>
-          <MobileOverlay
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            onClick={() => setIsMobileOpen(false)}
-          />
-          <MobileDrawer
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-          >
-            <MobileDrawerContent>
-            <MobileDrawerHeader>
-              <NavLogoMark>
-                <svg
-                  width="38"
-                  height="38"
-                  viewBox="0 0 38 38"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <defs>
-                    <linearGradient
-                      id="mob-grad"
-                      x1="0"
-                      y1="0"
-                      x2="38"
-                      y2="38"
-                      gradientUnits="userSpaceOnUse"
+              <MobileDrawerContent>
+                <MobileDrawerHeader>
+                  <NavLogoMark>
+                    <svg
+                      width="38"
+                      height="38"
+                      viewBox="0 0 38 38"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <stop offset="0%" stopColor="#48cae4" />
-                      <stop offset="100%" stopColor="#fb6f92" />
-                    </linearGradient>
-                  </defs>
-                  <text
-                    x="50%"
-                    y="50%"
-                    dominantBaseline="central"
-                    textAnchor="middle"
-                    fontFamily="'Inter', 'Segoe UI', sans-serif"
-                    fontSize="18"
-                    fontWeight="800"
-                    letterSpacing="-0.5"
-                    fill="url(#mob-grad)"
-                  >
-                    AR
-                  </text>
-                </svg>
-              </NavLogoMark>
-              <MobileDrawerClose onClick={() => setIsMobileOpen(false)}>
-                <FiX size={18} />
-              </MobileDrawerClose>
-            </MobileDrawerHeader>
+                      <defs>
+                        <linearGradient
+                          id="mob-grad"
+                          x1="0"
+                          y1="0"
+                          x2="38"
+                          y2="38"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop offset="0%" stopColor="#48cae4" />
+                          <stop offset="100%" stopColor="#fb6f92" />
+                        </linearGradient>
+                      </defs>
+                      <text
+                        x="50%"
+                        y="50%"
+                        dominantBaseline="central"
+                        textAnchor="middle"
+                        fontFamily="'Inter', 'Segoe UI', sans-serif"
+                        fontSize="18"
+                        fontWeight="800"
+                        letterSpacing="-0.5"
+                        fill="url(#mob-grad)"
+                      >
+                        AR
+                      </text>
+                    </svg>
+                  </NavLogoMark>
+                  <MobileDrawerClose onClick={() => setIsMobileOpen(false)}>
+                    <FiX size={20} />
+                  </MobileDrawerClose>
+                </MobileDrawerHeader>
 
-            {allHomeSections.map(link => (
-              <MobileDrawerLink
-                key={link.id}
-                $active={isHomePage && activeSection === link.id}
-                onClick={() => {
-                  handleScrollNav(link.id);
-                  setIsMobileOpen(false);
-                }}
-              >
-                {link.id === 'home' ? <FiHome size={18} /> : <FiInfo size={18} />}
-                {t(link.key as Parameters<typeof t>[0])}
-              </MobileDrawerLink>
-            ))}
-
-            <MobileDrawerDivider />
-
-            {PROJECT_CATEGORIES.map(cat => (
-              <MobileDrawerLink
-                key={cat.path}
-                $active={pathname === cat.path}
-                onClick={() => {
-                  router.push(cat.path);
-                  setIsMobileOpen(false);
-                }}
-              >
-                <cat.icon size={18} />
-                {t(cat.key)}
-              </MobileDrawerLink>
-            ))}
-
-            <MobileDrawerLink
-              $active={pathname === '/cursos'}
-              onClick={() => {
-                router.push('/cursos');
-                setIsMobileOpen(false);
-              }}
-            >
-              <FiAward size={18} />
-              {t('nav.courses')}
-            </MobileDrawerLink>
-
-            <MobileDrawerLink
-              $active={pathname === '/skills'}
-              onClick={() => {
-                router.push('/skills');
-                setIsMobileOpen(false);
-              }}
-            >
-              <FiLayers size={18} />
-              {t('nav.skills' as Parameters<typeof t>[0])}
-            </MobileDrawerLink>
-
-            <MobileDrawerLink
-              $active={pathname === '/jornada'}
-              onClick={() => {
-                router.push('/jornada');
-                setIsMobileOpen(false);
-              }}
-            >
-              <FiMapPin size={18} />
-              {t('nav.timeline' as Parameters<typeof t>[0])}
-            </MobileDrawerLink>
-
-            <MobileDrawerLink
-              $active={pathname === '/depoimentos'}
-              onClick={() => {
-                router.push('/depoimentos');
-                setIsMobileOpen(false);
-              }}
-            >
-              <FiMessageSquare size={18} />
-              {t('nav.testimonials' as Parameters<typeof t>[0])}
-            </MobileDrawerLink>
-
-            <MobileDrawerLink
-              $active={pathname === '/cases'}
-              onClick={() => {
-                router.push('/cases');
-                setIsMobileOpen(false);
-              }}
-            >
-              <FiFileText size={18} />
-              {t('nav.cases' as Parameters<typeof t>[0])}
-            </MobileDrawerLink>
-
-            <MobileDrawerLink
-              $active={pathname === '/contato'}
-              onClick={() => {
-                router.push('/contato');
-                setIsMobileOpen(false);
-              }}
-            >
-              <FiMail size={18} />
-              {t('contact.tag' as Parameters<typeof t>[0])}
-            </MobileDrawerLink>
-
-            <MobileDrawerDivider />
-
-            <ThemeToggleRow onClick={toggleTheme}>
-              <ThemeToggleLabel>
-                {themeMode === 'light' ? <FiSun size={18} /> : <FiMoon size={18} />}
-                {t('settings.theme')}
-              </ThemeToggleLabel>
-              <Switch active={themeMode === 'dark'} />
-            </ThemeToggleRow>
-
-            <MobileLanguageHeader onClick={() => setIsMobileLangOpen(prev => !prev)}>
-              <FiGlobe size={18} />
-              {t('settings.language')}
-              <FiChevronDown
-                size={14}
-                style={{
-                  transform: isMobileLangOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                }}
-              />
-            </MobileLanguageHeader>
-
-            <AnimatePresence>
-              {isMobileLangOpen && (
                 <motion.div
-                  initial={{ height: 0, opacity: 0, overflow: 'hidden' }}
-                  animate={{ height: 'auto', opacity: 1, transitionEnd: { overflow: 'visible' } }}
-                  exit={{ height: 0, opacity: 0, overflow: 'hidden' }}
-                  transition={{ duration: 0.2, ease: 'easeInOut' }}
+                  variants={mobileContainerVariants}
+                  initial="hidden"
+                  animate="visible"
+                  style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}
                 >
-                  <MobileLanguageList>
-                    {LANGUAGES.map(lang => (
-                      <MobileDrawerLink
-                        key={lang.code}
-                        $active={language === lang.code}
+                  <motion.div variants={mobileItemVariants}>
+                    <MobileNavLink>
+                      <MobileNavLinkText
+                        $active={isHomePage}
+                        onClick={() => setIsMobileHomeOpen(prev => !prev)}
+                      >
+                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                          <MobileNavLinkIndex>01</MobileNavLinkIndex>
+                          {t('nav.home')}
+                        </span>
+                        <FiChevronDown
+                          size={20}
+                          style={{
+                            transform: isMobileHomeOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                            transition: 'transform 0.2s ease',
+                            opacity: 0.6,
+                          }}
+                        />
+                      </MobileNavLinkText>
+                    </MobileNavLink>
+
+                    <AnimatePresence>
+                      {isMobileHomeOpen && (
+                        <MobileSubmenuContainer
+                          initial={{ height: 0, opacity: 0, overflow: 'hidden' }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          {allHomeSections.map(link => (
+                            <MobileSubmenuLink
+                              key={link.id}
+                              $active={isHomePage && activeSection === link.id}
+                              onClick={() => {
+                                handleScrollNav(link.id);
+                                setIsMobileOpen(false);
+                              }}
+                            >
+                              {link.id === 'home' ? <FiHome size={16} /> : <FiInfo size={16} />}
+                              {t(link.key as Parameters<typeof t>[0])}
+                            </MobileSubmenuLink>
+                          ))}
+                        </MobileSubmenuContainer>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+
+                  <motion.div variants={mobileItemVariants}>
+                    <MobileNavLink>
+                      <MobileNavLinkText
+                        $active={isPortfolioPage}
+                        onClick={() => setIsMobileProjectsSubOpen(prev => !prev)}
+                      >
+                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                          <MobileNavLinkIndex>02</MobileNavLinkIndex>
+                          {t('nav.portfolio')}
+                        </span>
+                        <FiChevronDown
+                          size={20}
+                          style={{
+                            transform: isMobileProjectsSubOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                            transition: 'transform 0.2s ease',
+                            opacity: 0.6,
+                          }}
+                        />
+                      </MobileNavLinkText>
+                    </MobileNavLink>
+
+                    <AnimatePresence>
+                      {isMobileProjectsSubOpen && (
+                        <MobileSubmenuContainer
+                          initial={{ height: 0, opacity: 0, overflow: 'hidden' }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          {PROJECT_CATEGORIES.map(cat => (
+                            <MobileSubmenuLink
+                              key={cat.path}
+                              $active={pathname === cat.path}
+                              onClick={() => {
+                                router.push(cat.path);
+                                setIsMobileOpen(false);
+                              }}
+                            >
+                              <cat.icon size={16} />
+                              {t(cat.key)}
+                            </MobileSubmenuLink>
+                          ))}
+                          <MobileSubmenuLink
+                            $active={pathname === '/cursos'}
+                            onClick={() => {
+                              router.push('/cursos');
+                              setIsMobileOpen(false);
+                            }}
+                          >
+                            <FiAward size={16} />
+                            {t('nav.courses')}
+                          </MobileSubmenuLink>
+                        </MobileSubmenuContainer>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+
+                  <motion.div variants={mobileItemVariants}>
+                    <MobileNavLink>
+                      <MobileNavLinkText
+                        $active={isAboutMePage}
+                        onClick={() => setIsMobileAboutSubOpen(prev => !prev)}
+                      >
+                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                          <MobileNavLinkIndex>03</MobileNavLinkIndex>
+                          {t('nav.aboutme')}
+                        </span>
+                        <FiChevronDown
+                          size={20}
+                          style={{
+                            transform: isMobileAboutSubOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                            transition: 'transform 0.2s ease',
+                            opacity: 0.6,
+                          }}
+                        />
+                      </MobileNavLinkText>
+                    </MobileNavLink>
+
+                    <AnimatePresence>
+                      {isMobileAboutSubOpen && (
+                        <MobileSubmenuContainer
+                          initial={{ height: 0, opacity: 0, overflow: 'hidden' }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <MobileSubmenuLink
+                            $active={pathname === '/skills'}
+                            onClick={() => {
+                              router.push('/skills');
+                              setIsMobileOpen(false);
+                            }}
+                          >
+                            <FiLayers size={16} />
+                            {t('nav.skills' as Parameters<typeof t>[0])}
+                          </MobileSubmenuLink>
+                          <MobileSubmenuLink
+                            $active={pathname === '/jornada'}
+                            onClick={() => {
+                              router.push('/jornada');
+                              setIsMobileOpen(false);
+                            }}
+                          >
+                            <FiMapPin size={16} />
+                            {t('nav.timeline' as Parameters<typeof t>[0])}
+                          </MobileSubmenuLink>
+                          <MobileSubmenuLink
+                            $active={pathname === '/depoimentos'}
+                            onClick={() => {
+                              router.push('/depoimentos');
+                              setIsMobileOpen(false);
+                            }}
+                          >
+                            <FiMessageSquare size={16} />
+                            {t('nav.testimonials' as Parameters<typeof t>[0])}
+                          </MobileSubmenuLink>
+                        </MobileSubmenuContainer>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+
+                  <motion.div variants={mobileItemVariants}>
+                    <MobileNavLink>
+                      <MobileNavLinkText
+                        $active={pathname === '/cases'}
                         onClick={() => {
-                          setLang(lang.code);
+                          router.push('/cases');
                           setIsMobileOpen(false);
                         }}
                       >
-                        <FlagImg src={lang.flag} alt={lang.label} />
-                        {lang.label}
-                      </MobileDrawerLink>
-                    ))}
-                  </MobileLanguageList>
+                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                          <MobileNavLinkIndex>04</MobileNavLinkIndex>
+                          {t('nav.cases' as Parameters<typeof t>[0])}
+                        </span>
+                      </MobileNavLinkText>
+                    </MobileNavLink>
+                  </motion.div>
+
+                  <motion.div variants={mobileItemVariants}>
+                    <MobileNavLink>
+                      <MobileNavLinkText
+                        $active={pathname === '/contato'}
+                        onClick={() => {
+                          router.push('/contato');
+                          setIsMobileOpen(false);
+                        }}
+                      >
+                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                          <MobileNavLinkIndex>05</MobileNavLinkIndex>
+                          {t('contact.tag' as Parameters<typeof t>[0])}
+                        </span>
+                      </MobileNavLinkText>
+                    </MobileNavLink>
+                  </motion.div>
                 </motion.div>
-              )}
-            </AnimatePresence>
 
-            <MobileDrawerDivider />
+                <MobileDrawerDivider />
 
-            <MobileDrawerLink
-              $active={pathname === '/configuracoes'}
-              onClick={() => {
-                router.push('/configuracoes');
-                setIsMobileOpen(false);
-              }}
-            >
-              <FiSliders size={18} />
-              {t('nav.settings')}
-            </MobileDrawerLink>
+                <MobileControlCenter>
+                  <MobileControlRow>
+                    <ThemeToggleRow onClick={toggleTheme}>
+                      <ThemeToggleLabel>
+                        {themeMode === 'light' ? <FiSun size={18} /> : <FiMoon size={18} />}
+                      </ThemeToggleLabel>
+                      <Switch active={themeMode === 'dark'} />
+                    </ThemeToggleRow>
 
-            <MobileDrawerDivider />
+                    <MobileControlCard
+                      $interactive
+                      onClick={() => {
+                        router.push('/configuracoes');
+                        setIsMobileOpen(false);
+                      }}
+                    >
+                      <MobileControlCardLabel>
+                        <FiSliders size={18} />
+                        {t('nav.settings')}
+                      </MobileControlCardLabel>
+                    </MobileControlCard>
+                  </MobileControlRow>
 
-            <DropdownVersion>
-              <span>{CURRENT_VERSION}</span>
-              <VersionBadge>{CURRENT_LABEL}</VersionBadge>
-            </DropdownVersion>
-            </MobileDrawerContent>
-          </MobileDrawer>
-        </>
-      )}
-    </AnimatePresence>
+                  <MobileControlCard $interactive onClick={() => setIsMobileLangOpen(prev => !prev)}>
+                    <MobileControlCardLabel>
+                      <FiGlobe size={18} />
+                      {t('settings.language')}
+                    </MobileControlCardLabel>
+                    <FiChevronDown
+                      size={14}
+                      style={{
+                        transform: isMobileLangOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.25s ease',
+                        opacity: 0.7,
+                      }}
+                    />
+                  </MobileControlCard>
+
+                  <AnimatePresence>
+                    {isMobileLangOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0, overflow: 'hidden' }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2, ease: 'easeInOut' }}
+                      >
+                        <MobileLanguageGrid>
+                          {LANGUAGES.map(lang => (
+                            <MobileSubmenuLink
+                              key={lang.code}
+                              $active={language === lang.code}
+                              onClick={() => {
+                                setLang(lang.code);
+                                setIsMobileOpen(false);
+                              }}
+                            >
+                              <FlagImg src={lang.flag} alt={lang.label} />
+                              {lang.label}
+                            </MobileSubmenuLink>
+                          ))}
+                        </MobileLanguageGrid>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </MobileControlCenter>
+              </MobileDrawerContent>
+
+              <MobileVersionWrapper>
+                <span>{CURRENT_VERSION}</span>
+                <VersionBadge>{CURRENT_LABEL}</VersionBadge>
+              </MobileVersionWrapper>
+            </MobileDrawer>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 };

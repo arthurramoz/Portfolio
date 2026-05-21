@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { motion } from 'motion/react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const NavbarContainer = styled.header`
   position: fixed;
@@ -163,26 +163,74 @@ export const HamburgerButton = styled.button`
 export const MobileOverlay = styled(motion.div)`
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(8, 8, 10, 0.45);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   z-index: 999;
 `;
 
 export const MobileDrawer = styled(motion.div)`
   position: fixed;
-  top: 0;
-  right: 0;
-  width: 300px;
-  max-width: 85vw;
-  height: 100vh;
-  height: 100dvh;
+  top: 16px;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
   z-index: 1001;
   display: flex;
   flex-direction: column;
-  background: ${({ theme }) => theme.colors.dropdownBg};
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-left: 1px solid ${({ theme }) => theme.colors.navbarBorder};
-  box-shadow: -8px 0 40px ${({ theme }) => theme.colors.navbarShadow};
+  background: ${({ theme }) =>
+    theme.colors.dropdownBg === '#ffffff'
+      ? 'rgba(255, 255, 255, 0.72)'
+      : 'rgba(15, 15, 22, 0.65)'};
+  backdrop-filter: blur(35px) saturate(210%);
+  -webkit-backdrop-filter: blur(35px) saturate(210%);
+  border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  border-radius: 28px;
+  box-shadow: 
+    0 24px 60px rgba(0, 0, 0, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+
+  ${({ theme }) => theme.media.sm} {
+    top: 12px;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    border-radius: 24px;
+  }
+`;
+
+const driftGlow = keyframes`
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(40px, -30px) scale(1.08);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+`;
+
+export const AmbientGlow = styled.div<{ $color: string; $top: string; $left: string; $size: string }>`
+  position: absolute;
+  top: ${({ $top }) => $top};
+  left: ${({ $left }) => $left};
+  width: ${({ $size }) => $size};
+  height: ${({ $size }) => $size};
+  background: radial-gradient(circle, ${({ $color }) => $color}22 0%, transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
+  animation: ${driftGlow} 22s ease-in-out infinite;
+
+  &:nth-child(2) {
+    animation-duration: 30s;
+    animation-delay: -8s;
+  }
 `;
 
 export const MobileDrawerContent = styled.div`
@@ -190,10 +238,15 @@ export const MobileDrawerContent = styled.div`
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
-  padding: 32px 24px 48px;
+  padding: 24px 20px 40px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 22px;
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
 
   &::-webkit-scrollbar {
     display: none;
@@ -206,192 +259,206 @@ export const MobileDrawerHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 4px;
 `;
 
 export const MobileDrawerClose = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
-  background: transparent;
+  background: rgba(255, 255, 255, 0.06);
   color: ${({ theme }) => theme.colors.navbarLinkActive};
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 
   &:hover {
-    background: ${({ theme }) => theme.colors.navbarLinkBgHover};
+    background: rgba(255, 255, 255, 0.15);
+    border-color: ${({ theme }) => theme.colors.primary1};
+    transform: rotate(90deg) scale(1.05);
   }
 `;
 
-export const MobileDrawerLink = styled.button<{ $active?: boolean }>`
+export const MobileNavLink = styled(motion.div)`
+  position: relative;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.navbarBorder}12;
+`;
+
+interface MobileNavLinkTextProps {
+  $active?: boolean;
+}
+
+export const MobileNavLinkText = styled.span<MobileNavLinkTextProps>`
+  font-size: clamp(1.6rem, 6vw, 2.1rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  width: 100%;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+  color: ${({ $active, theme }) => ($active ? theme.colors.primary1 : theme.colors.title)};
+
+  background: ${({ $active, theme }) =>
+    $active
+      ? `linear-gradient(135deg, ${theme.colors.primary1} 0%, ${theme.colors.secondary1} 100%)`
+      : 'none'};
+  -webkit-background-clip: ${({ $active }) => ($active ? 'text' : 'none')};
+  -webkit-text-fill-color: ${({ $active }) => ($active ? 'transparent' : 'initial')};
+
+  &:hover {
+    background: linear-gradient(
+      135deg,
+      ${({ theme }) => theme.colors.primary1} 0%,
+      ${({ theme }) => theme.colors.secondary1} 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transform: translateX(6px);
+  }
+`;
+
+export const MobileNavLinkIndex = styled.span`
+  font-size: 0.8rem;
+  font-family: monospace;
+  font-weight: 700;
+  opacity: 0.4;
+  color: ${({ theme }) => theme.colors.primary1};
+  margin-right: 10px;
+`;
+
+export const MobileSubmenuContainer = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+  background: rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+`;
+
+export const MobileSubmenuLink = styled.button<{ $active?: boolean }>`
   display: flex;
   align-items: center;
   gap: 12px;
   width: 100%;
-  padding: 14px 16px;
-  border-radius: 12px;
+  padding: 10px 14px;
+  background: ${({ $active }) => ($active ? 'rgba(255, 255, 255, 0.06)' : 'transparent')};
   border: none;
-  background: ${({ $active, theme }) =>
-    $active ? theme.colors.navbarLinkBgActive : 'transparent'};
   color: ${({ $active, theme }) =>
-    $active ? theme.colors.navbarLinkActive : theme.colors.navbarLinkInactive};
-  font-size: 16px;
+    $active ? theme.colors.primary1 : theme.colors.navbarLinkInactive};
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
   text-align: left;
+  border-radius: 10px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 
   &:hover {
-    background: ${({ theme }) => theme.colors.navbarLinkBgHover};
+    background: rgba(255, 255, 255, 0.08);
     color: ${({ theme }) => theme.colors.navbarLinkActive};
+    transform: translateX(4px);
   }
+`;
+
+export const MobileControlCenter = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: ${({ theme }) =>
+    theme.colors.dropdownBg === '#ffffff'
+      ? 'rgba(0, 0, 0, 0.03)'
+      : 'rgba(255, 255, 255, 0.02)'};
+  border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  border-radius: 24px;
+  padding: 14px;
+  margin-top: 6px;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.05);
+`;
+
+export const MobileControlRow = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+`;
+
+export const MobileControlCard = styled.div<{ $interactive?: boolean }>`
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid ${({ theme }) => theme.colors.navbarBorder}30;
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: ${({ $interactive }) => ($interactive ? 'pointer' : 'default')};
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: ${({ theme }) => theme.colors.primary1}50;
+    transform: translateY(-2px);
+  }
+`;
+
+export const MobileControlCardLabel = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.navbarLinkInactive};
+`;
+
+export const MobileLanguageGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  margin-top: 4px;
+  padding: 4px;
 `;
 
 export const MobileDrawerDivider = styled.div`
   height: 1px;
-  margin: 8px 0;
-  background: ${({ theme }) => theme.colors.navbarBorder};
+  margin: 2px 0;
+  background: ${({ theme }) => theme.colors.navbarBorder}15;
 `;
 
 export const ThemeToggleRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 16px;
-  border-radius: 12px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid ${({ theme }) => theme.colors.navbarBorder}30;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 
   &:hover {
-    background: ${({ theme }) => theme.colors.navbarLinkBgHover};
+    background: rgba(255, 255, 255, 0.08);
+    border-color: ${({ theme }) => theme.colors.secondary1}50;
+    transform: translateY(-2px);
   }
 `;
 
 export const ThemeToggleLabel = styled.div`
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 16px;
-  font-weight: 600;
+  gap: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
   color: ${({ theme }) => theme.colors.navbarLinkInactive};
-`;
-
-export const ThemeSwitch = styled.div<{ $active: boolean }>`
-  width: 56px;
-  height: 28px;
-  border-radius: 14px;
-  background: ${({ $active }) =>
-    $active
-      ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)'
-      : 'linear-gradient(135deg, #87CEEB 0%, #48cae4 50%, #00b4d8 100%)'};
-  position: relative;
-  transition: background 0.4s ease;
-  flex-shrink: 0;
-  overflow: hidden;
-  box-shadow: ${({ $active }) =>
-    $active
-      ? 'inset 0 1px 4px rgba(0, 0, 0, 0.4)'
-      : 'inset 0 1px 4px rgba(0, 0, 0, 0.1)'};
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    background: #fff;
-    transition: opacity 0.4s ease;
-    opacity: ${({ $active }) => ($active ? 0.7 : 0)};
-  }
-
-  &::before {
-    width: 2px;
-    height: 2px;
-    top: 8px;
-    left: 12px;
-  }
-
-  &::after {
-    width: 3px;
-    height: 3px;
-    top: 16px;
-    left: 8px;
-  }
-`;
-
-export const ThemeSwitchStar = styled.span<{ $active: boolean }>`
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  border-radius: 50%;
-  background: #fff;
-  top: 6px;
-  left: 18px;
-  opacity: ${({ $active }) => ($active ? 0.5 : 0)};
-  transition: opacity 0.4s ease;
-`;
-
-export const ThemeSwitchKnob = styled.div<{ $active: boolean }>`
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  position: absolute;
-  top: 3px;
-  left: ${({ $active }) => ($active ? '31px' : '3px')};
-  transition: left 0.35s cubic-bezier(0.68, -0.15, 0.27, 1.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: ${({ $active }) =>
-    $active
-      ? 'linear-gradient(135deg, #c9d6df 0%, #e8e8e8 100%)'
-      : 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)'};
-  box-shadow: ${({ $active }) =>
-    $active
-      ? '0 1px 6px rgba(201, 214, 223, 0.4)'
-      : '0 1px 8px rgba(255, 165, 0, 0.5)'};
-
-  svg {
-    width: 13px;
-    height: 13px;
-  }
-`;
-
-export const MobileLanguageHeader = styled.button`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-  padding: 14px 16px;
-  border-radius: 12px;
-  border: none;
-  background: transparent;
-  color: ${({ theme }) => theme.colors.navbarLinkInactive};
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-align: left;
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.navbarLinkBgHover};
-    color: ${({ theme }) => theme.colors.navbarLinkActive};
-  }
-
-  svg:last-child {
-    margin-left: auto;
-    transition: transform 0.25s ease;
-  }
-`;
-
-export const MobileLanguageList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding-left: 16px;
 `;
 
 export const SettingsWrapper = styled.div`
@@ -767,4 +834,23 @@ export const PortfolioItemWrapper = styled.div`
     visibility: visible;
     transform: translateX(0);
   }
+`;
+
+export const MobileVersionWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.navbarLinkInactive};
+  opacity: 0.85;
+  border-top: 1px solid ${({ theme }) => theme.colors.navbarBorder}15;
+  background: ${({ theme }) =>
+    theme.colors.dropdownBg === '#ffffff'
+      ? 'rgba(255, 255, 255, 0.45)'
+      : 'rgba(12, 12, 18, 0.35)'};
+  backdrop-filter: blur(10px);
+  z-index: 2;
+  margin-top: auto;
 `;

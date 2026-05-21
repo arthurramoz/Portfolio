@@ -148,7 +148,6 @@ const Contact = () => {
 
   return (
     <ContactPage>
-      {/* Watermark */}
       <ContactWatermark
         initial={{ opacity: 0, scale: 0.95, x: '-50%' }}
         animate={{ opacity: 0.03, scale: 1, x: '-50%' }}
@@ -158,7 +157,6 @@ const Contact = () => {
       </ContactWatermark>
 
       <ContactGrid>
-        {/* Left Side — Info */}
         <ContactInfo
           as={motion.div}
           variants={containerVariants}
@@ -210,7 +208,6 @@ const Contact = () => {
           </InfoCardsWrapper>
         </ContactInfo>
 
-        {/* Right Side — Form */}
         <ContactFormWrapper
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}

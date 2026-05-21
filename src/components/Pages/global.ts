@@ -52,6 +52,14 @@ export const PageHeading = styled(motion.h1)`
   letter-spacing: -0.03em;
   line-height: 1.1;
   color: ${({ theme }) => theme.colors.title};
+
+  ${({ theme }) => theme.media.lg} {
+    font-size: 2.5rem;
+  }
+
+  ${({ theme }) => theme.media.md} {
+    font-size: 2rem;
+  }
 `;
 
 export const PageDescription = styled(motion.p)`
@@ -60,4 +68,12 @@ export const PageDescription = styled(motion.p)`
   color: ${({ theme }) => theme.colors.text};
   font-weight: 200;
   max-width: 520px;
+
+  ${({ theme }) => theme.media.lg} {
+    font-size: 1.2rem;
+  }
+
+  ${({ theme }) => theme.media.md} {
+    font-size: 1rem;
+  }
 `;

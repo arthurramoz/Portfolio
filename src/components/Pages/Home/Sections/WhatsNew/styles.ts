@@ -106,6 +106,16 @@ export const Title = styled.h3`
   text-transform: uppercase;
   font-weight: 800;
   color: #111;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+  ${({ theme }) => theme.media.md} {
+    font-size: 2.4rem;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    font-size: 1.8rem;
+  }
 `;
 
 export const Description = styled.p`
@@ -113,6 +123,10 @@ export const Description = styled.p`
   line-height: 1.3;
   font-weight: 200;
   color: #222;
+
+  ${({ theme }) => theme.media.sm} {
+    font-size: 1.15rem;
+  }
 `;
 
 export const ActionBtn = styled.button`
@@ -158,7 +172,7 @@ export const CardVisual = styled.div`
     border-left: none;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding: 28px 24px;
-    min-height: 200px;
+    min-height: 220px;
   }
 `;
 
@@ -183,6 +197,23 @@ export const PreviewCard = styled.div<{ $delay: number; $accent: string }>`
     border-radius: 0 4px 4px 0;
     background: ${({ $accent }) => $accent};
   }
+
+  ${({ theme }) => theme.media.md} {
+    width: 170px;
+    padding: 12px;
+    border-radius: 12px;
+
+    &::before {
+      top: 10px;
+      bottom: 10px;
+    }
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    width: 135px;
+    padding: 8px 10px;
+    border-radius: 10px;
+  }
 `;
 
 export const PreviewHeader = styled.div<{ $accent: string }>`
@@ -203,12 +234,22 @@ export const PreviewIcon = styled.div<{ $accent: string }>`
   justify-content: center;
   color: ${({ $accent }) => $accent};
   flex-shrink: 0;
+
+  ${({ theme }) => theme.media.md} {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+  }
 `;
 
 export const PreviewLabel = styled.span`
   font-size: 0.78rem;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.title};
+
+  ${({ theme }) => theme.media.md} {
+    font-size: 0.68rem;
+  }
 `;
 
 export const PreviewLine = styled.div<{ $w: string }>`
@@ -221,12 +262,22 @@ export const PreviewLine = styled.div<{ $w: string }>`
   &:last-child {
     margin-bottom: 0;
   }
+
+  ${({ theme }) => theme.media.md} {
+    height: 4px;
+    margin-bottom: 4px;
+  }
 `;
 
 export const PreviewTags = styled.div`
   display: flex;
   gap: 4px;
   margin-top: 10px;
+
+  ${({ theme }) => theme.media.md} {
+    gap: 3px;
+    margin-top: 6px;
+  }
 `;
 
 export const PreviewTag = styled.span<{ $accent: string }>`
@@ -237,6 +288,11 @@ export const PreviewTag = styled.span<{ $accent: string }>`
   background: ${({ $accent }) => $accent}10;
   color: ${({ $accent }) => $accent};
   border: 1px solid ${({ $accent }) => $accent}20;
+
+  ${({ theme }) => theme.media.md} {
+    padding: 1px 5px;
+    font-size: 0.5rem;
+  }
 `;
 
 export const FeatureGrid = styled.div`
@@ -293,6 +349,12 @@ export const FeatureHeader = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
+
+  ${({ theme }) => theme.media.sm} {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 `;
 
 export const FeatureIcon = styled.div<{ $color: string }>`
@@ -311,6 +373,16 @@ export const FeatureTitle = styled.h4`
   color: #111;
   letter-spacing: -0.02em;
   line-height: 1.3;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+  ${({ theme }) => theme.media.md} {
+    font-size: 2.2rem;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    font-size: 1.6rem;
+  }
 `;
 
 export const FeatureDesc = styled.p`
@@ -318,6 +390,10 @@ export const FeatureDesc = styled.p`
   line-height: 1.5;
   font-weight: 200;
   color: #222;
+
+  ${({ theme }) => theme.media.sm} {
+    font-size: 1.1rem;
+  }
 `;
 
 export const FeatureBtn = styled.button`

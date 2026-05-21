@@ -1,8 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import { motion } from 'motion/react';
 
-/* ── Animations ── */
-
 const shimmer = keyframes`
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
@@ -12,10 +10,6 @@ const float = keyframes`
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
 `;
-
-
-
-/* ── Page ── */
 
 export const ContactPage = styled.div`
   position: relative;
@@ -30,12 +24,10 @@ export const ContactPage = styled.div`
     padding: ${({ theme }) => theme.pagePadding.lg};
   }
 
-  ${({ theme }) => theme.media.sm} {
+  ${({ theme }) => theme.media.md} {
     padding: ${({ theme }) => theme.pagePadding.sm};
   }
 `;
-
-/* ── Watermark ── */
 
 export const ContactWatermark = styled(motion.div)`
   position: fixed;
@@ -53,10 +45,6 @@ export const ContactWatermark = styled(motion.div)`
   z-index: 0;
 `;
 
-
-
-/* ── Grid ── */
-
 export const ContactGrid = styled.div`
   position: relative;
   z-index: 1;
@@ -65,26 +53,28 @@ export const ContactGrid = styled.div`
   gap: 64px;
   align-items: start;
 
-  ${({ theme }) => theme.media.md} {
+  ${({ theme }) => theme.media.lg} {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 40px;
+    justify-items: center;
+  }
+
+  ${({ theme }) => theme.media.md} {
+    gap: 32px;
   }
 `;
-
-/* ── Left Side: Info ── */
 
 export const ContactInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
+  width: 100%;
+
+  ${({ theme }) => theme.media.lg} {
+    max-width: 580px;
+    margin: 0 auto;
+  }
 `;
-
-
-
-
-
-
-/* ── Info Cards ── */
 
 export const InfoCardsWrapper = styled(motion.div)`
   display: flex;
@@ -116,6 +106,16 @@ export const InfoCard = styled(motion.a)`
       0 0 0 1px ${({ theme }) => theme.colors.primary1}15;
     transform: translateX(4px);
   }
+
+  ${({ theme }) => theme.media.md} {
+    padding: 16px;
+    gap: 12px;
+    border-radius: 12px;
+
+    &:hover {
+      transform: none;
+    }
+  }
 `;
 
 export const InfoCardIcon = styled.div<{ $color: string }>`
@@ -135,6 +135,17 @@ export const InfoCardIcon = styled.div<{ $color: string }>`
     background: ${({ $color }) => $color}25;
     animation: ${float} 2s ease-in-out infinite;
   }
+
+  ${({ theme }) => theme.media.md} {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
 `;
 
 export const InfoCardContent = styled.div`
@@ -149,6 +160,10 @@ export const InfoCardLabel = styled.span`
   font-size: 1rem;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.title};
+
+  ${({ theme }) => theme.media.md} {
+    font-size: 0.9rem;
+  }
 `;
 
 export const InfoCardValue = styled.span`
@@ -157,6 +172,10 @@ export const InfoCardValue = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  ${({ theme }) => theme.media.md} {
+    font-size: 0.85rem;
+  }
 `;
 
 export const InfoCardArrow = styled.div`
@@ -176,9 +195,18 @@ export const InfoCardArrow = styled.div`
     color: #111;
     transform: rotate(-45deg);
   }
-`;
 
-/* ── Right Side: Form ── */
+  ${({ theme }) => theme.media.md} {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+`;
 
 export const ContactFormWrapper = styled(motion.div)`
   position: relative;
@@ -192,6 +220,12 @@ export const ContactFormWrapper = styled(motion.div)`
     0 8px 32px ${({ theme }) => theme.colors.navbarShadow},
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
   overflow: hidden;
+  width: 100%;
+
+  ${({ theme }) => theme.media.lg} {
+    max-width: 580px;
+    margin: 0 auto;
+  }
 
   &::before {
     content: '';
@@ -208,8 +242,9 @@ export const ContactFormWrapper = styled(motion.div)`
     pointer-events: none;
   }
 
-  ${({ theme }) => theme.media.sm} {
-    padding: 28px 24px;
+  ${({ theme }) => theme.media.md} {
+    padding: 24px 20px;
+    border-radius: 20px;
   }
 `;
 
@@ -219,6 +254,10 @@ export const FormGroup = styled.div`
   gap: 20px;
   position: relative;
   z-index: 1;
+
+  ${({ theme }) => theme.media.md} {
+    gap: 16px;
+  }
 `;
 
 export const FormInput = styled.input`
@@ -241,6 +280,12 @@ export const FormInput = styled.input`
   &:focus {
     border-color: ${({ theme }) => theme.colors.primary1};
     box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.primary1}18;
+  }
+
+  ${({ theme }) => theme.media.md} {
+    padding: 14px 18px;
+    font-size: 0.95rem;
+    border-radius: 10px;
   }
 `;
 
@@ -266,6 +311,13 @@ export const FormTextarea = styled.textarea`
   &:focus {
     border-color: ${({ theme }) => theme.colors.primary1};
     box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.primary1}18;
+  }
+
+  ${({ theme }) => theme.media.md} {
+    padding: 14px 18px;
+    font-size: 0.95rem;
+    min-height: 120px;
+    border-radius: 10px;
   }
 `;
 
@@ -305,9 +357,13 @@ export const FormButton = styled(motion.button)`
     cursor: not-allowed;
     transform: none;
   }
-`;
 
-/* ── Success Message ── */
+  ${({ theme }) => theme.media.md} {
+    padding: 14px 28px;
+    font-size: 0.95rem;
+    border-radius: 12px;
+  }
+`;
 
 export const SuccessMessage = styled(motion.div)`
   display: flex;
@@ -318,6 +374,11 @@ export const SuccessMessage = styled(motion.div)`
   padding: 48px 32px;
   text-align: center;
   min-height: 320px;
+
+  ${({ theme }) => theme.media.md} {
+    padding: 32px 16px;
+    min-height: 280px;
+  }
 `;
 
 export const SuccessIcon = styled(motion.div)`
@@ -330,6 +391,16 @@ export const SuccessIcon = styled(motion.div)`
   background: ${({ theme }) => theme.colors.primary1}18;
   border: 2px solid ${({ theme }) => theme.colors.primary1}40;
   color: ${({ theme }) => theme.colors.primary1};
+
+  ${({ theme }) => theme.media.md} {
+    width: 60px;
+    height: 60px;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
 `;
 
 export const SuccessText = styled.p`
@@ -338,4 +409,8 @@ export const SuccessText = styled.p`
   color: ${({ theme }) => theme.colors.title};
   max-width: 320px;
   font-weight: 500;
+
+  ${({ theme }) => theme.media.md} {
+    font-size: 0.95rem;
+  }
 `;

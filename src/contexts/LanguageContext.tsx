@@ -13,7 +13,6 @@ export type Language = 'pt' | 'en' | 'fr' | 'ru' | 'es';
 const dictionaries = {
   pt: {
     'hero.greeting': 'Olá, eu sou',
-    'hero.role': 'Software Engineer & Full Stack',
     'hero.description':
       'Construindo experiências digitais modernas, fluidas e focadas na excelência de produto, do design elegante à arquitetura robusta.',
     'hero.btn.primary': 'Prosseguir',
@@ -244,7 +243,6 @@ const dictionaries = {
   },
   en: {
     'hero.greeting': 'Hi, I am',
-    'hero.role': 'Software Engineer & Full Stack',
     'hero.description':
       'Building modern, fluid digital experiences focused on product excellence, from elegant design to robust architecture.',
     'hero.btn.primary': 'Continue',
@@ -475,7 +473,6 @@ const dictionaries = {
   },
   fr: {
     'hero.greeting': 'Bonjour, je suis',
-    'hero.role': 'Software Engineer & Full Stack',
     'hero.description':
       'Création d\'expériences numériques modernes, fluides et axées sur l\'excellence produit, du design élégant à l\'architecture robuste.',
     'hero.btn.primary': 'Continuer',
@@ -706,7 +703,6 @@ const dictionaries = {
   },
   ru: {
     'hero.greeting': 'Привет, я',
-    'hero.role': 'Software Engineer & Full Stack',
     'hero.description':
       'Создание современных, плавных цифровых решений с фокусом на качество продукта — от элегантного дизайна до надёжной архитектуры.',
     'hero.btn.primary': 'Продолжить',

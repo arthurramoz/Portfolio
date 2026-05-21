@@ -47,7 +47,6 @@ const Hero = () => {
             }}
           >
             <Name>Arthur Moreira Ramos</Name>
-            <Role>{t('hero.role')}</Role>
           </motion.div>
 
           <motion.div

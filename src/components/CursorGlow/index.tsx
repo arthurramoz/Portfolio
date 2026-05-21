@@ -29,7 +29,7 @@ const CursorGlow = () => {
     };
 
     const animate = () => {
-      const lerp = 0.08;
+      const lerp = 0.02;
       currentRef.current.x += (mouseRef.current.x - currentRef.current.x) * lerp;
       currentRef.current.y += (mouseRef.current.y - currentRef.current.y) * lerp;
 
@@ -47,8 +47,8 @@ const CursorGlow = () => {
         const radius = 400 + distFromCenter * 400;
 
         const isDark = glowRef.current.dataset.dark === '1';
-        const a1 = isDark ? 0.06 : 0.08;
-        const a2 = isDark ? 0.02 : 0.03;
+        const a1 = isDark ? 0.04 : 0.05;
+        const a2 = isDark ? 0.012 : 0.018;
 
         glowRef.current.style.background =
           `radial-gradient(${radius}px circle at ${x}px ${y}px, ` +

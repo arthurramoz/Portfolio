@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { FiArrowRight, FiCreditCard, FiMessageCircle } from 'react-icons/fi';
+import { FiArrowRight, FiCreditCard, FiMessageCircle, FiMousePointer, FiZap } from 'react-icons/fi';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { CURRENT_VERSION } from '@/config/versions';
 import {
@@ -23,6 +23,11 @@ import {
   MockTags,
   MockTag,
   VersionTag,
+  MiniGrid,
+  MiniCard,
+  MiniIcon,
+  MiniTitle,
+  MiniDesc,
 } from './styles';
 
 const containerVariants = {
@@ -145,6 +150,32 @@ const WhatsNew = () => {
             </motion.div>
           </CardVisual>
         </Card>
+
+        <MiniGrid>
+          <MiniCard as={motion.div} variants={itemVariants}>
+            <MiniIcon $color="#a78bfa">
+              <FiMousePointer size={22} />
+            </MiniIcon>
+            <MiniTitle>
+              {t('whatsnew.cursor.title' as Parameters<typeof t>[0])}
+            </MiniTitle>
+            <MiniDesc>
+              {t('whatsnew.cursor.desc' as Parameters<typeof t>[0])}
+            </MiniDesc>
+          </MiniCard>
+
+          <MiniCard as={motion.div} variants={itemVariants}>
+            <MiniIcon $color="#fbbf24">
+              <FiZap size={22} />
+            </MiniIcon>
+            <MiniTitle>
+              {t('whatsnew.animations.title' as Parameters<typeof t>[0])}
+            </MiniTitle>
+            <MiniDesc>
+              {t('whatsnew.animations.desc' as Parameters<typeof t>[0])}
+            </MiniDesc>
+          </MiniCard>
+        </MiniGrid>
       </motion.div>
     </Section>
   );

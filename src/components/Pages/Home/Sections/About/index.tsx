@@ -62,7 +62,7 @@ const About = () => {
           <motion.div variants={itemVariants}>
             <PhotoWrap>
               <Image
-                src="/me/2.jpg"
+                src="/me/6.jpg"
                 alt="Arthur Moreira Ramos"
                 width={360}
                 height={420}
@@ -86,7 +86,7 @@ const About = () => {
                   <FiMapPin size={28} />
                 </LocationPin>
                 <LocationInfo>
-                  <LocationCountry>Brasil 🇧🇷</LocationCountry>
+                  <LocationCountry>Brasil</LocationCountry>
                   <LocationState>São Paulo</LocationState>
                   <LocationCity>Mogi das Cruzes</LocationCity>
                 </LocationInfo>

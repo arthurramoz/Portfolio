@@ -224,3 +224,66 @@ export const VersionTag = styled.span`
   margin-top: 4px;
   opacity: 0.7;
 `;
+
+export const MiniGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+
+  ${({ theme }) => theme.media.md} {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+`;
+
+export const MiniCard = styled.div`
+  position: relative;
+  background: ${({ theme }) => theme.colors.dropdownBg};
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  border-radius: 20px;
+  padding: 28px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 4px 24px ${({ theme }) => theme.colors.navbarShadow};
+  transition: box-shadow 0.35s ease, border-color 0.35s ease;
+  overflow: hidden;
+
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.primary1}25;
+    box-shadow: 0 8px 36px ${({ theme }) => theme.colors.navbarShadowHover};
+  }
+
+  ${({ theme }) => theme.media.md} {
+    padding: 24px 22px 20px;
+  }
+`;
+
+export const MiniIcon = styled.div<{ $color: string }>`
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: ${({ $color }) => $color}12;
+  border: 1px solid ${({ $color }) => $color}25;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${({ $color }) => $color};
+`;
+
+export const MiniTitle = styled.h4`
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: ${({ theme }) => theme.colors.title};
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+`;
+
+export const MiniDesc = styled.p`
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: ${({ theme }) => theme.colors.navbarLinkInactive};
+`;

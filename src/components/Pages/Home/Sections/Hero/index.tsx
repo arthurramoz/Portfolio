@@ -69,7 +69,17 @@ const Hero = () => {
                 {t('hero.btn.primary')}
                 <ArrowDownIcon size={18} />
               </PrimaryButton>
-              <SecondaryButton>{t('hero.btn.secondary')}</SecondaryButton>
+              <SecondaryButton
+                onClick={() => {
+                  const el = document.getElementById('novidade');
+                  if (el) {
+                    const y = el.getBoundingClientRect().top + window.scrollY - 270;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                  }
+                }}
+              >
+                {t('hero.btn.secondary')}
+              </SecondaryButton>
             </Actions>
           </motion.div>
         </TextBlock>

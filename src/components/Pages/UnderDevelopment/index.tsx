@@ -69,33 +69,7 @@ const UnderDevelopment = () => {
 
       <motion.div {...fade(0)}>
         <WipLogoMark>
-          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="wip-bg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#48cae4" stopOpacity="0.15" />
-                <stop offset="100%" stopColor="#fb6f92" stopOpacity="0.15" />
-              </linearGradient>
-              <linearGradient id="wip-text" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#48cae4" />
-                <stop offset="100%" stopColor="#fb6f92" />
-              </linearGradient>
-            </defs>
-            <rect width="64" height="64" rx="14" fill="url(#wip-bg)" />
-            <rect x="1" y="1" width="62" height="62" rx="13" stroke="url(#wip-text)" strokeWidth="1.5" strokeOpacity="0.45" fill="none" />
-            <text
-              x="50%"
-              y="50%"
-              dominantBaseline="central"
-              textAnchor="middle"
-              fontFamily="'Inter', 'Segoe UI', Arial, sans-serif"
-              fontSize="26"
-              fontWeight="800"
-              letterSpacing="-1"
-              fill="url(#wip-text)"
-            >
-              AR
-            </text>
-          </svg>
+          <img src="/logo.png" alt="A" width={64} height={64} style={{ objectFit: 'contain' }} />
         </WipLogoMark>
       </motion.div>
 

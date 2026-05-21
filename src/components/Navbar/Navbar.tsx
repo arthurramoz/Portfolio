@@ -254,40 +254,7 @@ const Navbar = () => {
         >
           <NavLogo onClick={() => handleScrollNav('home')}>
             <NavLogoMark>
-              <svg
-                width="38"
-                height="38"
-                viewBox="0 0 38 38"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <defs>
-                  <linearGradient
-                    id="logo-grad"
-                    x1="0"
-                    y1="0"
-                    x2="38"
-                    y2="38"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop offset="0%" stopColor="#48cae4" />
-                    <stop offset="100%" stopColor="#fb6f92" />
-                  </linearGradient>
-                </defs>
-                <text
-                  x="50%"
-                  y="50%"
-                  dominantBaseline="central"
-                  textAnchor="middle"
-                  fontFamily="'Inter', 'Segoe UI', sans-serif"
-                  fontSize="18"
-                  fontWeight="800"
-                  letterSpacing="-0.5"
-                  fill="url(#logo-grad)"
-                >
-                  AR
-                </text>
-              </svg>
+              <img src="/logo.png" alt="A" width={30} height={30} style={{ objectFit: 'contain' }} />
             </NavLogoMark>
           </NavLogo>
         </motion.div>
@@ -758,40 +725,7 @@ const Navbar = () => {
               <MobileDrawerContent>
                 <MobileDrawerHeader>
                   <NavLogoMark>
-                    <svg
-                      width="38"
-                      height="38"
-                      viewBox="0 0 38 38"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <defs>
-                        <linearGradient
-                          id="mob-grad"
-                          x1="0"
-                          y1="0"
-                          x2="38"
-                          y2="38"
-                          gradientUnits="userSpaceOnUse"
-                        >
-                          <stop offset="0%" stopColor="#48cae4" />
-                          <stop offset="100%" stopColor="#fb6f92" />
-                        </linearGradient>
-                      </defs>
-                      <text
-                        x="50%"
-                        y="50%"
-                        dominantBaseline="central"
-                        textAnchor="middle"
-                        fontFamily="'Inter', 'Segoe UI', sans-serif"
-                        fontSize="18"
-                        fontWeight="800"
-                        letterSpacing="-0.5"
-                        fill="url(#mob-grad)"
-                      >
-                        AR
-                      </text>
-                    </svg>
+                    <img src="/logo.png" alt="A" width={30} height={30} style={{ objectFit: 'contain' }} />
                   </NavLogoMark>
                   <MobileDrawerClose onClick={() => setIsMobileOpen(false)}>
                     <FiX size={20} />

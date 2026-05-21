@@ -52,16 +52,7 @@ export const NavLogoMark = styled.div`
   justify-content: center;
   width: 38px;
   height: 38px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #48cae420 0%, #fb6f9220 100%);
-  border: 1px solid #48cae430;
   flex-shrink: 0;
-  transition: border-color 0.25s ease, background 0.25s ease;
-
-  ${NavLogo}:hover & {
-    background: linear-gradient(135deg, #48cae435 0%, #fb6f9235 100%);
-    border-color: #48cae450;
-  }
 `;
 
 export const Nav = styled.nav`

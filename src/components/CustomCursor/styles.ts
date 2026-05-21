@@ -10,7 +10,6 @@ export const Dot = styled.div`
   background: ${({ theme }) => theme.colors.title};
   pointer-events: none;
   z-index: 999999;
-  mix-blend-mode: difference;
   transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease;
   will-change: transform;
 `;

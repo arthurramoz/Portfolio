@@ -1,31 +1,86 @@
 import styled from 'styled-components';
 
 export const Section = styled.section`
+  position: relative;
   width: 100%;
-  padding: 0 32px 80px;
+`;
+
+export const SectionBg = styled.div`
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+`;
+
+export const VersionWatermark = styled.div`
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+`;
+
+export const WatermarkVersion = styled.span`
+  font-size: clamp(12rem, 28vw, 22rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: #000000;
+`;
+
+export const WatermarkLabel = styled.span`
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #000000;
+  margin-top: -10px;
+`;
+
+export const SectionInner = styled.div`
+  position: relative;
+  z-index: 1;
+  padding: 80px 32px;
 
   ${({ theme }) => theme.media.md} {
-    padding: 0 20px 60px;
+    padding: 60px 20px;
   }
 `;
 
 export const Card = styled.div`
   position: relative;
-  background: ${({ theme }) => theme.colors.dropdownBg};
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
-  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(110%);
+  -webkit-backdrop-filter: blur(20px) saturate(110%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 28px;
   overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 340px;
-  box-shadow: 0 4px 32px ${({ theme }) => theme.colors.navbarShadow};
-  transition: box-shadow 0.35s ease, border-color 0.35s ease;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
 
-  &:hover {
-    border-color: ${({ theme }) => theme.colors.primary1}30;
-    box-shadow: 0 12px 48px ${({ theme }) => theme.colors.navbarShadowHover};
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 28px;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      transparent 40%,
+      transparent 60%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+    pointer-events: none;
   }
 
   ${({ theme }) => theme.media.md} {
@@ -46,48 +101,18 @@ export const CardContent = styled.div`
   }
 `;
 
-export const Badge = styled.span`
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  width: fit-content;
-  padding: 5px 14px;
-  border-radius: 100px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  background: linear-gradient(135deg, ${({ theme }) => theme.colors.primary1}20, ${({ theme }) => theme.colors.secondary1}20);
-  color: ${({ theme }) => theme.colors.primary1};
-  border: 1px solid ${({ theme }) => theme.colors.primary1}30;
-`;
-
-export const BadgeDot = styled.span`
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: ${({ theme }) => theme.colors.primary1};
-  animation: pulse-dot 2s ease-in-out infinite;
-
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-`;
-
 export const Title = styled.h3`
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: 3rem;  
+  text-transform: uppercase;
   font-weight: 800;
-  color: ${({ theme }) => theme.colors.title};
-  letter-spacing: -0.03em;
-  line-height: 1.2;
+  color: #111;
 `;
 
 export const Description = styled.p`
-  font-size: 0.92rem;
-  line-height: 1.7;
-  color: ${({ theme }) => theme.colors.navbarLinkInactive};
-  max-width: 420px;
+  font-size: 1.4rem;
+  line-height: 1.3;
+  font-weight: 200;
+  color: #222;
 `;
 
 export const ActionBtn = styled.button`
@@ -124,24 +149,20 @@ export const CardVisual = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(
-    135deg,
-    ${({ theme }) => theme.colors.primary1}08 0%,
-    ${({ theme }) => theme.colors.secondary1}08 100%
-  );
-  border-left: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  background: rgba(255, 255, 255, 0.04);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
   padding: 32px;
   overflow: hidden;
 
   ${({ theme }) => theme.media.md} {
     border-left: none;
-    border-top: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding: 28px 24px;
     min-height: 200px;
   }
 `;
 
-/* ── Preview cards (visual side) ── */
+
 
 export const PreviewCard = styled.div<{ $delay: number; $accent: string }>`
   position: absolute;
@@ -194,7 +215,7 @@ export const PreviewLine = styled.div<{ $w: string }>`
   height: 6px;
   width: ${({ $w }) => $w};
   border-radius: 3px;
-  background: ${({ theme }) => theme.colors.navbarBorder};
+  background: ${({ theme }) => theme.colors.title}15;
   margin-bottom: 6px;
 
   &:last-child {
@@ -218,16 +239,6 @@ export const PreviewTag = styled.span<{ $accent: string }>`
   border: 1px solid ${({ $accent }) => $accent}20;
 `;
 
-export const VersionTag = styled.span`
-  font-size: 0.68rem;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.navbarLinkInactive};
-  margin-top: 4px;
-  opacity: 0.7;
-`;
-
-/* ── Feature cards (mini grid) ── */
-
 export const FeatureGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -242,35 +253,35 @@ export const FeatureGrid = styled.div`
 
 export const FeatureCard = styled.div<{ $accent: string }>`
   position: relative;
-  background: ${({ theme }) => theme.colors.dropdownBg};
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
-  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(110%);
+  -webkit-backdrop-filter: blur(20px) saturate(110%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 24px;
   padding: 32px 28px 28px;
   display: flex;
   flex-direction: column;
   gap: 14px;
-  box-shadow: 0 4px 24px ${({ theme }) => theme.colors.navbarShadow};
-  transition: box-shadow 0.35s ease, border-color 0.35s ease, transform 0.3s ease;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
   overflow: hidden;
 
-  &::before {
+  &::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: ${({ $accent }) => $accent};
-    border-radius: 20px 20px 0 0;
-  }
-
-  &:hover {
-    border-color: ${({ $accent }) => $accent}30;
-    box-shadow: 0 8px 36px ${({ theme }) => theme.colors.navbarShadowHover},
-                0 0 0 1px ${({ $accent }) => $accent}10;
-    transform: translateY(-2px);
+    inset: 0;
+    border-radius: 24px;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 40%,
+      transparent 60%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    pointer-events: none;
   }
 
   ${({ theme }) => theme.media.md} {
@@ -278,33 +289,38 @@ export const FeatureCard = styled.div<{ $accent: string }>`
   }
 `;
 
+export const FeatureHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+`;
+
 export const FeatureIcon = styled.div<{ $color: string }>`
   width: 48px;
   height: 48px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, ${({ $color }) => $color}18, ${({ $color }) => $color}08);
-  border: 1px solid ${({ $color }) => $color}28;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${({ $color }) => $color};
+  color: #111;
 `;
 
 export const FeatureTitle = styled.h4`
-  font-size: 1.1rem;
+  font-size: 2.7rem;
   font-weight: 800;
-  color: ${({ theme }) => theme.colors.title};
+  text-transform: uppercase;
+  color: #111;
   letter-spacing: -0.02em;
   line-height: 1.3;
 `;
 
 export const FeatureDesc = styled.p`
-  font-size: 0.84rem;
-  line-height: 1.7;
-  color: ${({ theme }) => theme.colors.navbarLinkInactive};
+  font-size: 1.3rem;
+  line-height: 1.5;
+  font-weight: 200;
+  color: #222;
 `;
 
-export const FeatureBtn = styled.button<{ $color: string }>`
+export const FeatureBtn = styled.button`
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -312,7 +328,7 @@ export const FeatureBtn = styled.button<{ $color: string }>`
   padding: 12px 24px;
   border-radius: 10px;
   border: none;
-  background: ${({ $color }) => $color};
+  background: ${({ theme }) => theme.colors.primary1};
   color: #111;
   font-size: 1rem;
   font-weight: 700;
@@ -321,8 +337,8 @@ export const FeatureBtn = styled.button<{ $color: string }>`
   transition: all 0.25s ease;
 
   &:hover {
-    opacity: 0.85;
-    transform: translateX(3px);
+    background: ${({ theme }) => theme.colors.primary2};
+    transform: translateX(4px);
   }
 
   svg {

@@ -22,6 +22,7 @@ import {
   FiMapPin,
   FiMessageSquare,
   FiFileText,
+  FiMail,
 } from 'react-icons/fi';
 import { useAppTheme } from '@/contexts/ThemeContext';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -689,6 +690,7 @@ const Navbar = () => {
         </SettingsWrapper>
 
         <NavCta
+          onClick={() => router.push('/contato')}
           whileHover={{ scale: 1.04, y: -1 }}
           whileTap={{ scale: 0.97 }}
           transition={{ duration: 0.15 }}
@@ -844,6 +846,17 @@ const Navbar = () => {
             >
               <FiFileText size={18} />
               {t('nav.cases' as Parameters<typeof t>[0])}
+            </MobileDrawerLink>
+
+            <MobileDrawerLink
+              $active={pathname === '/contato'}
+              onClick={() => {
+                router.push('/contato');
+                setIsMobileOpen(false);
+              }}
+            >
+              <FiMail size={18} />
+              {t('contact.tag' as Parameters<typeof t>[0])}
             </MobileDrawerLink>
 
             <MobileDrawerDivider />

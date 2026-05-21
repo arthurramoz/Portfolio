@@ -17,6 +17,10 @@ const dictionaries = {
       'Construindo experiências digitais modernas, fluidas e focadas na excelência de produto, do design elegante à arquitetura robusta.',
     'hero.btn.primary': 'Prosseguir',
     'hero.btn.secondary': 'Entrar em Contato',
+    'whatsnew.badge': 'Novidade',
+    'whatsnew.title': 'Estudos de Caso',
+    'whatsnew.description': 'Conheça os bastidores de projetos reais — problemas complexos, abordagens técnicas e resultados concretos documentados com detalhes.',
+    'whatsnew.cta': 'Explorar casos',
     'about.title': 'Sobre mim',
     'about.subtitle': 'Engenheiro de Software & Full Stack',
     'about.p1':
@@ -114,9 +118,8 @@ const dictionaries = {
     'nav.settings': 'Configurações',
     'who.title': 'Quem sou eu?',
     'who.subtitle': 'Desenvolvedor Full Stack',
-    'who.bio.p1': 'Tenho 22 anos e sempre fui apaixonado por design, especialmente voltado para a web. No começo, estudei bastante WordPress e Elementor, e hoje essa paixão só cresceu. Também sou muito ligado no inglês — escuto muitas músicas em inglês, tanto para melhorar meu nível quanto por puro gosto. Acredito que aprender nunca para, e isso me move todos os dias.',
-    'who.bio.p2': 'Minhas soft skills incluem aprendizado rápido, comunicação clara, ótima organização e gosto por trabalhar sob pressão. Gosto de fazer parte de projetos importantes e sou prático na hora de resolver bugs, erros e problemas — prefiro resolver rápido e seguir em frente. Já conduzi reuniões com clientes, explicando o desenvolvimento e liderando a conversa. Gosto de trabalhar em equipe — embora às vezes me sinta mais produtivo focando sozinho em alguma atualização específica. Também gosto de liderar, ensinar e compartilhar conhecimento, sempre com respeito e colaboração.',
-    'who.bio.p3': 'No dia a dia, gosto de tomar um café enquanto codo, sou fã de gatos, curto jogar de vez em quando e treinar na academia. Amo parar tudo para aprender algo novo — uma stack diferente, uma ferramenta, uma abordagem. Essa curiosidade constante é o que me mantém evoluindo como desenvolvedor.',
+    'who.bio.p1': 'Desenvolvedor Full Stack com 22 anos, focado em criar experiências digitais de alta qualidade. Aprendizado rápido, comunicação clara e forte organização — já conduzi reuniões com clientes, liderando discussões técnicas e de produto.',
+    'who.bio.p2': 'Trabalho bem em equipe e sob pressão, com perfil prático na resolução de problemas. Gosto de liderar, ensinar e compartilhar conhecimento. Curiosidade constante por novas stacks e abordagens é o que me mantém evoluindo.',
     'stacks.title': 'Stacks & Background',
     'stacks.subtitle': 'Tecnologias & Vivência Profissional',
     'nav.skills': 'Habilidades',
@@ -250,6 +253,10 @@ const dictionaries = {
       'Building modern, fluid digital experiences focused on product excellence, from elegant design to robust architecture.',
     'hero.btn.primary': 'Continue',
     'hero.btn.secondary': 'Get in Touch',
+    'whatsnew.badge': 'What\'s New',
+    'whatsnew.title': 'Case Studies',
+    'whatsnew.description': 'Discover the behind-the-scenes of real projects — complex problems, technical approaches and concrete results documented in detail.',
+    'whatsnew.cta': 'Explore cases',
     'about.title': 'About me',
     'about.subtitle': 'Software Engineer & Full Stack',
     'about.p1':
@@ -347,9 +354,8 @@ const dictionaries = {
     'nav.settings': 'Settings',
     'who.title': 'Who am I?',
     'who.subtitle': 'Full Stack Developer',
-    'who.bio.p1': 'I\'m 22 years old and I\'ve always been passionate about design, especially for the web. Early on, I studied WordPress and Elementor extensively, and today that passion has only grown stronger. I\'m also really into English — I listen to a lot of English music, both to improve my skills and simply because I enjoy it. I believe learning never stops, and that mindset drives me every day.',
-    'who.bio.p2': 'My soft skills include fast learning, clear communication, strong organization, and a taste for working under pressure. I enjoy being part of important projects and I\'m very hands-on when it comes to fixing bugs, errors, and problems — I prefer to resolve things quickly and move forward. I\'ve led meetings with clients, explaining the development process and driving the conversation. I enjoy teamwork — though sometimes I feel more productive focusing solo on a specific update. I also like to lead, teach, and share knowledge, always with respect and collaboration.',
-    'who.bio.p3': 'On a daily basis, I enjoy drinking coffee while coding, I\'m a cat lover, I like gaming from time to time, and hitting the gym. I love stopping everything to learn something new — a different stack, a tool, a new approach. This constant curiosity is what keeps me evolving as a developer.',
+    'who.bio.p1': 'Full Stack developer, 22 years old, focused on building high-quality digital experiences. Fast learner with clear communication and strong organizational skills — I\'ve led client meetings, driving both technical and product discussions.',
+    'who.bio.p2': 'I work well in teams and under pressure, with a hands-on approach to problem-solving. I enjoy leading, teaching, and sharing knowledge. A constant curiosity for new stacks and approaches is what keeps me evolving.',
     'stacks.title': 'Stacks & Background',
     'stacks.subtitle': 'Technologies & Professional Background',
     'nav.skills': 'Skills',
@@ -483,6 +489,10 @@ const dictionaries = {
       'Création d\'expériences numériques modernes, fluides et axées sur l\'excellence produit, du design élégant à l\'architecture robuste.',
     'hero.btn.primary': 'Continuer',
     'hero.btn.secondary': 'Me Contacter',
+    'whatsnew.badge': 'Nouveauté',
+    'whatsnew.title': 'Études de Cas',
+    'whatsnew.description': 'Découvrez les coulisses de projets réels — problèmes complexes, approches techniques et résultats concrets documentés en détail.',
+    'whatsnew.cta': 'Explorer les cas',
     'about.title': 'À propos',
     'about.subtitle': 'Ingénieur Logiciel & Full Stack',
     'about.p1':
@@ -580,9 +590,8 @@ const dictionaries = {
     'nav.settings': 'Paramètres',
     'who.title': 'Qui suis-je ?',
     'who.subtitle': 'Développeur Full Stack',
-    'who.bio.p1': 'J\'ai 22 ans et j\'ai toujours été passionné par le design, surtout pour le web. Au début, j\'ai beaucoup étudié WordPress et Elementor, et aujourd\'hui cette passion n\'a fait que grandir. Je suis aussi très branché anglais — j\'écoute beaucoup de musique en anglais, autant pour progresser que par pur plaisir. Je crois que l\'apprentissage ne s\'arrête jamais, et c\'est ce qui me motive chaque jour.',
-    'who.bio.p2': 'Mes soft skills incluent un apprentissage rapide, une communication claire, une excellente organisation et le goût du travail sous pression. J\'aime faire partie de projets importants et je suis très pragmatique face aux bugs, erreurs et problèmes — je préfère résoudre vite et avancer. J\'ai déjà conduit des réunions avec des clients, expliquant le développement et menant la discussion. J\'aime travailler en équipe — même si parfois je me sens plus productif en me concentrant seul sur une mise à jour spécifique. J\'aime aussi diriger, enseigner et partager mes connaissances, toujours avec respect et collaboration.',
-    'who.bio.p3': 'Au quotidien, j\'aime boire un café en codant, je suis fan de chats, j\'aime jouer de temps en temps et m\'entraîner à la salle. J\'adore tout arrêter pour apprendre quelque chose de nouveau — un nouveau stack, un outil, une approche différente. Cette curiosité constante est ce qui me fait évoluer en tant que développeur.',
+    'who.bio.p1': 'Développeur Full Stack de 22 ans, concentré sur la création d\'expériences numériques de haute qualité. Apprentissage rapide, communication claire et forte capacité d\'organisation — j\'ai déjà mené des réunions clients, dirigeant les discussions techniques et produit.',
+    'who.bio.p2': 'Je travaille bien en équipe et sous pression, avec une approche pratique de la résolution de problèmes. J\'aime diriger, enseigner et partager mes connaissances. Une curiosité constante pour les nouvelles stacks et approches est ce qui me fait évoluer.',
     'stacks.title': 'Stacks & Background',
     'stacks.subtitle': 'Technologies & Parcours Professionnel',
     'nav.skills': 'Compétences',
@@ -716,6 +725,10 @@ const dictionaries = {
       'Создание современных, плавных цифровых решений с фокусом на качество продукта — от элегантного дизайна до надёжной архитектуры.',
     'hero.btn.primary': 'Продолжить',
     'hero.btn.secondary': 'Связаться',
+    'whatsnew.badge': 'Новинка',
+    'whatsnew.title': 'Кейсы',
+    'whatsnew.description': 'Узнайте закулисье реальных проектов — сложные задачи, технические подходы и конкретные результаты, задокументированные в деталях.',
+    'whatsnew.cta': 'Изучить кейсы',
     'about.title': 'Обо мне',
     'about.subtitle': 'Инженер-программист & Full Stack',
     'about.p1':
@@ -813,9 +826,8 @@ const dictionaries = {
     'nav.settings': 'Настройки',
     'who.title': 'Кто я?',
     'who.subtitle': 'Full Stack разработчик',
-    'who.bio.p1': 'Мне 22 года, и я всегда был увлечён дизайном, особенно для веба. В начале я много изучал WordPress и Elementor, и сегодня эта страсть только усилилась. Я также очень увлечён английским — слушаю много музыки на английском, и для улучшения навыков, и просто потому что нравится. Я верю, что обучение никогда не останавливается, и это то, что движет мной каждый день.',
-    'who.bio.p2': 'Мои софт-скиллы включают быстрое обучение, чёткую коммуникацию, отличную организацию и умение работать под давлением. Мне нравится быть частью важных проектов, и я очень практичен в решении багов, ошибок и проблем — предпочитаю решать быстро и двигаться дальше. Я уже проводил встречи с клиентами, объясняя процесс разработки и ведя беседу. Мне нравится работать в команде — хотя иногда я чувствую себя продуктивнее, фокусируясь в одиночку на конкретной задаче. Также люблю руководить, обучать и делиться знаниями, всегда с уважением и сотрудничеством.',
-    'who.bio.p3': 'В повседневной жизни люблю пить кофе за кодом, обожаю котов, иногда играю в игры и хожу в зал. Обожаю остановиться и изучить что-то новое — другой стек, инструмент, новый подход. Это постоянное любопытство — то, что заставляет меня развиваться как разработчика.',
+    'who.bio.p1': 'Full Stack разработчик, 22 года, сфокусирован на создании цифровых решений высокого качества. Быстро учусь, чётко коммуницирую, отлично организую работу — уже проводил встречи с клиентами, ведя технические и продуктовые обсуждения.',
+    'who.bio.p2': 'Хорошо работаю в команде и под давлением, с практичным подходом к решению задач. Люблю руководить, обучать и делиться знаниями. Постоянное любопытство к новым стекам и подходам — то, что заставляет меня расти.',
     'stacks.title': 'Stacks & Background',
     'stacks.subtitle': 'Технологии & Профессиональный Опыт',
     'nav.skills': 'Навыки',
@@ -950,6 +962,10 @@ const dictionaries = {
       'Construyendo experiencias digitales modernas, fluidas y centradas en la excelencia del producto, del diseño elegante a la arquitectura robusta.',
     'hero.btn.primary': 'Continuar',
     'hero.btn.secondary': 'Contáctame',
+    'whatsnew.badge': 'Novedad',
+    'whatsnew.title': 'Estudios de Caso',
+    'whatsnew.description': 'Conoce los bastidores de proyectos reales — problemas complejos, enfoques técnicos y resultados concretos documentados en detalle.',
+    'whatsnew.cta': 'Explorar casos',
     'about.title': 'Sobre mí',
     'about.subtitle': 'Ingeniero de Software & Full Stack',
     'about.p1':
@@ -1047,9 +1063,8 @@ const dictionaries = {
     'nav.settings': 'Configuración',
     'who.title': '¿Quién soy?',
     'who.subtitle': 'Desarrollador Full Stack',
-    'who.bio.p1': 'Tengo 22 años y siempre me apasionó el diseño, especialmente para la web. Al principio estudié mucho WordPress y Elementor, y hoy esa pasión solo ha crecido. También me encanta el inglés — escucho mucha música en inglés, tanto para mejorar como por puro gusto. Creo que el aprendizaje nunca se detiene, y eso es lo que me impulsa cada día.',
-    'who.bio.p2': 'Mis soft skills incluyen aprendizaje rápido, comunicación clara, excelente organización y gusto por trabajar bajo presión. Me gusta formar parte de proyectos importantes y soy muy práctico a la hora de resolver bugs, errores y problemas — prefiero resolver rápido y seguir adelante. Ya he conducido reuniones con clientes, explicando el desarrollo y liderando la conversación. Me gusta trabajar en equipo — aunque a veces me siento más productivo enfocándome solo en alguna actualización específica. También me gusta liderar, enseñar y compartir conocimiento, siempre con respeto y colaboración.',
-    'who.bio.p3': 'En el día a día, me gusta tomar un café mientras programo, soy fan de los gatos, me gusta jugar de vez en cuando y entrenar en el gimnasio. Me encanta parar todo para aprender algo nuevo — un stack diferente, una herramienta, un enfoque nuevo. Esta curiosidad constante es lo que me mantiene evolucionando como desarrollador.',
+    'who.bio.p1': 'Desarrollador Full Stack de 22 años, enfocado en crear experiencias digitales de alta calidad. Aprendizaje rápido, comunicación clara y fuerte organización — ya he conducido reuniones con clientes, liderando discusiones técnicas y de producto.',
+    'who.bio.p2': 'Trabajo bien en equipo y bajo presión, con un enfoque práctico para resolver problemas. Me gusta liderar, enseñar y compartir conocimiento. Una curiosidad constante por nuevos stacks y enfoques es lo que me mantiene evolucionando.',
     'stacks.title': 'Stacks & Background',
     'stacks.subtitle': 'Tecnologías & Experiencia Profesional',
     'nav.skills': 'Habilidades',
@@ -1200,7 +1215,7 @@ const LanguageContext = createContext<LanguageContextData>({
 });
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>('pt');
+  const [language, setLanguage] = useState<Language>('en');
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem('@Portfolio:lang') as Language;
@@ -1211,8 +1226,8 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
       if (nav.startsWith('fr')) setLanguage('fr');
       else if (nav.startsWith('ru')) setLanguage('ru');
       else if (nav.startsWith('es')) setLanguage('es');
-      else if (nav.startsWith('en')) setLanguage('en');
-      else setLanguage('pt');
+      else if (nav.startsWith('pt')) setLanguage('pt');
+      else setLanguage('en');
     }
   }, []);
 

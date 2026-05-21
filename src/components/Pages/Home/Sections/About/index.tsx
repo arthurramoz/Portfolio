@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { FiMapPin } from 'react-icons/fi';
 import { useLanguage } from '@/contexts/LanguageContext';
 import {
   Section,
@@ -12,6 +13,12 @@ import {
   PhotoWrap,
   BioColumn,
   BioParagraph,
+  LocationCard,
+  LocationPin,
+  LocationInfo,
+  LocationCountry,
+  LocationState,
+  LocationCity,
 } from './styles';
 
 const containerVariants = {
@@ -72,8 +79,18 @@ const About = () => {
             <motion.div variants={itemVariants}>
               <BioParagraph>{t('who.bio.p2' as Parameters<typeof t>[0])}</BioParagraph>
             </motion.div>
+
             <motion.div variants={itemVariants}>
-              <BioParagraph>{t('who.bio.p3' as Parameters<typeof t>[0])}</BioParagraph>
+              <LocationCard>
+                <LocationPin>
+                  <FiMapPin size={28} />
+                </LocationPin>
+                <LocationInfo>
+                  <LocationCountry>Brasil 🇧🇷</LocationCountry>
+                  <LocationState>São Paulo</LocationState>
+                  <LocationCity>Mogi das Cruzes</LocationCity>
+                </LocationInfo>
+              </LocationCard>
             </motion.div>
           </BioColumn>
         </PhotoBioWrapper>

@@ -14,7 +14,7 @@ interface ThemeContextData {
 const ThemeContext = createContext<ThemeContextData>({} as ThemeContextData);
 
 export const AppThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [themeMode, setThemeMode] = useState<ThemeMode>('light');
+  const [themeMode, setThemeMode] = useState<ThemeMode>('dark');
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export const AppThemeProvider = ({ children }: { children: ReactNode }) => {
     const savedTheme = localStorage.getItem('@Portfolio:theme') as ThemeMode;
     if (savedTheme) {
       setThemeMode(savedTheme);
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    } else {
       setThemeMode('dark');
     }
   }, []);
@@ -37,7 +37,7 @@ export const AppThemeProvider = ({ children }: { children: ReactNode }) => {
 
   if (!isMounted) {
     return (
-      <StyledThemeProvider theme={lightTheme}>
+      <StyledThemeProvider theme={darkTheme}>
         {children}
       </StyledThemeProvider>
     );

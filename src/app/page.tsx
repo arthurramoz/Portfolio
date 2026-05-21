@@ -1,7 +1,5 @@
-'use client';
+import { redirect } from 'next/navigation';
 
-import UnderDevelopment from '@/components/Pages/UnderDevelopment';
-
-export default function WipPage() {
-  return <UnderDevelopment />;
+export default function RootPage() {
+  redirect('/home');
 }

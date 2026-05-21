@@ -116,3 +116,54 @@ export const BioParagraph = styled.p`
     font-size: 15px;
   }
 `;
+
+export const LocationCard = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 12px;
+`;
+
+export const LocationPin = styled.div`
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    ${({ theme }) => theme.colors.primary1},
+    ${({ theme }) => theme.colors.primary2}
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 4px 20px ${({ theme }) => theme.colors.primary1}40;
+`;
+
+export const LocationInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+`;
+
+export const LocationCountry = styled.span`
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: ${({ theme }) => theme.colors.title};
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+`;
+
+export const LocationState = styled.span`
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.navbarLinkInactive};
+`;
+
+export const LocationCity = styled.span`
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.navbarLinkInactive};
+  opacity: 0.7;
+`;

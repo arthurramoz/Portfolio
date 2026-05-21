@@ -38,7 +38,6 @@ import {
   AboutRole,
   AboutName,
   AboutBio,
-  ThemeToggleBtn,
   LangCollapsibleCard,
   LangCardHeader,
   LangChevron,
@@ -59,6 +58,7 @@ import {
   RedirectDesc,
   RedirectArrow,
 } from './styles';
+import Switch from '@/components/Switch';
 
 const LANGUAGES = [
   { code: 'pt' as const, label: 'Português', native: 'PT-BR', flag: 'https://flagcdn.com/w40/br.png' },
@@ -154,11 +154,7 @@ const SettingsPage = () => {
             </RedirectDesc>
           </RedirectInfo>
         </RedirectLeft>
-        <ThemeToggleBtn
-          as="div"
-          $active={themeMode === 'dark'}
-          aria-hidden
-        />
+        <Switch active={themeMode === 'dark'} />
       </DirectRedirectCard>
 
       <DirectRedirectCard
@@ -183,11 +179,7 @@ const SettingsPage = () => {
             </RedirectDesc>
           </RedirectInfo>
         </RedirectLeft>
-        <ThemeToggleBtn
-          as="div"
-          $active={cursorMode === 'modern'}
-          aria-hidden
-        />
+        <Switch active={cursorMode === 'modern'} />
       </DirectRedirectCard>
 
       <LangCollapsibleCard
@@ -266,7 +258,7 @@ const SettingsPage = () => {
         variants={cardVariants}
         initial="hidden"
         animate="visible"
-        onClick={() => router.push('/')}
+        onClick={() => router.push('/under-development')}
         id="settings-wip-redirect"
       >
         <RedirectLeft>

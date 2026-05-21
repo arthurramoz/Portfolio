@@ -20,6 +20,8 @@ import {
   FiAward,
   FiSliders,
   FiMapPin,
+  FiMessageSquare,
+  FiFileText,
 } from 'react-icons/fi';
 import { useAppTheme } from '@/contexts/ThemeContext';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -106,6 +108,7 @@ const Navbar = () => {
   const { language, setLanguage: setLang, t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
+  const [isAboutMeOpen, setIsAboutMeOpen] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isMobileLangOpen, setIsMobileLangOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -113,9 +116,11 @@ const Navbar = () => {
   const homeSectionsTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const settingsRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
+  const aboutMeRef = useRef<HTMLDivElement>(null);
 
   const isHomePage = pathname === '/home';
   const isPortfolioPage = pathname.startsWith('/projetos') || pathname === '/cursos';
+  const isAboutMePage = pathname === '/skills' || pathname === '/jornada' || pathname === '/depoimentos';
 
   const allHomeSections = [HOME_MAIN, ...HOME_SECTIONS];
 
@@ -169,6 +174,12 @@ const Navbar = () => {
         !projectsRef.current.contains(event.target as Node)
       ) {
         setIsProjectsOpen(false);
+      }
+      if (
+        aboutMeRef.current &&
+        !aboutMeRef.current.contains(event.target as Node)
+      ) {
+        setIsAboutMeOpen(false);
       }
     };
 
@@ -436,32 +447,112 @@ const Navbar = () => {
             </AnimatePresence>
           </SettingsWrapper>
 
-          <NavLink
-            $selected={pathname === '/skills'}
-            onClick={() => router.push('/skills')}
-          >
-            {t('nav.skills' as Parameters<typeof t>[0])}
-            {pathname === '/skills' && (
-              <motion.span
-                layoutId="navbar-indicator"
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  borderRadius: '9999px',
-                  background: 'rgba(26, 26, 26, 0.06)',
-                  zIndex: -1,
-                }}
-                transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-              />
-            )}
-          </NavLink>
+          <SettingsWrapper ref={aboutMeRef}>
+            <NavLink
+              $selected={isAboutMePage}
+              onClick={() => setIsAboutMeOpen(prev => !prev)}
+              style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
+            >
+              {t('nav.aboutme' as Parameters<typeof t>[0])}
+              <FiChevronDown size={14} />
+              {isAboutMePage && (
+                <motion.span
+                  layoutId="navbar-indicator"
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    borderRadius: '9999px',
+                    background: 'rgba(26, 26, 26, 0.06)',
+                    zIndex: -1,
+                  }}
+                  transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                />
+              )}
+            </NavLink>
+
+            <AnimatePresence>
+              {isAboutMeOpen && (
+                <ProjectsDropdown
+                  initial={{ opacity: 0, y: 6, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 6, scale: 0.97 }}
+                  transition={{ duration: 0.18, ease: [0.25, 0.1, 0.25, 1] }}
+                >
+                  <ProjectsDropdownArrow />
+
+                  <motion.div
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0, duration: 0.2, ease: 'easeOut' }}
+                  >
+                    <ProjectsDropdownItem
+                      $active={pathname === '/skills'}
+                      onClick={() => {
+                        router.push('/skills');
+                        setIsAboutMeOpen(false);
+                      }}
+                    >
+                      <ProjectsDropdownIcon $active={pathname === '/skills'}>
+                        <FiLayers size={18} />
+                      </ProjectsDropdownIcon>
+                      <ProjectsDropdownText>
+                        <ProjectsDropdownName>{t('nav.skills' as Parameters<typeof t>[0])}</ProjectsDropdownName>
+                      </ProjectsDropdownText>
+                    </ProjectsDropdownItem>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.04, duration: 0.2, ease: 'easeOut' }}
+                  >
+                    <ProjectsDropdownItem
+                      $active={pathname === '/jornada'}
+                      onClick={() => {
+                        router.push('/jornada');
+                        setIsAboutMeOpen(false);
+                      }}
+                    >
+                      <ProjectsDropdownIcon $active={pathname === '/jornada'}>
+                        <FiMapPin size={18} />
+                      </ProjectsDropdownIcon>
+                      <ProjectsDropdownText>
+                        <ProjectsDropdownName>{t('nav.timeline' as Parameters<typeof t>[0])}</ProjectsDropdownName>
+                      </ProjectsDropdownText>
+                    </ProjectsDropdownItem>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.08, duration: 0.2, ease: 'easeOut' }}
+                  >
+                    <ProjectsDropdownItem
+                      $active={pathname === '/depoimentos'}
+                      onClick={() => {
+                        router.push('/depoimentos');
+                        setIsAboutMeOpen(false);
+                      }}
+                    >
+                      <ProjectsDropdownIcon $active={pathname === '/depoimentos'}>
+                        <FiMessageSquare size={18} />
+                      </ProjectsDropdownIcon>
+                      <ProjectsDropdownText>
+                        <ProjectsDropdownName>{t('nav.testimonials' as Parameters<typeof t>[0])}</ProjectsDropdownName>
+                      </ProjectsDropdownText>
+                    </ProjectsDropdownItem>
+                  </motion.div>
+                </ProjectsDropdown>
+              )}
+            </AnimatePresence>
+          </SettingsWrapper>
 
           <NavLink
-            $selected={pathname === '/jornada'}
-            onClick={() => router.push('/jornada')}
+            $selected={pathname === '/cases'}
+            onClick={() => router.push('/cases')}
           >
-            {t('nav.timeline' as Parameters<typeof t>[0])}
-            {pathname === '/jornada' && (
+            {t('nav.cases' as Parameters<typeof t>[0])}
+            {pathname === '/cases' && (
               <motion.span
                 layoutId="navbar-indicator"
                 style={{
@@ -727,6 +818,28 @@ const Navbar = () => {
             >
               <FiMapPin size={18} />
               {t('nav.timeline' as Parameters<typeof t>[0])}
+            </MobileDrawerLink>
+
+            <MobileDrawerLink
+              $active={pathname === '/depoimentos'}
+              onClick={() => {
+                router.push('/depoimentos');
+                setIsMobileOpen(false);
+              }}
+            >
+              <FiMessageSquare size={18} />
+              {t('nav.testimonials' as Parameters<typeof t>[0])}
+            </MobileDrawerLink>
+
+            <MobileDrawerLink
+              $active={pathname === '/cases'}
+              onClick={() => {
+                router.push('/cases');
+                setIsMobileOpen(false);
+              }}
+            >
+              <FiFileText size={18} />
+              {t('nav.cases' as Parameters<typeof t>[0])}
             </MobileDrawerLink>
 
             <MobileDrawerDivider />

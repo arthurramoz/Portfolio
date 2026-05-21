@@ -1,54 +1,5 @@
 import styled from 'styled-components';
 
-export const PageContainer = styled.div`
-  min-height: 100vh;
-  width: 100%;
-  max-width: ${({ theme }) => theme.max};
-  margin: 0 auto;
-  padding: ${({ theme }) => theme.pagePadding.default};
-
-  ${({ theme }) => theme.media.lg} {
-    padding: ${({ theme }) => theme.pagePadding.lg};
-  }
-
-  ${({ theme }) => theme.media.sm} {
-    padding: ${({ theme }) => theme.pagePadding.sm};
-  }
-`;
-
-export const TitleWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 64px;
-
-  ${({ theme }) => theme.media.md} {
-    margin-bottom: 40px;
-  }
-`;
-
-export const PageTitle = styled.h1`
-  font-size: 48px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: ${({ theme }) => theme.colors.title};
-
-  ${({ theme }) => theme.media.lg} {
-    font-size: 36px;
-  }
-
-  ${({ theme }) => theme.media.sm} {
-    font-size: 28px;
-  }
-`;
-
-export const PageSubtitle = styled.span`
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.primary1};
-`;
 
 export const ProjectsGrid = styled.div`
   display: grid;

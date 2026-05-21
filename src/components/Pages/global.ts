@@ -46,17 +46,18 @@ export const PageTag = styled(motion.span)`
 `;
 
 export const PageHeading = styled(motion.h1)`
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: 3rem;
   font-weight: 800;
+  text-transform: uppercase;
   letter-spacing: -0.03em;
   line-height: 1.1;
   color: ${({ theme }) => theme.colors.title};
 `;
 
 export const PageDescription = styled(motion.p)`
-  font-size: 1rem;
-  line-height: 1.6;
-  color: ${({ theme }) => theme.colors.navbarLinkInactive};
-  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 1.3;
+  color: ${({ theme }) => theme.colors.text};
+  font-weight: 200;
   max-width: 520px;
 `;

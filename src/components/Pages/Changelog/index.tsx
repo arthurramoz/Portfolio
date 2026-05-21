@@ -4,6 +4,10 @@ import { motion } from 'motion/react';
 import { VERSION_HISTORY, CURRENT_VERSION } from '@/config/versions';
 import { useLanguage } from '@/contexts/LanguageContext';
 import {
+  PageHeading,
+  PageDescription,
+} from '@/components/Pages/global';
+import {
   Entry,
   EntryActive,
   EntryBadge,
@@ -12,8 +16,6 @@ import {
   HighlightItem,
   HighlightList,
   PageContainer,
-  PageDescription,
-  PageTitle,
   SidebarColumn,
   TimelineColumn,
 } from './styles';
@@ -46,7 +48,7 @@ const ChangelogPage = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
         >
-          <PageTitle>{t('changelog.title')}</PageTitle>
+          <PageHeading>{t('changelog.title')}</PageHeading>
           <PageDescription>
             {t('changelog.description')}
           </PageDescription>

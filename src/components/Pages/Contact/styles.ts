@@ -82,20 +82,8 @@ export const ContactInfo = styled.div`
 
 
 
-export const ContactTitle = styled(motion.h1)`
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  color: ${({ theme }) => theme.colors.title};
-`;
 
-export const ContactSubtitle = styled(motion.p)`
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: ${({ theme }) => theme.colors.text};
-  max-width: 420px;
-`;
+
 
 /* ── Info Cards ── */
 

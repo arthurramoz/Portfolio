@@ -32,32 +32,7 @@ export const SidebarColumn = styled.div`
   }
 `;
 
-export const PageTitle = styled.h1`
-  font-size: 48px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: ${({ theme }) => theme.colors.title};
-  margin-bottom: 16px;
 
-  ${({ theme }) => theme.media.lg} {
-    font-size: 36px;
-  }
-
-  ${({ theme }) => theme.media.sm} {
-    font-size: 28px;
-  }
-`;
-
-export const PageDescription = styled.p`
-  font-size: 16px;
-  line-height: 1.6;
-  color: ${({ theme }) => theme.colors.subtitle};
-  max-width: 220px;
-
-  ${({ theme }) => theme.media.lg} {
-    max-width: unset;
-  }
-`;
 
 export const TimelineColumn = styled.div`
   flex: 1;

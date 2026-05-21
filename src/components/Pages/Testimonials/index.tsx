@@ -6,7 +6,6 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import {
   PageWrapper,
   PageTitleWrapper,
-  PageTag,
   PageHeading,
   PageDescription,
 } from '@/components/Pages/global';
@@ -47,13 +46,13 @@ const TestimonialsPage = () => {
   return (
     <PageWrapper>
       <PageTitleWrapper>
-        <PageTag
+        <PageDescription
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
           {t('testimonials.page.tag' as Parameters<typeof t>[0])}
-        </PageTag>
+        </PageDescription>
         <PageHeading
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}

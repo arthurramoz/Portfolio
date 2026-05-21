@@ -6,18 +6,20 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import type { ProjectItem } from '@/config/projects';
 import ImageCarousel from './ImageCarousel';
 import {
+  PageWrapper,
+  PageTitleWrapper,
+  PageHeading,
+  PageDescription,
+} from '@/components/Pages/global';
+import {
   CardContent,
   CardDescription,
   CardTitle,
   EmptyState,
-  PageContainer,
-  PageSubtitle,
-  PageTitle,
   ProjectCard,
   ProjectsGrid,
   Tag,
   TagsRow,
-  TitleWrapper,
 } from './styles';
 
 export type { ProjectItem };
@@ -59,20 +61,20 @@ const ProjectsPage = ({
   const { t } = useLanguage();
 
   return (
-    <PageContainer>
+    <PageWrapper>
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        <TitleWrapper>
+        <PageTitleWrapper>
           <motion.div variants={itemVariants}>
-            <PageSubtitle>{t(subtitleKey)}</PageSubtitle>
+            <PageDescription>{t(subtitleKey)}</PageDescription>
           </motion.div>
           <motion.div variants={itemVariants}>
-            <PageTitle>{t(titleKey)}</PageTitle>
+            <PageHeading>{t(titleKey)}</PageHeading>
           </motion.div>
-        </TitleWrapper>
+        </PageTitleWrapper>
 
         <ProjectsGrid>
           {projects.length === 0 ? (
@@ -126,7 +128,7 @@ const ProjectsPage = ({
           )}
         </ProjectsGrid>
       </motion.div>
-    </PageContainer>
+    </PageWrapper>
   );
 };
 

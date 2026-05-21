@@ -8,6 +8,12 @@ import { COURSES, PLATFORM_FILTERS } from '@/config/courses';
 import type { CoursePlatform } from '@/config/courses';
 import Pagination, { ITEMS_PER_PAGE } from '@/components/Pagination';
 import {
+  PageWrapper,
+  PageTitleWrapper,
+  PageHeading,
+  PageDescription,
+} from '@/components/Pages/global';
+import {
   CourseCard,
   CourseCount,
   CourseInfo,
@@ -19,14 +25,10 @@ import {
   FilterLabel,
   FiltersRow,
   FiltersSection,
-  PageContainer,
-  PageSubtitle,
-  PageTitle,
   PlatformBadge,
   PlatformLogo,
   SkillsRow,
   SkillTag,
-  TitleWrapper,
 } from './styles';
 
 const PLATFORM_LOGOS: Record<string, string> = {
@@ -169,24 +171,24 @@ const CoursesPage = () => {
   ).join()}`;
 
   return (
-    <PageContainer>
+    <PageWrapper>
       <motion.div
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
-        <TitleWrapper>
+        <PageTitleWrapper>
           <motion.div variants={itemVariants}>
-            <PageSubtitle>
+            <PageDescription>
               {t('courses.subtitle' as Parameters<typeof t>[0])}
-            </PageSubtitle>
+            </PageDescription>
           </motion.div>
           <motion.div variants={itemVariants}>
-            <PageTitle>
+            <PageHeading>
               {t('courses.title' as Parameters<typeof t>[0])}
-            </PageTitle>
+            </PageHeading>
           </motion.div>
-        </TitleWrapper>
+        </PageTitleWrapper>
 
         <motion.div variants={itemVariants}>
           <FiltersSection>
@@ -345,7 +347,7 @@ const CoursesPage = () => {
           onPageChange={handlePageChange}
         />
       </motion.div>
-    </PageContainer>
+    </PageWrapper>
   );
 };
 

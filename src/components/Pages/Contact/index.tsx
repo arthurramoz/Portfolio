@@ -12,12 +12,14 @@ import {
 } from 'react-icons/fi';
 import { useLanguage } from '@/contexts/LanguageContext';
 import {
+  PageHeading,
+  PageDescription,
+} from '@/components/Pages/global';
+import {
   ContactPage,
   ContactWatermark,
   ContactGrid,
   ContactInfo,
-  ContactTitle,
-  ContactSubtitle,
   InfoCardsWrapper,
   InfoCard,
   InfoCardIcon,
@@ -48,9 +50,9 @@ const itemVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
+    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const },
   },
-};
+} as const;
 
 const cardVariants = {
   hidden: { opacity: 0, x: -16 },
@@ -60,7 +62,7 @@ const cardVariants = {
     transition: {
       duration: 0.45,
       delay: 0.3 + i * 0.1,
-      ease: [0.25, 0.1, 0.25, 1],
+      ease: [0.25, 0.1, 0.25, 1] as const,
     },
   }),
 };
@@ -132,13 +134,13 @@ const Contact = () => {
           initial="hidden"
           animate="visible"
         >
-          <ContactTitle variants={itemVariants}>
+          <PageHeading variants={itemVariants}>
             {t('contact.title' as Parameters<typeof t>[0])}
-          </ContactTitle>
+          </PageHeading>
 
-          <ContactSubtitle variants={itemVariants}>
+          <PageDescription variants={itemVariants}>
             {t('contact.subtitle' as Parameters<typeof t>[0])}
-          </ContactSubtitle>
+          </PageDescription>
 
           <InfoCardsWrapper variants={itemVariants}>
             {CONTACT_INFO.map((info, i) => {

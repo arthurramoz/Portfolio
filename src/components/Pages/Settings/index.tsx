@@ -119,11 +119,11 @@ const SettingsPage = () => {
         <AboutPreview>
           <AboutPhotoWrap>
             <Image
-              src="/me/2.jpg"
+              src="/me/6.jpg"
               alt="Arthur Moreira Ramos"
               width={96}
               height={96}
-              style={{ objectFit: 'cover', objectPosition: 'center', width: '100%', height: '100%' }}
+              style={{ objectFit: 'cover', objectPosition: 'center top', width: '100%', height: '100%' }}
             />
           </AboutPhotoWrap>
           <AboutInfo>

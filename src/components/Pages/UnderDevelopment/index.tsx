@@ -170,11 +170,11 @@ const UnderDevelopment = () => {
                 >
                   <AboutPhoto>
                     <Image
-                      src="/me/2.jpg"
+                      src="/me/6.jpg"
                       alt="Arthur Moreira Ramos"
                       width={180}
                       height={180}
-                      style={{ objectFit: 'cover', objectPosition: 'center' }}
+                      style={{ objectFit: 'cover', objectPosition: 'center top' }}
                     />
                   </AboutPhoto>
                 </motion.div>

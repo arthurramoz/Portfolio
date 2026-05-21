@@ -39,9 +39,8 @@ export const ContactPage = styled.div`
 
 export const ContactWatermark = styled(motion.div)`
   position: fixed;
-  top: 50%;
+  top: 40px;
   left: 50%;
-  transform: translate(-50%, -50%);
   font-size: clamp(6rem, 18vw, 16rem);
   font-weight: 900;
   letter-spacing: -0.04em;
@@ -120,9 +119,9 @@ export const InfoCard = styled(motion.a)`
 `;
 
 export const InfoCardIcon = styled.div<{ $color: string }>`
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -141,19 +140,19 @@ export const InfoCardIcon = styled.div<{ $color: string }>`
 export const InfoCardContent = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
   flex: 1;
   min-width: 0;
 `;
 
 export const InfoCardLabel = styled.span`
-  font-size: 0.82rem;
+  font-size: 1rem;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.title};
 `;
 
 export const InfoCardValue = styled.span`
-  font-size: 0.78rem;
+  font-size: 0.95rem;
   color: ${({ theme }) => theme.colors.text};
   overflow: hidden;
   text-overflow: ellipsis;
@@ -224,12 +223,12 @@ export const FormGroup = styled.div`
 
 export const FormInput = styled.input`
   width: 100%;
-  padding: 16px 20px;
+  padding: 18px 22px;
   border-radius: 12px;
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   background: ${({ theme }) => theme.colors.dropdownBg};
   color: ${({ theme }) => theme.colors.title};
-  font-size: 0.92rem;
+  font-size: 1rem;
   font-family: inherit;
   outline: none;
   transition: all 0.3s ease;
@@ -248,12 +247,12 @@ export const FormInput = styled.input`
 export const FormTextarea = styled.textarea`
   width: 100%;
   min-height: 160px;
-  padding: 16px 20px;
+  padding: 18px 22px;
   border-radius: 12px;
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   background: ${({ theme }) => theme.colors.dropdownBg};
   color: ${({ theme }) => theme.colors.title};
-  font-size: 0.92rem;
+  font-size: 1rem;
   font-family: inherit;
   outline: none;
   resize: vertical;

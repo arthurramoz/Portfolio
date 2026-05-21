@@ -92,10 +92,9 @@ const CONTACT_INFO = [
 ];
 
 const Contact = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [formState, setFormState] = useState({
     name: '',
-    email: '',
     message: '',
   });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success'>('idle');
@@ -103,11 +102,44 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('sending');
-    // Simulated send — replace with EmailJS/Formspree later
-    setTimeout(() => {
-      setStatus('success');
-      setFormState({ name: '', email: '', message: '' });
-    }, 1200);
+
+    const subjects = {
+      pt: 'Contato - Portfólio',
+      en: 'Contact - Portfolio',
+      fr: 'Contact - Portfolio',
+      es: 'Contacto - Portafolio',
+      ru: 'Контакты - Портфолио',
+    };
+
+    const nameLabels = {
+      pt: 'Nome',
+      en: 'Name',
+      fr: 'Nom',
+      es: 'Nombre',
+      ru: 'Имя',
+    };
+
+    const messageLabels = {
+      pt: 'Mensagem',
+      en: 'Message',
+      fr: 'Message',
+      es: 'Mensaje',
+      ru: 'Сообщение',
+    };
+
+    const currentLanguage = language || 'pt';
+    const subject = subjects[currentLanguage] || subjects.pt;
+    const nameLabel = nameLabels[currentLanguage] || nameLabels.pt;
+    const messageLabel = messageLabels[currentLanguage] || messageLabels.pt;
+
+    const email = 'arthurmoreiraramos550sp@gmail.com';
+    const body = `${nameLabel}: ${formState.name}\n\n${messageLabel}:\n${formState.message}`;
+    const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailtoUrl;
+
+    setStatus('success');
+    setFormState({ name: '', message: '' });
   };
 
   const handleReset = () => {
@@ -118,13 +150,12 @@ const Contact = () => {
     <ContactPage>
       {/* Watermark */}
       <ContactWatermark
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 0.03, scale: 1 }}
+        initial={{ opacity: 0, scale: 0.95, x: '-50%' }}
+        animate={{ opacity: 0.03, scale: 1, x: '-50%' }}
         transition={{ duration: 1.2, ease: 'easeOut' }}
       >
         {t('contact.watermark' as Parameters<typeof t>[0])}
       </ContactWatermark>
-
 
       <ContactGrid>
         {/* Left Side — Info */}
@@ -158,7 +189,7 @@ const Contact = () => {
                   animate="visible"
                 >
                   <InfoCardIcon $color={info.color}>
-                    <Icon size={20} />
+                    <Icon size={24} />
                   </InfoCardIcon>
                   <InfoCardContent>
                     <InfoCardLabel>
@@ -249,22 +280,6 @@ const Contact = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4, duration: 0.4, ease: 'easeOut' }}
                   >
-                    <FormInput
-                      type="email"
-                      placeholder={t('contact.form.email' as Parameters<typeof t>[0])}
-                      value={formState.email}
-                      onChange={(e) =>
-                        setFormState((prev) => ({ ...prev, email: e.target.value }))
-                      }
-                      required
-                    />
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5, duration: 0.4, ease: 'easeOut' }}
-                  >
                     <FormTextarea
                       placeholder={t('contact.form.message' as Parameters<typeof t>[0])}
                       value={formState.message}
@@ -281,7 +296,7 @@ const Contact = () => {
                   <motion.div
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6, duration: 0.4, ease: 'easeOut' }}
+                    transition={{ delay: 0.5, duration: 0.4, ease: 'easeOut' }}
                   >
                     <FormButton
                       type="submit"

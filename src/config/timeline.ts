@@ -27,7 +27,6 @@ export interface TimelineEntry {
 }
 
 export const TIMELINE_ENTRIES: TimelineEntry[] = [
-  // ── 2026 ───────────────────────────────────────────────
   {
     id: '2026-projects-company',
     category: 'work',
@@ -57,8 +56,6 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     descriptionKey: 'timeline.2026.english.desc',
     tags: ['Inglês B2'],
   },
-
-  // ── 2025 ───────────────────────────────────────────────
   {
     id: '2025-heavy-stack',
     category: 'education',
@@ -99,8 +96,6 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     descriptionKey: 'timeline.2025.english.desc',
     tags: ['Inglês B2'],
   },
-
-  // ── 2024 ───────────────────────────────────────────────
   {
     id: '2024-mestres-intern',
     category: 'work',
@@ -150,8 +145,6 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     descriptionKey: 'timeline.2024.english.desc',
     tags: ['Inglês B1'],
   },
-
-  // ── 2023 ───────────────────────────────────────────────
   {
     id: '2023-fatec',
     category: 'education',
@@ -190,8 +183,6 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     descriptionKey: 'timeline.2023.english.desc',
     tags: ['Inglês A2'],
   },
-
-  // ── 2022 ───────────────────────────────────────────────
   {
     id: '2022-first-code',
     category: 'milestone',
@@ -222,8 +213,6 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     tags: ['Cultura Inglesa', 'Inglês A1'],
     highlight: true,
   },
-
-  // ── 2021 ───────────────────────────────────────────────
   {
     id: '2021-first-project-sold',
     category: 'milestone',
@@ -244,8 +233,6 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     tags: ['Shopify', 'E-commerce'],
     highlight: true,
   },
-
-  // ── 2020 ───────────────────────────────────────────────
   {
     id: '2020-wordpress',
     category: 'education',

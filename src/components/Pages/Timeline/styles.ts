@@ -96,7 +96,6 @@ export const YearLabel = styled.span`
   }
 `;
 
-/* ─── highlighted card glow mixin ─── */
 const highlightGlow = css<{ $accentColor: string }>`
   border-color: ${({ $accentColor }) => $accentColor}40;
   box-shadow:
@@ -111,7 +110,7 @@ const highlightGlow = css<{ $accentColor: string }>`
   }
 `;
 
-export const EntryCard = styled(motion.div)<{
+export const EntryCard = styled(motion.div) <{
   $accentColor: string;
   $highlight?: boolean;
 }>`
@@ -155,11 +154,10 @@ export const EntryCard = styled(motion.div)<{
 
   ${({ theme }) => theme.media.md} {
     padding: ${({ $highlight }) =>
-      $highlight ? '24px 20px 20px' : '18px 18px 14px'};
+    $highlight ? '24px 20px 20px' : '18px 18px 14px'};
   }
 `;
 
-/* ─── highlight accent bar ─── */
 export const HighlightBar = styled.div<{ $accentColor: string }>`
   position: absolute;
   left: 0;

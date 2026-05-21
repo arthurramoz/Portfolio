@@ -63,7 +63,7 @@ const UnderDevelopment = () => {
       >
         <BackButton onClick={() => router.push('/home')}>
           <HiArrowLeft />
-          Voltar
+          Ir para Home
         </BackButton>
       </motion.div>
 

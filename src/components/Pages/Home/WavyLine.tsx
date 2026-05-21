@@ -1,13 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
-import styled, { keyframes, useTheme } from 'styled-components';
-
-const drip = keyframes`
-  0% { stroke-dashoffset: 0; }
-  100% { stroke-dashoffset: -400; }
-`;
+import styled from 'styled-components';
 
 const WavyContainer = styled.div`
   position: absolute;
@@ -20,59 +15,101 @@ const WavyContainer = styled.div`
   overflow: hidden;
 `;
 
-const EdgePath = styled.path`
-  animation: ${drip} 2s linear infinite;
-`;
-
-const EDGE_LEFT = 'M1410,-57 Q1110,843 810,1643 Q510,2443 -190,3343';
-const EDGE_RIGHT = 'M1590,-143 Q1290,757 990,1557 Q690,2357 -10,3257';
+const CENTER_PATH = 'M1200,-600 Q850,800 650,1600 Q450,2400 -100,3400';
 
 const WavyLine = () => {
-  const theme = useTheme();
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '8%']);
   const [mounted, setMounted] = useState(false);
 
+  const coreRef = useRef<SVGPathElement>(null);
+  const glowRef = useRef<SVGPathElement>(null);
+
   useEffect(() => setMounted(true), []);
 
-  const c1 = theme.colors.primary1;
+  useEffect(() => {
+    if (!mounted) return;
+
+    const setup = (el: SVGPathElement | null) => {
+      if (!el) return null;
+      const len = el.getTotalLength();
+      const dash = 100;
+      const gap = (len / 1) - dash;
+      el.style.strokeDasharray = `${dash} ${gap}`;
+      el.style.strokeDashoffset = '0';
+      return { total: dash + gap };
+    };
+
+    const coreInfo = setup(coreRef.current);
+    const glowInfo = setup(glowRef.current);
+
+    let offset = 0;
+    let raf: number;
+
+    const tick = () => {
+      offset -= 1;
+      if (coreRef.current && coreInfo) {
+        coreRef.current.style.strokeDashoffset = `${offset % -coreInfo.total}`;
+      }
+      if (glowRef.current && glowInfo) {
+        glowRef.current.style.strokeDashoffset = `${offset % -glowInfo.total}`;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [mounted]);
+
+  if (!mounted) return null;
 
   return (
     <WavyContainer>
       <motion.svg
-        viewBox="0 0 1440 3200"
+        viewBox="-200 -300 1400 3600"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
         style={{
           position: 'absolute',
-          top: '-5%',
+          top: 0,
           left: 0,
           width: '100%',
-          height: '110%',
+          height: '100%',
           y,
-          opacity: mounted ? 1 : 0,
-          transition: 'opacity 1s ease',
         }}
       >
-        <EdgePath
-          d={EDGE_LEFT}
-          stroke={c1}
-          strokeWidth="2"
+        <defs>
+          <filter id="comet-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="8" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <path
+          ref={glowRef}
+          d={CENTER_PATH}
+          stroke="white"
+          strokeWidth="14"
           strokeLinecap="round"
+          strokeLinejoin="round"
           fill="none"
-          opacity="0.4"
-          strokeDasharray="60 340"
+          opacity="0.08"
+          filter="url(#comet-glow)"
         />
 
-        <EdgePath
-          d={EDGE_RIGHT}
-          stroke={c1}
-          strokeWidth="2"
+        <path
+          ref={coreRef}
+          d={CENTER_PATH}
+          stroke="white"
+          strokeWidth="3"
           strokeLinecap="round"
+          strokeLinejoin="round"
           fill="none"
-          opacity="0.4"
-          strokeDasharray="60 340"
+          opacity="0.5"
         />
       </motion.svg>
     </WavyContainer>

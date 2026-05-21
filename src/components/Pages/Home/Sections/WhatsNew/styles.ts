@@ -90,24 +90,23 @@ export const Description = styled.p`
   max-width: 420px;
 `;
 
-export const ExploreBtn = styled.button`
+export const ActionBtn = styled.button`
   display: inline-flex;
   align-items: center;
   gap: 8px;
   width: fit-content;
-  padding: 10px 22px;
+  padding: 12px 24px;
   border-radius: 12px;
-  border: 1px solid ${({ theme }) => theme.colors.primary1}40;
-  background: ${({ theme }) => theme.colors.primary1}10;
-  color: ${({ theme }) => theme.colors.primary1};
-  font-size: 0.85rem;
+  border: none;
+  background: ${({ theme }) => theme.colors.primary1};
+  color: #111;
+  font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.25s ease;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.primary1}20;
-    border-color: ${({ theme }) => theme.colors.primary1}70;
+    background: ${({ theme }) => theme.colors.primary2};
     transform: translateX(4px);
   }
 
@@ -142,7 +141,9 @@ export const CardVisual = styled.div`
   }
 `;
 
-export const MockCard = styled.div<{ $delay: number; $accent: string }>`
+/* ── Preview cards (visual side) ── */
+
+export const PreviewCard = styled.div<{ $delay: number; $accent: string }>`
   position: absolute;
   width: 220px;
   background: ${({ theme }) => theme.colors.dropdownBg};
@@ -163,14 +164,14 @@ export const MockCard = styled.div<{ $delay: number; $accent: string }>`
   }
 `;
 
-export const MockTitle = styled.div<{ $accent: string }>`
+export const PreviewHeader = styled.div<{ $accent: string }>`
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 12px;
 `;
 
-export const MockIcon = styled.div<{ $accent: string }>`
+export const PreviewIcon = styled.div<{ $accent: string }>`
   width: 28px;
   height: 28px;
   border-radius: 8px;
@@ -183,13 +184,13 @@ export const MockIcon = styled.div<{ $accent: string }>`
   flex-shrink: 0;
 `;
 
-export const MockTitleText = styled.span`
+export const PreviewLabel = styled.span`
   font-size: 0.78rem;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.title};
 `;
 
-export const MockLine = styled.div<{ $w: string }>`
+export const PreviewLine = styled.div<{ $w: string }>`
   height: 6px;
   width: ${({ $w }) => $w};
   border-radius: 3px;
@@ -201,13 +202,13 @@ export const MockLine = styled.div<{ $w: string }>`
   }
 `;
 
-export const MockTags = styled.div`
+export const PreviewTags = styled.div`
   display: flex;
   gap: 4px;
   margin-top: 10px;
 `;
 
-export const MockTag = styled.span<{ $accent: string }>`
+export const PreviewTag = styled.span<{ $accent: string }>`
   padding: 2px 8px;
   border-radius: 100px;
   font-size: 0.58rem;
@@ -225,7 +226,9 @@ export const VersionTag = styled.span`
   opacity: 0.7;
 `;
 
-export const MiniGrid = styled.div`
+/* ── Feature cards (mini grid) ── */
+
+export const FeatureGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
@@ -237,53 +240,96 @@ export const MiniGrid = styled.div`
   }
 `;
 
-export const MiniCard = styled.div`
+export const FeatureCard = styled.div<{ $accent: string }>`
   position: relative;
   background: ${({ theme }) => theme.colors.dropdownBg};
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   border-radius: 20px;
-  padding: 28px 28px 24px;
+  padding: 32px 28px 28px;
   display: flex;
   flex-direction: column;
   gap: 14px;
   box-shadow: 0 4px 24px ${({ theme }) => theme.colors.navbarShadow};
-  transition: box-shadow 0.35s ease, border-color 0.35s ease;
+  transition: box-shadow 0.35s ease, border-color 0.35s ease, transform 0.3s ease;
   overflow: hidden;
 
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: ${({ $accent }) => $accent};
+    border-radius: 20px 20px 0 0;
+  }
+
   &:hover {
-    border-color: ${({ theme }) => theme.colors.primary1}25;
-    box-shadow: 0 8px 36px ${({ theme }) => theme.colors.navbarShadowHover};
+    border-color: ${({ $accent }) => $accent}30;
+    box-shadow: 0 8px 36px ${({ theme }) => theme.colors.navbarShadowHover},
+                0 0 0 1px ${({ $accent }) => $accent}10;
+    transform: translateY(-2px);
   }
 
   ${({ theme }) => theme.media.md} {
-    padding: 24px 22px 20px;
+    padding: 28px 24px 24px;
   }
 `;
 
-export const MiniIcon = styled.div<{ $color: string }>`
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  background: ${({ $color }) => $color}12;
-  border: 1px solid ${({ $color }) => $color}25;
+export const FeatureIcon = styled.div<{ $color: string }>`
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, ${({ $color }) => $color}18, ${({ $color }) => $color}08);
+  border: 1px solid ${({ $color }) => $color}28;
   display: flex;
   align-items: center;
   justify-content: center;
   color: ${({ $color }) => $color};
 `;
 
-export const MiniTitle = styled.h4`
-  font-size: 1.05rem;
+export const FeatureTitle = styled.h4`
+  font-size: 1.1rem;
   font-weight: 800;
   color: ${({ theme }) => theme.colors.title};
   letter-spacing: -0.02em;
   line-height: 1.3;
 `;
 
-export const MiniDesc = styled.p`
-  font-size: 0.82rem;
-  line-height: 1.65;
+export const FeatureDesc = styled.p`
+  font-size: 0.84rem;
+  line-height: 1.7;
   color: ${({ theme }) => theme.colors.navbarLinkInactive};
+`;
+
+export const FeatureBtn = styled.button<{ $color: string }>`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  padding: 12px 24px;
+  border-radius: 10px;
+  border: none;
+  background: ${({ $color }) => $color};
+  color: #111;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: all 0.25s ease;
+
+  &:hover {
+    opacity: 0.85;
+    transform: translateX(3px);
+  }
+
+  svg {
+    transition: transform 0.25s ease;
+  }
+
+  &:hover svg {
+    transform: translateX(2px);
+  }
 `;

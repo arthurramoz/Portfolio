@@ -2,9 +2,10 @@
 
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { FiArrowRight, FiCreditCard, FiMessageCircle, FiMousePointer, FiZap } from 'react-icons/fi';
+import { FiArrowRight } from 'react-icons/fi';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { CURRENT_VERSION } from '@/config/versions';
+import { HIGHLIGHT_CONFIG } from '@/config/highlights';
 import {
   Section,
   Card,
@@ -13,21 +14,22 @@ import {
   BadgeDot,
   Title,
   Description,
-  ExploreBtn,
+  ActionBtn,
   CardVisual,
-  MockCard,
-  MockTitle,
-  MockIcon,
-  MockTitleText,
-  MockLine,
-  MockTags,
-  MockTag,
+  PreviewCard,
+  PreviewHeader,
+  PreviewIcon,
+  PreviewLabel,
+  PreviewLine,
+  PreviewTags,
+  PreviewTag,
   VersionTag,
-  MiniGrid,
-  MiniCard,
-  MiniIcon,
-  MiniTitle,
-  MiniDesc,
+  FeatureGrid,
+  FeatureCard,
+  FeatureIcon,
+  FeatureTitle,
+  FeatureDesc,
+  FeatureBtn,
 } from './styles';
 
 const containerVariants = {
@@ -47,9 +49,23 @@ const itemVariants = {
   },
 };
 
+const ACTIONS: Record<string, (router: ReturnType<typeof useRouter>) => void> = {
+  'cursor-settings': (router) => {
+    router.push('/configuracoes');
+    setTimeout(() => {
+      const el = document.getElementById('settings-cursor-toggle');
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.scrollY - 120;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }, 600);
+  },
+};
+
 const WhatsNew = () => {
   const { t } = useLanguage();
   const router = useRouter();
+  const cfg = HIGHLIGHT_CONFIG;
 
   return (
     <Section id="novidade">
@@ -64,27 +80,23 @@ const WhatsNew = () => {
             <motion.div variants={itemVariants}>
               <Badge>
                 <BadgeDot />
-                {t('whatsnew.badge' as Parameters<typeof t>[0])}
+                {t(cfg.badgeKey as Parameters<typeof t>[0])}
               </Badge>
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <Title>
-                {t('whatsnew.title' as Parameters<typeof t>[0])}
-              </Title>
+              <Title>{t(cfg.titleKey as Parameters<typeof t>[0])}</Title>
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <Description>
-                {t('whatsnew.description' as Parameters<typeof t>[0])}
-              </Description>
+              <Description>{t(cfg.descKey as Parameters<typeof t>[0])}</Description>
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <ExploreBtn onClick={() => router.push('/cases')}>
-                {t('whatsnew.cta' as Parameters<typeof t>[0])}
+              <ActionBtn onClick={() => router.push(cfg.ctaPath)}>
+                {t(cfg.ctaKey as Parameters<typeof t>[0])}
                 <FiArrowRight size={16} />
-              </ExploreBtn>
+              </ActionBtn>
             </motion.div>
 
             <motion.div variants={itemVariants}>
@@ -97,85 +109,68 @@ const WhatsNew = () => {
               variants={itemVariants}
               style={{ position: 'relative', width: '100%', height: '100%' }}
             >
-              <MockCard
-                as={motion.div}
-                $delay={0}
-                $accent="#22d3ee"
-                initial={{ opacity: 0, y: 20, rotate: -2 }}
-                whileInView={{ opacity: 1, y: 0, rotate: -2 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-                style={{ top: '15%', left: '8%' }}
-              >
-                <MockTitle $accent="#22d3ee">
-                  <MockIcon $accent="#22d3ee">
-                    <FiCreditCard size={14} />
-                  </MockIcon>
-                  <MockTitleText>Pagar.me v5</MockTitleText>
-                </MockTitle>
-                <MockLine $w="90%" />
-                <MockLine $w="70%" />
-                <MockLine $w="50%" />
-                <MockTags>
-                  <MockTag $accent="#22d3ee">Node.js</MockTag>
-                  <MockTag $accent="#22d3ee">PIX</MockTag>
-                  <MockTag $accent="#22d3ee">Split</MockTag>
-                </MockTags>
-              </MockCard>
-
-              <MockCard
-                as={motion.div}
-                $delay={0.15}
-                $accent="#fb6f92"
-                initial={{ opacity: 0, y: 20, rotate: 2 }}
-                whileInView={{ opacity: 1, y: 0, rotate: 2 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
-                style={{ bottom: '10%', right: '8%' }}
-              >
-                <MockTitle $accent="#fb6f92">
-                  <MockIcon $accent="#fb6f92">
-                    <FiMessageCircle size={14} />
-                  </MockIcon>
-                  <MockTitleText>Realtime Chat</MockTitleText>
-                </MockTitle>
-                <MockLine $w="85%" />
-                <MockLine $w="65%" />
-                <MockLine $w="75%" />
-                <MockTags>
-                  <MockTag $accent="#fb6f92">Firebase</MockTag>
-                  <MockTag $accent="#fb6f92">React</MockTag>
-                </MockTags>
-              </MockCard>
+              {cfg.mocks.map((mock, i) => {
+                const Icon = mock.icon;
+                return (
+                  <PreviewCard
+                    key={i}
+                    as={motion.div}
+                    $delay={mock.delay}
+                    $accent={mock.accent}
+                    initial={{ opacity: 0, y: 20, rotate: mock.rotate }}
+                    whileInView={{ opacity: 1, y: 0, rotate: mock.rotate }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: mock.delay, ease: [0.25, 0.1, 0.25, 1] }}
+                    style={mock.position}
+                  >
+                    <PreviewHeader $accent={mock.accent}>
+                      <PreviewIcon $accent={mock.accent}>
+                        <Icon size={14} />
+                      </PreviewIcon>
+                      <PreviewLabel>{mock.title}</PreviewLabel>
+                    </PreviewHeader>
+                    {mock.lines.map((w, j) => (
+                      <PreviewLine key={j} $w={w} />
+                    ))}
+                    <PreviewTags>
+                      {mock.tags.map((tag) => (
+                        <PreviewTag key={tag} $accent={mock.accent}>{tag}</PreviewTag>
+                      ))}
+                    </PreviewTags>
+                  </PreviewCard>
+                );
+              })}
             </motion.div>
           </CardVisual>
         </Card>
 
-        <MiniGrid>
-          <MiniCard as={motion.div} variants={itemVariants}>
-            <MiniIcon $color="#a78bfa">
-              <FiMousePointer size={22} />
-            </MiniIcon>
-            <MiniTitle>
-              {t('whatsnew.cursor.title' as Parameters<typeof t>[0])}
-            </MiniTitle>
-            <MiniDesc>
-              {t('whatsnew.cursor.desc' as Parameters<typeof t>[0])}
-            </MiniDesc>
-          </MiniCard>
-
-          <MiniCard as={motion.div} variants={itemVariants}>
-            <MiniIcon $color="#fbbf24">
-              <FiZap size={22} />
-            </MiniIcon>
-            <MiniTitle>
-              {t('whatsnew.animations.title' as Parameters<typeof t>[0])}
-            </MiniTitle>
-            <MiniDesc>
-              {t('whatsnew.animations.desc' as Parameters<typeof t>[0])}
-            </MiniDesc>
-          </MiniCard>
-        </MiniGrid>
+        <FeatureGrid>
+          {cfg.features.map((feat, i) => {
+            const Icon = feat.icon;
+            return (
+              <FeatureCard key={i} as={motion.div} variants={itemVariants} $accent={feat.accent}>
+                <FeatureIcon $color={feat.accent}>
+                  <Icon size={22} />
+                </FeatureIcon>
+                <FeatureTitle>
+                  {t(feat.titleKey as Parameters<typeof t>[0])}
+                </FeatureTitle>
+                <FeatureDesc>
+                  {t(feat.descKey as Parameters<typeof t>[0])}
+                </FeatureDesc>
+                {feat.ctaKey && feat.action && (
+                  <FeatureBtn
+                    $color={feat.accent}
+                    onClick={() => ACTIONS[feat.action!]?.(router)}
+                  >
+                    {t(feat.ctaKey as Parameters<typeof t>[0])}
+                    <FiArrowRight size={14} />
+                  </FeatureBtn>
+                )}
+              </FeatureCard>
+            );
+          })}
+        </FeatureGrid>
       </motion.div>
     </Section>
   );

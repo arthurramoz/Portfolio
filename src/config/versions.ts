@@ -7,10 +7,67 @@ export interface VersionEntry {
   highlights: Record<Exclude<Language, 'es'>, string[]> & { es?: string[] };
 }
 
-export const CURRENT_VERSION = 'v1.6';
-export const CURRENT_LABEL = 'Pulse';
+export const CURRENT_VERSION = 'v1.8';
+export const CURRENT_LABEL = 'Nova';
 
 export const VERSION_HISTORY: VersionEntry[] = [
+  {
+    version: 'v1.8',
+    date: '21/05/2026',
+    label: 'Nova',
+    highlights: {
+      pt: [
+        'Cursor personalizado (dot + ring) com efeito magnético em hover — substitui o cursor nativo no desktop',
+        'Sombra do cursor (CursorGlow) mais fluida e sutil com delay aumentado',
+        'Topbar reestruturada com dropdowns de Portfólio e Sobre Mim',
+        'Estudos de caso: Integração Pagar.me v5 e Chat em tempo real com Firebase',
+        'Página de depoimentos com estado vazio (EmptyState)',
+        'Bandeira do idioma atual exibida ao lado da engrenagem na topbar',
+        'Remoção do subtítulo "Software Engineer & Full Stack" do Hero',
+        'Cor do cursor adapta ao tema (branco no escuro, preto no claro)',
+      ],
+      en: [
+        'Custom cursor (dot + ring) with magnetic hover effect — replaces native cursor on desktop',
+        'Cursor glow made more fluid and subtle with increased delay',
+        'Topbar restructured with Portfolio and About Me dropdowns',
+        'Case studies: Pagar.me v5 Integration and Realtime Chat with Firebase',
+        'Testimonials page with empty state (EmptyState)',
+        'Current language flag displayed beside settings gear in topbar',
+        'Removed "Software Engineer & Full Stack" subtitle from Hero',
+        'Cursor color adapts to theme (white on dark, black on light)',
+      ],
+      fr: [
+        'Curseur personnalisé (point + anneau) avec effet magnétique au survol — remplace le curseur natif sur desktop',
+        'Lueur du curseur plus fluide et subtile avec délai augmenté',
+        'Topbar restructurée avec dropdowns Portfólio et À propos',
+        'Études de cas : Intégration Pagar.me v5 et Chat temps réel avec Firebase',
+        'Page témoignages avec état vide (EmptyState)',
+        'Drapeau de la langue actuelle affiché à côté de l\'engrenage dans la topbar',
+        'Suppression du sous-titre "Software Engineer & Full Stack" du Hero',
+        'Couleur du curseur s\'adapte au thème (blanc sur sombre, noir sur clair)',
+      ],
+      ru: [
+        'Кастомный курсор (точка + кольцо) с магнитным эффектом при наведении — заменяет нативный курсор на десктопе',
+        'Свечение курсора стало более плавным и тонким с увеличенной задержкой',
+        'Topbar реструктурирован с dropdown-меню Портфолио и Обо мне',
+        'Кейсы: Интеграция Pagar.me v5 и Чат в реальном времени с Firebase',
+        'Страница отзывов с пустым состоянием (EmptyState)',
+        'Флаг текущего языка отображается рядом с шестерёнкой в topbar',
+        'Удалён подзаголовок "Software Engineer & Full Stack" из Hero',
+        'Цвет курсора адаптируется к теме (белый на тёмной, чёрный на светлой)',
+      ],
+      es: [
+        'Cursor personalizado (punto + anillo) con efecto magnético en hover — reemplaza el cursor nativo en escritorio',
+        'Sombra del cursor más fluida y sutil con mayor delay',
+        'Topbar reestructurada con dropdowns de Portafolio y Sobre Mí',
+        'Estudios de caso: Integración Pagar.me v5 y Chat en tiempo real con Firebase',
+        'Página de testimonios con estado vacío (EmptyState)',
+        'Bandera del idioma actual mostrada junto al engranaje en la topbar',
+        'Eliminación del subtítulo "Software Engineer & Full Stack" del Hero',
+        'Color del cursor se adapta al tema (blanco en oscuro, negro en claro)',
+      ],
+    },
+  },
   {
     version: 'v1.6',
     date: '29/04/2026',

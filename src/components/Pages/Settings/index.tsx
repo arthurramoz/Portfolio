@@ -13,9 +13,11 @@ import {
   FiArrowRight,
   FiCode,
   FiChevronDown,
+  FiMousePointer,
 } from 'react-icons/fi';
 import { useAppTheme } from '@/contexts/ThemeContext';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useCursor } from '@/contexts/CursorContext';
 import {
   PageTitleWrapper,
   PageTag,
@@ -79,6 +81,7 @@ const SettingsPage = () => {
   const router = useRouter();
   const { themeMode, toggleTheme } = useAppTheme();
   const { language, setLanguage, t } = useLanguage();
+  const { cursorMode, toggleCursor } = useCursor();
   const [langOpen, setLangOpen] = useState(false);
 
   return (
@@ -154,6 +157,35 @@ const SettingsPage = () => {
         <ThemeToggleBtn
           as="div"
           $active={themeMode === 'dark'}
+          aria-hidden
+        />
+      </DirectRedirectCard>
+
+      <DirectRedirectCard
+        custom={2}
+        variants={cardVariants}
+        initial="hidden"
+        animate="visible"
+        onClick={toggleCursor}
+        id="settings-cursor-toggle"
+        aria-label="Toggle cursor"
+      >
+        <RedirectLeft>
+          <RedirectIconWrap>
+            <FiMousePointer size={20} />
+          </RedirectIconWrap>
+          <RedirectInfo>
+            <RedirectTitle>{t('settings.cursor' as Parameters<typeof t>[0])}</RedirectTitle>
+            <RedirectDesc>
+              {cursorMode === 'modern'
+                ? t('settings.cursor.modern' as Parameters<typeof t>[0])
+                : t('settings.cursor.default' as Parameters<typeof t>[0])}
+            </RedirectDesc>
+          </RedirectInfo>
+        </RedirectLeft>
+        <ThemeToggleBtn
+          as="div"
+          $active={cursorMode === 'modern'}
           aria-hidden
         />
       </DirectRedirectCard>

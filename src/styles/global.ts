@@ -17,11 +17,11 @@ export const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
-  html, body {
+  html.modern-cursor, html.modern-cursor body {
     cursor: none;
   }
 
-  * {
+  html.modern-cursor * {
     cursor: none !important;
   }
 

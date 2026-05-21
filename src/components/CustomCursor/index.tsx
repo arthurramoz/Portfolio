@@ -2,10 +2,12 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Dot, Ring } from './styles';
+import { useCursor } from '@/contexts/CursorContext';
 
 const HOVER_SELECTORS = 'a, button, [role="button"], input, textarea, select, label';
 
 const CustomCursor = () => {
+  const { cursorMode } = useCursor();
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const mouse = useRef({ x: 0, y: 0 });
@@ -92,7 +94,7 @@ const CustomCursor = () => {
     };
   }, [isMobile, visible]);
 
-  if (isMobile) return null;
+  if (isMobile || cursorMode === 'default') return null;
 
   return (
     <>

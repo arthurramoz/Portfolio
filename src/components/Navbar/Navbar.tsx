@@ -575,6 +575,11 @@ const Navbar = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.3, duration: 0.4, ease: 'easeOut' }}
       >
+        <FlagImg
+          src={LANGUAGES.find(l => l.code === language)?.flag ?? ''}
+          alt={language}
+          style={{ width: 18, height: 14, borderRadius: 2, objectFit: 'cover', opacity: 0.85 }}
+        />
         <SettingsWrapper ref={settingsRef}>
           <SettingsButton onClick={() => setIsMenuOpen(prev => !prev)}>
             <FiSettings size={18} />

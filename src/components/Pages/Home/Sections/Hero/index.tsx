@@ -12,7 +12,6 @@ import {
   IllustrationBlock,
   Name,
   PrimaryButton,
-  Role,
   SecondaryButton,
   Section,
   TextBlock,

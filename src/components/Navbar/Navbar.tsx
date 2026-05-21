@@ -72,7 +72,6 @@ import {
   AmbientGlow,
   MobileNavLink,
   MobileNavLinkText,
-  MobileNavLinkIndex,
   MobileSubmenuContainer,
   MobileSubmenuLink,
   MobileControlCenter,
@@ -812,7 +811,6 @@ const Navbar = () => {
                         onClick={() => setIsMobileHomeOpen(prev => !prev)}
                       >
                         <span style={{ display: 'flex', alignItems: 'center' }}>
-                          <MobileNavLinkIndex>01</MobileNavLinkIndex>
                           {t('nav.home')}
                         </span>
                         <FiChevronDown
@@ -859,7 +857,6 @@ const Navbar = () => {
                         onClick={() => setIsMobileProjectsSubOpen(prev => !prev)}
                       >
                         <span style={{ display: 'flex', alignItems: 'center' }}>
-                          <MobileNavLinkIndex>02</MobileNavLinkIndex>
                           {t('nav.portfolio')}
                         </span>
                         <FiChevronDown
@@ -916,7 +913,6 @@ const Navbar = () => {
                         onClick={() => setIsMobileAboutSubOpen(prev => !prev)}
                       >
                         <span style={{ display: 'flex', alignItems: 'center' }}>
-                          <MobileNavLinkIndex>03</MobileNavLinkIndex>
                           {t('nav.aboutme')}
                         </span>
                         <FiChevronDown
@@ -983,7 +979,6 @@ const Navbar = () => {
                         }}
                       >
                         <span style={{ display: 'flex', alignItems: 'center' }}>
-                          <MobileNavLinkIndex>04</MobileNavLinkIndex>
                           {t('nav.cases' as Parameters<typeof t>[0])}
                         </span>
                       </MobileNavLinkText>
@@ -1000,7 +995,6 @@ const Navbar = () => {
                         }}
                       >
                         <span style={{ display: 'flex', alignItems: 'center' }}>
-                          <MobileNavLinkIndex>05</MobileNavLinkIndex>
                           {t('contact.tag' as Parameters<typeof t>[0])}
                         </span>
                       </MobileNavLinkText>

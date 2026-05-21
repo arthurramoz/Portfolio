@@ -322,7 +322,6 @@ export const MobileNavLinkText = styled.span<MobileNavLinkTextProps>`
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    transform: translateX(6px);
   }
 `;
 
@@ -367,7 +366,6 @@ export const MobileSubmenuLink = styled.button<{ $active?: boolean }>`
   &:hover {
     background: rgba(255, 255, 255, 0.08);
     color: ${({ theme }) => theme.colors.navbarLinkActive};
-    transform: translateX(4px);
   }
 `;
 
@@ -846,11 +844,6 @@ export const MobileVersionWrapper = styled.div`
   color: ${({ theme }) => theme.colors.navbarLinkInactive};
   opacity: 0.85;
   border-top: 1px solid ${({ theme }) => theme.colors.navbarBorder}15;
-  background: ${({ theme }) =>
-    theme.colors.dropdownBg === '#ffffff'
-      ? 'rgba(255, 255, 255, 0.45)'
-      : 'rgba(12, 12, 18, 0.35)'};
-  backdrop-filter: blur(10px);
   z-index: 2;
   margin-top: auto;
 `;

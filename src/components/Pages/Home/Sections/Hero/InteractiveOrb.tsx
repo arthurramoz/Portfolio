@@ -50,9 +50,12 @@ const InteractiveOrb = () => {
   const rotRef = useRef({ x: 0.3, y: 0 });
   const velRef = useRef({ x: 0, y: 0 });
   const particlesRef = useRef<Particle[]>(createParticles());
+  const [isMounted, setIsMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     setIsMobile(window.innerWidth < 1024);
     const handleResize = () => setIsMobile(window.innerWidth < 1024);
     window.addEventListener('resize', handleResize);
@@ -60,6 +63,8 @@ const InteractiveOrb = () => {
   }, []);
 
   useEffect(() => {
+    if (!isMounted) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -81,6 +86,7 @@ const InteractiveOrb = () => {
 
     updateSize();
     window.addEventListener('resize', updateSize);
+    setIsVisible(true);
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
@@ -135,8 +141,8 @@ const InteractiveOrb = () => {
           const nx = mdx / speed;
           const ny = mdy / speed;
 
-          velRef.current.y -= nx * factor;
-          velRef.current.x -= ny * factor;
+          velRef.current.y += nx * factor;
+          velRef.current.x += ny * factor;
         }
       } else {
         mouseDeltaRef.current.dx = 0;
@@ -178,14 +184,14 @@ const InteractiveOrb = () => {
         projected.push({ sx, sy, depth, dotSize });
       }
 
-      projected.sort((a, b) => a.depth - b.depth);
+      projected.sort((a, b) => b.depth - a.depth);
 
       const BUCKETS_COUNT = 16;
       const buckets: typeof projected[] = Array.from({ length: BUCKETS_COUNT }, () => []);
 
       for (let i = 0; i < projected.length; i++) {
         const p = projected[i];
-        const bIndex = Math.max(0, Math.min(Math.floor(p.depth * BUCKETS_COUNT), BUCKETS_COUNT - 1));
+        const bIndex = Math.max(0, Math.min(Math.floor((1 - p.depth) * BUCKETS_COUNT), BUCKETS_COUNT - 1));
         buckets[bIndex].push(p);
       }
 
@@ -218,9 +224,9 @@ const InteractiveOrb = () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('resize', updateSize);
     };
-  }, [themeMode]);
+  }, [themeMode, isMounted]);
 
-  if (isMobile) return null;
+  if (!isMounted || isMobile) return null;
 
   return (
     <canvas
@@ -234,6 +240,8 @@ const InteractiveOrb = () => {
         height: '100%',
         pointerEvents: 'none',
         zIndex: 0,
+        opacity: isVisible ? 1 : 0,
+        transition: 'opacity 1s cubic-bezier(0.25, 0.1, 0.25, 1)',
       }}
     />
   );

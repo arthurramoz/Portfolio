@@ -1,6 +1,27 @@
-import { motion } from 'framer-motion';
 import { FiArrowRight } from 'react-icons/fi';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const fadeInUp30 = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const fadeInUp20 = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 export const Section = styled.section`
   position: relative;
@@ -55,6 +76,9 @@ export const Greeting = styled.div`
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: ${({ theme }) => theme.colors.primary1};
+  
+  animation: ${fadeInUp30} 0.7s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+  animation-delay: 0.1s;
 `;
 
 export const Name = styled.h1`
@@ -72,6 +96,9 @@ export const Name = styled.h1`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
+  animation: ${fadeInUp20} 0.7s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+  animation-delay: 0.2s;
+
   ${({ theme }) => theme.media.lg} {
     font-size: 40px;
   }
@@ -79,6 +106,11 @@ export const Name = styled.h1`
   ${({ theme }) => theme.media.sm} {
     font-size: 32px;
   }
+`;
+
+export const InfoBlock = styled.div`
+  animation: ${fadeInUp20} 0.7s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+  animation-delay: 0.3s;
 `;
 
 export const Role = styled.h2`

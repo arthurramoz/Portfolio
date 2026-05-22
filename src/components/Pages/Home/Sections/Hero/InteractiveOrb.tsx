@@ -5,7 +5,7 @@ import { useAppTheme } from '@/contexts/ThemeContext';
 
 const PARTICLE_COUNT = 3800;
 const SPHERE_RADIUS = 200;
-const DOT_SIZE_BASE = 1;
+const DOT_SIZE_BASE = 1.5;
 const BASE_ROTATION_SPEED = 0.00004;
 const PERSPECTIVE = 400;
 const MOUSE_DRAG = 0.0002;
@@ -180,19 +180,30 @@ const InteractiveOrb = () => {
 
       projected.sort((a, b) => a.depth - b.depth);
 
+      const BUCKETS_COUNT = 16;
+      const buckets: typeof projected[] = Array.from({ length: BUCKETS_COUNT }, () => []);
+
       for (let i = 0; i < projected.length; i++) {
-        const { sx, sy, depth, dotSize } = projected[i];
+        const p = projected[i];
+        const bIndex = Math.max(0, Math.min(Math.floor(p.depth * BUCKETS_COUNT), BUCKETS_COUNT - 1));
+        buckets[bIndex].push(p);
+      }
 
-        const alpha = 0.08 + depth * 0.85;
+      for (let b = 0; b < BUCKETS_COUNT; b++) {
+        const list = buckets[b];
+        if (list.length === 0) continue;
 
-        if (isDark) {
-          ctx.fillStyle = `rgba(220, 240, 245, ${alpha})`;
-        } else {
-          ctx.fillStyle = `rgba(30, 30, 35, ${alpha})`;
-        }
+        const alpha = 0.08 + ((b + 0.5) / BUCKETS_COUNT) * 0.85;
+        ctx.fillStyle = isDark
+          ? `rgba(220, 240, 245, ${alpha})`
+          : `rgba(30, 30, 35, ${alpha})`;
 
         ctx.beginPath();
-        ctx.arc(sx, sy, dotSize, 0, Math.PI * 2);
+        for (let j = 0; j < list.length; j++) {
+          const { sx, sy, dotSize } = list[j];
+          ctx.moveTo(sx + dotSize, sy);
+          ctx.arc(sx, sy, dotSize, 0, Math.PI * 2);
+        }
         ctx.fill();
       }
 

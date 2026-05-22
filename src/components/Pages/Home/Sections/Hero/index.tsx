@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import InteractiveOrb from './InteractiveOrb';
 import {
@@ -14,6 +13,7 @@ import {
   SecondaryButton,
   Section,
   TextBlock,
+  InfoBlock,
 } from './styles';
 
 const Hero = () => {
@@ -24,39 +24,11 @@ const Hero = () => {
       <InteractiveOrb />
       <Content>
         <TextBlock>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.7,
-              delay: 0.2,
-              ease: [0.25, 0.1, 0.25, 1],
-            }}
-          >
-            <Greeting>{t('hero.greeting')}</Greeting>
-          </motion.div>
+          <Greeting>{t('hero.greeting')}</Greeting>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.7,
-              delay: 0.4,
-              ease: [0.25, 0.1, 0.25, 1],
-            }}
-          >
-            <Name>Arthur Moreira Ramos</Name>
-          </motion.div>
+          <Name>Arthur Moreira Ramos</Name>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.7,
-              delay: 0.6,
-              ease: [0.25, 0.1, 0.25, 1],
-            }}
-          >
+          <InfoBlock>
             <Description>{t('hero.description')}</Description>
 
             <Actions>
@@ -81,7 +53,7 @@ const Hero = () => {
                 {t('hero.btn.secondary')}
               </SecondaryButton>
             </Actions>
-          </motion.div>
+          </InfoBlock>
         </TextBlock>
       </Content>
     </Section>

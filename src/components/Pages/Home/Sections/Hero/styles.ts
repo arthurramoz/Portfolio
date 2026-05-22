@@ -20,6 +20,8 @@ export const Section = styled.section`
 `;
 
 export const Content = styled.div`
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;

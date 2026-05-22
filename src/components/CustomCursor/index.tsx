@@ -41,8 +41,8 @@ const CustomCursor = () => {
         isHovering = hovering;
         if (!dotRef.current || !ringRef.current) return;
         if (hovering) {
-          dotRef.current.style.width = '6px';
-          dotRef.current.style.height = '6px';
+          dotRef.current.style.width = '20px';
+          dotRef.current.style.height = '20px';
           dotRef.current.style.opacity = '0.6';
           ringRef.current.style.width = '32px';
           ringRef.current.style.height = '32px';

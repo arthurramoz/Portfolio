@@ -103,12 +103,12 @@ const Contact = () => {
     e.preventDefault();
     setStatus('sending');
 
-    const subjects = {
-      pt: 'Contato - Portfólio',
-      en: 'Contact - Portfolio',
-      fr: 'Contact - Portfolio',
-      es: 'Contacto - Portafolio',
-      ru: 'Контакты - Портфолио',
+    const portfolioIntro = {
+      pt: 'Vim do seu portfólio!',
+      en: 'I came from your portfolio!',
+      fr: 'Je viens de votre portfolio !',
+      es: '¡Vine de tu portafolio!',
+      ru: 'Я пришёл с вашего портфолио!',
     };
 
     const nameLabels = {
@@ -128,15 +128,15 @@ const Contact = () => {
     };
 
     const currentLanguage = language || 'pt';
-    const subject = subjects[currentLanguage] || subjects.pt;
+    const intro = portfolioIntro[currentLanguage] || portfolioIntro.pt;
     const nameLabel = nameLabels[currentLanguage] || nameLabels.pt;
     const messageLabel = messageLabels[currentLanguage] || messageLabels.pt;
 
-    const email = 'arthurmoreiraramos550sp@gmail.com';
-    const body = `${nameLabel}: ${formState.name}\n\n${messageLabel}:\n${formState.message}`;
-    const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const phone = '5511941006962';
+    const text = `${intro}\n\n${nameLabel}: ${formState.name}\n${messageLabel}: ${formState.message}`;
+    const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
 
-    window.location.href = mailtoUrl;
+    window.open(whatsappUrl, '_blank');
 
     setStatus('success');
     setFormState({ name: '', message: '' });

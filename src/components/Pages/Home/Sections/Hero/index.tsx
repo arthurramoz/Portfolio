@@ -1,15 +1,14 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { useLanguage } from '@/contexts/LanguageContext';
+import InteractiveOrb from './InteractiveOrb';
 import {
   Actions,
   ArrowDownIcon,
   Content,
   Description,
   Greeting,
-  IllustrationBlock,
   Name,
   PrimaryButton,
   SecondaryButton,
@@ -22,6 +21,7 @@ const Hero = () => {
 
   return (
     <Section id="home">
+      <InteractiveOrb />
       <Content>
         <TextBlock>
           <motion.div
@@ -83,31 +83,6 @@ const Hero = () => {
             </Actions>
           </motion.div>
         </TextBlock>
-        {/* 
-        <IllustrationBlock>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1, ease: 'easeOut' }}
-          >
-            <motion.div
-              animate={{ y: [0, -16, 0] }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            >
-              <Image
-                src="/elements/about-me.svg"
-                alt="Ilustração de desenvolvedor"
-                width={700}
-                height={700}
-                priority
-              />
-            </motion.div>
-          </motion.div>
-        </IllustrationBlock> */}
       </Content>
     </Section>
   );

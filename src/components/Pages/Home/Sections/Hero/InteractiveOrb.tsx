@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useAppTheme } from '@/contexts/ThemeContext';
 
-const PARTICLE_COUNT = 3800;
+const PARTICLE_COUNT = 2500;
 const SPHERE_RADIUS = 200;
 const DOT_SIZE_BASE = 1.5;
 const BASE_ROTATION_SPEED = 0.00004;

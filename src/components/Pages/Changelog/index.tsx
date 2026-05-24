@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import { motion } from 'motion/react';
 import { VERSION_HISTORY, CURRENT_VERSION } from '@/config/versions';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -8,6 +9,7 @@ import {
   PageDescription,
 } from '@/components/Pages/global';
 import {
+  DevTimeAlert,
   Entry,
   EntryActive,
   EntryBadge,
@@ -37,8 +39,36 @@ const itemVariants = {
   },
 };
 
+const PROJECT_START = new Date(2026, 0, 14);
+
 const ChangelogPage = () => {
   const { language, t } = useLanguage();
+
+  const devTime = useMemo(() => {
+    const now = new Date();
+    let months = (now.getFullYear() - PROJECT_START.getFullYear()) * 12 + (now.getMonth() - PROJECT_START.getMonth());
+    let days = now.getDate() - PROJECT_START.getDate();
+    if (days < 0) {
+      months--;
+      const prev = new Date(now.getFullYear(), now.getMonth(), 0);
+      days += prev.getDate();
+    }
+
+    const labels: Record<string, { m: string; ms: string; d: string; ds: string }> = {
+      pt: { m: 'mês', ms: 'meses', d: 'dia', ds: 'dias' },
+      en: { m: 'month', ms: 'months', d: 'day', ds: 'days' },
+      fr: { m: 'mois', ms: 'mois', d: 'jour', ds: 'jours' },
+      ru: { m: 'месяц', ms: 'месяцев', d: 'день', ds: 'дней' },
+      es: { m: 'mes', ms: 'meses', d: 'día', ds: 'días' },
+    };
+
+    const l = labels[language] || labels.en;
+    const parts: string[] = [];
+    if (months > 0) parts.push(`${months} ${months === 1 ? l.m : l.ms}`);
+    if (days > 0) parts.push(`${days} ${days === 1 ? l.d : l.ds}`);
+
+    return parts.join(language === 'en' ? ' and ' : language === 'fr' ? ' et ' : language === 'ru' ? ' и ' : ' e ');
+  }, [language]);
 
   return (
     <PageContainer>
@@ -56,6 +86,20 @@ const ChangelogPage = () => {
       </SidebarColumn>
 
       <TimelineColumn>
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+        >
+          <DevTimeAlert>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+            <span>{t('changelog.devtime').replace('{time}', devTime)}</span>
+          </DevTimeAlert>
+        </motion.div>
+
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -89,3 +133,4 @@ const ChangelogPage = () => {
 };
 
 export default ChangelogPage;
+

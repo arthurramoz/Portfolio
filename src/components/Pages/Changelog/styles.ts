@@ -128,3 +128,34 @@ export const HighlightItem = styled.li`
     font-size: 14px;
   }
 `;
+
+export const DevTimeAlert = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-radius: 12px;
+  background: ${({ theme }) => theme.colors.primary1}10;
+  border: 1px solid ${({ theme }) => theme.colors.primary1}25;
+  margin-bottom: 8px;
+
+  svg {
+    flex-shrink: 0;
+    color: ${({ theme }) => theme.colors.primary1};
+  }
+
+  span {
+    font-size: 14px;
+    line-height: 1.5;
+    color: ${({ theme }) => theme.colors.subtitle};
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    padding: 12px 16px;
+    gap: 10px;
+
+    span {
+      font-size: 13px;
+    }
+  }
+`;

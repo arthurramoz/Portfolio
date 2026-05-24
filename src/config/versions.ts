@@ -13,7 +13,7 @@ export const CURRENT_LABEL = 'Nova';
 export const VERSION_HISTORY: VersionEntry[] = [
   {
     version: 'v1.8',
-    date: '21/05/2026',
+    date: '24/05/2026',
     label: 'Nova',
     highlights: {
       pt: [
@@ -70,7 +70,7 @@ export const VERSION_HISTORY: VersionEntry[] = [
   },
   {
     version: 'v1.6',
-    date: '29/04/2026',
+    date: '19/05/2026',
     label: 'Pulse',
     highlights: {
       pt: [
@@ -127,7 +127,7 @@ export const VERSION_HISTORY: VersionEntry[] = [
   },
   {
     version: 'v1.5',
-    date: '27/04/2026',
+    date: '11/05/2026',
     label: 'Nexus',
     highlights: {
       pt: [
@@ -194,7 +194,7 @@ export const VERSION_HISTORY: VersionEntry[] = [
   },
   {
     version: 'v1.0',
-    date: '24/04/2026',
+    date: '06/05/2026',
     label: 'release',
     highlights: {
       pt: [
@@ -241,7 +241,7 @@ export const VERSION_HISTORY: VersionEntry[] = [
   },
   {
     version: 'v0.8',
-    date: '24/04/2026',
+    date: '21/04/2026',
     label: 'beta',
     highlights: {
       pt: [
@@ -284,7 +284,7 @@ export const VERSION_HISTORY: VersionEntry[] = [
   },
   {
     version: 'v0.7',
-    date: '23/04/2026',
+    date: '17/04/2026',
     label: 'beta',
     highlights: {
       pt: [
@@ -327,7 +327,7 @@ export const VERSION_HISTORY: VersionEntry[] = [
   },
   {
     version: 'v0.6',
-    date: '23/04/2026',
+    date: '02/04/2026',
     label: 'beta',
     highlights: {
       pt: [
@@ -362,7 +362,7 @@ export const VERSION_HISTORY: VersionEntry[] = [
   },
   {
     version: 'v0.5',
-    date: '21/04/2026',
+    date: '14/03/2026',
     label: 'beta',
     highlights: {
       pt: [
@@ -389,7 +389,7 @@ export const VERSION_HISTORY: VersionEntry[] = [
   },
   {
     version: 'v0.4',
-    date: '18/04/2026',
+    date: '01/03/2026',
     label: 'beta',
     highlights: {
       pt: [
@@ -416,7 +416,7 @@ export const VERSION_HISTORY: VersionEntry[] = [
   },
   {
     version: 'v0.3',
-    date: '14/04/2026',
+    date: '09/02/2026',
     label: 'alpha',
     highlights: {
       pt: [
@@ -443,7 +443,7 @@ export const VERSION_HISTORY: VersionEntry[] = [
   },
   {
     version: 'v0.2',
-    date: '10/04/2026',
+    date: '22/01/2026',
     label: 'alpha',
     highlights: {
       pt: [
@@ -466,7 +466,7 @@ export const VERSION_HISTORY: VersionEntry[] = [
   },
   {
     version: 'v0.1',
-    date: '08/04/2026',
+    date: '14/01/2026',
     label: 'alpha',
     highlights: {
       pt: [

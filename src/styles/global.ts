@@ -46,4 +46,17 @@ export const GlobalStyle = createGlobalStyle`
   input, textarea, button {
     font-family: inherit;
   }
+
+  html.a11y-large-text {
+    font-size: 120%;
+  }
+
+  html.a11y-reduce-motion *,
+  html.a11y-reduce-motion *::before,
+  html.a11y-reduce-motion *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 `;

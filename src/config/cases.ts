@@ -3,7 +3,7 @@ import { IconType } from 'react-icons';
 
 export interface CaseMetric {
   labelKey: string;
-  value: string;
+  valueKey: string;
 }
 
 export interface CaseStudy {
@@ -27,9 +27,9 @@ export const CASE_STUDIES: CaseStudy[] = [
     resultKey: 'cases.pagarme.result',
     tags: ['Node.js', 'Pagar.me v5', 'Factory Pattern', 'Split Payment', 'PIX', 'Webhooks', 'TypeScript'],
     metrics: [
-      { labelKey: 'cases.pagarme.metric1.label', value: '~443' },
-      { labelKey: 'cases.pagarme.metric2.label', value: '3' },
-      { labelKey: 'cases.pagarme.metric3.label', value: '6+' },
+      { labelKey: 'cases.metric.role', valueKey: 'cases.pagarme.role' },
+      { labelKey: 'cases.metric.collab', valueKey: 'cases.pagarme.collab' },
+      { labelKey: 'cases.metric.delivery', valueKey: 'cases.pagarme.delivery' },
     ],
     accentColor: '#22d3ee',
     icon: FiCreditCard,
@@ -42,11 +42,12 @@ export const CASE_STUDIES: CaseStudy[] = [
     resultKey: 'cases.chat.result',
     tags: ['Firebase', 'REST API', 'React', 'TypeScript', 'Node.js', 'E-commerce'],
     metrics: [
-      { labelKey: 'cases.chat.metric1.label', value: 'Front-End' },
-      { labelKey: 'cases.chat.metric2.label', value: 'QA + Back' },
-      { labelKey: 'cases.chat.metric3.label', value: 'Produção' },
+      { labelKey: 'cases.metric.role', valueKey: 'cases.chat.role' },
+      { labelKey: 'cases.metric.collab', valueKey: 'cases.chat.collab' },
+      { labelKey: 'cases.metric.delivery', valueKey: 'cases.chat.delivery' },
     ],
     accentColor: '#fb6f92',
     icon: FiMessageCircle,
   },
 ];
+

@@ -160,7 +160,7 @@ const CasesPage = () => {
                 {cs.metrics.map((m) => (
                   <MetricItem key={m.labelKey} $accentColor={cs.accentColor}>
                     <MetricValue $accentColor={cs.accentColor}>
-                      {m.value}
+                      {t(m.valueKey as Parameters<typeof t>[0])}
                     </MetricValue>
                     <MetricLabel>
                       {t(m.labelKey as Parameters<typeof t>[0])}

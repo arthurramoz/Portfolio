@@ -1,6 +1,7 @@
 'use client';
 
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useAccessibility } from '@/contexts/AccessibilityContext';
 import InteractiveOrb from './InteractiveOrb';
 import {
   Actions,
@@ -18,10 +19,11 @@ import {
 
 const Hero = () => {
   const { t } = useLanguage();
+  const { reduceAnimations } = useAccessibility();
 
   return (
     <Section id="home">
-      <InteractiveOrb />
+      {!reduceAnimations && <InteractiveOrb />}
       <Content>
         <TextBlock>
           <Greeting>{t('hero.greeting')}</Greeting>

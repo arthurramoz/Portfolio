@@ -10,9 +10,11 @@ import { GlobalStyle } from '@/styles/global';
 import { AppThemeProvider } from '@/contexts/ThemeContext';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { CursorProvider } from '@/contexts/CursorContext';
+import { AccessibilityProvider } from '@/contexts/AccessibilityContext';
 import { lightTheme } from '@/styles/theme';
 import CursorGlow from '@/components/CursorGlow';
 import CustomCursor from '@/components/CustomCursor';
+import AccessibilityWidget from '@/components/AccessibilityWidget';
 
 const Providers = ({ children }: PropsWithChildren) => {
   return (
@@ -20,21 +22,24 @@ const Providers = ({ children }: PropsWithChildren) => {
       <LanguageProvider>
         <AppThemeProvider>
           <CursorProvider>
-            <GlobalStyle />
-            <NextNProgress
-              color={lightTheme.colors.primary1}
-              options={{ easing: 'ease', speed: 500 }}
-            />
-            <CustomCursor />
-            <div style={{ position: 'relative', minHeight: '100vh' }}>
-              <CursorGlow />
-              {children}
-            </div>
-            <ToastContainer
-              style={{
-                zIndex: 999999,
-              }}
-            />
+            <AccessibilityProvider>
+              <GlobalStyle />
+              <NextNProgress
+                color={lightTheme.colors.primary1}
+                options={{ easing: 'ease', speed: 500 }}
+              />
+              <CustomCursor />
+              <div style={{ position: 'relative', minHeight: '100vh' }}>
+                <CursorGlow />
+                {children}
+              </div>
+              <AccessibilityWidget />
+              <ToastContainer
+                style={{
+                  zIndex: 999999,
+                }}
+              />
+            </AccessibilityProvider>
           </CursorProvider>
         </AppThemeProvider>
       </LanguageProvider>

@@ -24,8 +24,10 @@ const dictionaries = {
     'whatsnew.cursor.title': 'Cursor personalizável',
     'whatsnew.cursor.desc': 'Agora você pode escolher entre o cursor moderno do Arthur ou o cursor padrão do sistema nas configurações.',
     'whatsnew.cursor.cta': 'Experimentar',
-    'whatsnew.animations.title': 'Novas animações',
-    'whatsnew.animations.desc': 'Transições mais suaves, micro-interações refinadas e efeitos visuais otimizados em toda a experiência.',
+    'whatsnew.analytics.title': 'Google Analytics 4',
+    'whatsnew.analytics.desc': 'Integração com o GA4 com controle de consentimento de cookies para análise de tráfego totalmente otimizada.',
+    'whatsnew.a11y.title': 'Widget de Acessibilidade',
+    'whatsnew.a11y.desc': 'Novas opções para aumentar os textos do site e reduzir movimentos pesados nas animações.',
     'about.title': 'Sobre mim',
     'about.subtitle': 'Engenheiro de Software & Full Stack',
     'about.p1':
@@ -291,8 +293,10 @@ const dictionaries = {
     'whatsnew.cursor.title': 'Custom cursor',
     'whatsnew.cursor.desc': 'You can now switch between Arthur\'s modern cursor or the default system cursor in settings.',
     'whatsnew.cursor.cta': 'Try it',
-    'whatsnew.animations.title': 'New animations',
-    'whatsnew.animations.desc': 'Smoother transitions, refined micro-interactions, and optimized visual effects across the entire experience.',
+    'whatsnew.analytics.title': 'Google Analytics 4',
+    'whatsnew.analytics.desc': 'GA4 integration with cookie consent control for fully optimized traffic analysis.',
+    'whatsnew.a11y.title': 'Accessibility Widget',
+    'whatsnew.a11y.desc': 'New options to increase text size and reduce heavy motion animations across the site.',
     'about.title': 'About me',
     'about.subtitle': 'Software Engineer & Full Stack',
     'about.p1':
@@ -558,8 +562,10 @@ const dictionaries = {
     'whatsnew.cursor.title': 'Curseur personnalisable',
     'whatsnew.cursor.desc': 'Vous pouvez désormais choisir entre le curseur moderne d\'Arthur ou le curseur système par défaut dans les paramètres.',
     'whatsnew.cursor.cta': 'Essayer',
-    'whatsnew.animations.title': 'Nouvelles animations',
-    'whatsnew.animations.desc': 'Transitions plus fluides, micro-interactions raffinées et effets visuels optimisés dans toute l\'expérience.',
+    'whatsnew.analytics.title': 'Google Analytics 4',
+    'whatsnew.analytics.desc': 'Intégration du GA4 avec contrôle du consentement aux cookies pour une analyse de trafic optimisée.',
+    'whatsnew.a11y.title': 'Widget d\'Accessibilité',
+    'whatsnew.a11y.desc': 'Nouvelles options pour agrandir le texte du site et réduire les animations de mouvement lourdes.',
     'about.title': 'À propos',
     'about.subtitle': 'Ingénieur Logiciel & Full Stack',
     'about.p1':
@@ -825,8 +831,10 @@ const dictionaries = {
     'whatsnew.cursor.title': 'Пользовательский курсор',
     'whatsnew.cursor.desc': 'Теперь вы можете переключаться между современным курсором Артура или стандартным системным курсором в настройках.',
     'whatsnew.cursor.cta': 'Попробовать',
-    'whatsnew.animations.title': 'Новые анимации',
-    'whatsnew.animations.desc': 'Более плавные переходы, утончённые микро-интеракции и оптимизированные визуальные эффекты по всему сайту.',
+    'whatsnew.analytics.title': 'Google Analytics 4',
+    'whatsnew.analytics.desc': 'Интеграция с GA4 с контролем согласия на куки для оптимизированного анализа трафика.',
+    'whatsnew.a11y.title': 'Виджет доступности',
+    'whatsnew.a11y.desc': 'Новые функции для увеличения размера текста и уменьшения тяжелой анимации движения.',
     'about.title': 'Обо мне',
     'about.subtitle': 'Инженер-программист & Full Stack',
     'about.p1':
@@ -1093,8 +1101,10 @@ const dictionaries = {
     'whatsnew.cursor.title': 'Cursor personalizable',
     'whatsnew.cursor.desc': 'Ahora puedes elegir entre el cursor moderno de Arthur o el cursor predeterminado del sistema en la configuración.',
     'whatsnew.cursor.cta': 'Probar',
-    'whatsnew.animations.title': 'Nuevas animaciones',
-    'whatsnew.animations.desc': 'Transiciones más suaves, micro-interacciones refinadas y efectos visuales optimizados en toda la experiencia.',
+    'whatsnew.analytics.title': 'Google Analytics 4',
+    'whatsnew.analytics.desc': 'Integración con GA4 con control de consentimiento de cookies para un análisis de tráfico optimizado.',
+    'whatsnew.a11y.title': 'Widget de Accesibilidad',
+    'whatsnew.a11y.desc': 'Nuevas opciones para aumentar el tamaño de los textos y reducir las animaciones de movimiento pesado.',
     'about.title': 'Sobre mí',
     'about.subtitle': 'Ingeniero de Software & Full Stack',
     'about.p1':
@@ -1357,6 +1367,7 @@ const getTranslation = (lang: Language, key: DictionaryKeys) => {
 
 interface LanguageContextData {
   language: Language;
+  isChangingLanguage: boolean;
   toggleLanguage: () => void;
   setLanguage: (lang: Language) => void;
   t: (key: DictionaryKeys) => string;
@@ -1364,6 +1375,7 @@ interface LanguageContextData {
 
 const LanguageContext = createContext<LanguageContextData>({
   language: 'pt',
+  isChangingLanguage: false,
   toggleLanguage: () => { },
   setLanguage: () => { },
   t: (key: DictionaryKeys) => getTranslation('pt', key),
@@ -1371,6 +1383,7 @@ const LanguageContext = createContext<LanguageContextData>({
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguage] = useState<Language>('en');
+  const [isChangingLanguage, setIsChangingLanguage] = useState(false);
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem('@Portfolio:lang') as Language;
@@ -1386,24 +1399,29 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
-  const toggleLanguage = () => {
-    const newLang = language === 'pt' ? 'en' : 'pt';
-    setLanguage(newLang);
-    localStorage.setItem('@Portfolio:lang', newLang);
+  const applyLanguage = (newLang: Language) => {
+    if (newLang === language) return;
+    setIsChangingLanguage(true);
+    setTimeout(() => {
+      setLanguage(newLang);
+      localStorage.setItem('@Portfolio:lang', newLang);
+      setIsChangingLanguage(false);
+    }, 2000);
   };
 
-  const handleSetLanguage = (lang: Language) => {
-    setLanguage(lang);
-    localStorage.setItem('@Portfolio:lang', lang);
+  const toggleLanguage = () => {
+    const newLang = language === 'pt' ? 'en' : 'pt';
+    applyLanguage(newLang);
   };
 
   const t = (key: DictionaryKeys) => getTranslation(language, key);
 
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage, setLanguage: handleSetLanguage, t }}>
+    <LanguageContext.Provider value={{ language, isChangingLanguage, toggleLanguage, setLanguage: applyLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );
 };
 
 export const useLanguage = () => useContext(LanguageContext);
+

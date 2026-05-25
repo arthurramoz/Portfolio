@@ -16,6 +16,7 @@ import CursorGlow from '@/components/CursorGlow';
 import CustomCursor from '@/components/CustomCursor';
 import AccessibilityWidget from '@/components/AccessibilityWidget';
 import CookieConsent from '@/components/CookieConsent';
+import LanguageLoading from '@/components/LanguageLoading';
 
 const Providers = ({ children }: PropsWithChildren) => {
   return (
@@ -36,6 +37,7 @@ const Providers = ({ children }: PropsWithChildren) => {
               </div>
               <AccessibilityWidget />
               <CookieConsent />
+              <LanguageLoading />
               <ToastContainer
                 style={{
                   zIndex: 999999,

@@ -64,6 +64,12 @@ const ACTIONS: Record<string, (router: ReturnType<typeof useRouter>) => void> = 
       }
     }, 600);
   },
+  'a11y-widget': () => {
+    const el = document.getElementById('a11y-widget-trigger');
+    if (el) {
+      el.click();
+    }
+  },
 };
 
 const WhatsNew = () => {

@@ -1,5 +1,5 @@
 import { IconType } from 'react-icons';
-import { FiCreditCard, FiMessageCircle, FiMousePointer, FiZap, FiArrowRight } from 'react-icons/fi';
+import { FiCreditCard, FiMessageCircle, FiMousePointer, FiBarChart2, FiEye, FiArrowRight } from 'react-icons/fi';
 
 export interface HighlightMock {
   title: string;
@@ -71,10 +71,18 @@ export const HIGHLIGHT_CONFIG: HighlightConfig = {
       action: 'cursor-settings',
     },
     {
-      icon: FiZap,
-      accent: '#22d3ee',
-      titleKey: 'whatsnew.animations.title',
-      descKey: 'whatsnew.animations.desc',
+      icon: FiBarChart2,
+      accent: '#10b981',
+      titleKey: 'whatsnew.analytics.title',
+      descKey: 'whatsnew.analytics.desc',
+    },
+    {
+      icon: FiEye,
+      accent: '#a855f7',
+      titleKey: 'whatsnew.a11y.title',
+      descKey: 'whatsnew.a11y.desc',
+      ctaKey: 'whatsnew.cursor.cta',
+      action: 'a11y-widget',
     },
   ],
 };

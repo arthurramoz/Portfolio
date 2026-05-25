@@ -138,6 +138,7 @@ const AccessibilityWidget = () => {
   return (
     <>
       <Fab
+        id="a11y-widget-trigger"
         onClick={() => setOpen(prev => !prev)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}

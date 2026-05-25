@@ -23,7 +23,7 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="pt">
-      <head>
+      <body className={`${plusJakarta.variable} ${plusJakarta.className}`}>
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
             <Script
@@ -54,8 +54,6 @@ const RootLayout = ({
             </Script>
           </>
         )}
-      </head>
-      <body className={`${plusJakarta.variable} ${plusJakarta.className}`}>
         <Providers>{children}</Providers>
       </body>
     </html>

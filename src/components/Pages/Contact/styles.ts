@@ -92,8 +92,8 @@ export const InfoCard = styled(motion.a)`
   text-decoration: none;
   cursor: pointer;
   background: ${({ theme }) => theme.colors.navbarBg};
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   box-shadow: 0 2px 12px ${({ theme }) => theme.colors.navbarShadow};
   transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -211,8 +211,8 @@ export const InfoCardArrow = styled.div`
 export const ContactFormWrapper = styled(motion.div)`
   position: relative;
   background: ${({ theme }) => theme.colors.navbarBg};
-  backdrop-filter: blur(20px) saturate(110%);
-  -webkit-backdrop-filter: blur(20px) saturate(110%);
+  backdrop-filter: blur(10px) saturate(110%);
+  -webkit-backdrop-filter: blur(10px) saturate(110%);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   border-radius: 24px;
   padding: 40px;

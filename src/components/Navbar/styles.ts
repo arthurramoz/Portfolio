@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { motion } from 'motion/react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 export const NavbarContainer = styled.header`
   position: fixed;
@@ -21,8 +21,8 @@ export const NavbarContainer = styled.header`
   border-radius: 9999px;
 
   background: ${({ theme }) => theme.colors.navbarBg};
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   box-shadow: 0 4px 32px ${({ theme }) => theme.colors.navbarShadow};
 
@@ -155,8 +155,8 @@ export const MobileOverlay = styled(motion.div)`
   position: fixed;
   inset: 0;
   background: rgba(8, 8, 10, 0.45);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 999;
 `;
 
@@ -173,8 +173,8 @@ export const MobileDrawer = styled(motion.div)`
     theme.colors.dropdownBg === '#ffffff'
       ? 'rgba(255, 255, 255, 0.72)'
       : 'rgba(15, 15, 22, 0.65)'};
-  backdrop-filter: blur(35px) saturate(210%);
-  -webkit-backdrop-filter: blur(35px) saturate(210%);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   border-radius: 28px;
   box-shadow: 
@@ -191,20 +191,8 @@ export const MobileDrawer = styled(motion.div)`
   }
 `;
 
-const driftGlow = keyframes`
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(40px, -30px) scale(1.08);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.95);
-  }
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-`;
+
+
 
 export const AmbientGlow = styled.div<{ $color: string; $top: string; $left: string; $size: string }>`
   position: absolute;
@@ -213,15 +201,11 @@ export const AmbientGlow = styled.div<{ $color: string; $top: string; $left: str
   width: ${({ $size }) => $size};
   height: ${({ $size }) => $size};
   background: radial-gradient(circle, ${({ $color }) => $color}22 0%, transparent 70%);
-  filter: blur(50px);
+  filter: blur(25px);
   pointer-events: none;
   z-index: 0;
-  animation: ${driftGlow} 22s ease-in-out infinite;
 
-  &:nth-child(2) {
-    animation-duration: 30s;
-    animation-delay: -8s;
-  }
+
 `;
 
 export const MobileDrawerContent = styled.div`
@@ -436,8 +420,8 @@ export const MobileLanguageModal = styled(motion.div)`
   border-radius: 20px;
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   background: ${({ theme }) => theme.colors.dropdownBg};
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
   padding: 20px;
   display: flex;
@@ -523,8 +507,8 @@ export const ProjectsDropdown = styled(motion.div)`
   padding: 6px;
   border-radius: 16px;
   background: ${({ theme }) => theme.colors.dropdownBg};
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   box-shadow:
     0 12px 40px ${({ theme }) => theme.colors.navbarShadow},
@@ -624,8 +608,8 @@ export const SettingsDropdown = styled(motion.div)`
   padding: 6px;
   border-radius: 16px;
   background: ${({ theme }) => theme.colors.dropdownBg};
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   box-shadow:
     0 12px 40px ${({ theme }) => theme.colors.navbarShadow},
@@ -744,8 +728,8 @@ export const LanguageSubmenu = styled.div`
   padding: 6px;
   border-radius: 12px;
   background: ${({ theme }) => theme.colors.dropdownBg};
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   box-shadow:
     0 8px 32px ${({ theme }) => theme.colors.navbarShadow},
@@ -816,8 +800,8 @@ export const PortfolioSubmenu = styled.div`
   padding: 6px;
   border-radius: 14px;
   background: ${({ theme }) => theme.colors.dropdownBg};
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   box-shadow:
     0 8px 32px ${({ theme }) => theme.colors.navbarShadow},

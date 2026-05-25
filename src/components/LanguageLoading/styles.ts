@@ -8,12 +8,7 @@ export const Overlay = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: ${({ theme }) =>
-    theme.colors.dropdownBg === '#ffffff'
-      ? 'rgba(255, 255, 255, 0.82)'
-      : 'rgba(10, 10, 14, 0.82)'};
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  background: rgba(10, 10, 14, 0.95);
 `;
 
 const pulse = keyframes`

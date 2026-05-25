@@ -116,8 +116,8 @@ export const EntryCard = styled(motion.div) <{
 }>`
   position: relative;
   background: ${({ theme }) => theme.colors.dropdownBg};
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   border-radius: 20px;
   padding: ${({ $highlight }) => ($highlight ? '32px 32px 28px' : '22px 24px 18px')};

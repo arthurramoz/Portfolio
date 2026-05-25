@@ -1406,7 +1406,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
       setLanguage(newLang);
       localStorage.setItem('@Portfolio:lang', newLang);
       setIsChangingLanguage(false);
-    }, 2000);
+    }, 400);
   };
 
   const toggleLanguage = () => {

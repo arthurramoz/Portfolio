@@ -81,7 +81,7 @@ const CustomCursor = () => {
       rafRef.current = requestAnimationFrame(animate);
     };
 
-    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mousemove', onMove, { passive: true });
     document.addEventListener('mouseleave', onLeave);
     document.addEventListener('mouseenter', onEnter);
     rafRef.current = requestAnimationFrame(animate);
@@ -92,7 +92,7 @@ const CustomCursor = () => {
       document.removeEventListener('mouseenter', onEnter);
       cancelAnimationFrame(rafRef.current);
     };
-  }, [isMobile, visible]);
+  }, [isMobile]);
 
   if (isMobile || cursorMode === 'default') return null;
 

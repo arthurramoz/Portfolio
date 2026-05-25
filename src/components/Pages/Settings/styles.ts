@@ -10,8 +10,8 @@ export const DirectRedirectCard = styled(motion.button)`
   border-radius: 20px;
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   background: ${({ theme }) => theme.colors.dropdownBg};
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 4px 32px ${({ theme }) => theme.colors.navbarShadow};
   cursor: pointer;
   text-align: left;
@@ -35,8 +35,8 @@ export const DirectRedirectCard = styled(motion.button)`
 
 export const LangCollapsibleCard = styled(motion.div)`
   background: ${({ theme }) => theme.colors.dropdownBg};
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   border-radius: 20px;
   overflow: hidden;
@@ -111,8 +111,8 @@ export const SettingsPageWrapper = styled.div`
 
 export const SectionCard = styled(motion.section)`
   background: ${({ theme }) => theme.colors.dropdownBg};
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   border-radius: 20px;
   padding: 32px;

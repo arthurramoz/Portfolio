@@ -81,8 +81,6 @@ export const HIGHLIGHT_CONFIG: HighlightConfig = {
       accent: '#a855f7',
       titleKey: 'whatsnew.a11y.title',
       descKey: 'whatsnew.a11y.desc',
-      ctaKey: 'whatsnew.cursor.cta',
-      action: 'a11y-widget',
     },
   ],
 };

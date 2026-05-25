@@ -16,8 +16,8 @@ const Fab = styled(motion.button)`
   border-radius: 50%;
   border: 1px solid ${({ theme }) => theme.colors.btnSecondaryBorder};
   background: ${({ theme }) => theme.colors.navbarBg};
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,8 +48,8 @@ const Panel = styled(motion.div)`
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.colors.btnSecondaryBorder};
   background: ${({ theme }) => theme.colors.navbarBg};
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
   padding: 20px;
   display: flex;

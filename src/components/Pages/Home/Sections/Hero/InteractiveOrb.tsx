@@ -25,9 +25,7 @@ const createParticles = (): Particle[] => {
     const phi = Math.random() * Math.PI * 2;
 
     const n1 = Math.sin(theta * 3.0) * Math.cos(phi * 2.0) * 0.12;
-    const n2 = Math.sin(theta * 5.0 + 1.3) * Math.sin(phi * 3.0 + 0.7) * 0.06;
-    const n3 = Math.cos(theta * 2.0 + phi * 4.0) * 0.04;
-    const deform = 1 + n1 + n2 + n3;
+    const deform = 1 + n1;
 
     const r = SPHERE_RADIUS * deform;
 
@@ -186,7 +184,7 @@ const InteractiveOrb = () => {
 
       projected.sort((a, b) => b.depth - a.depth);
 
-      const BUCKETS_COUNT = 16;
+      const BUCKETS_COUNT = 8;
       const buckets: typeof projected[] = Array.from({ length: BUCKETS_COUNT }, () => []);
 
       for (let i = 0; i < projected.length; i++) {

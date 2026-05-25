@@ -29,7 +29,7 @@ const CursorGlow = () => {
     };
 
     const animate = () => {
-      const lerp = 0.02;
+      const lerp = 0.08;
       currentRef.current.x += (mouseRef.current.x - currentRef.current.x) * lerp;
       currentRef.current.y += (mouseRef.current.y - currentRef.current.y) * lerp;
 
@@ -44,7 +44,7 @@ const CursorGlow = () => {
         const b = (C_LEFT[2] + (C_RIGHT[2] - C_LEFT[2]) * t) | 0;
 
         const distFromCenter = Math.abs(x - w / 2) / (w / 2);
-        const radius = 400 + distFromCenter * 400;
+        const radius = 300 + distFromCenter * 200;
 
         const isDark = glowRef.current.dataset.dark === '1';
         const a1 = isDark ? 0.04 : 0.05;
@@ -60,7 +60,7 @@ const CursorGlow = () => {
       rafRef.current = requestAnimationFrame(animate);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     rafRef.current = requestAnimationFrame(animate);
 
     return () => {

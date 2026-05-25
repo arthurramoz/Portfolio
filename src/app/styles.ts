@@ -23,9 +23,10 @@ export const BlobLeft = styled(motion.div)`
     ${({ theme }) => theme.colors.primary2}50 0%,
     transparent 70%
   );
-  filter: blur(80px);
+  filter: blur(40px);
   pointer-events: none;
   z-index: 0;
+  will-change: transform;
 `;
 
 export const BlobRight = styled(motion.div)`
@@ -40,7 +41,8 @@ export const BlobRight = styled(motion.div)`
     ${({ theme }) => theme.colors.secondary2}40 0%,
     transparent 70%
   );
-  filter: blur(80px);
+  filter: blur(40px);
   pointer-events: none;
   z-index: 0;
+  will-change: transform;
 `;

@@ -105,8 +105,8 @@ export const GlassCard = styled.div`
     isDark(theme)
       ? 'rgba(255, 255, 255, 0.04)'
       : 'rgba(255, 255, 255, 0.65)'};
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
   border: 1px solid
     ${({ theme }) =>

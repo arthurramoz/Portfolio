@@ -14,8 +14,8 @@ export const CasesGrid = styled.div`
 export const CaseCard = styled(motion.article)<{ $accentColor: string }>`
   position: relative;
   background: ${({ theme }) => theme.colors.dropdownBg};
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   border-radius: 24px;
   overflow: hidden;

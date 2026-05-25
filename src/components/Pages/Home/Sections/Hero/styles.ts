@@ -190,8 +190,8 @@ export const SecondaryButton = styled(BaseButton)`
   background: ${({ theme }) => theme.colors.btnSecondaryBg};
   color: ${({ theme }) => theme.colors.btnSecondaryText};
   border: 1px solid ${({ theme }) => theme.colors.btnSecondaryBorder};
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 `;
 
 export const IllustrationBlock = styled.div`

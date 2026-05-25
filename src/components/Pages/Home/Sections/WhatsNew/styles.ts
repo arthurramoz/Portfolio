@@ -54,8 +54,8 @@ export const SectionInner = styled.div`
 export const Card = styled.div`
   position: relative;
   background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px) saturate(110%);
-  -webkit-backdrop-filter: blur(20px) saturate(110%);
+  backdrop-filter: blur(10px) saturate(110%);
+  -webkit-backdrop-filter: blur(10px) saturate(110%);
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 28px;
   overflow: hidden;
@@ -310,8 +310,8 @@ export const FeatureGrid = styled.div`
 export const FeatureCard = styled.div<{ $accent: string }>`
   position: relative;
   background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px) saturate(110%);
-  -webkit-backdrop-filter: blur(20px) saturate(110%);
+  backdrop-filter: blur(10px) saturate(110%);
+  -webkit-backdrop-filter: blur(10px) saturate(110%);
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 24px;
   padding: 32px 28px 28px;

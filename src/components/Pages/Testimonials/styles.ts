@@ -14,8 +14,8 @@ export const TestimonialsGrid = styled.div`
 export const TestimonialCard = styled(motion.div)`
   position: relative;
   background: ${({ theme }) => theme.colors.dropdownBg};
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   border-radius: 20px;
   padding: 32px;
@@ -85,8 +85,8 @@ export const EmptyState = styled(motion.div)`
   padding: 80px 32px;
   border-radius: 20px;
   background: ${({ theme }) => theme.colors.dropdownBg};
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   text-align: center;
 `;

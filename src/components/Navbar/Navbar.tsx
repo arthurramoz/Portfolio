@@ -79,6 +79,9 @@ import {
   MobileControlCard,
   MobileControlCardLabel,
   MobileLanguageGrid,
+  MobileLanguageModalOverlay,
+  MobileLanguageModal,
+  MobileLanguageModalTitle,
   MobileVersionWrapper,
 } from './styles';
 import Switch from '@/components/Switch';
@@ -949,60 +952,63 @@ const Navbar = () => {
 
                     <MobileControlCard
                       $interactive
+                      onClick={() => setIsMobileLangOpen(true)}
+                      style={{ justifyContent: 'center' }}
+                    >
+                      <MobileControlCardLabel style={{ gap: 0 }}>
+                        <FiGlobe size={18} />
+                      </MobileControlCardLabel>
+                    </MobileControlCard>
+
+                    <MobileControlCard
+                      $interactive
                       onClick={() => {
                         router.push('/configuracoes');
                         setIsMobileOpen(false);
                       }}
+                      style={{ justifyContent: 'center' }}
                     >
-                      <MobileControlCardLabel>
+                      <MobileControlCardLabel style={{ gap: 0 }}>
                         <FiSliders size={18} />
-                        {t('nav.settings')}
                       </MobileControlCardLabel>
                     </MobileControlCard>
                   </MobileControlRow>
-
-                  <MobileControlCard $interactive onClick={() => setIsMobileLangOpen(prev => !prev)}>
-                    <MobileControlCardLabel>
-                      <FiGlobe size={18} />
-                      {t('settings.language')}
-                    </MobileControlCardLabel>
-                    <FiChevronDown
-                      size={14}
-                      style={{
-                        transform: isMobileLangOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                        transition: 'transform 0.25s ease',
-                        opacity: 0.7,
-                      }}
-                    />
-                  </MobileControlCard>
-
-                  <AnimatePresence>
-                    {isMobileLangOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0, overflow: 'hidden' }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.2, ease: 'easeInOut' }}
-                      >
-                        <MobileLanguageGrid>
-                          {LANGUAGES.map(lang => (
-                            <MobileSubmenuLink
-                              key={lang.code}
-                              $active={language === lang.code}
-                              onClick={() => {
-                                setLang(lang.code);
-                                setIsMobileOpen(false);
-                              }}
-                            >
-                              <FlagImg src={lang.flag} alt={lang.label} />
-                              {lang.label}
-                            </MobileSubmenuLink>
-                          ))}
-                        </MobileLanguageGrid>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
                 </MobileControlCenter>
+
+                <AnimatePresence>
+                  {isMobileLangOpen && (
+                    <>
+                      <MobileLanguageModalOverlay
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        onClick={() => setIsMobileLangOpen(false)}
+                      />
+                      <MobileLanguageModal
+                        initial={{ opacity: 0, scale: 0.9, x: '-50%', y: '-50%' }}
+                        animate={{ opacity: 1, scale: 1, x: '-50%', y: '-50%' }}
+                        exit={{ opacity: 0, scale: 0.9, x: '-50%', y: '-50%' }}
+                        transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+                      >
+                        <MobileLanguageModalTitle>{t('settings.language')}</MobileLanguageModalTitle>
+                        {LANGUAGES.map(lang => (
+                          <MobileSubmenuLink
+                            key={lang.code}
+                            $active={language === lang.code}
+                            onClick={() => {
+                              setLang(lang.code);
+                              setIsMobileLangOpen(false);
+                            }}
+                          >
+                            <FlagImg src={lang.flag} alt={lang.label} />
+                            {lang.label}
+                          </MobileSubmenuLink>
+                        ))}
+                      </MobileLanguageModal>
+                    </>
+                  )}
+                </AnimatePresence>
               </MobileDrawerContent>
 
               <MobileVersionWrapper>

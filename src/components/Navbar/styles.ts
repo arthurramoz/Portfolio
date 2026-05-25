@@ -377,7 +377,7 @@ export const MobileControlCenter = styled.div`
 
 export const MobileControlRow = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr auto auto;
   gap: 10px;
 `;
 
@@ -415,6 +415,45 @@ export const MobileLanguageGrid = styled.div`
   width: 100%;
   margin-top: 4px;
   padding: 4px;
+`;
+
+export const MobileLanguageModalOverlay = styled(motion.div)`
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 50;
+  border-radius: 28px;
+`;
+
+export const MobileLanguageModal = styled(motion.div)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 51;
+  width: calc(100% - 48px);
+  max-width: 300px;
+  border-radius: 20px;
+  border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  background: ${({ theme }) => theme.colors.dropdownBg};
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+`;
+
+export const MobileLanguageModalTitle = styled.span`
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.primary1};
+  margin-bottom: 8px;
 `;
 
 export const MobileDrawerDivider = styled.div`

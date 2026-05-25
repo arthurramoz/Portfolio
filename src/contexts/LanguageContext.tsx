@@ -272,7 +272,11 @@ const dictionaries = {
     'a11y.largeText': 'Textos grandes',
     'a11y.largeText.desc': 'Aumenta o tamanho dos textos do site.',
     'a11y.reduceMotion': 'Reduzir animações',
-    'a11y.reduceMotion.desc': 'Remove efeitos visuais pesados para uma experiência mais leve.'
+    'a11y.reduceMotion.desc': 'Remove efeitos visuais pesados para uma experiência mais leve.',
+    'cookie.title': 'Controle de Cookies',
+    'cookie.desc': 'Usamos cookies para melhorar sua experiência e analisar o tráfego do site. Ao continuar navegando, você aceita o uso de cookies.',
+    'cookie.btn.accept': 'Aceitar tudo',
+    'cookie.btn.decline': 'Recusar'
   },
   en: {
     'hero.greeting': 'Hi, I am',
@@ -535,7 +539,11 @@ const dictionaries = {
     'a11y.largeText': 'Large text',
     'a11y.largeText.desc': 'Increases the font size across the site.',
     'a11y.reduceMotion': 'Reduce animations',
-    'a11y.reduceMotion.desc': 'Removes heavy visual effects for a smoother experience.'
+    'a11y.reduceMotion.desc': 'Removes heavy visual effects for a smoother experience.',
+    'cookie.title': 'Cookie Control',
+    'cookie.desc': 'We use cookies to improve your experience and analyze website traffic. By continuing to browse, you accept our use of cookies.',
+    'cookie.btn.accept': 'Accept all',
+    'cookie.btn.decline': 'Decline'
   },
   fr: {
     'hero.greeting': 'Bonjour, je suis',
@@ -798,7 +806,11 @@ const dictionaries = {
     'a11y.largeText': 'Grands textes',
     'a11y.largeText.desc': 'Augmente la taille des textes du site.',
     'a11y.reduceMotion': 'Réduire les animations',
-    'a11y.reduceMotion.desc': 'Supprime les effets visuels lourds pour une expérience plus fluide.'
+    'a11y.reduceMotion.desc': 'Supprime les effets visuels lourds pour une expérience plus fluide.',
+    'cookie.title': 'Contrôle des cookies',
+    'cookie.desc': 'Nous utilisons des cookies pour améliorer votre expérience et analyser le trafic du site. En continuant à naviguer, vous acceptez leur utilisation.',
+    'cookie.btn.accept': 'Tout accepter',
+    'cookie.btn.decline': 'Refuser'
   },
   ru: {
     'hero.greeting': 'Привет, я',
@@ -1061,7 +1073,11 @@ const dictionaries = {
     'a11y.largeText': 'Крупный текст',
     'a11y.largeText.desc': 'Увеличивает размер текста на сайте.',
     'a11y.reduceMotion': 'Уменьшить анимации',
-    'a11y.reduceMotion.desc': 'Убирает тяжёлые визуальные эффекты для более плавного опыта.'
+    'a11y.reduceMotion.desc': 'Убирает тяжёлые визуальные эффекты для более плавного опыта.',
+    'cookie.title': 'Управление файлами cookie',
+    'cookie.desc': 'Мы используем файлы cookie для улучшения вашего опыта и анализа трафика сайта. Продолжая просмотр, вы соглашаетесь с их использованием.',
+    'cookie.btn.accept': 'Принять все',
+    'cookie.btn.decline': 'Отклонить'
   },
   es: {
     'hero.greeting': 'Hola, soy',
@@ -1325,7 +1341,11 @@ const dictionaries = {
     'a11y.largeText': 'Textos grandes',
     'a11y.largeText.desc': 'Aumenta el tamaño de los textos del sitio.',
     'a11y.reduceMotion': 'Reducir animaciones',
-    'a11y.reduceMotion.desc': 'Elimina efectos visuales pesados para una experiencia más fluida.'
+    'a11y.reduceMotion.desc': 'Elimina efectos visuales pesados para una experiencia más fluida.',
+    'cookie.title': 'Control de Cookies',
+    'cookie.desc': 'Utilizamos cookies para mejorar su experiencia y analizar el tráfico del sitio. Al continuar navegando, acepta el uso de cookies.',
+    'cookie.btn.accept': 'Aceptar todo',
+    'cookie.btn.decline': 'Rechazar'
   },
 } as const;
 

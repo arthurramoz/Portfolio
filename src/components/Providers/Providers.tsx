@@ -15,6 +15,7 @@ import { lightTheme } from '@/styles/theme';
 import CursorGlow from '@/components/CursorGlow';
 import CustomCursor from '@/components/CustomCursor';
 import AccessibilityWidget from '@/components/AccessibilityWidget';
+import CookieConsent from '@/components/CookieConsent';
 
 const Providers = ({ children }: PropsWithChildren) => {
   return (
@@ -34,6 +35,7 @@ const Providers = ({ children }: PropsWithChildren) => {
                 {children}
               </div>
               <AccessibilityWidget />
+              <CookieConsent />
               <ToastContainer
                 style={{
                   zIndex: 999999,
@@ -46,6 +48,7 @@ const Providers = ({ children }: PropsWithChildren) => {
     </StyledComponentsRegistry>
   );
 };
+
 
 export default Providers;
 

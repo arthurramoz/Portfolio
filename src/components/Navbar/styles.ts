@@ -423,7 +423,7 @@ export const MobileLanguageModalOverlay = styled(motion.div)`
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  z-index: 50;
+  z-index: 99990;
   border-radius: 28px;
 `;
 
@@ -432,7 +432,7 @@ export const MobileLanguageModal = styled(motion.div)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 51;
+  z-index: 99991;
   width: calc(100% - 48px);
   max-width: 300px;
   border-radius: 20px;

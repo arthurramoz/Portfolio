@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { useRouter } from 'next/navigation';
 import { FiArrowRight } from 'react-icons/fi';
 import { useLanguage } from '@/contexts/LanguageContext';

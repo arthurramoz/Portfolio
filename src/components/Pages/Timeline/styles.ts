@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 export const LegendRow = styled(motion.div)`
   display: flex;

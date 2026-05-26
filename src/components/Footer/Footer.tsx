@@ -38,6 +38,7 @@ const Footer = () => {
   const router = useRouter();
   const { t } = useLanguage();
   const [projectsOpen, setProjectsOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   const handleScrollTo = (id: string) => {
     const element = document.getElementById(id);
@@ -84,15 +85,12 @@ const Footer = () => {
           <FooterLink onClick={() => handleScrollTo('home')}>
             {t('nav.home')}
           </FooterLink>
-          <FooterLink onClick={() => handleScrollTo('sobre-mim')}>
-            {t('nav.about')}
-          </FooterLink>
 
           <FooterSubLabel
             onClick={() => setProjectsOpen(prev => !prev)}
             style={{ cursor: 'pointer' }}
           >
-            {t('nav.projects')} {projectsOpen ? '−' : '+'}
+            {t('nav.portfolio')} {projectsOpen ? '−' : '+'}
           </FooterSubLabel>
 
           <AnimatePresence>
@@ -118,18 +116,52 @@ const Footer = () => {
                 <FooterLink onClick={() => router.push('/projetos/faculdade')}>
                   {t('projects.university')}
                 </FooterLink>
+                <FooterLink onClick={() => router.push('/cursos')}>
+                  {t('nav.courses')}
+                </FooterLink>
               </motion.div>
             )}
           </AnimatePresence>
 
-          <FooterLink onClick={() => router.push('/cursos')}>
-            {t('nav.courses')}
+          <FooterSubLabel
+            onClick={() => setAboutOpen(prev => !prev)}
+            style={{ cursor: 'pointer' }}
+          >
+            {t('nav.aboutme' as Parameters<typeof t>[0])} {aboutOpen ? '−' : '+'}
+          </FooterSubLabel>
+
+          <AnimatePresence>
+            {aboutOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.25, ease: 'easeInOut' }}
+                style={{
+                  overflow: 'hidden',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '16px',
+                }}
+              >
+                <FooterLink onClick={() => router.push('/skills')}>
+                  {t('nav.skills' as Parameters<typeof t>[0])}
+                </FooterLink>
+                <FooterLink onClick={() => router.push('/jornada')}>
+                  {t('nav.timeline' as Parameters<typeof t>[0])}
+                </FooterLink>
+                <FooterLink onClick={() => router.push('/depoimentos')}>
+                  {t('nav.testimonials' as Parameters<typeof t>[0])}
+                </FooterLink>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <FooterLink onClick={() => router.push('/cases')}>
+            {t('nav.cases' as Parameters<typeof t>[0])}
           </FooterLink>
-          <FooterLink onClick={() => router.push('/skills')}>
-            {t('nav.skills' as Parameters<typeof t>[0])}
-          </FooterLink>
-          <FooterLink onClick={() => router.push('/jornada')}>
-            {t('nav.timeline' as Parameters<typeof t>[0])}
+          <FooterLink onClick={() => router.push('/contato')}>
+            {t('nav.cta')}
           </FooterLink>
         </FooterColumn>
 

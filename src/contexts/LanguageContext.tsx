@@ -10,18 +10,22 @@ import {
 } from 'react';
 
 import ptDict from '@/locales/pt.json';
+import enDict from '@/locales/en.json';
+import frDict from '@/locales/fr.json';
+import ruDict from '@/locales/ru.json';
+import esDict from '@/locales/es.json';
 
 export type Language = 'pt' | 'en' | 'fr' | 'ru' | 'es';
 
 type Dictionary = Record<string, string>;
 export type DictionaryKeys = keyof typeof ptDict;
 
-const loaders: Record<Language, () => Promise<{ default: Dictionary }>> = {
-  pt: () => Promise.resolve({ default: ptDict }),
-  en: () => import('@/locales/en.json'),
-  fr: () => import('@/locales/fr.json'),
-  ru: () => import('@/locales/ru.json'),
-  es: () => import('@/locales/es.json'),
+const dictionaries: Record<Language, Dictionary> = {
+  pt: ptDict,
+  en: enDict,
+  fr: frDict,
+  ru: ruDict,
+  es: esDict,
 };
 
 const getTranslation = (dict: Dictionary, key: string) => {
@@ -41,39 +45,18 @@ const LanguageContext = createContext<LanguageContextData>({
   isChangingLanguage: false,
   toggleLanguage: () => {},
   setLanguage: () => {},
-  t: (key: DictionaryKeys) => getTranslation(ptDict, key),
+  t: (key: DictionaryKeys) => getTranslation(dictionaries.pt, key),
 });
-
-const dictCache = new Map<Language, Dictionary>();
-dictCache.set('pt', ptDict);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguageState] = useState<Language>('pt');
-  const [dictionary, setDictionary] = useState<Dictionary>(ptDict);
   const [isChangingLanguage, setIsChangingLanguage] = useState(false);
-
-  const loadDictionary = useCallback(async (lang: Language) => {
-    const cached = dictCache.get(lang);
-    if (cached) {
-      setDictionary(cached);
-      return;
-    }
-
-    try {
-      const mod = await loaders[lang]();
-      const dict = mod.default;
-      dictCache.set(lang, dict);
-      setDictionary(dict);
-    } catch {
-      setDictionary(ptDict);
-    }
-  }, []);
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem('@Portfolio:lang') as Language;
     let targetLang: Language = 'pt';
 
-    if (savedLanguage) {
+    if (savedLanguage && dictionaries[savedLanguage]) {
       targetLang = savedLanguage;
     } else {
       const nav = navigator.language;
@@ -85,23 +68,19 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     }
 
     setLanguageState(targetLang);
-    loadDictionary(targetLang);
-  }, [loadDictionary]);
+  }, []);
 
   const applyLanguage = useCallback(
     (newLang: Language) => {
       if (newLang === language) return;
       setIsChangingLanguage(true);
-
-      loadDictionary(newLang).then(() => {
-        setTimeout(() => {
-          setLanguageState(newLang);
-          localStorage.setItem('@Portfolio:lang', newLang);
-          setIsChangingLanguage(false);
-        }, 400);
-      });
+      setTimeout(() => {
+        setLanguageState(newLang);
+        localStorage.setItem('@Portfolio:lang', newLang);
+        setIsChangingLanguage(false);
+      }, 400);
     },
-    [language, loadDictionary],
+    [language],
   );
 
   const toggleLanguage = useCallback(() => {
@@ -110,8 +89,8 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   }, [language, applyLanguage]);
 
   const t = useCallback(
-    (key: DictionaryKeys) => getTranslation(dictionary, key),
-    [dictionary],
+    (key: DictionaryKeys) => getTranslation(dictionaries[language], key),
+    [language],
   );
 
   return (
@@ -130,3 +109,4 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export const useLanguage = () => useContext(LanguageContext);
+

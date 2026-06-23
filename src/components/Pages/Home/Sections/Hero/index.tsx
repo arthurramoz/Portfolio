@@ -2,6 +2,7 @@
 
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useAccessibility } from '@/contexts/AccessibilityContext';
+import { FiDownload } from 'react-icons/fi';
 import InteractiveOrb from './InteractiveOrb';
 import {
   Actions,
@@ -11,6 +12,7 @@ import {
   Greeting,
   Name,
   PrimaryButton,
+  ResumeLink,
   SecondaryButton,
   Section,
   TextBlock,
@@ -54,6 +56,13 @@ const Hero = () => {
               >
                 {t('hero.btn.secondary')}
               </SecondaryButton>
+              <ResumeLink
+                href="/resume/Currículo de Arthur Moreira Ramos.pdf"
+                download
+              >
+                <FiDownload size={16} />
+                {t('hero.btn.resume' as Parameters<typeof t>[0])}
+              </ResumeLink>
             </Actions>
           </InfoBlock>
         </TextBlock>

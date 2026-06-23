@@ -169,7 +169,7 @@ const Footer = () => {
           <ColumnTitle>{t('footer.contact')}</ColumnTitle>
           <ContactItem>
             <FiMail size={15} />
-            arthurmoreiraramos550sp@gmail.com
+            arthurmoreiraramosdev@gmail.com
           </ContactItem>
           <ContactItem>
             <FiPhone size={15} />

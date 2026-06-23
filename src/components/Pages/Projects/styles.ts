@@ -1,13 +1,21 @@
 import styled, { keyframes } from 'styled-components';
 
 export const ProjectsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
+  columns: 2;
+  column-gap: 32px;
+
+  > * {
+    break-inside: avoid;
+    margin-bottom: 32px;
+  }
 
   ${({ theme }) => theme.media.md} {
-    grid-template-columns: 1fr;
-    gap: 24px;
+    columns: 1;
+    column-gap: 0;
+
+    > * {
+      margin-bottom: 24px;
+    }
   }
 `;
 

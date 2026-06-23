@@ -71,8 +71,8 @@ const CONTACT_INFO = [
   {
     icon: FiMail,
     labelKey: 'contact.email' as const,
-    value: 'arthurmoreiraramos550sp@gmail.com',
-    href: 'mailto:arthurmoreiraramos550sp@gmail.com',
+    value: 'arthurmoreiraramosdev@gmail.com',
+    href: 'mailto:arthurmoreiraramosdev@gmail.com',
     color: '#48cae4',
   },
   {

@@ -124,7 +124,7 @@ const ProjectsPage = ({
           </CardDescription>
 
           {hasCompanyFeatures &&
-            (project.roleKey || project.duration || project.highlightKey) && (
+            (project.roleKey || project.durationKey || project.highlightKey) && (
               <InfoPillsRow>
                 {project.roleKey && (
                   <InfoPill>
@@ -135,13 +135,13 @@ const ProjectsPage = ({
                     {t(project.roleKey as Parameters<typeof t>[0])}
                   </InfoPill>
                 )}
-                {project.duration && (
+                {project.durationKey && (
                   <InfoPill>
                     <FiClock size={13} />
                     <strong>
                       {t('projects.pill.duration' as Parameters<typeof t>[0])}:
                     </strong>{' '}
-                    {project.duration}
+                    {t(project.durationKey as Parameters<typeof t>[0])}
                   </InfoPill>
                 )}
                 {project.highlightKey && (

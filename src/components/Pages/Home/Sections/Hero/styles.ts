@@ -194,6 +194,38 @@ export const SecondaryButton = styled(BaseButton)`
   -webkit-backdrop-filter: blur(6px);
 `;
 
+export const ResumeLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  background: transparent;
+  color: ${({ theme }) => theme.colors.primary1};
+  border: 1px solid ${({ theme }) => theme.colors.primary1}40;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.primary1}12;
+    border-color: ${({ theme }) => theme.colors.primary1};
+    transform: translateY(-2px);
+  }
+
+  svg {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover svg {
+    transform: translateY(2px);
+  }
+`;
+
 export const IllustrationBlock = styled.div`
   flex-shrink: 0;
   display: flex;

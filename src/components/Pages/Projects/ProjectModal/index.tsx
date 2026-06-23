@@ -69,7 +69,7 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
             {t(project.descriptionKey as Parameters<typeof t>[0])}
           </ModalDescription>
 
-          {(project.roleKey || project.duration || project.highlightKey) && (
+          {(project.roleKey || project.durationKey || project.highlightKey) && (
             <InfoPillsRow>
               {project.roleKey && (
                 <InfoPill>
@@ -77,10 +77,10 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                   {t(project.roleKey as Parameters<typeof t>[0])}
                 </InfoPill>
               )}
-              {project.duration && (
+              {project.durationKey && (
                 <InfoPill>
                   <strong>{t('projects.pill.duration' as Parameters<typeof t>[0])}:</strong>
-                  {project.duration}
+                  {t(project.durationKey as Parameters<typeof t>[0])}
                 </InfoPill>
               )}
               {project.highlightKey && (

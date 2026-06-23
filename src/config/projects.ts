@@ -16,7 +16,7 @@ export interface ProjectItem {
   hidden?: boolean;
   featured?: boolean;
   roleKey?: string;
-  duration?: string;
+  durationKey?: string;
   highlightKey?: string;
   platforms?: ProjectPlatform[];
 }
@@ -69,7 +69,7 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     ],
     tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'Tailwind CSS', 'MUI', 'Chart.js', 'Firebase', 'Pagarme', 'J&T Express'],
     roleKey: 'project.cqt.role',
-    duration: '7 meses',
+    durationKey: 'project.cqt.duration',
     highlightKey: 'project.cqt.highlight',
     platforms: [
       {
@@ -128,7 +128,7 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     ],
     tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'Radix UI', 'Recharts', 'Chart.js', 'React Query'],
     roleKey: 'project.edugest.role',
-    duration: '3 meses',
+    durationKey: 'project.edugest.duration',
     highlightKey: 'project.edugest.highlight',
   },
   {
@@ -143,7 +143,7 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     ],
     tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'QRCode'],
     roleKey: 'project.gotasks.role',
-    duration: '2 meses',
+    durationKey: 'project.gotasks.duration',
     highlightKey: 'project.gotasks.highlight',
   },
   {
@@ -151,7 +151,7 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     descriptionKey: 'project.gti.desc',
     tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'Framer Motion', 'React Query'],
     roleKey: 'project.gti.role',
-    duration: '4 meses',
+    durationKey: 'project.gti.duration',
     highlightKey: 'project.gti.highlight',
   },
   {
@@ -159,7 +159,7 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     descriptionKey: 'project.impulsse.desc',
     tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'Tailwind CSS', 'Chart.js', 'Draft.js', 'Next Auth', 'Swiper'],
     roleKey: 'project.impulsse.role',
-    duration: '2 meses',
+    durationKey: 'project.impulsse.duration',
     highlightKey: 'project.impulsse.highlight',
   },
   {
@@ -167,7 +167,7 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     descriptionKey: 'project.lawhub.desc',
     tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'Framer Motion', 'react-pdf'],
     roleKey: 'project.lawhub.role',
-    duration: '3 meses',
+    durationKey: 'project.lawhub.duration',
     highlightKey: 'project.lawhub.highlight',
   },
   {
@@ -175,7 +175,7 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     descriptionKey: 'project.localizemais.desc',
     tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'Chart.js', 'Lucide', 'Sharp', 'Netlify'],
     roleKey: 'project.localizemais.role',
-    duration: '2 meses',
+    durationKey: 'project.localizemais.duration',
     highlightKey: 'project.localizemais.highlight',
   },
   {
@@ -183,7 +183,7 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     descriptionKey: 'project.medconfere.desc',
     tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'MUI 7', 'Recharts', 'pdfjs-dist', 'Canvas', 'Netlify'],
     roleKey: 'project.medconfere.role',
-    duration: '2 meses',
+    durationKey: 'project.medconfere.duration',
     highlightKey: 'project.medconfere.highlight',
   },
   {
@@ -192,7 +192,7 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     featured: true,
     tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'Framer Motion', 'Credit Card UI'],
     roleKey: 'project.meuacesso.role',
-    duration: '2 semanas',
+    durationKey: 'project.meuacesso.duration',
     highlightKey: 'project.meuacesso.highlight',
   },
   {
@@ -200,7 +200,7 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     descriptionKey: 'project.planc.desc',
     tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'React Datepicker'],
     roleKey: 'project.planc.role',
-    duration: '5 meses',
+    durationKey: 'project.planc.duration',
     highlightKey: 'project.planc.highlight',
   },
   {
@@ -218,7 +218,7 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     ],
     tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'Recharts', 'jsPDF', 'html2canvas', 'react-dropzone', 'Swiper'],
     roleKey: 'project.popgov.role',
-    duration: '3 meses',
+    durationKey: 'project.popgov.duration',
     highlightKey: 'project.popgov.highlight',
   },
   {
@@ -226,7 +226,7 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     descriptionKey: 'project.protecin.desc',
     tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'QR Code', 'react-to-print', 'nuqs'],
     roleKey: 'project.protecin.role',
-    duration: '2 meses',
+    durationKey: 'project.protecin.duration',
     highlightKey: 'project.protecin.highlight',
   },
   {
@@ -234,7 +234,7 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     descriptionKey: 'project.queroeventos.desc',
     tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'Tailwind CSS', 'MUI 7', 'Firebase', 'QRCode'],
     roleKey: 'project.queroeventos.role',
-    duration: '5 meses',
+    durationKey: 'project.queroeventos.duration',
     highlightKey: 'project.queroeventos.highlight',
     platforms: [
       {
@@ -259,7 +259,7 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     featured: true,
     tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'MUI', 'Chart.js', 'Swiper', 'QRCode'],
     roleKey: 'project.xmandu.role',
-    duration: '10 meses',
+    durationKey: 'project.xmandu.duration',
     highlightKey: 'project.xmandu.highlight',
     platforms: [
       {
@@ -290,7 +290,7 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     descriptionKey: 'project.yuse.desc',
     tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'Framer Motion'],
     roleKey: 'project.yuse.role',
-    duration: '3 semanas',
+    durationKey: 'project.yuse.duration',
     highlightKey: 'project.yuse.highlight',
   },
 ];

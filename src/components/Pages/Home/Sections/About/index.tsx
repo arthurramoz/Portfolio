@@ -62,7 +62,7 @@ const About = () => {
           <motion.div variants={itemVariants}>
             <PhotoWrap>
               <Image
-                src="/me/me.jpg"
+                src="/me/1.jpg"
                 alt="Arthur Moreira Ramos"
                 width={360}
                 height={420}

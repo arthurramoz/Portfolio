@@ -228,3 +228,151 @@ export const SkillCircle = styled.div``;
 export const SkillIcon = styled.div``;
 export const SkillHoverName = styled.div``;
 export const SkillName = styled.span``;
+
+/* --- Favoritas --- */
+export const FavoritesSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 56px;
+`;
+
+export const FavoritesLabel = styled.span`
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: ${({ theme }) => theme.colors.subtitle};
+  padding-left: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: ${({ theme }) => theme.colors.primary1}30;
+  }
+`;
+
+export const FavoritesGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+
+  ${({ theme }) => theme.media.md} {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+`;
+
+const isDarkFav = (theme: any) => theme.colors.title === '#f0f0f2';
+
+export const FavoriteCard = styled.div`
+  position: relative;
+  border-radius: 20px;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow: hidden;
+
+  background: ${({ theme }) =>
+    isDarkFav(theme)
+      ? 'rgba(255, 255, 255, 0.04)'
+      : 'rgba(255, 255, 255, 0.65)'};
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border: 1px solid
+    ${({ theme }) =>
+    isDarkFav(theme)
+      ? 'rgba(255, 255, 255, 0.09)'
+      : 'rgba(255, 255, 255, 0.85)'};
+
+  box-shadow: ${({ theme }) =>
+    isDarkFav(theme)
+      ? 'inset 0 1px 1px rgba(255,255,255,0.06), 0 4px 24px rgba(0,0,0,0.14)'
+      : 'inset 0 1px 2px rgba(255,255,255,0.5), 0 4px 24px rgba(0,0,0,0.05)'};
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: ${({ theme }) =>
+      isDarkFav(theme)
+        ? 'inset 0 1px 1px rgba(255,255,255,0.08), 0 10px 36px rgba(0,0,0,0.2)'
+        : 'inset 0 1px 2px rgba(255,255,255,0.6), 0 10px 36px rgba(0,0,0,0.08)'};
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    border-radius: 20px 20px 0 0;
+    background: linear-gradient(
+      180deg,
+      ${({ theme }) =>
+        isDarkFav(theme) ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.35)'},
+      transparent
+    );
+    pointer-events: none;
+  }
+`;
+
+export const FavoriteHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 14px;
+`;
+
+export const FavoriteIconWrapper = styled.div<{ $color?: string }>`
+  font-size: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${({ $color }) => $color ?? 'currentColor'};
+  flex-shrink: 0;
+
+  svg {
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.12));
+  }
+`;
+
+export const FavoriteMeta = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+export const FavoriteName = styled.span`
+  font-size: 18px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.title};
+  line-height: 1.2;
+`;
+
+export const FavoriteBadge = styled.span`
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: ${({ theme }) => theme.colors.primary1}20;
+  color: ${({ theme }) => theme.colors.primary1};
+  width: fit-content;
+`;
+
+export const FavoriteDescription = styled.p`
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: ${({ theme }) => theme.colors.text};
+  margin: 0;
+  position: relative;
+  z-index: 1;
+`;

@@ -1,4 +1,4 @@
-import { FiMessageCircle, FiCreditCard } from 'react-icons/fi';
+import { FiMessageCircle, FiCreditCard, FiServer, FiLayout } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 
 export interface CaseMetric {
@@ -35,6 +35,21 @@ export const CASE_STUDIES: CaseStudy[] = [
     icon: FiCreditCard,
   },
   {
+    id: 'saas-multitenant',
+    titleKey: 'cases.saas.title',
+    problemKey: 'cases.saas.problem',
+    approachKey: 'cases.saas.approach',
+    resultKey: 'cases.saas.result',
+    tags: ['Next.js', 'Node.js', 'Prisma', 'RBAC', 'Multi-tenant', 'Pagar.me', 'TypeScript'],
+    metrics: [
+      { labelKey: 'cases.saas.metric1.label', valueKey: 'cases.saas.metric1.value' },
+      { labelKey: 'cases.saas.metric2.label', valueKey: 'cases.saas.metric2.value' },
+      { labelKey: 'cases.saas.metric3.label', valueKey: 'cases.saas.metric3.value' },
+    ],
+    accentColor: '#a78bfa',
+    icon: FiServer,
+  },
+  {
     id: 'realtime-chat',
     titleKey: 'cases.chat.title',
     problemKey: 'cases.chat.problem',
@@ -49,5 +64,19 @@ export const CASE_STUDIES: CaseStudy[] = [
     accentColor: '#fb6f92',
     icon: FiMessageCircle,
   },
+  {
+    id: 'admin-dashboards',
+    titleKey: 'cases.dashboard.title',
+    problemKey: 'cases.dashboard.problem',
+    approachKey: 'cases.dashboard.approach',
+    resultKey: 'cases.dashboard.result',
+    tags: ['React', 'TypeScript', 'styled-components', 'Chart.js', 'REST API', 'Design System'],
+    metrics: [
+      { labelKey: 'cases.dashboard.metric1.label', valueKey: 'cases.dashboard.metric1.value' },
+      { labelKey: 'cases.dashboard.metric2.label', valueKey: 'cases.dashboard.metric2.value' },
+      { labelKey: 'cases.dashboard.metric3.label', valueKey: 'cases.dashboard.metric3.value' },
+    ],
+    accentColor: '#4ade80',
+    icon: FiLayout,
+  },
 ];
-

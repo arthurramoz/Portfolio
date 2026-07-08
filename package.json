@@ -1,5 +1,5 @@
 {
-  "name": "new-project",
+  "name": "arthurramoz-portfolio",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -50,14 +50,14 @@
     "prettier": "^2.7.1",
     "typescript": "^5"
   },
-  "description": "",
+  "description": "Personal portfolio of Arthur Ramos — Frontend Developer. Built with Next.js, TypeScript, styled-components, and Framer Motion.",
   "main": "next.config.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/arthurramoz/Portfolio.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["portfolio", "frontend", "react", "nextjs", "typescript", "styled-components"],
+  "author": "Arthur Ramos <https://github.com/arthurramoz>",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {

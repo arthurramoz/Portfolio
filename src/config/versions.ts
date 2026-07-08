@@ -7,10 +7,67 @@ export interface VersionEntry {
   highlights: Record<Exclude<Language, 'es'>, string[]> & { es?: string[] };
 }
 
-export const CURRENT_VERSION = 'v1.8';
-export const CURRENT_LABEL = 'Nova';
+export const CURRENT_VERSION = 'v2.0';
+export const CURRENT_LABEL = 'Lumina';
 
 export const VERSION_HISTORY: VersionEntry[] = [
+  {
+    version: 'v2.0',
+    date: '08/07/2026',
+    label: 'Lumina',
+    highlights: {
+      pt: [
+        'Redesign completo da página de Cases — cards colapsáveis com expand/collapse via Framer Motion',
+        'Integração dos 4 cases reais: Pagar.me, SaaS Multi-tenant, Chat em Tempo Real e Dashboards',
+        'Seção “Minhas Favoritas” na página de Skills — cards fixados para React, Next.js e TypeScript com justificativas pessoais',
+        'Fundo ambient dinâmico: blobs animados que percorrem o site todo com drift, scale e opacity',
+        'Blobs menores adicionais com cores primária e secundária do tema',
+        'SEO completo: Schema JSON-LD, Open Graph, Twitter Cards, robots.txt e sitemap configurados',
+        'Domínio customizado: arthur-moreira-ramos.com.br',
+        'Traduções da página de Cases e seção Favoritas em PT, EN, ES, FR e RU',
+      ],
+      en: [
+        'Full redesign of the Cases page — collapsible cards with expand/collapse via Framer Motion',
+        'Integration of 4 real case studies: Pagar.me, Multi-tenant SaaS, Real-time Chat and Dashboards',
+        '"My Favorites" section on Skills page — pinned cards for React, Next.js and TypeScript with personal rationale',
+        'Dynamic ambient background: animated blobs that drift across the full site with scale and opacity',
+        'Additional smaller blobs using primary and secondary theme colors',
+        'Full SEO setup: JSON-LD Schema, Open Graph, Twitter Cards, robots.txt and sitemap configured',
+        'Custom domain: arthur-moreira-ramos.com.br',
+        'Cases page and Favorites section translations in PT, EN, ES, FR and RU',
+      ],
+      fr: [
+        'Refonte complète de la page Cases — cartes repliables avec expand/collapse via Framer Motion',
+        'Intégration de 4 études de cas réelles: Pagar.me, SaaS Multi-tenant, Chat en temps réel et Dashboards',
+        'Section “Mes favoris” sur la page Skills — cartes épinglées pour React, Next.js et TypeScript avec justifications personnelles',
+        'Fond ambient dynamique: blobs animés qui parcourent tout le site avec drift, scale et opacity',
+        'Blobs supplémentaires plus petits utilisant les couleurs principale et secondaire du thème',
+        'SEO complet: Schema JSON-LD, Open Graph, Twitter Cards, robots.txt et sitemap configurés',
+        'Domaine personnalisé: arthur-moreira-ramos.com.br',
+        'Traductions de la page Cases et section Favoris en PT, EN, ES, FR et RU',
+      ],
+      ru: [
+        'Полный редизайн страницы Cases — сворачиваемые карточки с expand/collapse через Framer Motion',
+        'Интеграция 4 реальных кейсов: Pagar.me, SaaS Мульти-тенант, Чат в реальном времени и Dashboards',
+        'Секция «Мои фавориты» на странице Skills — закреплённые карточки React, Next.js и TypeScript с личными обоснованиями',
+        'Динамичный ambient фон: анимированные blobs плывущие по всему сайту с drift, scale и opacity',
+        'Дополнительные меньшие blobs цветами первичной и вторичной палитры темы',
+        'Полный SEO: JSON-LD Schema, Open Graph, Twitter Cards, robots.txt и sitemap настроены',
+        'Кастомный домен: arthur-moreira-ramos.com.br',
+        'Переводы страницы Cases и секции Фавориты на PT, EN, ES, FR и RU',
+      ],
+      es: [
+        'Rediseño completo de la página de Cases — tarjetas colapsables con expand/collapse vía Framer Motion',
+        'Integración de 4 casos reales: Pagar.me, SaaS Multi-tenant, Chat en Tiempo Real y Dashboards',
+        'Sección “Mis Favoritas” en la página de Skills — tarjetas fijadas para React, Next.js y TypeScript con justificaciones personales',
+        'Fondo ambient dinámico: blobs animados que recorren todo el sitio con drift, scale y opacity',
+        'Blobs adicionales más pequeños con colores primario y secundario del tema',
+        'SEO completo: Schema JSON-LD, Open Graph, Twitter Cards, robots.txt y sitemap configurados',
+        'Dominio personalizado: arthur-moreira-ramos.com.br',
+        'Traducciones de la página Cases y sección Favoritas en PT, EN, ES, FR y RU',
+      ],
+    },
+  },
   {
     version: 'v1.8',
     date: '24/05/2026',

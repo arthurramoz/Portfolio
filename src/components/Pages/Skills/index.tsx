@@ -3,6 +3,7 @@
 import { motion } from 'motion/react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { HARD_SKILLS_ROWS, Skill } from '@/config/skills';
+import { SiReact, SiNextdotjs, SiTypescript } from 'react-icons/si';
 import {
   PageTitleWrapper,
   PageHeading,
@@ -17,6 +18,16 @@ import {
   SkillIconWrapper,
   SkillTooltip,
   PageHint,
+  FavoritesSection,
+  FavoritesLabel,
+  FavoritesGrid,
+  FavoriteCard,
+  FavoriteHeader,
+  FavoriteIconWrapper,
+  FavoriteMeta,
+  FavoriteName,
+  FavoriteBadge,
+  FavoriteDescription,
 } from './styles';
 
 const LEVEL_MAP: Record<
@@ -29,6 +40,30 @@ const LEVEL_MAP: Record<
   2: { span: 1, iconSize: 50 },
   1: { span: 1, iconSize: 44 },
 };
+
+const FAVORITES = [
+  {
+    name: 'React',
+    icon: SiReact,
+    color: '#61dafb',
+    badgeKey: 'skills.favorites.react.badge' as const,
+    descKey: 'skills.favorites.react.desc' as const,
+  },
+  {
+    name: 'Next.js',
+    icon: SiNextdotjs,
+    color: undefined,
+    badgeKey: 'skills.favorites.next.badge' as const,
+    descKey: 'skills.favorites.next.desc' as const,
+  },
+  {
+    name: 'TypeScript',
+    icon: SiTypescript,
+    color: '#3178c6',
+    badgeKey: 'skills.favorites.ts.badge' as const,
+    descKey: 'skills.favorites.ts.desc' as const,
+  },
+];
 
 const SkillsPage = () => {
   const { t } = useLanguage();
@@ -65,6 +100,44 @@ const SkillsPage = () => {
           {t('skills.page.hint' as Parameters<typeof t>[0])}
         </PageHint>
       </PageTitleWrapper>
+
+      {/* Favoritas fixadas */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+      >
+        <FavoritesSection>
+          <FavoritesLabel>{t('skills.favorites.label' as Parameters<typeof t>[0])}</FavoritesLabel>
+          <FavoritesGrid>
+            {FAVORITES.map((fav, i) => (
+              <motion.div
+                key={fav.name}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 0.28 + i * 0.08,
+                  duration: 0.45,
+                  ease: [0.25, 0.1, 0.25, 1],
+                }}
+              >
+                <FavoriteCard>
+                  <FavoriteHeader>
+                    <FavoriteIconWrapper $color={fav.color}>
+                      <fav.icon />
+                    </FavoriteIconWrapper>
+                    <FavoriteMeta>
+                      <FavoriteName>{fav.name}</FavoriteName>
+                      <FavoriteBadge>{t(fav.badgeKey as Parameters<typeof t>[0])}</FavoriteBadge>
+                    </FavoriteMeta>
+                  </FavoriteHeader>
+                  <FavoriteDescription>{t(fav.descKey as Parameters<typeof t>[0])}</FavoriteDescription>
+                </FavoriteCard>
+              </motion.div>
+            ))}
+          </FavoritesGrid>
+        </FavoritesSection>
+      </motion.div>
 
       <RowWrapper>
         {HARD_SKILLS_ROWS.map((row, ri) => (

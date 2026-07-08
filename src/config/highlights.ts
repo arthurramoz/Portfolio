@@ -1,5 +1,12 @@
 import { IconType } from 'react-icons';
-import { FiCreditCard, FiMessageCircle, FiMousePointer, FiBarChart2, FiEye, FiArrowRight } from 'react-icons/fi';
+import {
+  FiCreditCard,
+  FiMessageCircle,
+  FiLayers,
+  FiStar,
+  FiZap,
+  FiGlobe,
+} from 'react-icons/fi';
 
 export interface HighlightMock {
   title: string;
@@ -40,7 +47,7 @@ export const HIGHLIGHT_CONFIG: HighlightConfig = {
 
   mocks: [
     {
-      title: 'Pagar.me v5',
+      title: 'Cases — Pagar.me v5',
       icon: FiCreditCard,
       accent: '#22d3ee',
       lines: ['90%', '70%', '50%'],
@@ -50,11 +57,11 @@ export const HIGHLIGHT_CONFIG: HighlightConfig = {
       delay: 0.3,
     },
     {
-      title: 'Realtime Chat',
-      icon: FiMessageCircle,
+      title: 'Skills — Favoritas',
+      icon: FiStar,
       accent: '#fb6f92',
       lines: ['85%', '65%', '75%'],
-      tags: ['Firebase', 'React'],
+      tags: ['React', 'Next.js', 'TypeScript'],
       rotate: 2,
       position: { bottom: '10%', right: '8%' },
       delay: 0.45,
@@ -63,24 +70,32 @@ export const HIGHLIGHT_CONFIG: HighlightConfig = {
 
   features: [
     {
-      icon: FiMousePointer,
+      icon: FiLayers,
       accent: '#22d3ee',
-      titleKey: 'whatsnew.cursor.title',
-      descKey: 'whatsnew.cursor.desc',
-      ctaKey: 'whatsnew.cursor.cta',
-      action: 'cursor-settings',
+      titleKey: 'whatsnew.cases.title',
+      descKey: 'whatsnew.cases.desc',
+      ctaKey: 'whatsnew.cases.cta',
+      action: 'cases-page',
     },
     {
-      icon: FiBarChart2,
-      accent: '#10b981',
-      titleKey: 'whatsnew.analytics.title',
-      descKey: 'whatsnew.analytics.desc',
+      icon: FiStar,
+      accent: '#fb6f92',
+      titleKey: 'whatsnew.favorites.title',
+      descKey: 'whatsnew.favorites.desc',
+      ctaKey: 'whatsnew.favorites.cta',
+      action: 'skills-page',
     },
     {
-      icon: FiEye,
+      icon: FiZap,
       accent: '#a855f7',
-      titleKey: 'whatsnew.a11y.title',
-      descKey: 'whatsnew.a11y.desc',
+      titleKey: 'whatsnew.ambient.title',
+      descKey: 'whatsnew.ambient.desc',
+    },
+    {
+      icon: FiGlobe,
+      accent: '#10b981',
+      titleKey: 'whatsnew.seo.title',
+      descKey: 'whatsnew.seo.desc',
     },
   ],
 };

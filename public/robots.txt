@@ -1,6 +1,0 @@
-# Allow all search engine crawlers
-User-agent: *
-Allow: /
-
-# Sitemap
-Sitemap: https://www.arthur-moreira-ramos.com.br/sitemap.xml

@@ -179,7 +179,7 @@ const GitHub = () => {
             <StatsRow>
               <StatBox>
                 <StatValue>
-                  {commits !== null ? commits.toLocaleString() : '...'}
+                  3700+
                 </StatValue>
                 <StatLabel>
                   {t('github.totalCommits' as Parameters<typeof t>[0])}

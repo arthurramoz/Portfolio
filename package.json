@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint"
   },
@@ -19,6 +20,7 @@
     "date-fns-tz": "^2.0.0",
     "motion": "^12.38.0",
     "next": "15.0.5",
+    "next-sitemap": "^4.2.3",
     "nextjs-progressbar": "^0.0.16",
     "react": "^18",
     "react-chartjs-2": "^5.2.0",
@@ -56,7 +58,14 @@
     "type": "git",
     "url": "git+https://github.com/arthurramoz/Portfolio.git"
   },
-  "keywords": ["portfolio", "frontend", "react", "nextjs", "typescript", "styled-components"],
+  "keywords": [
+    "portfolio",
+    "frontend",
+    "react",
+    "nextjs",
+    "typescript",
+    "styled-components"
+  ],
   "author": "Arthur Ramos <https://github.com/arthurramoz>",
   "license": "ISC",
   "type": "commonjs",

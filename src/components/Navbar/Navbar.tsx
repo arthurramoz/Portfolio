@@ -9,9 +9,7 @@ import {
   FiSun,
   FiGlobe,
   FiChevronDown,
-  FiUser,
   FiBriefcase,
-  FiBookOpen,
   FiMenu,
   FiX,
   FiHome,
@@ -21,7 +19,6 @@ import {
   FiSliders,
   FiMapPin,
   FiMessageSquare,
-  FiFileText,
   FiMail,
 } from 'react-icons/fi';
 import { useAppTheme } from '@/contexts/ThemeContext';
@@ -96,11 +93,6 @@ const HOME_SECTIONS = [
   { key: 'github.viewProfile' as const, id: 'github' },
 ];
 
-const PROJECT_CATEGORIES = [
-  { key: 'projects.personal' as const, path: '/projetos/pessoais', icon: FiUser, descKey: 'projects.personal.desc' as const },
-  { key: 'projects.company' as const, path: '/projetos/empresa', icon: FiBriefcase, descKey: 'projects.company.desc' as const },
-  { key: 'projects.university' as const, path: '/projetos/faculdade', icon: FiBookOpen, descKey: 'projects.university.desc' as const },
-];
 
 const LANGUAGES = [
   { code: 'pt' as const, label: 'Português', flag: 'https://flagcdn.com/w40/br.png' },
@@ -244,10 +236,6 @@ const Navbar = () => {
     }
   };
 
-  const handleProjectNav = (path: string) => {
-    router.push(path);
-    setIsProjectsOpen(false);
-  };
 
   return (
     <>
@@ -392,42 +380,20 @@ const Navbar = () => {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0, duration: 0.2, ease: 'easeOut' }}
                     >
-                      <PortfolioItemWrapper>
-                        <ProjectsDropdownItem
-                          $active={pathname.startsWith('/projetos')}
-                          as="div"
-                          style={{ cursor: 'pointer' }}
-                        >
-                          <ProjectsDropdownIcon $active={pathname.startsWith('/projetos')}>
-                            <FiBriefcase size={18} />
-                          </ProjectsDropdownIcon>
-                          <ProjectsDropdownText>
-                            <ProjectsDropdownName>{t('nav.projects')}</ProjectsDropdownName>
-                          </ProjectsDropdownText>
-                          <FiChevronDown
-                            size={12}
-                            style={{ transform: 'rotate(-90deg)', opacity: 0.5, marginLeft: 'auto' }}
-                          />
-                        </ProjectsDropdownItem>
-
-                        <PortfolioSubmenu>
-                          {PROJECT_CATEGORIES.map(({ key, path, icon: Icon, descKey }) => (
-                            <ProjectsDropdownItem
-                              key={path}
-                              $active={pathname === path}
-                              onClick={() => handleProjectNav(path)}
-                            >
-                              <ProjectsDropdownIcon $active={pathname === path}>
-                                <Icon size={18} />
-                              </ProjectsDropdownIcon>
-                              <ProjectsDropdownText>
-                                <ProjectsDropdownName>{t(key)}</ProjectsDropdownName>
-                                <ProjectsDropdownDesc>{t(descKey)}</ProjectsDropdownDesc>
-                              </ProjectsDropdownText>
-                            </ProjectsDropdownItem>
-                          ))}
-                        </PortfolioSubmenu>
-                      </PortfolioItemWrapper>
+                      <ProjectsDropdownItem
+                        $active={pathname.startsWith('/projetos')}
+                        onClick={() => {
+                          router.push('/projetos');
+                          setIsProjectsOpen(false);
+                        }}
+                      >
+                        <ProjectsDropdownIcon $active={pathname.startsWith('/projetos')}>
+                          <FiBriefcase size={18} />
+                        </ProjectsDropdownIcon>
+                        <ProjectsDropdownText>
+                          <ProjectsDropdownName>{t('nav.projects')}</ProjectsDropdownName>
+                        </ProjectsDropdownText>
+                      </ProjectsDropdownItem>
                     </motion.div>
 
                     <motion.div
@@ -821,19 +787,16 @@ const Navbar = () => {
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.2 }}
                         >
-                          {PROJECT_CATEGORIES.map(cat => (
-                            <MobileSubmenuLink
-                              key={cat.path}
-                              $active={pathname === cat.path}
-                              onClick={() => {
-                                router.push(cat.path);
-                                setIsMobileOpen(false);
-                              }}
-                            >
-                              <cat.icon size={16} />
-                              {t(cat.key)}
-                            </MobileSubmenuLink>
-                          ))}
+                          <MobileSubmenuLink
+                            $active={pathname.startsWith('/projetos') && pathname !== '/cursos'}
+                            onClick={() => {
+                              router.push('/projetos');
+                              setIsMobileOpen(false);
+                            }}
+                          >
+                            <FiBriefcase size={16} />
+                            {t('nav.projects')}
+                          </MobileSubmenuLink>
                           <MobileSubmenuLink
                             $active={pathname === '/cursos'}
                             onClick={() => {

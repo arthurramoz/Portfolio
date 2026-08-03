@@ -1,16 +1,7 @@
-'use client';
-
-import ProjectsPage from '@/components/Pages/Projects';
-import { PERSONAL_PROJECTS } from '@/config/projects';
+import { redirect } from 'next/navigation';
 
 const PersonalProjectsPage = () => {
-  return (
-    <ProjectsPage
-      titleKey="projects.title.personal"
-      subtitleKey="projects.subtitle.personal"
-      projects={PERSONAL_PROJECTS}
-    />
-  );
+  redirect('/projetos');
 };
 
 export default PersonalProjectsPage;

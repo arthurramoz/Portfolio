@@ -1,4 +1,4 @@
-import { FiMessageCircle, FiCreditCard, FiServer, FiLayout } from 'react-icons/fi';
+import { FiMessageCircle, FiCreditCard, FiServer, FiLayout, FiBell } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 
 export interface CaseMetric {
@@ -19,6 +19,21 @@ export interface CaseStudy {
 }
 
 export const CASE_STUDIES: CaseStudy[] = [
+  {
+    id: 'push-notifications',
+    titleKey: 'cases.push.title',
+    problemKey: 'cases.push.problem',
+    approachKey: 'cases.push.approach',
+    resultKey: 'cases.push.result',
+    tags: ['Expo Push', 'Firebase FCM v1', 'React Native', 'Node.js', 'Strapi', 'Google Cloud IAM', 'Real-time'],
+    metrics: [
+      { labelKey: 'cases.push.metric1.label', valueKey: 'cases.push.metric1.value' },
+      { labelKey: 'cases.push.metric2.label', valueKey: 'cases.push.metric2.value' },
+      { labelKey: 'cases.push.metric3.label', valueKey: 'cases.push.metric3.value' },
+    ],
+    accentColor: '#f97316',
+    icon: FiBell,
+  },
   {
     id: 'pagarme-gateway',
     titleKey: 'cases.pagarme.title',
@@ -80,3 +95,4 @@ export const CASE_STUDIES: CaseStudy[] = [
     icon: FiLayout,
   },
 ];
+

@@ -69,11 +69,11 @@ export const CaseHeaderText = styled.div`
 `;
 
 export const CaseTitle = styled.h3`
-  font-size: 1.15rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.title};
   letter-spacing: -0.02em;
-  line-height: 1.3;
+  line-height: 1.25;
 `;
 
 export const CaseSubtitle = styled.p`

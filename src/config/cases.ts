@@ -1,4 +1,4 @@
-import { FiMessageCircle, FiCreditCard, FiServer, FiLayout, FiBell } from 'react-icons/fi';
+import { FiMessageCircle, FiCreditCard, FiServer, FiLayout, FiBell, FiCamera, FiShield, FiZap } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 
 export interface CaseMetric {
@@ -94,5 +94,49 @@ export const CASE_STUDIES: CaseStudy[] = [
     accentColor: '#4ade80',
     icon: FiLayout,
   },
+  {
+    id: 'qrcode-scanner',
+    titleKey: 'cases.qrcode.title',
+    problemKey: 'cases.qrcode.problem',
+    approachKey: 'cases.qrcode.approach',
+    resultKey: 'cases.qrcode.result',
+    tags: ['React Native', 'Expo Camera', 'TypeScript', 'QR Code', 'Mobile UX', 'PDF Generation'],
+    metrics: [
+      { labelKey: 'cases.metric.role', valueKey: 'cases.qrcode.role' },
+      { labelKey: 'cases.metric.collab', valueKey: 'cases.qrcode.collab' },
+      { labelKey: 'cases.metric.delivery', valueKey: 'cases.qrcode.delivery' },
+    ],
+    accentColor: '#38bdf8',
+    icon: FiCamera,
+  },
+  {
+    id: 'business-rule-ui',
+    titleKey: 'cases.bizrule.title',
+    problemKey: 'cases.bizrule.problem',
+    approachKey: 'cases.bizrule.approach',
+    resultKey: 'cases.bizrule.result',
+    tags: ['React Native', 'TypeScript', 'UX', 'Conditional Rendering', 'Business Logic', 'Node.js'],
+    metrics: [
+      { labelKey: 'cases.metric.role', valueKey: 'cases.bizrule.role' },
+      { labelKey: 'cases.metric.collab', valueKey: 'cases.bizrule.collab' },
+      { labelKey: 'cases.metric.delivery', valueKey: 'cases.bizrule.delivery' },
+    ],
+    accentColor: '#f43f5e',
+    icon: FiShield,
+  },
+  {
+    id: 'realtime-state',
+    titleKey: 'cases.realtimestate.title',
+    problemKey: 'cases.realtimestate.problem',
+    approachKey: 'cases.realtimestate.approach',
+    resultKey: 'cases.realtimestate.result',
+    tags: ['React Query', 'React Native', 'TypeScript', 'State Management', 'UX Feedback', 'Mobile'],
+    metrics: [
+      { labelKey: 'cases.metric.role', valueKey: 'cases.realtimestate.role' },
+      { labelKey: 'cases.metric.collab', valueKey: 'cases.realtimestate.collab' },
+      { labelKey: 'cases.metric.delivery', valueKey: 'cases.realtimestate.delivery' },
+    ],
+    accentColor: '#34d399',
+    icon: FiZap,
+  },
 ];
-

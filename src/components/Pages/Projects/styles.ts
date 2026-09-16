@@ -287,7 +287,7 @@ export const FeaturedBadge = styled.div`
   box-shadow: 0 4px 12px ${({ theme }) => theme.colors.primary1}40;
 `;
 
-export const CategoryBadge = styled.span<{ $category: 'company' | 'personal' | 'university' }>`
+export const TypeBadge = styled.span<{ $type: 'ecommerce' | 'dashboard' | 'landing' | 'saas' | 'other' }>`
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -297,19 +297,29 @@ export const CategoryBadge = styled.span<{ $category: 'company' | 'personal' | '
   font-weight: 700;
   letter-spacing: 0.03em;
 
-  ${({ $category, theme }) => {
-    switch ($category) {
-      case 'company':
+  ${({ $type, theme }) => {
+    switch ($type) {
+      case 'ecommerce':
         return `
           background: ${theme.colors.secondary1}18;
           color: ${theme.colors.secondary1};
         `;
-      case 'personal':
+      case 'dashboard':
         return `
           background: ${theme.colors.primary1}18;
           color: ${theme.colors.primary1};
         `;
-      case 'university':
+      case 'landing':
+        return `
+          background: #10b98118;
+          color: #10b981;
+        `;
+      case 'saas':
+        return `
+          background: #8b5cf618;
+          color: #8b5cf6;
+        `;
+      case 'other':
         return `
           background: #f59e0b18;
           color: #f59e0b;
@@ -656,4 +666,79 @@ export const PlatformRoleBadge = styled.span`
 export const PlatformCarouselWrapper = styled.div`
   border-radius: 12px;
   overflow: hidden;
+`;
+
+/* ─── Tab Bar (Web Sites / Apps) ─── */
+export const TabBar = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 14px;
+  background: ${({ theme }) => theme.colors.btnSecondaryBg};
+  border: 1px solid ${({ theme }) => theme.colors.btnSecondaryBorder};
+  margin-bottom: 32px;
+  width: fit-content;
+`;
+
+export const TabButton = styled.button<{ $active: boolean }>`
+  position: relative;
+  padding: 10px 28px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  background: ${({ $active, theme }) =>
+    $active ? theme.colors.primary1 : 'transparent'};
+  color: ${({ $active, theme }) =>
+    $active ? '#fff' : theme.colors.subtitle};
+  transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+  white-space: nowrap;
+
+  &:hover {
+    color: ${({ $active, theme }) =>
+      $active ? '#fff' : theme.colors.title};
+    background: ${({ $active, theme }) =>
+      $active ? theme.colors.primary1 : `${theme.colors.primary1}10`};
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    padding: 8px 20px;
+    font-size: 13px;
+  }
+`;
+
+export const AppsEmptyState = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 100px 24px;
+  text-align: center;
+  border: 2px dashed ${({ theme }) => theme.colors.btnSecondaryBorder};
+  border-radius: 24px;
+  background: ${({ theme }) => theme.colors.primary1}05;
+
+  svg {
+    color: ${({ theme }) => theme.colors.primary1};
+    opacity: 0.4;
+  }
+
+  span {
+    font-size: 18px;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.subtitle};
+    max-width: 320px;
+    line-height: 1.5;
+  }
+
+  ${({ theme }) => theme.media.md} {
+    padding: 64px 16px;
+
+    span {
+      font-size: 16px;
+    }
+  }
 `;

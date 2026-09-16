@@ -1,0 +1,12 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /changelog
+Disallow: /api/
+Disallow: /_next/
+
+# Host
+Host: https://www.arthur-moreira-ramos.com.br
+
+# Sitemaps
+Sitemap: https://www.arthur-moreira-ramos.com.br/sitemap.xml

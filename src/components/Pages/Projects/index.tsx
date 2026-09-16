@@ -10,14 +10,17 @@ import {
   FiZap,
   FiLayers,
   FiStar,
-  FiBriefcase,
-  FiUser,
-  FiBook,
+  FiShoppingCart,
+  FiGrid,
+  FiLayout,
+  FiBox,
+  FiMoreHorizontal,
+  FiSmartphone,
   FiMail,
 } from 'react-icons/fi';
 import { useRouter } from 'next/navigation';
 import { useLanguage } from '@/contexts/LanguageContext';
-import type { ProjectItem, ProjectCategory } from '@/config/projects';
+import type { ProjectItem, ProjectType, ProjectPlatformType } from '@/config/projects';
 import ImageCarousel from './ImageCarousel';
 import ProjectModal from './ProjectModal';
 import {
@@ -27,11 +30,12 @@ import {
   PageDescription,
 } from '@/components/Pages/global';
 import {
+  AppsEmptyState,
   CardContent,
   CardDescription,
   CardMeta,
   CardTitle,
-  CategoryBadge,
+  TypeBadge,
   EmptyState,
   FeaturedBadge,
   FilterBar,
@@ -48,6 +52,8 @@ import {
   PlatformBadge,
   ProjectCard,
   ProjectsGrid,
+  TabBar,
+  TabButton,
   Tag,
   TagsRow,
   TimelineWrapper,
@@ -66,12 +72,15 @@ interface AllProjectsPageProps {
   productionCount?: number;
 }
 
-type FilterCategory = 'all' | ProjectCategory;
+type FilterType = 'all' | ProjectType;
+type ActiveTab = ProjectPlatformType;
 
-const CATEGORY_ICONS: Record<ProjectCategory, typeof FiBriefcase> = {
-  company: FiBriefcase,
-  personal: FiUser,
-  university: FiBook,
+const TYPE_ICONS: Record<ProjectType, typeof FiShoppingCart> = {
+  ecommerce: FiShoppingCart,
+  dashboard: FiGrid,
+  landing: FiLayout,
+  saas: FiBox,
+  other: FiMoreHorizontal,
 };
 
 const containerVariants = {
@@ -98,18 +107,18 @@ const AllProjectsPage = ({
   const { t } = useLanguage();
   const router = useRouter();
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
-  const [activeFilter, setActiveFilter] = useState<FilterCategory>('all');
+  const [activeFilter, setActiveFilter] = useState<FilterType>('all');
+  const [activeTab, setActiveTab] = useState<ActiveTab>('web');
 
   const visibleProjects = projects.filter(p => !p.hidden);
 
-  /* ── Filter ── */
-  const filteredProjects = useMemo(
-    () =>
-      activeFilter === 'all'
-        ? visibleProjects
-        : visibleProjects.filter(p => p.category === activeFilter),
-    [visibleProjects, activeFilter],
-  );
+  /* ── Filter by tab (web/app) then by type ── */
+  const filteredProjects = useMemo(() => {
+    const tabFiltered = visibleProjects.filter(p => p.platformType === activeTab);
+    return activeFilter === 'all'
+      ? tabFiltered
+      : tabFiltered.filter(p => p.projectType === activeFilter);
+  }, [visibleProjects, activeFilter, activeTab]);
 
   /* ── Group by year ── */
   const projectsByYear = useMemo(() => {
@@ -131,15 +140,17 @@ const AllProjectsPage = ({
     return Math.max(...years) - Math.min(...years) + 1;
   }, [visibleProjects]);
 
-  const FILTERS: { key: FilterCategory; label: string }[] = [
+  const FILTERS: { key: FilterType; label: string }[] = [
     { key: 'all', label: t('projects.filter.all' as Parameters<typeof t>[0]) },
-    { key: 'company', label: t('projects.filter.company' as Parameters<typeof t>[0]) },
-    { key: 'personal', label: t('projects.filter.personal' as Parameters<typeof t>[0]) },
-    { key: 'university', label: t('projects.filter.university' as Parameters<typeof t>[0]) },
+    { key: 'ecommerce', label: t('projects.filter.ecommerce' as Parameters<typeof t>[0]) },
+    { key: 'dashboard', label: t('projects.filter.dashboard' as Parameters<typeof t>[0]) },
+    { key: 'landing', label: t('projects.filter.landing' as Parameters<typeof t>[0]) },
+    { key: 'saas', label: t('projects.filter.saas' as Parameters<typeof t>[0]) },
+    { key: 'other', label: t('projects.filter.other' as Parameters<typeof t>[0]) },
   ];
 
   const renderCard = (project: ProjectItem, index: number) => {
-    const CategoryIcon = CATEGORY_ICONS[project.category];
+    const TypeIcon = TYPE_ICONS[project.projectType];
     const isClickable = !!project.platforms && project.platforms.length > 0;
 
     return (
@@ -164,10 +175,10 @@ const AllProjectsPage = ({
 
           <CardContent>
             <CardMeta>
-              <CategoryBadge $category={project.category}>
-                <CategoryIcon size={10} />
-                {t(`projects.category.${project.category}` as Parameters<typeof t>[0])}
-              </CategoryBadge>
+              <TypeBadge $type={project.projectType}>
+                <TypeIcon size={10} />
+                {t(`projects.type.${project.projectType}` as Parameters<typeof t>[0])}
+              </TypeBadge>
               {project.platforms && project.platforms.length > 0 && (
                 <PlatformBadge>
                   <FiLayers size={10} />
@@ -302,68 +313,118 @@ const AllProjectsPage = ({
           </ImpactBanner>
         </motion.div>
 
-        {/* ── Filter Bar ── */}
+        {/* ── Tab Bar (Web Sites / Apps) ── */}
         <motion.div variants={itemVariants}>
-          <FilterBar>
-            {FILTERS.map(filter => (
-              <FilterButton
-                key={filter.key}
-                $active={activeFilter === filter.key}
-                onClick={() => setActiveFilter(filter.key)}
-              >
-                {filter.label}
-              </FilterButton>
-            ))}
-          </FilterBar>
+          <TabBar>
+            <TabButton
+              $active={activeTab === 'web'}
+              onClick={() => {
+                setActiveTab('web');
+                setActiveFilter('all');
+              }}
+            >
+              {t('projects.tab.websites' as Parameters<typeof t>[0])}
+            </TabButton>
+            <TabButton
+              $active={activeTab === 'app'}
+              onClick={() => {
+                setActiveTab('app');
+                setActiveFilter('all');
+              }}
+            >
+              {t('projects.tab.apps' as Parameters<typeof t>[0])}
+            </TabButton>
+          </TabBar>
         </motion.div>
 
-        {/* ── Timeline ── */}
+        {/* ── Content based on active tab ── */}
         <AnimatePresence mode="wait">
-          {filteredProjects.length === 0 ? (
+          {activeTab === 'app' ? (
             <motion.div
-              key="empty"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <EmptyState>
-                {t('projects.empty' as Parameters<typeof t>[0])}
-              </EmptyState>
-            </motion.div>
-          ) : (
-            <motion.div
-              key={activeFilter}
+              key="apps-empty"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 8 }}
               transition={{ duration: 0.25 }}
             >
-              <TimelineWrapper>
-                {projectsByYear.map(([year, yearProjects]) => (
-                  <YearSection key={year}>
-                    <YearHeader>
-                      <YearLabel>{year}</YearLabel>
-                      <YearLine />
-                      <YearCount>
-                        {yearProjects.length}{' '}
-                        {yearProjects.length === 1 ? 'projeto' : 'projetos'}
-                      </YearCount>
-                    </YearHeader>
-
-                    <motion.div
-                      variants={containerVariants}
-                      initial="hidden"
-                      animate="visible"
-                    >
-                      <ProjectsGrid>
-                        {yearProjects.map((project, index) =>
-                          renderCard(project, index),
-                        )}
-                      </ProjectsGrid>
-                    </motion.div>
-                  </YearSection>
+              <AppsEmptyState>
+                <FiSmartphone size={48} />
+                <span>
+                  {t('projects.apps.empty' as Parameters<typeof t>[0])}
+                </span>
+              </AppsEmptyState>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="web-content"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              transition={{ duration: 0.25 }}
+            >
+              {/* ── Filter Bar ── */}
+              <FilterBar>
+                {FILTERS.map(filter => (
+                  <FilterButton
+                    key={filter.key}
+                    $active={activeFilter === filter.key}
+                    onClick={() => setActiveFilter(filter.key)}
+                  >
+                    {filter.label}
+                  </FilterButton>
                 ))}
-              </TimelineWrapper>
+              </FilterBar>
+
+              {/* ── Timeline ── */}
+              <AnimatePresence mode="wait">
+                {filteredProjects.length === 0 ? (
+                  <motion.div
+                    key="empty"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <EmptyState>
+                      {t('projects.empty' as Parameters<typeof t>[0])}
+                    </EmptyState>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key={activeFilter}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    <TimelineWrapper>
+                      {projectsByYear.map(([year, yearProjects]) => (
+                        <YearSection key={year}>
+                          <YearHeader>
+                            <YearLabel>{year}</YearLabel>
+                            <YearLine />
+                            <YearCount>
+                              {yearProjects.length}{' '}
+                              {yearProjects.length === 1 ? 'projeto' : 'projetos'}
+                            </YearCount>
+                          </YearHeader>
+
+                          <motion.div
+                            variants={containerVariants}
+                            initial="hidden"
+                            animate="visible"
+                          >
+                            <ProjectsGrid>
+                              {yearProjects.map((project, index) =>
+                                renderCard(project, index),
+                              )}
+                            </ProjectsGrid>
+                          </motion.div>
+                        </YearSection>
+                      ))}
+                    </TimelineWrapper>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           )}
         </AnimatePresence>

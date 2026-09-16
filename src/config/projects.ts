@@ -7,7 +7,8 @@ export interface ProjectPlatform {
   featuresKey?: string;
 }
 
-export type ProjectCategory = 'company' | 'personal' | 'university';
+export type ProjectType = 'ecommerce' | 'dashboard' | 'landing' | 'saas' | 'other';
+export type ProjectPlatformType = 'web' | 'app';
 
 export interface ProjectItem {
   title: string;
@@ -25,8 +26,10 @@ export interface ProjectItem {
   year: number;
   /** Mês de desenvolvimento (1-12), opcional */
   month?: number;
-  /** Categoria do projeto */
-  category: ProjectCategory;
+  /** Tipo do projeto */
+  projectType: ProjectType;
+  /** Tipo de plataforma (web ou app) */
+  platformType: ProjectPlatformType;
 }
 
 /* ─────────────────────────────────────────────────────────
@@ -37,9 +40,10 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     title: 'Certeza que Tem',
     descriptionKey: 'project.cqt.desc',
     featured: true,
-    year: 2025,
+    year: 2026,
     month: 7,
-    category: 'company',
+    projectType: 'ecommerce',
+    platformType: 'web',
     images: [
       '/projects/certeza-cliente/1.png',
       '/projects/certeza-cliente/2.png',
@@ -96,72 +100,13 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     ],
   },
   {
-    title: 'Quero Eventos',
-    descriptionKey: 'project.queroeventos.desc',
-    year: 2025,
-    month: 6,
-    category: 'company',
-    tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'Tailwind CSS', 'MUI 7', 'Firebase', 'QRCode'],
-    roleKey: 'project.queroeventos.role',
-    durationKey: 'project.queroeventos.duration',
-    highlightKey: 'project.queroeventos.highlight',
-    platforms: [
-      {
-        title: 'Quero Eventos — Web (Usuário)',
-        descriptionKey: 'project.queroeventos.web.desc',
-        tags: ['Next.js 15', 'React 19', 'TypeScript', 'Styled-Components', 'Tailwind CSS 4', 'Firebase', 'QRCode'],
-        roleKey: 'project.queroeventos.web.role',
-        featuresKey: 'project.queroeventos.web.features',
-      },
-      {
-        title: 'Quero Eventos — Master',
-        descriptionKey: 'project.queroeventos.master.desc',
-        tags: ['Next.js 16', 'React 18', 'TypeScript', 'Styled-Components', 'MUI 7', 'API Routes'],
-        roleKey: 'project.queroeventos.master.role',
-        featuresKey: 'project.queroeventos.master.features',
-      },
-    ],
-  },
-  {
-    title: 'Med Confere — Master',
-    descriptionKey: 'project.medconfere.desc',
-    year: 2025,
-    month: 5,
-    category: 'company',
-    tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'MUI 7', 'Recharts', 'pdfjs-dist', 'Canvas', 'Netlify'],
-    roleKey: 'project.medconfere.role',
-    durationKey: 'project.medconfere.duration',
-    highlightKey: 'project.medconfere.highlight',
-  },
-  {
-    title: 'Protecin — Master',
-    descriptionKey: 'project.protecin.desc',
-    year: 2025,
-    month: 4,
-    category: 'company',
-    tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'QR Code', 'react-to-print', 'nuqs'],
-    roleKey: 'project.protecin.role',
-    durationKey: 'project.protecin.duration',
-    highlightKey: 'project.protecin.highlight',
-  },
-  {
-    title: 'Localize Mais — Master',
-    descriptionKey: 'project.localizemais.desc',
-    year: 2025,
-    month: 2,
-    category: 'company',
-    tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'Chart.js', 'Lucide', 'Sharp', 'Netlify'],
-    roleKey: 'project.localizemais.role',
-    durationKey: 'project.localizemais.duration',
-    highlightKey: 'project.localizemais.highlight',
-  },
-  {
     title: 'X-Mandu',
     descriptionKey: 'project.xmandu.desc',
     featured: true,
     year: 2025,
     month: 1,
-    category: 'company',
+    projectType: 'ecommerce',
+    platformType: 'web',
     tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'MUI', 'Chart.js', 'Swiper', 'QRCode'],
     roleKey: 'project.xmandu.role',
     durationKey: 'project.xmandu.duration',
@@ -194,9 +139,10 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     title: 'Pop Gov — Vereador',
     descriptionKey: 'project.popgov.desc',
     featured: true,
-    year: 2024,
+    year: 2025,
     month: 11,
-    category: 'company',
+    projectType: 'dashboard',
+    platformType: 'web',
     images: [
       '/projects/popgov/1.png',
       '/projects/popgov/2.png',
@@ -214,9 +160,10 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
   {
     title: 'Edugest — Professor',
     descriptionKey: 'project.edugest.desc',
-    year: 2024,
+    year: 2025,
     month: 10,
-    category: 'company',
+    projectType: 'dashboard',
+    platformType: 'web',
     images: [
       '/projects/edugest/1.png',
       '/projects/edugest/2.png',
@@ -234,7 +181,8 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     descriptionKey: 'project.impulsse.desc',
     year: 2024,
     month: 12,
-    category: 'company',
+    projectType: 'dashboard',
+    platformType: 'web',
     tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'Tailwind CSS', 'Chart.js', 'Draft.js', 'Next Auth', 'Swiper'],
     roleKey: 'project.impulsse.role',
     durationKey: 'project.impulsse.duration',
@@ -244,9 +192,10 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     title: 'GoTasks — Landing Page',
     descriptionKey: 'project.gotasks.desc',
     featured: true,
-    year: 2024,
+    year: 2025,
     month: 11,
-    category: 'company',
+    projectType: 'landing',
+    platformType: 'web',
     images: [
       '/projects/gotasks/1.png',
       '/projects/gotasks/2.png',
@@ -259,37 +208,54 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     highlightKey: 'project.gotasks.highlight',
   },
   {
-    title: 'LawHub — Master',
-    descriptionKey: 'project.lawhub.desc',
-    year: 2025,
-    month: 3,
-    category: 'company',
-    tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'Framer Motion', 'react-pdf'],
-    roleKey: 'project.lawhub.role',
-    durationKey: 'project.lawhub.duration',
-    highlightKey: 'project.lawhub.highlight',
-  },
-  {
-    title: 'GTI — Ponto de Coleta',
+    title: 'GTI — Logística & Entregas',
     descriptionKey: 'project.gti.desc',
+    featured: true,
     year: 2025,
     month: 1,
-    category: 'company',
-    tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'Framer Motion', 'React Query'],
+    projectType: 'saas',
+    platformType: 'web',
+    tags: ['Next.js', 'React', 'React Native', 'Expo', 'TypeScript', 'Styled-Components', 'Tailwind CSS', 'MUI', 'ApexCharts', 'Chart.js', 'Framer Motion', 'React Query'],
     roleKey: 'project.gti.role',
     durationKey: 'project.gti.duration',
     highlightKey: 'project.gti.highlight',
-  },
-  {
-    title: 'Planc — Web',
-    descriptionKey: 'project.planc.desc',
-    year: 2024,
-    month: 10,
-    category: 'company',
-    tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'React Datepicker'],
-    roleKey: 'project.planc.role',
-    durationKey: 'project.planc.duration',
-    highlightKey: 'project.planc.highlight',
+    platforms: [
+      {
+        title: 'GTI — Web Centro de Distribuição',
+        descriptionKey: 'project.gti.cd.desc',
+        tags: ['Next.js 15', 'React 18', 'TypeScript', 'Styled-Components', 'Tailwind CSS', 'ApexCharts', 'React Query'],
+        roleKey: 'project.gti.cd.role',
+        featuresKey: 'project.gti.cd.features',
+      },
+      {
+        title: 'GTI — Web Ponto de Coleta',
+        descriptionKey: 'project.gti.ponto.desc',
+        tags: ['Next.js 15', 'React 18', 'TypeScript', 'Styled-Components', 'Framer Motion', 'React Query', 'React Select'],
+        roleKey: 'project.gti.ponto.role',
+        featuresKey: 'project.gti.ponto.features',
+      },
+      {
+        title: 'GTI — Web Master',
+        descriptionKey: 'project.gti.master.desc',
+        tags: ['Next.js 15', 'React 18', 'TypeScript', 'Styled-Components', 'MUI 6', 'Chart.js', 'React Query'],
+        roleKey: 'project.gti.master.role',
+        featuresKey: 'project.gti.master.features',
+      },
+      {
+        title: 'GTI — Web Seller',
+        descriptionKey: 'project.gti.seller.desc',
+        tags: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind CSS 4', 'Recharts', 'Framer Motion'],
+        roleKey: 'project.gti.seller.role',
+        featuresKey: 'project.gti.seller.features',
+      },
+      {
+        title: 'GTI — App Entregador & Motorista',
+        descriptionKey: 'project.gti.app.desc',
+        tags: ['React Native', 'Expo 54', 'Expo Router', 'TypeScript', 'React Query', 'Camera', 'SecureStore'],
+        roleKey: 'project.gti.app.role',
+        featuresKey: 'project.gti.app.features',
+      },
+    ],
   },
   {
     title: 'Meu Acesso — Landing Page',
@@ -297,22 +263,12 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     featured: true,
     year: 2024,
     month: 12,
-    category: 'company',
+    projectType: 'landing',
+    platformType: 'web',
     tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'Framer Motion', 'Credit Card UI'],
     roleKey: 'project.meuacesso.role',
     durationKey: 'project.meuacesso.duration',
     highlightKey: 'project.meuacesso.highlight',
-  },
-  {
-    title: 'Yuse — Parceiros',
-    descriptionKey: 'project.yuse.desc',
-    year: 2024,
-    month: 11,
-    category: 'company',
-    tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'Framer Motion'],
-    roleKey: 'project.yuse.role',
-    durationKey: 'project.yuse.duration',
-    highlightKey: 'project.yuse.highlight',
   },
 ];
 
@@ -323,9 +279,10 @@ export const PERSONAL_PROJECTS: ProjectItem[] = [
   {
     title: 'ElevenLabs – UI/UX Recreated',
     descriptionKey: 'project.elevenlabs.desc',
-    year: 2024,
+    year: 2025,
     month: 9,
-    category: 'personal',
+    projectType: 'landing',
+    platformType: 'web',
     images: [
       '/projects/eleven-labs.jpg',
       '/projects/eleven-labs2.jpg',
@@ -341,7 +298,8 @@ export const PERSONAL_PROJECTS: ProjectItem[] = [
     descriptionKey: 'project.portfolio.desc',
     year: 2024,
     month: 3,
-    category: 'personal',
+    projectType: 'landing',
+    platformType: 'web',
     images: [
       '/projects/first-portfolio.png',
       '/projects/first-portfolio2.png',
@@ -356,7 +314,8 @@ export const PERSONAL_PROJECTS: ProjectItem[] = [
     descriptionKey: 'project.paragrafeado.desc',
     year: 2023,
     month: 8,
-    category: 'personal',
+    projectType: 'other',
+    platformType: 'web',
     images: ['/projects/paragrafeado.png'],
     tags: ['React', 'JavaScript', 'JSX', 'HTML', 'CSS'],
     link: 'https://arthurramoz.github.io/paragrafeado-react/',
@@ -372,7 +331,8 @@ export const UNIVERSITY_PROJECTS: ProjectItem[] = [
     descriptionKey: 'project.netflix.desc',
     year: 2023,
     month: 6,
-    category: 'university',
+    projectType: 'other',
+    platformType: 'web',
     images: ['/projects/netflix.jpg'],
     tags: ['JavaScript', 'JQuery', 'PHP', 'MySQL', 'HTML', 'CSS'],
   },
@@ -381,7 +341,8 @@ export const UNIVERSITY_PROJECTS: ProjectItem[] = [
     descriptionKey: 'project.calculadora.desc',
     year: 2023,
     month: 4,
-    category: 'university',
+    projectType: 'other',
+    platformType: 'web',
     tags: ['C'],
   },
 ];

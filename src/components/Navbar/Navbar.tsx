@@ -146,8 +146,8 @@ const Navbar = () => {
   const aboutMeRef = useRef<HTMLDivElement>(null);
 
   const isHomePage = pathname === '/home';
-  const isPortfolioPage = pathname.startsWith('/projetos') || pathname === '/cursos';
-  const isAboutMePage = pathname === '/skills' || pathname === '/jornada' || pathname === '/depoimentos';
+  const isProjectsPage = pathname.startsWith('/projetos');
+  const isAboutMePage = pathname === '/skills' || pathname === '/jornada' || pathname === '/depoimentos' || pathname === '/cursos';
 
   const allHomeSections = [HOME_MAIN, ...HOME_SECTIONS];
 
@@ -342,84 +342,25 @@ const Navbar = () => {
             transition={{ duration: 0.2, ease: 'easeOut' }}
             style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
           >
-            <SettingsWrapper ref={projectsRef}>
-              <NavLink
-                $selected={isPortfolioPage}
-                onClick={() => setIsProjectsOpen(prev => !prev)}
-                style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
-              >
-                {t('nav.portfolio' as Parameters<typeof t>[0])}
-                <FiChevronDown size={14} />
-                {isPortfolioPage && (
-                  <motion.span
-                    layoutId="navbar-indicator"
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      borderRadius: '9999px',
-                      background: 'rgba(26, 26, 26, 0.06)',
-                      zIndex: -1,
-                    }}
-                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                  />
-                )}
-              </NavLink>
-
-              <AnimatePresence>
-                {isProjectsOpen && (
-                  <ProjectsDropdown
-                    initial={{ opacity: 0, y: 6, scale: 0.97 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 6, scale: 0.97 }}
-                    transition={{ duration: 0.18, ease: [0.25, 0.1, 0.25, 1] }}
-                  >
-                    <ProjectsDropdownArrow />
-
-                    <motion.div
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0, duration: 0.2, ease: 'easeOut' }}
-                    >
-                      <ProjectsDropdownItem
-                        $active={pathname.startsWith('/projetos')}
-                        onClick={() => {
-                          router.push('/projetos');
-                          setIsProjectsOpen(false);
-                        }}
-                      >
-                        <ProjectsDropdownIcon $active={pathname.startsWith('/projetos')}>
-                          <FiBriefcase size={18} />
-                        </ProjectsDropdownIcon>
-                        <ProjectsDropdownText>
-                          <ProjectsDropdownName>{t('nav.projects')}</ProjectsDropdownName>
-                        </ProjectsDropdownText>
-                      </ProjectsDropdownItem>
-                    </motion.div>
-
-                    <motion.div
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.04, duration: 0.2, ease: 'easeOut' }}
-                    >
-                      <ProjectsDropdownItem
-                        $active={pathname === '/cursos'}
-                        onClick={() => {
-                          router.push('/cursos');
-                          setIsProjectsOpen(false);
-                        }}
-                      >
-                        <ProjectsDropdownIcon $active={pathname === '/cursos'}>
-                          <FiAward size={18} />
-                        </ProjectsDropdownIcon>
-                        <ProjectsDropdownText>
-                          <ProjectsDropdownName>{t('nav.courses')}</ProjectsDropdownName>
-                        </ProjectsDropdownText>
-                      </ProjectsDropdownItem>
-                    </motion.div>
-                  </ProjectsDropdown>
-                )}
-              </AnimatePresence>
-            </SettingsWrapper>
+            <NavLink
+              $selected={isProjectsPage}
+              onClick={() => router.push('/projetos')}
+            >
+              {t('nav.projects')}
+              {isProjectsPage && (
+                <motion.span
+                  layoutId="navbar-indicator"
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    borderRadius: '9999px',
+                    background: 'rgba(26, 26, 26, 0.06)',
+                    zIndex: -1,
+                  }}
+                  transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                />
+              )}
+            </NavLink>
 
             <SettingsWrapper ref={aboutMeRef}>
               <NavLink
@@ -513,6 +454,27 @@ const Navbar = () => {
                         </ProjectsDropdownIcon>
                         <ProjectsDropdownText>
                           <ProjectsDropdownName>{t('nav.testimonials' as Parameters<typeof t>[0])}</ProjectsDropdownName>
+                        </ProjectsDropdownText>
+                      </ProjectsDropdownItem>
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.12, duration: 0.2, ease: 'easeOut' }}
+                    >
+                      <ProjectsDropdownItem
+                        $active={pathname === '/cursos'}
+                        onClick={() => {
+                          router.push('/cursos');
+                          setIsAboutMeOpen(false);
+                        }}
+                      >
+                        <ProjectsDropdownIcon $active={pathname === '/cursos'}>
+                          <FiAward size={18} />
+                        </ProjectsDropdownIcon>
+                        <ProjectsDropdownText>
+                          <ProjectsDropdownName>{t('nav.courses')}</ProjectsDropdownName>
                         </ProjectsDropdownText>
                       </ProjectsDropdownItem>
                     </motion.div>
@@ -762,54 +724,17 @@ const Navbar = () => {
                   <motion.div variants={mobileItemVariants}>
                     <MobileNavLink>
                       <MobileNavLinkText
-                        $active={isPortfolioPage}
-                        onClick={() => setIsMobileProjectsSubOpen(prev => !prev)}
+                        $active={isProjectsPage}
+                        onClick={() => {
+                          router.push('/projetos');
+                          setIsMobileOpen(false);
+                        }}
                       >
                         <span style={{ display: 'flex', alignItems: 'center' }}>
-                          {t('nav.portfolio')}
+                          {t('nav.projects')}
                         </span>
-                        <FiChevronDown
-                          size={20}
-                          style={{
-                            transform: isMobileProjectsSubOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                            transition: 'transform 0.2s ease',
-                            opacity: 0.6,
-                          }}
-                        />
                       </MobileNavLinkText>
                     </MobileNavLink>
-
-                    <AnimatePresence>
-                      {isMobileProjectsSubOpen && (
-                        <MobileSubmenuContainer
-                          initial={{ height: 0, opacity: 0, overflow: 'hidden' }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          <MobileSubmenuLink
-                            $active={pathname.startsWith('/projetos') && pathname !== '/cursos'}
-                            onClick={() => {
-                              router.push('/projetos');
-                              setIsMobileOpen(false);
-                            }}
-                          >
-                            <FiBriefcase size={16} />
-                            {t('nav.projects')}
-                          </MobileSubmenuLink>
-                          <MobileSubmenuLink
-                            $active={pathname === '/cursos'}
-                            onClick={() => {
-                              router.push('/cursos');
-                              setIsMobileOpen(false);
-                            }}
-                          >
-                            <FiAward size={16} />
-                            {t('nav.courses')}
-                          </MobileSubmenuLink>
-                        </MobileSubmenuContainer>
-                      )}
-                    </AnimatePresence>
                   </motion.div>
 
                   <motion.div variants={mobileItemVariants}>
@@ -869,6 +794,16 @@ const Navbar = () => {
                           >
                             <FiMessageSquare size={16} />
                             {t('nav.testimonials' as Parameters<typeof t>[0])}
+                          </MobileSubmenuLink>
+                          <MobileSubmenuLink
+                            $active={pathname === '/cursos'}
+                            onClick={() => {
+                              router.push('/cursos');
+                              setIsMobileOpen(false);
+                            }}
+                          >
+                            <FiAward size={16} />
+                            {t('nav.courses')}
                           </MobileSubmenuLink>
                         </MobileSubmenuContainer>
                       )}

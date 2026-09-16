@@ -37,7 +37,6 @@ import {
 const Footer = () => {
   const router = useRouter();
   const { t } = useLanguage();
-  const [projectsOpen, setProjectsOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
 
   const handleScrollTo = (id: string) => {
@@ -86,42 +85,9 @@ const Footer = () => {
             {t('nav.home')}
           </FooterLink>
 
-          <FooterSubLabel
-            onClick={() => setProjectsOpen(prev => !prev)}
-            style={{ cursor: 'pointer' }}
-          >
-            {t('nav.portfolio')} {projectsOpen ? '−' : '+'}
-          </FooterSubLabel>
-
-          <AnimatePresence>
-            {projectsOpen && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.25, ease: 'easeInOut' }}
-                style={{
-                  overflow: 'hidden',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '16px',
-                }}
-              >
-                <FooterLink onClick={() => router.push('/projetos/pessoais')}>
-                  {t('projects.personal')}
-                </FooterLink>
-                <FooterLink onClick={() => router.push('/projetos/empresa')}>
-                  {t('projects.company')}
-                </FooterLink>
-                <FooterLink onClick={() => router.push('/projetos/faculdade')}>
-                  {t('projects.university')}
-                </FooterLink>
-                <FooterLink onClick={() => router.push('/cursos')}>
-                  {t('nav.courses')}
-                </FooterLink>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <FooterLink onClick={() => router.push('/projetos')}>
+            {t('nav.projects')}
+          </FooterLink>
 
           <FooterSubLabel
             onClick={() => setAboutOpen(prev => !prev)}
@@ -152,6 +118,9 @@ const Footer = () => {
                 </FooterLink>
                 <FooterLink onClick={() => router.push('/depoimentos')}>
                   {t('nav.testimonials' as Parameters<typeof t>[0])}
+                </FooterLink>
+                <FooterLink onClick={() => router.push('/cursos')}>
+                  {t('nav.courses')}
                 </FooterLink>
               </motion.div>
             )}

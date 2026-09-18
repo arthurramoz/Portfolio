@@ -9,6 +9,8 @@ export interface CaseMetric {
 export interface CaseStudy {
   id: string;
   titleKey: string;
+  summaryKey: string;
+  domainKey: string;
   problemKey: string;
   approachKey: string;
   resultKey: string;
@@ -22,6 +24,8 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     id: 'push-notifications',
     titleKey: 'cases.push.title',
+    summaryKey: 'cases.push.summary',
+    domainKey: 'cases.push.domain',
     problemKey: 'cases.push.problem',
     approachKey: 'cases.push.approach',
     resultKey: 'cases.push.result',
@@ -37,6 +41,8 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     id: 'pagarme-gateway',
     titleKey: 'cases.pagarme.title',
+    summaryKey: 'cases.pagarme.summary',
+    domainKey: 'cases.pagarme.domain',
     problemKey: 'cases.pagarme.problem',
     approachKey: 'cases.pagarme.approach',
     resultKey: 'cases.pagarme.result',
@@ -52,6 +58,8 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     id: 'saas-multitenant',
     titleKey: 'cases.saas.title',
+    summaryKey: 'cases.saas.summary',
+    domainKey: 'cases.saas.domain',
     problemKey: 'cases.saas.problem',
     approachKey: 'cases.saas.approach',
     resultKey: 'cases.saas.result',
@@ -67,6 +75,8 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     id: 'realtime-chat',
     titleKey: 'cases.chat.title',
+    summaryKey: 'cases.chat.summary',
+    domainKey: 'cases.chat.domain',
     problemKey: 'cases.chat.problem',
     approachKey: 'cases.chat.approach',
     resultKey: 'cases.chat.result',
@@ -82,6 +92,8 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     id: 'admin-dashboards',
     titleKey: 'cases.dashboard.title',
+    summaryKey: 'cases.dashboard.summary',
+    domainKey: 'cases.dashboard.domain',
     problemKey: 'cases.dashboard.problem',
     approachKey: 'cases.dashboard.approach',
     resultKey: 'cases.dashboard.result',
@@ -97,6 +109,8 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     id: 'qrcode-scanner',
     titleKey: 'cases.qrcode.title',
+    summaryKey: 'cases.qrcode.summary',
+    domainKey: 'cases.qrcode.domain',
     problemKey: 'cases.qrcode.problem',
     approachKey: 'cases.qrcode.approach',
     resultKey: 'cases.qrcode.result',
@@ -112,6 +126,8 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     id: 'business-rule-ui',
     titleKey: 'cases.bizrule.title',
+    summaryKey: 'cases.bizrule.summary',
+    domainKey: 'cases.bizrule.domain',
     problemKey: 'cases.bizrule.problem',
     approachKey: 'cases.bizrule.approach',
     resultKey: 'cases.bizrule.result',
@@ -127,6 +143,8 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     id: 'realtime-state',
     titleKey: 'cases.realtimestate.title',
+    summaryKey: 'cases.realtimestate.summary',
+    domainKey: 'cases.realtimestate.domain',
     problemKey: 'cases.realtimestate.problem',
     approachKey: 'cases.realtimestate.approach',
     resultKey: 'cases.realtimestate.result',

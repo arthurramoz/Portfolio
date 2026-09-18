@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { FiChevronDown } from 'react-icons/fi';
+import { FiChevronDown, FiAlertCircle, FiCpu, FiTrendingUp } from 'react-icons/fi';
 import { useLanguage } from '@/contexts/LanguageContext';
 import {
   PageWrapper,
@@ -18,6 +18,7 @@ import {
   CaseHeaderTop,
   CaseIconWrap,
   CaseHeaderText,
+  CaseDomainBadge,
   CaseTitle,
   CaseSubtitle,
   CaseHeaderMeta,
@@ -32,7 +33,8 @@ import {
   CaseBodyInner,
   StoryTimeline,
   StoryStep,
-  StepNumber,
+  StepHeader,
+  StepIconWrap,
   StepLabel,
   StepText,
 } from './styles';
@@ -55,9 +57,9 @@ const cardVariants = {
 };
 
 const STEPS = [
-  { labelKey: 'cases.section.problem', num: '01' },
-  { labelKey: 'cases.section.approach', num: '02' },
-  { labelKey: 'cases.section.result', num: '03' },
+  { labelKey: 'cases.section.problem', num: '01', icon: FiAlertCircle, type: 'problem' as const },
+  { labelKey: 'cases.section.approach', num: '02', icon: FiCpu, type: 'solution' as const },
+  { labelKey: 'cases.section.result', num: '03', icon: FiTrendingUp, type: 'result' as const },
 ] as const;
 
 const CasesPage = () => {
@@ -123,14 +125,17 @@ const CasesPage = () => {
               <CaseHeader onClick={() => toggleExpand(cs.id)}>
                 <CaseHeaderTop>
                   <CaseIconWrap $accentColor={cs.accentColor}>
-                    <Icon size={20} />
+                    <Icon size={22} />
                   </CaseIconWrap>
                   <CaseHeaderText>
+                    <CaseDomainBadge $accentColor={cs.accentColor}>
+                      {t(cs.domainKey as Parameters<typeof t>[0])}
+                    </CaseDomainBadge>
                     <CaseTitle>
                       {t(cs.titleKey as Parameters<typeof t>[0])}
                     </CaseTitle>
                     <CaseSubtitle>
-                      {t(cs.problemKey as Parameters<typeof t>[0])}
+                      {t(cs.summaryKey as Parameters<typeof t>[0])}
                     </CaseSubtitle>
                   </CaseHeaderText>
                 </CaseHeaderTop>
@@ -155,17 +160,17 @@ const CasesPage = () => {
               <MetricRow>
                 {cs.metrics.map((m) => (
                   <MetricItem key={m.labelKey} $accentColor={cs.accentColor}>
-                    <MetricValue $accentColor={cs.accentColor}>
-                      {t(m.valueKey as Parameters<typeof t>[0])}
-                    </MetricValue>
                     <MetricLabel>
                       {t(m.labelKey as Parameters<typeof t>[0])}
                     </MetricLabel>
+                    <MetricValue $accentColor={cs.accentColor}>
+                      {t(m.valueKey as Parameters<typeof t>[0])}
+                    </MetricValue>
                   </MetricItem>
                 ))}
               </MetricRow>
 
-              {/* ── Expanded Body ── */}
+              {/* ── Expanded Deep Dive Body ── */}
               <AnimatePresence initial={false}>
                 {isExpanded && (
                   <CaseBody
@@ -179,22 +184,28 @@ const CasesPage = () => {
                   >
                     <CaseBodyInner>
                       <StoryTimeline>
-                        {STEPS.map((step, i) => (
-                          <StoryStep
-                            key={step.num}
-                            $accentColor={cs.accentColor}
-                          >
-                            <StepNumber $accentColor={cs.accentColor}>
-                              {step.num}
-                            </StepNumber>
-                            <StepLabel $accentColor={cs.accentColor}>
-                              {t(step.labelKey as Parameters<typeof t>[0])}
-                            </StepLabel>
-                            <StepText>
-                              {t(textKeys[i] as Parameters<typeof t>[0])}
-                            </StepText>
-                          </StoryStep>
-                        ))}
+                        {STEPS.map((step, i) => {
+                          const StepIcon = step.icon;
+                          return (
+                            <StoryStep
+                              key={step.num}
+                              $accentColor={cs.accentColor}
+                              $type={step.type}
+                            >
+                              <StepHeader>
+                                <StepIconWrap $accentColor={cs.accentColor}>
+                                  <StepIcon size={14} />
+                                </StepIconWrap>
+                                <StepLabel $accentColor={cs.accentColor}>
+                                  {t(step.labelKey as Parameters<typeof t>[0])}
+                                </StepLabel>
+                              </StepHeader>
+                              <StepText>
+                                {t(textKeys[i] as Parameters<typeof t>[0])}
+                              </StepText>
+                            </StoryStep>
+                          );
+                        })}
                       </StoryTimeline>
                     </CaseBodyInner>
                   </CaseBody>
@@ -206,11 +217,13 @@ const CasesPage = () => {
                 $accentColor={cs.accentColor}
                 onClick={() => toggleExpand(cs.id)}
               >
-                {isExpanded
-                  ? t('cases.btn.collapse' as Parameters<typeof t>[0])
-                  : t('cases.btn.expand' as Parameters<typeof t>[0])}
+                <span>
+                  {isExpanded
+                    ? t('cases.btn.collapse' as Parameters<typeof t>[0])
+                    : t('cases.btn.expand' as Parameters<typeof t>[0])}
+                </span>
                 <FiChevronDown
-                  size={16}
+                  size={18}
                   style={{
                     transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
                   }}

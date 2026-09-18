@@ -3,7 +3,6 @@
 import styled, { keyframes } from 'styled-components';
 import { motion } from 'motion/react';
 
-/* ── Keyframes ── */
 const float1 = keyframes`
   0%, 100% { transform: translate(0, 0) rotate(0deg); }
   25% { transform: translate(12px, -18px) rotate(2deg); }
@@ -46,7 +45,6 @@ const gridPulse = keyframes`
   50% { opacity: 0.08; }
 `;
 
-/* ── Container ── */
 export const ThumbnailContainer = styled.div`
   position: relative;
   width: 100vw;
@@ -58,7 +56,6 @@ export const ThumbnailContainer = styled.div`
   background: #0a0a0f;
 `;
 
-/* ── Grid Background ── */
 export const GridBackground = styled.div`
   position: absolute;
   inset: 0;
@@ -70,7 +67,6 @@ export const GridBackground = styled.div`
   z-index: 0;
 `;
 
-/* ── Orbs ── */
 export const OrbPrimary = styled.div`
   position: absolute;
   width: 600px;
@@ -125,7 +121,6 @@ export const OrbAccent = styled.div`
   z-index: 0;
 `;
 
-/* ── Center Content ── */
 export const CenterContent = styled(motion.div)`
   position: relative;
   z-index: 10;
@@ -135,7 +130,6 @@ export const CenterContent = styled(motion.div)`
   gap: 24px;
 `;
 
-/* ── Logo ── */
 export const LogoWrapper = styled(motion.div)`
   position: relative;
   display: flex;
@@ -173,7 +167,6 @@ export const LogoSvg = styled.div`
   }
 `;
 
-/* ── Title area ── */
 export const TitleArea = styled(motion.div)`
   display: flex;
   flex-direction: column;
@@ -207,7 +200,6 @@ export const Subtitle = styled.p`
   text-transform: uppercase;
 `;
 
-/* ── Tech tags ── */
 export const TagsRow = styled(motion.div)`
   display: flex;
   gap: 10px;
@@ -229,7 +221,6 @@ export const Tag = styled(motion.span)`
   transition: all 0.3s ease;
 `;
 
-/* ── Floating project cards ── */
 const floatAnimations = [float1, float2, float3];
 
 export const FloatingCard = styled.div<{
@@ -287,7 +278,6 @@ export const FloatingCard = styled.div<{
   }
 `;
 
-/* ── Vignette ── */
 export const Vignette = styled.div`
   position: absolute;
   inset: 0;
@@ -301,7 +291,6 @@ export const Vignette = styled.div`
   );
 `;
 
-/* ── Bottom gradient fade ── */
 export const BottomFade = styled.div`
   position: absolute;
   bottom: 0;
@@ -324,7 +313,6 @@ export const TopFade = styled.div`
   pointer-events: none;
 `;
 
-/* ── Decorative line ── */
 export const GlowLine = styled(motion.div)`
   width: 80px;
   height: 2px;

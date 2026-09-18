@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { motion } from 'motion/react';
 
-/* ─── Page Grid ─── */
 export const CasesGrid = styled.div`
   display: flex;
   flex-direction: column;
@@ -12,7 +11,6 @@ export const CasesGrid = styled.div`
   }
 `;
 
-/* ─── Card Shell ─── */
 export const CaseCard = styled(motion.article)<{ $accentColor: string }>`
   position: relative;
   background: ${({ theme }) => theme.colors.cardBg};
@@ -34,7 +32,6 @@ export const CaseCard = styled(motion.article)<{ $accentColor: string }>`
   }
 `;
 
-/* ─── Compact Header ─── */
 export const CaseHeader = styled.div`
   padding: 28px 32px 20px;
   cursor: pointer;
@@ -145,7 +142,6 @@ export const CaseTag = styled.span<{ $accentColor: string }>`
   }
 `;
 
-/* ─── Metrics Grid (Scannable Cards) ─── */
 export const MetricRow = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -195,7 +191,6 @@ export const MetricLabel = styled.span`
   color: ${({ theme }) => theme.colors.navbarLinkInactive};
 `;
 
-/* ─── Expand/Collapse Button ─── */
 export const ExpandButton = styled.button<{ $accentColor: string }>`
   display: flex;
   align-items: center;
@@ -231,7 +226,6 @@ export const ExpandButton = styled.button<{ $accentColor: string }>`
   }
 `;
 
-/* ─── Expanded Deep Dive Body ─── */
 export const CaseBody = styled(motion.div)`
   overflow: hidden;
 `;
@@ -305,7 +299,6 @@ export const StepText = styled.p`
   opacity: 0.88;
 `;
 
-/* ─── Legacy exports (kept for compatibility) ─── */
 export const StepNumber = styled.div<{ $accentColor: string }>``;
 export const CaseHero = styled.div<{ $accentColor: string }>``;
 export const CaseHeroText = styled.div``;

@@ -68,7 +68,6 @@ export type { ProjectItem };
 
 interface AllProjectsPageProps {
   projects: ProjectItem[];
-  /** Número de projetos em produção (para o banner de impacto) */
   productionCount?: number;
 }
 
@@ -112,7 +111,6 @@ const AllProjectsPage = ({
 
   const visibleProjects = projects.filter(p => !p.hidden);
 
-  /* ── Filter by tab (web/app) then by type ── */
   const filteredProjects = useMemo(() => {
     const tabFiltered = visibleProjects.filter(p => p.platformType === activeTab);
     return activeFilter === 'all'
@@ -120,7 +118,6 @@ const AllProjectsPage = ({
       : tabFiltered.filter(p => p.projectType === activeFilter);
   }, [visibleProjects, activeFilter, activeTab]);
 
-  /* ── Group by year ── */
   const projectsByYear = useMemo(() => {
     const map = new Map<number, ProjectItem[]>();
     filteredProjects.forEach(p => {
@@ -128,11 +125,9 @@ const AllProjectsPage = ({
       list.push(p);
       map.set(p.year, list);
     });
-    // Sort years descending
     return Array.from(map.entries()).sort(([a], [b]) => b - a);
   }, [filteredProjects]);
 
-  /* ── Metrics ── */
   const totalCount = visibleProjects.length;
   const yearsActive = useMemo(() => {
     if (visibleProjects.length === 0) return 3;
@@ -262,7 +257,6 @@ const AllProjectsPage = ({
   return (
     <PageWrapper>
       <motion.div variants={containerVariants} initial="hidden" animate="visible">
-        {/* ── Page header ── */}
         <PageTitleWrapper>
           <motion.div variants={itemVariants}>
             <PageDescription>
@@ -276,7 +270,6 @@ const AllProjectsPage = ({
           </motion.div>
         </PageTitleWrapper>
 
-        {/* ── Impact Banner ── */}
         <motion.div variants={itemVariants}>
           <ImpactBanner>
             <ImpactMetrics>
@@ -313,7 +306,6 @@ const AllProjectsPage = ({
           </ImpactBanner>
         </motion.div>
 
-        {/* ── Tab Bar (Web Sites / Apps) ── */}
         <motion.div variants={itemVariants}>
           <TabBar>
             <TabButton
@@ -337,7 +329,6 @@ const AllProjectsPage = ({
           </TabBar>
         </motion.div>
 
-        {/* ── Content based on active tab ── */}
         <AnimatePresence mode="wait">
           {activeTab === 'app' ? (
             <motion.div
@@ -362,7 +353,6 @@ const AllProjectsPage = ({
               exit={{ opacity: 0, y: 8 }}
               transition={{ duration: 0.25 }}
             >
-              {/* ── Filter Bar ── */}
               <FilterBar>
                 {FILTERS.map(filter => (
                   <FilterButton
@@ -375,7 +365,6 @@ const AllProjectsPage = ({
                 ))}
               </FilterBar>
 
-              {/* ── Timeline ── */}
               <AnimatePresence mode="wait">
                 {filteredProjects.length === 0 ? (
                   <motion.div

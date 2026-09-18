@@ -121,7 +121,6 @@ const CasesPage = () => {
               $accentColor={cs.accentColor}
               variants={cardVariants}
             >
-              {/* ── Compact Header ── */}
               <CaseHeader onClick={() => toggleExpand(cs.id)}>
                 <CaseHeaderTop>
                   <CaseIconWrap $accentColor={cs.accentColor}>
@@ -156,7 +155,6 @@ const CasesPage = () => {
                 </CaseHeaderMeta>
               </CaseHeader>
 
-              {/* ── Metrics (always visible) ── */}
               <MetricRow>
                 {cs.metrics.map((m) => (
                   <MetricItem key={m.labelKey} $accentColor={cs.accentColor}>
@@ -170,7 +168,6 @@ const CasesPage = () => {
                 ))}
               </MetricRow>
 
-              {/* ── Expanded Deep Dive Body ── */}
               <AnimatePresence initial={false}>
                 {isExpanded && (
                   <CaseBody
@@ -212,7 +209,6 @@ const CasesPage = () => {
                 )}
               </AnimatePresence>
 
-              {/* ── Expand/Collapse Toggle ── */}
               <ExpandButton
                 $accentColor={cs.accentColor}
                 onClick={() => toggleExpand(cs.id)}

@@ -111,7 +111,6 @@ const RootLayout = ({
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
                 
-                // Retrieve saved consent from localStorage
                 let savedConsent = 'denied';
                 try {
                   const consent = localStorage.getItem('@Portfolio:cookie-consent');

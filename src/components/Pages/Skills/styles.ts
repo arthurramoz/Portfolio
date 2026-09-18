@@ -228,8 +228,6 @@ export const SkillCircle = styled.div``;
 export const SkillIcon = styled.div``;
 export const SkillHoverName = styled.div``;
 export const SkillName = styled.span``;
-
-/* --- Favoritas --- */
 export const FavoritesSection = styled.div`
   display: flex;
   flex-direction: column;

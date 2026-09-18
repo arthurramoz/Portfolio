@@ -11,7 +11,6 @@ const ParticleWrapper = styled.div`
   overflow: hidden;
 `;
 
-/* Brilhinho: radial-gradient do centro branco → cor → transparente, com blur suave */
 const Sparkle = styled(motion.div)<{ $size: number; $color: string }>`
   position: absolute;
   width: ${({ $size }) => $size}px;
@@ -30,7 +29,6 @@ const Sparkle = styled(motion.div)<{ $size: number; $color: string }>`
   will-change: transform, opacity;
 `;
 
-/* primary1 = #48cae4 (ciano), secondary1 = #fb6f92 (rosa) */
 const SPARKLES = [
   { id: 1,  top: '6%',  left: '12%', size: 6,  color: '#48cae4', dur: 18, delay: 0,   dx: [0, 180, -60, 220, 0],  dy: [0, -80, 160, -120, 0]  },
   { id: 2,  top: '18%', left: '78%', size: 5,  color: '#fb6f92', dur: 22, delay: 3,   dx: [0, -200, 60, -150, 0], dy: [0, 100, -60, 180, 0]   },

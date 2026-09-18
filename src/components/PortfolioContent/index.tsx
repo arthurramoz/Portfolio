@@ -7,8 +7,6 @@ import { PropsWithChildren } from 'react';
 const PortfolioContent = ({ children }: PropsWithChildren) => {
   return (
     <Main>
-
-      {/* Left blob — começa no canto esquerdo e varre o site todo */}
       <BlobLeft
         animate={{
           scale: [1, 1.1, 0.95, 1.08, 1],
@@ -23,7 +21,6 @@ const PortfolioContent = ({ children }: PropsWithChildren) => {
         }}
       />
 
-      {/* Right blob — começa no canto direito e varre o site todo */}
       <BlobRight
         animate={{
           scale: [1, 1.12, 0.9, 1.1, 1],
@@ -39,7 +36,6 @@ const PortfolioContent = ({ children }: PropsWithChildren) => {
         }}
       />
 
-      {/* Center blob — passa pelo meio do site */}
       <BlobCenter
         animate={{
           scale: [0.85, 1.1, 0.8, 1.05, 0.85],
@@ -55,7 +51,6 @@ const PortfolioContent = ({ children }: PropsWithChildren) => {
         }}
       />
 
-      {/* Blob pequeno 1 — rosa, região central-esquerda */}
       <BlobSmall1
         animate={{
           scale: [0.9, 1.15, 0.85, 1.1, 0.9],
@@ -71,7 +66,6 @@ const PortfolioContent = ({ children }: PropsWithChildren) => {
         }}
       />
 
-      {/* Blob pequeno 2 — ciano, topo direito */}
       <BlobSmall2
         animate={{
           scale: [0.9, 1.2, 0.8, 1.15, 0.9],
@@ -87,7 +81,6 @@ const PortfolioContent = ({ children }: PropsWithChildren) => {
         }}
       />
 
-      {/* Blob pequeno 3 — rosa claro, base central */}
       <BlobSmall3
         animate={{
           scale: [0.85, 1.1, 0.9, 1.05, 0.85],

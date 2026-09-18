@@ -1,6 +1,5 @@
 import styled, { keyframes } from 'styled-components';
 
-/* ─── Animations ─── */
 const shimmer = keyframes`
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
@@ -21,7 +20,6 @@ const pulseGlow = keyframes`
   50% { box-shadow: 0 0 40px ${() => 'rgba(99,102,241,0.35)'}; }
 `;
 
-/* ─── Impact Banner ─── */
 export const ImpactBanner = styled.div`
   position: relative;
   display: flex;
@@ -143,7 +141,6 @@ export const ImpactCta = styled.button`
   }
 `;
 
-/* ─── Filter Bar ─── */
 export const FilterBar = styled.div`
   display: flex;
   align-items: center;
@@ -173,7 +170,6 @@ export const FilterButton = styled.button<{ $active: boolean }>`
   }
 `;
 
-/* ─── Year Timeline ─── */
 export const TimelineWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -221,7 +217,6 @@ export const YearCount = styled.span`
   white-space: nowrap;
 `;
 
-/* ─── Projects Grid ─── */
 export const ProjectsGrid = styled.div`
   columns: 2;
   column-gap: 24px;
@@ -241,7 +236,6 @@ export const ProjectsGrid = styled.div`
   }
 `;
 
-/* ─── Project Card ─── */
 export const ProjectCard = styled.div<{ $clickable?: boolean; $featured?: boolean }>`
   background: ${({ theme }) => theme.colors.btnSecondaryBg};
   border: 1px solid ${({ theme, $featured }) =>
@@ -421,7 +415,6 @@ export const EmptyState = styled.div`
   }
 `;
 
-/* ─── Info Pills ─── */
 export const InfoPillsRow = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -465,7 +458,6 @@ export const PlatformBadge = styled.span`
   letter-spacing: 0.03em;
 `;
 
-/* ─── Legacy kept for compatibility ─── */
 export const SectionHeader = styled.div`
   display: flex;
   align-items: center;
@@ -500,7 +492,6 @@ export const SectionSpacer = styled.div`
   margin-top: 48px;
 `;
 
-/* ─── Modal ─── */
 export const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
@@ -668,7 +659,6 @@ export const PlatformCarouselWrapper = styled.div`
   overflow: hidden;
 `;
 
-/* ─── Tab Bar (Web Sites / Apps) ─── */
 export const TabBar = styled.div`
   display: flex;
   align-items: center;

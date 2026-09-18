@@ -56,7 +56,6 @@ export const BlobCenter = styled(BlobBase)`
   );
 `;
 
-/* --- Blobs menores --- */
 export const BlobSmall1 = styled(BlobBase)`
   top: 40%;
   left: 20%;

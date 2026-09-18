@@ -27,19 +27,12 @@ export interface ProjectItem {
   durationKey?: string;
   highlightKey?: string;
   platforms?: ProjectPlatform[];
-  /** Ano de desenvolvimento */
   year: number;
-  /** Mês de desenvolvimento (1-12), opcional */
   month?: number;
-  /** Tipo do projeto */
   projectType: ProjectType;
-  /** Tipo de plataforma (web ou app) */
   platformType: ProjectPlatformType;
 }
 
-/* ─────────────────────────────────────────────────────────
-   PROJETOS DE EMPRESA
-────────────────────────────────────────────────────────── */
 export const COMPANY_PROJECTS: ProjectItem[] = [
   {
     title: 'AVS',
@@ -480,9 +473,6 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
   },
 ];
 
-/* ─────────────────────────────────────────────────────────
-   PROJETOS PESSOAIS
-────────────────────────────────────────────────────────── */
 export const PERSONAL_PROJECTS: ProjectItem[] = [
   {
     title: 'ElevenLabs',
@@ -539,9 +529,6 @@ export const PERSONAL_PROJECTS: ProjectItem[] = [
   },
 ];
 
-/* ─────────────────────────────────────────────────────────
-   PROJETOS DA FACULDADE
-────────────────────────────────────────────────────────── */
 export const UNIVERSITY_PROJECTS: ProjectItem[] = [
   {
     title: 'Netflix CRUD',
@@ -564,9 +551,6 @@ export const UNIVERSITY_PROJECTS: ProjectItem[] = [
   },
 ];
 
-/* ─────────────────────────────────────────────────────────
-   TODOS OS PROJETOS — ordenados do mais recente ao mais antigo
-────────────────────────────────────────────────────────── */
 export const ALL_PROJECTS: ProjectItem[] = [
   ...COMPANY_PROJECTS,
   ...PERSONAL_PROJECTS,

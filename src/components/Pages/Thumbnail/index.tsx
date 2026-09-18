@@ -33,9 +33,7 @@ const TAGS = [
   'Responsive Design',
 ];
 
-/* Cards flutuantes com screenshots de projetos */
 const FLOATING_CARDS = [
-  // Top left
   {
     src: '/projects/popgov/1.png',
     alt: 'PopGov Dashboard',
@@ -47,7 +45,6 @@ const FLOATING_CARDS = [
     delay: 0,
     floatIndex: 0,
   },
-  // Top right
   {
     src: '/projects/certeza-seller/1.png',
     alt: 'Certeza Seller',
@@ -59,7 +56,6 @@ const FLOATING_CARDS = [
     delay: 1,
     floatIndex: 1,
   },
-  // Middle left
   {
     src: '/projects/gotasks/1.png',
     alt: 'GoTasks App',
@@ -71,7 +67,6 @@ const FLOATING_CARDS = [
     delay: 2,
     floatIndex: 2,
   },
-  // Middle right
   {
     src: '/projects/edugest/1.png',
     alt: 'EduGest Platform',
@@ -83,7 +78,6 @@ const FLOATING_CARDS = [
     delay: 3,
     floatIndex: 0,
   },
-  // Bottom left
   {
     src: '/projects/certeza-master/2.png',
     alt: 'Certeza Master',
@@ -95,7 +89,6 @@ const FLOATING_CARDS = [
     delay: 4,
     floatIndex: 1,
   },
-  // Bottom right
   {
     src: '/projects/certeza-cliente/1.png',
     alt: 'Certeza Client',
@@ -107,7 +100,6 @@ const FLOATING_CARDS = [
     delay: 5,
     floatIndex: 2,
   },
-  // Extra top center-left
   {
     src: '/projects/eleven-labs.jpg',
     alt: 'Eleven Labs',
@@ -120,7 +112,6 @@ const FLOATING_CARDS = [
     floatIndex: 1,
     scale: 0.9,
   },
-  // Extra bottom center-right
   {
     src: '/projects/first-portfolio.png',
     alt: 'First Portfolio',
@@ -138,13 +129,11 @@ const FLOATING_CARDS = [
 const ThumbnailPage = () => {
   return (
     <ThumbnailContainer>
-      {/* Background layers */}
       <GridBackground />
       <OrbPrimary />
       <OrbSecondary />
       <OrbAccent />
 
-      {/* Floating project cards */}
       {FLOATING_CARDS.map((card, i) => (
         <FloatingCard
           key={i}
@@ -168,12 +157,10 @@ const ThumbnailPage = () => {
         </FloatingCard>
       ))}
 
-      {/* Vignette + fade overlays */}
       <Vignette />
       <TopFade />
       <BottomFade />
 
-      {/* Center content */}
       <CenterContent
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}

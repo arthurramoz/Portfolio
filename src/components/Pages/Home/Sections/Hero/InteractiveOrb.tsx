@@ -11,13 +11,12 @@ const PERSPECTIVE = 400;
 const MOUSE_DRAG = 0.0002;
 const FRICTION = 0.98;
 
-/* ─── Wave (water-drop deformation) constants ─── */
-const WAVE_SPEED = 0.022;           // radians/frame the ring expands
-const WAVE_HALF_WIDTH = 0.22;       // half-width of the ring in radians
-const WAVE_DECAY = 0.983;           // amplitude multiplier per frame
-const WAVE_AMP_ENTER = 26;          // max radial displacement (px) on enter
-const WAVE_AMP_MOVE = 10;           // on throttled move inside
-const WAVE_AMP_LEAVE = 18;          // on leave
+const WAVE_SPEED = 0.022;
+const WAVE_HALF_WIDTH = 0.22;
+const WAVE_DECAY = 0.983;
+const WAVE_AMP_ENTER = 26;
+const WAVE_AMP_MOVE = 10;
+const WAVE_AMP_LEAVE = 18;
 const WAVE_MAX_ANGLE = Math.PI * 0.88;
 const MAX_WAVES = 5;
 const MOVE_THROTTLE_MS = 380;
@@ -28,11 +27,6 @@ interface Particle {
   baseZ: number;
 }
 
-/**
- * A propagating wave ring on the sphere surface.
- * `lx/ly/lz` is the impact direction in LOCAL (unrotated) space, magnitude ≈ SPHERE_RADIUS.
- * `ringAngle` is the current angular radius of the ring (0 → π).
- */
 interface Wave {
   lx: number;
   ly: number;
@@ -107,28 +101,16 @@ const InteractiveOrb = () => {
     window.addEventListener('resize', updateSize);
     setIsVisible(true);
 
-    /**
-     * Convert a screen-space offset (dx, dy) from the sphere center
-     * to a LOCAL (unrotated) sphere direction × SPHERE_RADIUS.
-     *
-     * The sphere's rendering rotation is R = Rx(rotX) ∘ Ry(rotY).
-     * The screen-space front of the sphere is already in the rotated frame,
-     * so we apply R⁻¹ = Ry(-rotY) ∘ Rx(-rotX) to recover local coords.
-     */
     const screenToLocal = (dx: number, dy: number): [number, number, number] => {
       const nx = dx / SPHERE_RADIUS;
       const ny = dy / SPHERE_RADIUS;
       const nzSq = 1 - nx * nx - ny * ny;
-      const nz = nzSq > 0 ? Math.sqrt(nzSq) : 0; // front hemisphere
+      const nz = nzSq > 0 ? Math.sqrt(nzSq) : 0;
 
       const { x: rotX, y: rotY } = rotRef.current;
       const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
       const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
 
-      // Inverse rotation: R^T = (Rx·Ry)^T
-      // lx = nx·cosY  − ny·sinX·sinY + nz·cosX·sinY
-      // ly = ny·cosX  + nz·sinX
-      // lz = −nx·sinY − ny·sinX·cosY + nz·cosX·cosY
       const lx = nx * cosY - ny * sinX * sinY + nz * cosX * sinY;
       const ly = ny * cosX + nz * sinX;
       const lz = -nx * sinY - ny * sinX * cosY + nz * cosX * cosY;
@@ -166,10 +148,8 @@ const InteractiveOrb = () => {
       const isInside = dist < SPHERE_RADIUS;
 
       if (isInside && !wasInsideRef.current) {
-        // Mouse just entered — big entrance wave
         spawnWave(dx, dy, WAVE_AMP_ENTER);
       } else if (isInside) {
-        // Throttled micro-waves while moving inside
         const now = performance.now();
         if (now - lastMoveWaveRef.current > MOVE_THROTTLE_MS) {
           lastMoveWaveRef.current = now;
@@ -208,7 +188,6 @@ const InteractiveOrb = () => {
       const sphereCx = w * 0.76;
       const sphereCy = h * 0.52;
 
-      /* ── Mouse drag rotation ── */
       const mx = mouseRef.current.x;
       const my = mouseRef.current.y;
       const distToCenter = Math.sqrt((mx - sphereCx) ** 2 + (my - sphereCy) ** 2);
@@ -241,20 +220,10 @@ const InteractiveOrb = () => {
       const cosX = Math.cos(rotX);
       const sinX = Math.sin(rotX);
 
-      /* ── Advance & cull waves; precompute per-wave world-space data ── */
       wavesRef.current = wavesRef.current.filter(
         wv => wv.amplitude > 0.4 && wv.ringAngle < WAVE_MAX_ANGLE,
       );
 
-      /**
-       * For each wave, rotate its local-space impact direction into
-       * the current world (rotated) frame — done ONCE per wave, not per particle.
-       *
-       * Forward rotation R = Rx(rotX) ∘ Ry(rotY):
-       *   drx = lx·cosY         − lz·sinY
-       *   dry = lx·(-sinX·sinY) + ly·cosX + lz·(-sinX·cosY)
-       *   drz = lx·(cosX·sinY)  + ly·sinX + lz·(cosX·cosY)
-       */
       const waveData = wavesRef.current.map(wv => {
         const drx_pre = wv.lx * cosY - wv.lz * sinY;
         const drz_pre = wv.lx * sinY + wv.lz * cosY;
@@ -262,13 +231,11 @@ const InteractiveOrb = () => {
         const drz = wv.ly * sinX + drz_pre * cosX;
         const drx = drx_pre;
 
-        // Ring bounds in cos-space (cos monotone-decreasing on [0,π])
-        const cosBack  = Math.cos(Math.max(0, wv.ringAngle - WAVE_HALF_WIDTH)); // larger cos, "behind" ring
-        const cosFront = Math.cos(wv.ringAngle + WAVE_HALF_WIDTH);              // smaller cos, "ahead"
+        const cosBack  = Math.cos(Math.max(0, wv.ringAngle - WAVE_HALF_WIDTH));
+        const cosFront = Math.cos(wv.ringAngle + WAVE_HALF_WIDTH);
 
         const amp = wv.amplitude;
 
-        // Advance for next frame
         wv.ringAngle += WAVE_SPEED;
         wv.amplitude *= WAVE_DECAY;
 
@@ -283,13 +250,11 @@ const InteractiveOrb = () => {
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        /* ── Standard rotation ── */
         let rx = p.baseX * cosY - p.baseZ * sinY;
         let rz_temp = p.baseX * sinY + p.baseZ * cosY;
         let ry = p.baseY * cosX - rz_temp * sinX;
         let rz = p.baseY * sinX + rz_temp * cosX;
 
-        /* ── Wave deformation: displace particles radially ── */
         if (hasWaves) {
           const rLen = Math.sqrt(rx * rx + ry * ry + rz * rz) || 1;
           let totalDisp = 0;
@@ -297,20 +262,15 @@ const InteractiveOrb = () => {
           for (let w = 0; w < waveData.length; w++) {
             const wd = waveData[w];
 
-            // cos(angle between particle and wave impact) — normalised by R²
             const dot = (rx * wd.drx + ry * wd.dry + rz * wd.drz) / (SPHERE_RADIUS * SPHERE_RADIUS);
 
-            // Is this particle inside the wave ring?
             if (dot > wd.cosFront && dot < wd.cosBack) {
-              // t: 0 at ring front → 1 at ring back
               const t = (dot - wd.cosFront) / (wd.cosBack - wd.cosFront);
-              // Smooth symmetric hump peaking at ring centre (t = 0.5)
               totalDisp += wd.amp * Math.sin(t * Math.PI);
             }
           }
 
           if (totalDisp !== 0) {
-            // Push particle radially outward by totalDisp pixels
             rx += (rx / rLen) * totalDisp;
             ry += (ry / rLen) * totalDisp;
             rz += (rz / rLen) * totalDisp;

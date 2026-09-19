@@ -174,7 +174,7 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     title: 'X-Mandu',
     descriptionKey: 'project.xmandu.desc',
     featured: true,
-    year: 2025,
+    year: 2024,
     month: 1,
     projectType: 'ecommerce',
     platformType: 'web',

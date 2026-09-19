@@ -471,6 +471,36 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     durationKey: 'project.meuacesso.duration',
     highlightKey: 'project.meuacesso.highlight',
   },
+  {
+    title: 'Dra. Solange',
+    descriptionKey: 'project.solange.desc',
+    featured: true,
+    year: 2026,
+    month: 6,
+    projectType: 'landing',
+    platformType: 'web',
+    link: 'https://adv-solange-pied.vercel.app/',
+    images: [
+      '/projects/advogada/1.png',
+      '/projects/advogada/2.png',
+      '/projects/advogada/3.png',
+      '/projects/advogada/4.png',
+      '/projects/advogada/5.png',
+      '/projects/advogada/6.png',
+    ],
+    tags: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'Styled-Components',
+      'Responsive Design',
+      'Landing Page',
+      'UI/UX',
+    ],
+    roleKey: 'project.solange.role',
+    durationKey: 'project.solange.duration',
+    highlightKey: 'project.solange.highlight',
+  },
 ];
 
 export const PERSONAL_PROJECTS: ProjectItem[] = [

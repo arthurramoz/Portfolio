@@ -67,7 +67,7 @@
     "styled-components"
   ],
   "author": "Arthur Ramos <https://github.com/arthurramoz>",
-  "license": "ISC",
+  "license": "MIT",
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/arthurramoz/Portfolio/issues"

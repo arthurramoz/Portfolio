@@ -20,7 +20,7 @@ import {
 
 const STATS = [
   { value: '15+', labelKey: 'exp.stats.corporate' as const },
-  { value: '1', labelKey: 'exp.stats.fullstack' as const },
+  { value: '4', labelKey: 'exp.stats.products' as const },
   { value: '28', labelKey: 'exp.stats.certifications' as const },
 ];
 

@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'motion/react';
 import {
   FiExternalLink,
   FiLinkedin,
-  FiTarget,
   FiClock,
   FiZap,
   FiLayers,
@@ -209,15 +208,15 @@ const AllProjectsPage = ({
               {t(project.descriptionKey as Parameters<typeof t>[0])}
             </CardDescription>
 
-            {(project.roleKey || project.durationKey || project.highlightKey) && (
+            {(project.durationKey || project.highlightKey) && (
               <InfoPillsRow>
-                {project.roleKey && (
+                {project.highlightKey && (
                   <InfoPill>
-                    <FiTarget size={12} />
+                    <FiZap size={12} />
                     <strong>
-                      {t('projects.pill.role' as Parameters<typeof t>[0])}:
+                      {t('projects.pill.highlight' as Parameters<typeof t>[0])}:
                     </strong>{' '}
-                    {t(project.roleKey as Parameters<typeof t>[0])}
+                    {t(project.highlightKey as Parameters<typeof t>[0])}
                   </InfoPill>
                 )}
                 {project.durationKey && (
@@ -227,15 +226,6 @@ const AllProjectsPage = ({
                       {t('projects.pill.duration' as Parameters<typeof t>[0])}:
                     </strong>{' '}
                     {t(project.durationKey as Parameters<typeof t>[0])}
-                  </InfoPill>
-                )}
-                {project.highlightKey && (
-                  <InfoPill>
-                    <FiZap size={12} />
-                    <strong>
-                      {t('projects.pill.highlight' as Parameters<typeof t>[0])}:
-                    </strong>{' '}
-                    {t(project.highlightKey as Parameters<typeof t>[0])}
                   </InfoPill>
                 )}
               </InfoPillsRow>

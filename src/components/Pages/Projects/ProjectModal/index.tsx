@@ -18,7 +18,6 @@ import {
   PlatformTitle,
   PlatformDescription,
   PlatformFeatures,
-  PlatformRoleBadge,
   PlatformCarouselWrapper,
   TagsRow,
   Tag,
@@ -69,24 +68,18 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
             {t(project.descriptionKey as Parameters<typeof t>[0])}
           </ModalDescription>
 
-          {(project.roleKey || project.durationKey || project.highlightKey) && (
+          {(project.durationKey || project.highlightKey) && (
             <InfoPillsRow>
-              {project.roleKey && (
+              {project.highlightKey && (
                 <InfoPill>
-                  <strong>{t('projects.pill.role' as Parameters<typeof t>[0])}:</strong>
-                  {t(project.roleKey as Parameters<typeof t>[0])}
+                  <strong>{t('projects.pill.highlight' as Parameters<typeof t>[0])}:</strong>
+                  {t(project.highlightKey as Parameters<typeof t>[0])}
                 </InfoPill>
               )}
               {project.durationKey && (
                 <InfoPill>
                   <strong>{t('projects.pill.duration' as Parameters<typeof t>[0])}:</strong>
                   {t(project.durationKey as Parameters<typeof t>[0])}
-                </InfoPill>
-              )}
-              {project.highlightKey && (
-                <InfoPill>
-                  <strong>{t('projects.pill.highlight' as Parameters<typeof t>[0])}:</strong>
-                  {t(project.highlightKey as Parameters<typeof t>[0])}
                 </InfoPill>
               )}
             </InfoPillsRow>
@@ -118,12 +111,6 @@ const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                   <PlatformDescription>
                     {t(platform.descriptionKey as Parameters<typeof t>[0])}
                   </PlatformDescription>
-
-                  {platform.roleKey && (
-                    <PlatformRoleBadge>
-                      {t(platform.roleKey as Parameters<typeof t>[0])}
-                    </PlatformRoleBadge>
-                  )}
 
                   {platform.featuresKey && (
                     <PlatformFeatures>

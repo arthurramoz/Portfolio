@@ -11,9 +11,9 @@ const plusJakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.arthur-moreira-ramos.com.br'),
-  title: 'Arthur Ramos | Frontend Developer — React, Next.js, TypeScript',
+  title: 'Arthur Ramos | Frontend Developer | React, Next.js, TypeScript',
   description:
-    'Portfolio of Arthur Ramos — Frontend Developer specializing in React, Next.js, and TypeScript. Explore case studies, projects, and professional experience in building performant, accessible web applications.',
+    'Portfolio of Arthur Ramos, Frontend Developer specializing in React, Next.js, and TypeScript. Explore case studies, projects, and professional experience in building performant, accessible web applications.',
   keywords: [
     'Frontend Developer',
     'React',
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Arthur Ramos | Frontend Developer',
     description:
-      'React, Next.js, TypeScript — Portfolio, Case Studies & Professional Experience',
+      'React, Next.js, TypeScript | Portfolio, Case Studies & Professional Experience',
   },
   robots: {
     index: true,

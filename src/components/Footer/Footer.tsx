@@ -89,11 +89,19 @@ const Footer = () => {
             {t('nav.projects')}
           </FooterLink>
 
+          <FooterLink onClick={() => router.push('/jornada')}>
+            {t('nav.timeline' as Parameters<typeof t>[0])}
+          </FooterLink>
+
+          <FooterLink onClick={() => router.push('/cases')}>
+            {t('nav.cases' as Parameters<typeof t>[0])}
+          </FooterLink>
+
           <FooterSubLabel
             onClick={() => setAboutOpen(prev => !prev)}
             style={{ cursor: 'pointer' }}
           >
-            {t('nav.aboutme' as Parameters<typeof t>[0])} {aboutOpen ? '−' : '+'}
+            {t('nav.profile' as Parameters<typeof t>[0])} {aboutOpen ? '−' : '+'}
           </FooterSubLabel>
 
           <AnimatePresence>
@@ -113,9 +121,6 @@ const Footer = () => {
                 <FooterLink onClick={() => router.push('/skills')}>
                   {t('nav.skills' as Parameters<typeof t>[0])}
                 </FooterLink>
-                <FooterLink onClick={() => router.push('/jornada')}>
-                  {t('nav.timeline' as Parameters<typeof t>[0])}
-                </FooterLink>
                 <FooterLink onClick={() => router.push('/depoimentos')}>
                   {t('nav.testimonials' as Parameters<typeof t>[0])}
                 </FooterLink>
@@ -126,9 +131,6 @@ const Footer = () => {
             )}
           </AnimatePresence>
 
-          <FooterLink onClick={() => router.push('/cases')}>
-            {t('nav.cases' as Parameters<typeof t>[0])}
-          </FooterLink>
           <FooterLink onClick={() => router.push('/contato')}>
             {t('nav.cta')}
           </FooterLink>

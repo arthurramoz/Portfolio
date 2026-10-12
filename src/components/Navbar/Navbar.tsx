@@ -46,6 +46,7 @@ import {
   NavLink,
   NavLogo,
   NavLogoMark,
+  ActiveNavIndicator,
   HomeSectionsWrapper,
   HomeSectionLink,
   ProjectsDropdown,
@@ -132,22 +133,27 @@ const Navbar = () => {
   const { language, setLanguage: setLang, t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
-  const [isAboutMeOpen, setIsAboutMeOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isMobileLangOpen, setIsMobileLangOpen] = useState(false);
   const [isMobileHomeOpen, setIsMobileHomeOpen] = useState(false);
   const [isMobileProjectsSubOpen, setIsMobileProjectsSubOpen] = useState(false);
-  const [isMobileAboutSubOpen, setIsMobileAboutSubOpen] = useState(false);
+  const [isMobileProfileSubOpen, setIsMobileProfileSubOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [isHomeSectionsOpen, setIsHomeSectionsOpen] = useState(false);
   const homeSectionsTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const settingsRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
-  const aboutMeRef = useRef<HTMLDivElement>(null);
+  const profileRef = useRef<HTMLDivElement>(null);
 
   const isHomePage = pathname === '/home';
   const isProjectsPage = pathname.startsWith('/projetos');
-  const isAboutMePage = pathname === '/skills' || pathname === '/jornada' || pathname === '/depoimentos' || pathname === '/cursos';
+  const isTimelinePage = pathname.startsWith('/jornada');
+  const isCasesPage = pathname.startsWith('/cases');
+  const isProfilePage =
+    pathname === '/skills' ||
+    pathname === '/depoimentos' ||
+    pathname === '/cursos';
 
   const allHomeSections = [HOME_MAIN, ...HOME_SECTIONS];
 
@@ -209,10 +215,10 @@ const Navbar = () => {
         setIsProjectsOpen(false);
       }
       if (
-        aboutMeRef.current &&
-        !aboutMeRef.current.contains(event.target as Node)
+        profileRef.current &&
+        !profileRef.current.contains(event.target as Node)
       ) {
-        setIsAboutMeOpen(false);
+        setIsProfileOpen(false);
       }
     };
 
@@ -261,31 +267,26 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.35, ease: 'easeOut' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
           >
+            <NavLink
+              $selected={isHomePage && activeSection === 'home'}
+              onClick={() => handleScrollNav('home')}
+            >
+              {t(HOME_MAIN.key)}
+              {isHomePage && activeSection === 'home' && (
+                <ActiveNavIndicator
+                  layoutId="navbar-indicator"
+                  transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                />
+              )}
+            </NavLink>
+
+            {/*
             <HomeSectionsWrapper
               onMouseEnter={handleHomeSectionsEnter}
               onMouseLeave={handleHomeSectionsLeave}
             >
-              <NavLink
-                $selected={isHomePage && activeSection === 'home'}
-                onClick={() => handleScrollNav('home')}
-              >
-                {t(HOME_MAIN.key)}
-                {isHomePage && activeSection === 'home' && (
-                  <motion.span
-                    layoutId="navbar-indicator"
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      borderRadius: '9999px',
-                      background: 'rgba(26, 26, 26, 0.06)',
-                      zIndex: -1,
-                    }}
-                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                  />
-                )}
-              </NavLink>
-
               <AnimatePresence>
                 {isHomeSectionsOpen && (
                   <div
@@ -332,61 +333,70 @@ const Navbar = () => {
                 )}
               </AnimatePresence>
             </HomeSectionsWrapper>
-          </motion.div>
-
-          <motion.div
-            animate={{
-              opacity: isHomeSectionsOpen ? 0 : 1,
-              pointerEvents: isHomeSectionsOpen ? 'none' as const : 'auto' as const,
-            }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
-            style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
-          >
+            */}
             <NavLink
               $selected={isProjectsPage}
               onClick={() => router.push('/projetos')}
             >
               {t('nav.projects')}
               {isProjectsPage && (
-                <motion.span
+                <ActiveNavIndicator
                   layoutId="navbar-indicator"
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    borderRadius: '9999px',
-                    background: 'rgba(26, 26, 26, 0.06)',
-                    zIndex: -1,
-                  }}
                   transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                 />
               )}
             </NavLink>
 
-            <SettingsWrapper ref={aboutMeRef}>
+            <NavLink
+              $selected={isTimelinePage}
+              onClick={() => router.push('/jornada')}
+            >
+              {t('nav.timeline' as Parameters<typeof t>[0])}
+              {isTimelinePage && (
+                <ActiveNavIndicator
+                  layoutId="navbar-indicator"
+                  transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                />
+              )}
+            </NavLink>
+
+            <NavLink
+              $selected={isCasesPage}
+              onClick={() => router.push('/cases')}
+            >
+              {t('nav.cases' as Parameters<typeof t>[0])}
+              {isCasesPage && (
+                <ActiveNavIndicator
+                  layoutId="navbar-indicator"
+                  transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                />
+              )}
+            </NavLink>
+
+            <SettingsWrapper ref={profileRef}>
               <NavLink
-                $selected={isAboutMePage}
-                onClick={() => setIsAboutMeOpen(prev => !prev)}
+                $selected={isProfilePage}
+                onClick={() => setIsProfileOpen(prev => !prev)}
                 style={{ display: 'flex', alignItems: 'center', gap: '4px' }}
               >
-                {t('nav.aboutme' as Parameters<typeof t>[0])}
-                <FiChevronDown size={14} />
-                {isAboutMePage && (
-                  <motion.span
+                {t('nav.profile' as Parameters<typeof t>[0])}
+                <FiChevronDown
+                  size={14}
+                  style={{
+                    transform: isProfileOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                    transition: 'transform 0.2s ease',
+                  }}
+                />
+                {isProfilePage && (
+                  <ActiveNavIndicator
                     layoutId="navbar-indicator"
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      borderRadius: '9999px',
-                      background: 'rgba(26, 26, 26, 0.06)',
-                      zIndex: -1,
-                    }}
                     transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                   />
                 )}
               </NavLink>
 
               <AnimatePresence>
-                {isAboutMeOpen && (
+                {isProfileOpen && (
                   <ProjectsDropdown
                     initial={{ opacity: 0, y: 6, scale: 0.97 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -404,7 +414,7 @@ const Navbar = () => {
                         $active={pathname === '/skills'}
                         onClick={() => {
                           router.push('/skills');
-                          setIsAboutMeOpen(false);
+                          setIsProfileOpen(false);
                         }}
                       >
                         <ProjectsDropdownIcon $active={pathname === '/skills'}>
@@ -422,31 +432,10 @@ const Navbar = () => {
                       transition={{ delay: 0.04, duration: 0.2, ease: 'easeOut' }}
                     >
                       <ProjectsDropdownItem
-                        $active={pathname === '/jornada'}
-                        onClick={() => {
-                          router.push('/jornada');
-                          setIsAboutMeOpen(false);
-                        }}
-                      >
-                        <ProjectsDropdownIcon $active={pathname === '/jornada'}>
-                          <FiMapPin size={18} />
-                        </ProjectsDropdownIcon>
-                        <ProjectsDropdownText>
-                          <ProjectsDropdownName>{t('nav.timeline' as Parameters<typeof t>[0])}</ProjectsDropdownName>
-                        </ProjectsDropdownText>
-                      </ProjectsDropdownItem>
-                    </motion.div>
-
-                    <motion.div
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.08, duration: 0.2, ease: 'easeOut' }}
-                    >
-                      <ProjectsDropdownItem
                         $active={pathname === '/depoimentos'}
                         onClick={() => {
                           router.push('/depoimentos');
-                          setIsAboutMeOpen(false);
+                          setIsProfileOpen(false);
                         }}
                       >
                         <ProjectsDropdownIcon $active={pathname === '/depoimentos'}>
@@ -461,13 +450,13 @@ const Navbar = () => {
                     <motion.div
                       initial={{ opacity: 0, x: -8 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.12, duration: 0.2, ease: 'easeOut' }}
+                      transition={{ delay: 0.08, duration: 0.2, ease: 'easeOut' }}
                     >
                       <ProjectsDropdownItem
                         $active={pathname === '/cursos'}
                         onClick={() => {
                           router.push('/cursos');
-                          setIsAboutMeOpen(false);
+                          setIsProfileOpen(false);
                         }}
                       >
                         <ProjectsDropdownIcon $active={pathname === '/cursos'}>
@@ -482,26 +471,6 @@ const Navbar = () => {
                 )}
               </AnimatePresence>
             </SettingsWrapper>
-
-            <NavLink
-              $selected={pathname === '/cases'}
-              onClick={() => router.push('/cases')}
-            >
-              {t('nav.cases' as Parameters<typeof t>[0])}
-              {pathname === '/cases' && (
-                <motion.span
-                  layoutId="navbar-indicator"
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    borderRadius: '9999px',
-                    background: 'rgba(26, 26, 26, 0.06)',
-                    zIndex: -1,
-                  }}
-                  transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                />
-              )}
-            </NavLink>
           </motion.div>
         </Nav>
 
@@ -740,16 +709,48 @@ const Navbar = () => {
                   <motion.div variants={mobileItemVariants}>
                     <MobileNavLink>
                       <MobileNavLinkText
-                        $active={isAboutMePage}
-                        onClick={() => setIsMobileAboutSubOpen(prev => !prev)}
+                        $active={isTimelinePage}
+                        onClick={() => {
+                          router.push('/jornada');
+                          setIsMobileOpen(false);
+                        }}
                       >
                         <span style={{ display: 'flex', alignItems: 'center' }}>
-                          {t('nav.aboutme')}
+                          {t('nav.timeline' as Parameters<typeof t>[0])}
+                        </span>
+                      </MobileNavLinkText>
+                    </MobileNavLink>
+                  </motion.div>
+
+                  <motion.div variants={mobileItemVariants}>
+                    <MobileNavLink>
+                      <MobileNavLinkText
+                        $active={isCasesPage}
+                        onClick={() => {
+                          router.push('/cases');
+                          setIsMobileOpen(false);
+                        }}
+                      >
+                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                          {t('nav.cases' as Parameters<typeof t>[0])}
+                        </span>
+                      </MobileNavLinkText>
+                    </MobileNavLink>
+                  </motion.div>
+
+                  <motion.div variants={mobileItemVariants}>
+                    <MobileNavLink>
+                      <MobileNavLinkText
+                        $active={isProfilePage}
+                        onClick={() => setIsMobileProfileSubOpen(prev => !prev)}
+                      >
+                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                          {t('nav.profile' as Parameters<typeof t>[0])}
                         </span>
                         <FiChevronDown
                           size={20}
                           style={{
-                            transform: isMobileAboutSubOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                            transform: isMobileProfileSubOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                             transition: 'transform 0.2s ease',
                             opacity: 0.6,
                           }}
@@ -758,7 +759,7 @@ const Navbar = () => {
                     </MobileNavLink>
 
                     <AnimatePresence>
-                      {isMobileAboutSubOpen && (
+                      {isMobileProfileSubOpen && (
                         <MobileSubmenuContainer
                           initial={{ height: 0, opacity: 0, overflow: 'hidden' }}
                           animate={{ height: 'auto', opacity: 1 }}
@@ -774,16 +775,6 @@ const Navbar = () => {
                           >
                             <FiLayers size={16} />
                             {t('nav.skills' as Parameters<typeof t>[0])}
-                          </MobileSubmenuLink>
-                          <MobileSubmenuLink
-                            $active={pathname === '/jornada'}
-                            onClick={() => {
-                              router.push('/jornada');
-                              setIsMobileOpen(false);
-                            }}
-                          >
-                            <FiMapPin size={16} />
-                            {t('nav.timeline' as Parameters<typeof t>[0])}
                           </MobileSubmenuLink>
                           <MobileSubmenuLink
                             $active={pathname === '/depoimentos'}
@@ -808,22 +799,6 @@ const Navbar = () => {
                         </MobileSubmenuContainer>
                       )}
                     </AnimatePresence>
-                  </motion.div>
-
-                  <motion.div variants={mobileItemVariants}>
-                    <MobileNavLink>
-                      <MobileNavLinkText
-                        $active={pathname === '/cases'}
-                        onClick={() => {
-                          router.push('/cases');
-                          setIsMobileOpen(false);
-                        }}
-                      >
-                        <span style={{ display: 'flex', alignItems: 'center' }}>
-                          {t('nav.cases' as Parameters<typeof t>[0])}
-                        </span>
-                      </MobileNavLinkText>
-                    </MobileNavLink>
                   </motion.div>
 
                   <motion.div variants={mobileItemVariants}>

@@ -1,11 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'motion/react';
 import { useRouter } from 'next/navigation';
 import {
-  FiUser,
   FiSun,
   FiMoon,
   FiGlobe,
@@ -27,17 +25,6 @@ import {
 import {
   DirectRedirectCard,
   SettingsPageWrapper,
-  SectionCard,
-  SectionHeader,
-  SectionIconWrap,
-  SectionTitle,
-  SectionDivider,
-  AboutPreview,
-  AboutPhotoWrap,
-  AboutInfo,
-  AboutRole,
-  AboutName,
-  AboutBio,
   LangCollapsibleCard,
   LangCardHeader,
   LangChevron,
@@ -50,7 +37,6 @@ import {
   LangName,
   LangNative,
   ActiveDot,
-  RedirectCard,
   RedirectLeft,
   RedirectIconWrap,
   RedirectInfo,
@@ -110,32 +96,8 @@ const SettingsPage = () => {
         </PageDescription>
       </PageTitleWrapper>
 
-      <SectionCard custom={0} variants={cardVariants} initial="hidden" animate="visible">
-        <SectionHeader>
-          <SectionIconWrap><FiUser size={18} /></SectionIconWrap>
-          <SectionTitle>{t('settings.about.title')}</SectionTitle>
-        </SectionHeader>
-        <SectionDivider />
-        <AboutPreview>
-          <AboutPhotoWrap>
-            <Image
-              src="/me/6.jpg"
-              alt="Arthur Moreira Ramos"
-              width={96}
-              height={96}
-              style={{ objectFit: 'cover', objectPosition: 'center top', width: '100%', height: '100%' }}
-            />
-          </AboutPhotoWrap>
-          <AboutInfo>
-            <AboutRole>Software Engineer &amp; Full Stack</AboutRole>
-            <AboutName>Arthur Moreira Ramos</AboutName>
-            <AboutBio>{t('settings.about.bio')}</AboutBio>
-          </AboutInfo>
-        </AboutPreview>
-      </SectionCard>
-
       <DirectRedirectCard
-        custom={1}
+        custom={0}
         variants={cardVariants}
         initial="hidden"
         animate="visible"
@@ -150,7 +112,7 @@ const SettingsPage = () => {
           <RedirectInfo>
             <RedirectTitle>{t('settings.theme')}</RedirectTitle>
             <RedirectDesc>
-              {themeMode === 'dark' ? t('settings.theme.dark') : t('settings.theme.light')} — {t('settings.theme.desc')}
+              {themeMode === 'dark' ? t('settings.theme.dark') : t('settings.theme.light')}: {t('settings.theme.desc')}
             </RedirectDesc>
           </RedirectInfo>
         </RedirectLeft>
@@ -158,7 +120,7 @@ const SettingsPage = () => {
       </DirectRedirectCard>
 
       <DirectRedirectCard
-        custom={2}
+        custom={1}
         variants={cardVariants}
         initial="hidden"
         animate="visible"

@@ -97,7 +97,7 @@ const TestimonialsPage = () => {
               </QuoteText>
               <AuthorInfo>
                 <AuthorName>{tm.name}</AuthorName>
-                <AuthorRole>{tm.role} — {tm.company}</AuthorRole>
+                <AuthorRole>{tm.role}, {tm.company}</AuthorRole>
               </AuthorInfo>
             </TestimonialCard>
           ))}

@@ -17,20 +17,20 @@ export const NavbarContainer = styled.header`
   align-items: center;
   justify-content: space-between;
 
-  padding: 12px 20px;
+  padding: 10px 20px;
   border-radius: 9999px;
 
   background: ${({ theme }) => theme.colors.navbarBg};
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
-  box-shadow: 0 4px 32px ${({ theme }) => theme.colors.navbarShadow};
+  box-shadow: ${({ theme }) => theme.colors.navbarGlassShadow};
 
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 
   &:hover {
     background: ${({ theme }) => theme.colors.navbarBgHover};
-    box-shadow: 0 8px 40px ${({ theme }) => theme.colors.navbarShadowHover};
+    box-shadow: ${({ theme }) => theme.colors.navbarGlassShadowHover};
   }
 
   ${({ theme }) => theme.media.lg} {
@@ -73,9 +73,9 @@ export const HomeSectionsWrapper = styled.div`
 
 export const HomeSectionLink = styled.p<NavLinkProps>`
   position: relative;
-  padding: 16px 14px;
+  padding: 12px 14px;
   border-radius: 9999px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   white-space: nowrap;
   color: ${({ $selected, theme }) =>
@@ -96,9 +96,9 @@ interface NavLinkProps {
 
 export const NavLink = styled.p<NavLinkProps>`
   position: relative;
-  padding: 16px 18px;
+  padding: 12px 16px;
   border-radius: 9999px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: ${({ $selected, theme }) =>
     $selected
@@ -106,10 +106,21 @@ export const NavLink = styled.p<NavLinkProps>`
       : theme.colors.navbarLinkInactive};
   transition: color 0.2s ease;
   cursor: pointer;
+  user-select: none;
 
   &:hover {
     color: ${({ theme }) => theme.colors.navbarLinkActive};
   }
+`;
+
+export const ActiveNavIndicator = styled(motion.span)`
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: ${({ theme }) => theme.colors.navbarLinkBgActive};
+  border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  box-shadow: inset 0 1px 0 0 ${({ theme }) => theme.colors.navbarGlassHighlight};
+  z-index: -1;
 `;
 
 export const NavCta = styled(motion.button)`
@@ -170,16 +181,16 @@ export const MobileDrawer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   background: ${({ theme }) =>
-    theme.colors.dropdownBg === '#ffffff'
-      ? 'rgba(255, 255, 255, 0.72)'
-      : 'rgba(15, 15, 22, 0.65)'};
-  backdrop-filter: blur(12px) saturate(150%);
-  -webkit-backdrop-filter: blur(12px) saturate(150%);
+    theme.colors.dropdownBg.includes('255, 255, 255')
+      ? 'rgba(255, 255, 255, 0.82)'
+      : 'rgba(16, 16, 24, 0.76)'};
+  backdrop-filter: blur(32px) saturate(190%) contrast(105%);
+  -webkit-backdrop-filter: blur(32px) saturate(190%) contrast(105%);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   border-radius: 28px;
   box-shadow: 
-    0 24px 60px rgba(0, 0, 0, 0.25),
-    inset 0 1px 1px rgba(255, 255, 255, 0.12);
+    0 24px 60px rgba(0, 0, 0, 0.35),
+    inset 0 1px 1px ${({ theme }) => theme.colors.navbarGlassHighlight};
   overflow: hidden;
 
   ${({ theme }) => theme.media.sm} {
@@ -507,12 +518,12 @@ export const ProjectsDropdown = styled(motion.div)`
   padding: 6px;
   border-radius: 16px;
   background: ${({ theme }) => theme.colors.dropdownBg};
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   box-shadow:
-    0 12px 40px ${({ theme }) => theme.colors.navbarShadow},
-    0 0 0 1px ${({ theme }) => theme.colors.navbarBorder};
+    0 16px 40px ${({ theme }) => theme.colors.navbarShadow},
+    inset 0 1px 1px 0 ${({ theme }) => theme.colors.navbarGlassHighlight};
   z-index: 100;
 `;
 
@@ -608,12 +619,12 @@ export const SettingsDropdown = styled(motion.div)`
   padding: 6px;
   border-radius: 16px;
   background: ${({ theme }) => theme.colors.dropdownBg};
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   box-shadow:
-    0 12px 40px ${({ theme }) => theme.colors.navbarShadow},
-    0 0 0 1px ${({ theme }) => theme.colors.navbarBorder};
+    0 16px 40px ${({ theme }) => theme.colors.navbarShadow},
+    inset 0 1px 1px 0 ${({ theme }) => theme.colors.navbarGlassHighlight};
   z-index: 100;
 `;
 
@@ -728,12 +739,12 @@ export const LanguageSubmenu = styled.div`
   padding: 6px;
   border-radius: 12px;
   background: ${({ theme }) => theme.colors.dropdownBg};
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   box-shadow:
-    0 8px 32px ${({ theme }) => theme.colors.navbarShadow},
-    0 0 0 1px ${({ theme }) => theme.colors.navbarBorder};
+    0 12px 32px ${({ theme }) => theme.colors.navbarShadow},
+    inset 0 1px 1px 0 ${({ theme }) => theme.colors.navbarGlassHighlight};
   opacity: 0;
   visibility: hidden;
   transform: translateX(8px);
@@ -800,12 +811,12 @@ export const PortfolioSubmenu = styled.div`
   padding: 6px;
   border-radius: 14px;
   background: ${({ theme }) => theme.colors.dropdownBg};
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%);
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   box-shadow:
-    0 8px 32px ${({ theme }) => theme.colors.navbarShadow},
-    0 0 0 1px ${({ theme }) => theme.colors.navbarBorder};
+    0 12px 32px ${({ theme }) => theme.colors.navbarShadow},
+    inset 0 1px 1px 0 ${({ theme }) => theme.colors.navbarGlassHighlight};
   opacity: 0;
   visibility: hidden;
   transform: translateX(6px);

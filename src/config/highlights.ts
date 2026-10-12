@@ -47,7 +47,7 @@ export const HIGHLIGHT_CONFIG: HighlightConfig = {
 
   mocks: [
     {
-      title: 'Cases — Pagar.me v5',
+      title: 'Cases: Pagar.me v5',
       icon: FiCreditCard,
       accent: '#22d3ee',
       lines: ['90%', '70%', '50%'],
@@ -57,7 +57,7 @@ export const HIGHLIGHT_CONFIG: HighlightConfig = {
       delay: 0.3,
     },
     {
-      title: 'Skills — Favoritas',
+      title: 'Skills: Favoritas',
       icon: FiStar,
       accent: '#fb6f92',
       lines: ['85%', '65%', '75%'],

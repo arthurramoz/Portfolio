@@ -1,4 +1,5 @@
 import { FiArrowRight } from 'react-icons/fi';
+import { motion } from 'motion/react';
 import styled, { keyframes } from 'styled-components';
 
 const fadeInUp30 = keyframes`
@@ -194,22 +195,34 @@ export const SecondaryButton = styled(BaseButton)`
   -webkit-backdrop-filter: blur(6px);
 `;
 
-export const ResumeLink = styled.a`
+export const ResumeWrapper = styled.div`
+  position: relative;
+  display: inline-flex;
+
+  ${({ theme }) => theme.media.sm} {
+    width: 100%;
+  }
+`;
+
+export const ResumeButton = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px 28px;
+  padding: 14px 24px;
   border-radius: 50px;
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   letter-spacing: -0.01em;
-  text-decoration: none;
   background: transparent;
   color: ${({ theme }) => theme.colors.primary1};
   border: 1px solid ${({ theme }) => theme.colors.primary1}40;
+
+  ${({ theme }) => theme.media.sm} {
+    width: 100%;
+  }
 
   &:hover {
     background: ${({ theme }) => theme.colors.primary1}12;
@@ -220,10 +233,78 @@ export const ResumeLink = styled.a`
   svg {
     transition: transform 0.3s ease;
   }
+`;
 
-  &:hover svg {
-    transform: translateY(2px);
+export const ResumeDropdown = styled(motion.div)`
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 210px;
+  padding: 8px;
+  border-radius: 16px;
+  background: ${({ theme }) => theme.colors.dropdownBg};
+  backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+  border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  box-shadow:
+    0 16px 40px ${({ theme }) => theme.colors.navbarShadow},
+    inset 0 1px 1px 0 ${({ theme }) => theme.colors.navbarGlassHighlight};
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  ${({ theme }) => theme.media.sm} {
+    width: 100%;
+    left: 0;
+    right: 0;
   }
+`;
+
+export const ResumeOption = styled.a`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: ${({ theme }) => theme.colors.navbarLinkActive};
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.navbarLinkBgHover};
+    transform: translateX(4px);
+  }
+`;
+
+export const ResumeOptionFlag = styled.img`
+  width: 22px;
+  height: 15px;
+  object-fit: cover;
+  border-radius: 3px;
+  flex-shrink: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+`;
+
+export const ResumeOptionInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+`;
+
+export const ResumeOptionTitle = styled.span`
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+`;
+
+export const ResumeOptionMeta = styled.span`
+  font-size: 11px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.navbarLinkInactive};
+  line-height: 1.2;
 `;
 
 export const IllustrationBlock = styled.div`

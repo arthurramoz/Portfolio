@@ -1,7 +1,8 @@
 'use client';
 
-import { useMemo } from 'react';
-import { motion } from 'motion/react';
+import { useMemo, useRef, useState } from 'react';
+import { motion, useScroll, useSpring, AnimatePresence } from 'motion/react';
+import { FiChevronDown } from 'react-icons/fi';
 import { useLanguage } from '@/contexts/LanguageContext';
 import {
   PageWrapper,
@@ -15,66 +16,87 @@ import {
   TimelineCategory,
 } from '@/config/timeline';
 import {
-  LegendRow,
-  LegendItem,
-  LegendDot,
-  TimelineTrack,
-  YearMarker,
-  YearLabel,
-  EntryCard,
-  EntryHeader,
-  EntryIconWrap,
-  EntryTitleGroup,
-  EntryTitle,
-  EntryDate,
-  EntryDescription,
-  EntryTags,
-  EntryTag,
-  HighlightBar,
+  FilterBar,
+  FilterChip,
+  FilterDot,
+  TimelineWrapper,
+  SpineTop,
+  SpineRail,
+  SpineBeam,
+  TimelineRow,
+  DateCell,
+  NodeCell,
+  CardCell,
+  DatePill,
+  PillDot,
+  NodeDot,
+  Card,
+  CategoryTag,
+  CardTitle,
+  CompanyAccent,
+  CardDescription,
 } from './styles';
 
-const LEGEND_KEYS: Record<TimelineCategory, string> = {
-  education: 'timeline.cat.education',
-  work: 'timeline.cat.work',
-  freelance: 'timeline.cat.freelance',
-  milestone: 'timeline.cat.milestone',
-};
+type TranslationKey = Parameters<ReturnType<typeof useLanguage>['t']>[0];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.06 },
-  },
-};
+const CATEGORIES: TimelineCategory[] = ['work', 'milestone', 'education'];
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 18 },
+const EASE = [0.16, 1, 0.3, 1] as const;
+
+const rowVariants = {
+  hidden: { opacity: 0, y: 24, filter: 'blur(6px)' },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+    filter: 'blur(0px)',
+    transition: { duration: 0.6, ease: EASE },
   },
 };
 
+const splitTitle = (title: string) => {
+  const colonIndex = title.lastIndexOf(':');
+  if (colonIndex > -1) {
+    return {
+      main: `${title.slice(0, colonIndex).trim()}: `,
+      accent: title.slice(colonIndex + 1).trim(),
+    };
+  }
+  const parenIndex = title.indexOf('(');
+  if (parenIndex > -1 && title.endsWith(')')) {
+    return {
+      main: `${title.slice(0, parenIndex).trim()} `,
+      accent: title.slice(parenIndex).trim(),
+    };
+  }
+  return { main: title, accent: '' };
+};
+
 const TimelinePage = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
+  const [selectedCategory, setSelectedCategory] = useState<'all' | TimelineCategory>('all');
+  const trackRef = useRef<HTMLDivElement>(null);
 
-  const grouped = useMemo(() => {
-    const map = new Map<number, typeof TIMELINE_ENTRIES>();
-    TIMELINE_ENTRIES.forEach(entry => {
-      const arr = map.get(entry.year) ?? [];
-      arr.push(entry);
-      map.set(entry.year, arr);
-    });
-    return Array.from(map.entries()).sort(([a], [b]) => b - a);
-  }, []);
+  const { scrollYProgress } = useScroll({
+    target: trackRef,
+    offset: ['start 60%', 'end 60%'],
+  });
 
-  const formatDate = (year: number, month?: number) => {
-    if (!month) return `${year}`;
-    const monthName = t(`month.${month}` as Parameters<typeof t>[0]);
-    return `${monthName} ${year}`;
-  };
+  const beamScale = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  const entries = useMemo(
+    () =>
+      selectedCategory === 'all'
+        ? TIMELINE_ENTRIES
+        : TIMELINE_ENTRIES.filter(entry => entry.category === selectedCategory),
+    [selectedCategory],
+  );
+
+  const formatDate = (year: number, month?: number) =>
+    month ? `${t(`month.${month}` as TranslationKey)} ${year}` : `${year}`;
 
   return (
     <PageWrapper>
@@ -82,100 +104,114 @@ const TimelinePage = () => {
         <PageDescription
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5, ease: EASE }}
         >
-          {t('timeline.page.tag' as Parameters<typeof t>[0])}
+          {t('timeline.page.tag' as TranslationKey)}
         </PageDescription>
         <PageHeading
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.04 }}
+          transition={{ duration: 0.5, ease: EASE, delay: 0.04 }}
         >
-          {t('timeline.page.title' as Parameters<typeof t>[0])}
+          {t('timeline.page.title' as TranslationKey)}
         </PageHeading>
         <PageDescription
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.08, duration: 0.45, ease: 'easeOut' }}
         >
-          {t('timeline.page.subtitle' as Parameters<typeof t>[0])}
+          {t('timeline.page.subtitle' as TranslationKey)}
         </PageDescription>
       </PageTitleWrapper>
 
-      <LegendRow
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.15, duration: 0.4 }}
+      <FilterBar
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.12, duration: 0.4, ease: EASE }}
       >
-        {(Object.keys(LEGEND_KEYS) as TimelineCategory[]).map(cat => (
-          <LegendItem key={cat}>
-            <LegendDot $color={CATEGORY_COLORS[cat]} />
-            {t(LEGEND_KEYS[cat] as Parameters<typeof t>[0])}
-          </LegendItem>
-        ))}
-      </LegendRow>
-
-      <TimelineTrack>
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
+        <FilterChip
+          id="timeline-filter-all"
+          type="button"
+          $active={selectedCategory === 'all'}
+          onClick={() => setSelectedCategory('all')}
         >
-          {grouped.map(([year, entries]) => (
-            <div key={year}>
-              <YearMarker variants={itemVariants}>
-                <YearLabel>{year}</YearLabel>
-              </YearMarker>
+          {t('courses.filter.all' as TranslationKey)}
+        </FilterChip>
+        {CATEGORIES.map(category => (
+          <FilterChip
+            key={category}
+            id={`timeline-filter-${category}`}
+            type="button"
+            $active={selectedCategory === category}
+            onClick={() => setSelectedCategory(category)}
+          >
+            <FilterDot $color={CATEGORY_COLORS[category]} />
+            {t(`timeline.cat.${category}` as TranslationKey)}
+          </FilterChip>
+        ))}
+      </FilterBar>
 
-              {entries.map(entry => {
-                const color = CATEGORY_COLORS[entry.category];
-                const Icon = entry.icon;
-                const hl = !!entry.highlight;
-                return (
-                  <EntryCard
-                    key={entry.id}
-                    $accentColor={color}
-                    $highlight={hl}
-                    variants={itemVariants}
-                  >
-                    {hl && <HighlightBar $accentColor={color} />}
+      <TimelineWrapper ref={trackRef}>
+        <SpineTop
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.45, delay: 0.2, ease: EASE }}
+        >
+          <FiChevronDown size={18} />
+        </SpineTop>
 
-                    <EntryHeader>
-                      {Icon && (
-                        <EntryIconWrap $accentColor={color} $highlight={hl}>
-                          <Icon size={hl ? 20 : 16} />
-                        </EntryIconWrap>
-                      )}
-                      <EntryTitleGroup>
-                        <EntryTitle $highlight={hl}>
-                          {t(entry.titleKey as Parameters<typeof t>[0])}
-                        </EntryTitle>
-                      </EntryTitleGroup>
-                      <EntryDate>
-                        {formatDate(entry.year, entry.month)}
-                      </EntryDate>
-                    </EntryHeader>
+        <SpineRail />
+        <SpineBeam style={{ scaleY: beamScale }} />
 
-                    <EntryDescription $highlight={hl}>
-                      {t(entry.descriptionKey as Parameters<typeof t>[0])}
-                    </EntryDescription>
+        <AnimatePresence mode="popLayout" initial={false}>
+          {entries.map((entry, index) => {
+            const color = CATEGORY_COLORS[entry.category];
+            const Icon = entry.icon;
+            const cardLeft = index % 2 === 1;
+            const { main, accent } = splitTitle(t(entry.titleKey as TranslationKey));
 
-                    {entry.tags && entry.tags.length > 0 && (
-                      <EntryTags>
-                        {entry.tags.map(tag => (
-                          <EntryTag key={tag} $accentColor={color}>
-                            {tag}
-                          </EntryTag>
-                        ))}
-                      </EntryTags>
-                    )}
-                  </EntryCard>
-                );
-              })}
-            </div>
-          ))}
-        </motion.div>
-      </TimelineTrack>
+            return (
+              <TimelineRow
+                key={entry.id}
+                layout
+                $cardLeft={cardLeft}
+                variants={rowVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-60px' }}
+                exit={{ opacity: 0, transition: { duration: 0.2 } }}
+              >
+                <DateCell $cardLeft={cardLeft}>
+                  <DatePill>
+                    <PillDot $color={color} />
+                    {formatDate(entry.year, entry.month)}
+                  </DatePill>
+                </DateCell>
+
+                <NodeCell>
+                  <NodeDot $color={color} />
+                </NodeCell>
+
+                <CardCell $cardLeft={cardLeft}>
+                  <Card $color={color}>
+                    <CategoryTag $color={color}>
+                      {Icon && <Icon size={14} />}
+                      {t(`timeline.cat.${entry.category}` as TranslationKey)}
+                    </CategoryTag>
+                    <CardTitle>
+                      {main}
+                      {accent && <CompanyAccent>{accent}</CompanyAccent>}
+                    </CardTitle>
+                    <CardDescription>
+                      {t(entry.descriptionKey as TranslationKey)}
+                    </CardDescription>
+                  </Card>
+                </CardCell>
+              </TimelineRow>
+            );
+          })}
+        </AnimatePresence>
+      </TimelineWrapper>
     </PageWrapper>
   );
 };

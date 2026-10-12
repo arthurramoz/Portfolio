@@ -43,6 +43,20 @@ export const GlobalStyle = createGlobalStyle`
     color: inherit;
   }
 
+  :focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.accentText};
+    outline-offset: 3px;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: none;
+  }
+
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+
   input, textarea, button {
     font-family: inherit;
   }

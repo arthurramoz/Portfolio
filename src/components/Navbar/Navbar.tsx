@@ -486,7 +486,12 @@ const Navbar = () => {
             style={{ width: 18, height: 14, borderRadius: 2, objectFit: 'cover', opacity: 0.85 }}
           />
           <SettingsWrapper ref={settingsRef}>
-            <SettingsButton onClick={() => setIsMenuOpen(prev => !prev)}>
+            <SettingsButton
+              type="button"
+              aria-label={t('nav.settings')}
+              aria-expanded={isMenuOpen}
+              onClick={() => setIsMenuOpen(prev => !prev)}
+            >
               <FiSettings size={18} />
             </SettingsButton>
 
@@ -603,7 +608,12 @@ const Navbar = () => {
             {t('nav.cta')}
           </NavCta>
 
-          <HamburgerButton onClick={() => setIsMobileOpen(true)}>
+          <HamburgerButton
+            type="button"
+            aria-label={t('nav.menu.open' as Parameters<typeof t>[0])}
+            aria-expanded={isMobileOpen}
+            onClick={() => setIsMobileOpen(true)}
+          >
             <FiMenu size={20} />
           </HamburgerButton>
         </motion.div>
@@ -633,7 +643,11 @@ const Navbar = () => {
                   <NavLogoMark>
                     <img src="/logo.png" alt="A" width={30} height={30} style={{ objectFit: 'contain' }} />
                   </NavLogoMark>
-                  <MobileDrawerClose onClick={() => setIsMobileOpen(false)}>
+                  <MobileDrawerClose
+                    type="button"
+                    aria-label={t('nav.menu.close' as Parameters<typeof t>[0])}
+                    onClick={() => setIsMobileOpen(false)}
+                  >
                     <FiX size={20} />
                   </MobileDrawerClose>
                 </MobileDrawerHeader>

@@ -263,6 +263,9 @@ const Contact = () => {
                   >
                     <FormInput
                       type="text"
+                      name="name"
+                      autoComplete="name"
+                      aria-label={t('contact.form.name' as Parameters<typeof t>[0])}
                       placeholder={t('contact.form.name' as Parameters<typeof t>[0])}
                       value={formState.name}
                       onChange={(e) =>
@@ -278,6 +281,9 @@ const Contact = () => {
                     transition={{ delay: 0.4, duration: 0.4, ease: 'easeOut' }}
                   >
                     <FormTextarea
+                      name="message"
+                      autoComplete="off"
+                      aria-label={t('contact.form.message' as Parameters<typeof t>[0])}
                       placeholder={t('contact.form.message' as Parameters<typeof t>[0])}
                       value={formState.message}
                       onChange={(e) =>
@@ -303,10 +309,12 @@ const Contact = () => {
                     >
                       {status === 'sending' ? (
                         <motion.span
+                          role="status"
+                          aria-live="polite"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                         >
-                          ...
+                          …
                         </motion.span>
                       ) : (
                         <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>

@@ -234,6 +234,8 @@
   "settings.wip.title": "Under Development",
   "settings.wip.desc": "View the initial version of the portfolio, under construction.",
   "nav.settings": "Settings",
+  "nav.menu.open": "Open menu",
+  "nav.menu.close": "Close menu",
   "who.title": "Who am I?",
   "who.subtitle": "Frontend Developer",
   "who.bio.p1": "Frontend Developer, 22 years old, studying Systems Analysis and Development at FATEC and deeply passionate about what I build every day. With an eye for design since the start of my journey, I found in the modern frontend ecosystem (React, Next.js, and TypeScript) the ideal bridge to transform Figma concepts into intuitive, fluid, and visually compelling interfaces for end users.",

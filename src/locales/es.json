@@ -235,6 +235,8 @@
   "settings.wip.title": "Under Development",
   "settings.wip.desc": "Visualiza la versión inicial del portfolio, en construcción.",
   "nav.settings": "Configuración",
+  "nav.menu.open": "Abrir menú",
+  "nav.menu.close": "Cerrar menú",
   "who.title": "¿Quién soy?",
   "who.subtitle": "Desarrollador Front-End",
   "who.bio.p1": "Desarrollador Front-End de 22 años, estudiante de Análisis y Desarrollo de Sistemas en la FATEC y apasionado por lo que construye día a día. Con una mirada atenta al diseño desde el inicio de mi trayectoria, encontré en el ecosistema Front-End (React, Next.js y TypeScript) el puente perfecto para transformar interfaces de Figma en experiencias intuitivas, veloces y visualmente atractivas para los usuarios.",

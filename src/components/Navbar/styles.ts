@@ -545,6 +545,7 @@ interface ProjectItemProps {
 }
 
 export const ProjectsDropdownItem = styled.button<ProjectItemProps>`
+  position: relative;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -553,15 +554,31 @@ export const ProjectsDropdownItem = styled.button<ProjectItemProps>`
   border-radius: 12px;
   border: none;
   background: ${({ $active, theme }) =>
-    $active ? `${theme.colors.primary1}10` : 'transparent'};
-  border-left: 2px solid ${({ $active, theme }) =>
-    $active ? theme.colors.primary1 : 'transparent'};
+    $active ? `${theme.colors.primary1}14` : 'transparent'};
+  box-shadow: ${({ $active, theme }) =>
+    $active ? `inset 0 0 0 1px ${theme.colors.primary1}33` : 'none'};
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: left;
 
+  &::after {
+    content: '';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: ${({ theme }) => theme.colors.primary1};
+    box-shadow: 0 0 8px ${({ theme }) => theme.colors.primary1}99;
+    opacity: ${({ $active }) => ($active ? 1 : 0)};
+    transform: translateY(-50%) scale(${({ $active }) => ($active ? 1 : 0.4)});
+    transition: all 0.2s ease;
+  }
+
   &:hover {
-    background: ${({ theme }) => theme.colors.navbarLinkBgHover};
+    background: ${({ $active, theme }) =>
+      $active ? `${theme.colors.primary1}1f` : theme.colors.navbarLinkBgHover};
   }
 `;
 

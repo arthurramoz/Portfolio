@@ -28,6 +28,7 @@ export const lightTheme = {
     bgSecondary2: '#ff8fab26',
 
     title: '#333',
+    accentText: '#0a7f98',
     subtitle: '#555',
     text: '#666',
     textGradientEnd: '#777',
@@ -88,6 +89,7 @@ export const darkTheme = {
     bgSecondary2: '#1e1e24',
 
     title: '#f0f0f2',
+    accentText: '#48cae4',
     subtitle: '#a0a0a8',
     text: '#8a8a94',
     textGradientEnd: '#6a6a72',

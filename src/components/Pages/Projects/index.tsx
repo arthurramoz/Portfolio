@@ -249,14 +249,14 @@ const AllProjectsPage = ({
       <motion.div variants={containerVariants} initial="hidden" animate="visible">
         <PageTitleWrapper>
           <motion.div variants={itemVariants}>
-            <PageDescription>
-              {t('projects.subtitle.all' as Parameters<typeof t>[0])}
-            </PageDescription>
-          </motion.div>
-          <motion.div variants={itemVariants}>
             <PageHeading>
               {t('projects.title.all' as Parameters<typeof t>[0])}
             </PageHeading>
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <PageDescription>
+              {t('projects.subtitle.all' as Parameters<typeof t>[0])}
+            </PageDescription>
           </motion.div>
         </PageTitleWrapper>
 

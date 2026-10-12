@@ -6,6 +6,7 @@ import { HARD_SKILLS_ROWS, Skill } from '@/config/skills';
 import { SiReact, SiNextdotjs, SiTypescript } from 'react-icons/si';
 import {
   PageTitleWrapper,
+  PageTag,
   PageHeading,
   PageDescription,
 } from '@/components/Pages/global';
@@ -71,13 +72,13 @@ const SkillsPage = () => {
   return (
     <SkillsPageWrapper>
       <PageTitleWrapper>
-        <PageDescription
+        <PageTag
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
           {t('skills.page.tag' as Parameters<typeof t>[0])}
-        </PageDescription>
+        </PageTag>
         <PageHeading
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}

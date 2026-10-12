@@ -29,20 +29,33 @@ export const PageWrapper = styled.div`
 export const PageTitleWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  align-items: flex-start;
+  gap: 12px;
   margin-bottom: 48px;
 
   ${({ theme }) => theme.media.md} {
+    gap: 10px;
     margin-bottom: 32px;
   }
 `;
 
 export const PageTag = styled(motion.span)`
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.primary1};
+  color: ${({ theme }) => theme.colors.accentText};
+
+  &::before {
+    content: '';
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background: ${({ theme }) => theme.colors.primary1};
+  }
 `;
 
 export const PageHeading = styled(motion.h1)`
@@ -50,7 +63,7 @@ export const PageHeading = styled(motion.h1)`
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: -0.03em;
-  line-height: 1.1;
+  line-height: 1.08;
   color: ${({ theme }) => theme.colors.title};
 
   ${({ theme }) => theme.media.lg} {
@@ -63,14 +76,14 @@ export const PageHeading = styled(motion.h1)`
 `;
 
 export const PageDescription = styled(motion.p)`
-  font-size: 1.4rem;
-  line-height: 1.3;
-  color: ${({ theme }) => theme.colors.text};
-  font-weight: 200;
-  max-width: 520px;
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: ${({ theme }) => theme.colors.subtitle};
+  font-weight: 400;
+  max-width: 560px;
 
   ${({ theme }) => theme.media.lg} {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
   }
 
   ${({ theme }) => theme.media.md} {

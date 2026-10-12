@@ -7,6 +7,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import {
   PageWrapper,
   PageTitleWrapper,
+  PageTag,
   PageHeading,
   PageDescription,
 } from '@/components/Pages/global';
@@ -101,13 +102,13 @@ const TimelinePage = () => {
   return (
     <PageWrapper>
       <PageTitleWrapper>
-        <PageDescription
+        <PageTag
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE }}
         >
           {t('timeline.page.tag' as TranslationKey)}
-        </PageDescription>
+        </PageTag>
         <PageHeading
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}

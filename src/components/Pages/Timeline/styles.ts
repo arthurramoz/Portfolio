@@ -281,7 +281,7 @@ export const CardTitle = styled.h3`
 `;
 
 export const CompanyAccent = styled.span`
-  color: ${({ theme }) => theme.colors.primary1};
+  color: ${({ theme }) => theme.colors.accentText};
 `;
 
 export const CardDescription = styled.p`

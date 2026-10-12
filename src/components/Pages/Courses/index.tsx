@@ -179,14 +179,14 @@ const CoursesPage = () => {
       >
         <PageTitleWrapper>
           <motion.div variants={itemVariants}>
-            <PageDescription>
-              {t('courses.subtitle' as Parameters<typeof t>[0])}
-            </PageDescription>
-          </motion.div>
-          <motion.div variants={itemVariants}>
             <PageHeading>
               {t('courses.title' as Parameters<typeof t>[0])}
             </PageHeading>
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <PageDescription>
+              {t('courses.subtitle' as Parameters<typeof t>[0])}
+            </PageDescription>
           </motion.div>
         </PageTitleWrapper>
 

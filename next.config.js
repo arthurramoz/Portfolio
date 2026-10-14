@@ -10,8 +10,18 @@ module.exports = {
         permanent: true,
       },
       {
-        source: '/projects/:path*',
-        destination: '/projetos/:path*',
+        source: '/projects/empresa',
+        destination: '/projetos/empresa',
+        permanent: true,
+      },
+      {
+        source: '/projects/faculdade',
+        destination: '/projetos/faculdade',
+        permanent: true,
+      },
+      {
+        source: '/projects/pessoais',
+        destination: '/projetos/pessoais',
         permanent: true,
       },
     ];

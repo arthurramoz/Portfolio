@@ -111,7 +111,8 @@ export const Title = styled.h3`
   overflow-wrap: break-word;
 
   ${({ theme }) => theme.media.sm} {
-    font-size: 1.6rem;
+    font-size: 1.45rem;
+    line-height: 1.22;
   }
 `;
 
@@ -122,7 +123,8 @@ export const Description = styled.p`
   color: #1e293b;
 
   ${({ theme }) => theme.media.sm} {
-    font-size: 1.05rem;
+    font-size: 0.98rem;
+    line-height: 1.55;
   }
 `;
 
@@ -155,6 +157,12 @@ export const ActionBtn = styled.button`
   &:hover svg {
     transform: translateX(4px);
   }
+
+  ${({ theme }) => theme.media.sm} {
+    width: 100%;
+    justify-content: center;
+    padding: 13px 20px;
+  }
 `;
 
 export const CardVisual = styled.div`
@@ -171,7 +179,11 @@ export const CardVisual = styled.div`
     border-left: none;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding: 28px 24px;
-    min-height: 220px;
+    min-height: 240px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    display: none;
   }
 `;
 
@@ -350,6 +362,12 @@ export const FeatureCard = styled.div<{ $accent: string }>`
   ${({ theme }) => theme.media.md} {
     padding: 28px 24px 24px;
   }
+
+  ${({ theme }) => theme.media.sm} {
+    padding: 22px 18px 20px;
+    border-radius: 20px;
+    gap: 14px;
+  }
 `;
 
 export const FeatureHeader = styled.div`
@@ -358,9 +376,7 @@ export const FeatureHeader = styled.div`
   gap: 16px;
 
   ${({ theme }) => theme.media.sm} {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    gap: 12px;
   }
 `;
 
@@ -376,6 +392,16 @@ export const FeatureIcon = styled.div<{ $color: string }>`
   justify-content: center;
   color: #0f172a;
   flex-shrink: 0;
+
+  ${({ theme }) => theme.media.sm} {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
 `;
 
 export const FeatureTitle = styled.h4`
@@ -393,7 +419,8 @@ export const FeatureTitle = styled.h4`
   }
 
   ${({ theme }) => theme.media.sm} {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
+    line-height: 1.25;
   }
 `;
 
@@ -405,7 +432,8 @@ export const FeatureDesc = styled.p`
   flex: 1;
 
   ${({ theme }) => theme.media.sm} {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
   }
 `;
 
@@ -432,6 +460,12 @@ export const FeatureBtn = styled.button`
     border-color: #0f172a;
     box-shadow: 0 6px 18px rgba(15, 23, 42, 0.22);
     transform: translateY(-2px);
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 18px;
   }
 
   svg {

@@ -11,7 +11,11 @@ export const Section = styled.section`
   margin: 0 auto;
 
   ${({ theme }) => theme.media.md} {
-    padding: 80px 16px 64px;
+    padding: 72px 16px 56px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    padding: 56px 16px 40px;
   }
 `;
 
@@ -22,7 +26,11 @@ export const TitleWrapper = styled.div`
   margin-bottom: 64px;
 
   ${({ theme }) => theme.media.md} {
-    margin-bottom: 40px;
+    margin-bottom: 36px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    margin-bottom: 24px;
   }
 `;
 
@@ -143,6 +151,12 @@ export const StatCard = styled.div`
 
   &:hover {
     transform: translateY(-4px);
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    padding: 18px 16px;
+    border-radius: 18px;
+    gap: 6px;
   }
 `;
 

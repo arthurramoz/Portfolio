@@ -13,7 +13,12 @@ export const Section = styled.section`
   overflow-x: hidden;
 
   ${({ theme }) => theme.media.md} {
-    padding: 100px 16px 64px;
+    padding: 80px 16px 64px;
+    min-height: auto;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    padding: 60px 16px 40px;
   }
 `;
 
@@ -25,6 +30,10 @@ export const TitleWrapper = styled.div`
 
   ${({ theme }) => theme.media.md} {
     margin-bottom: 40px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    margin-bottom: 24px;
   }
 `;
 
@@ -58,7 +67,7 @@ export const PhotoBioWrapper = styled.div`
 
   ${({ theme }) => theme.media.lg} {
     flex-direction: column;
-    gap: 40px;
+    gap: 36px;
   }
 `;
 
@@ -87,12 +96,15 @@ export const PhotoWrap = styled.div`
 
   ${({ theme }) => theme.media.lg} {
     width: 100%;
+    max-width: 360px;
     height: 340px;
+    margin: 0 auto;
   }
 
   ${({ theme }) => theme.media.sm} {
-    height: 280px;
-    border-radius: 18px;
+    max-width: 300px;
+    height: 300px;
+    border-radius: 20px;
   }
 `;
 
@@ -103,8 +115,6 @@ export const BioColumn = styled.div`
   gap: 22px;
   min-width: 0;
 `;
-
-
 
 export const BioParagraph = styled.p`
   font-size: 17px;
@@ -122,6 +132,14 @@ export const LocationCard = styled.div`
   align-items: center;
   gap: 20px;
   margin-top: 12px;
+
+  ${({ theme }) => theme.media.sm} {
+    gap: 14px;
+    padding: 14px 18px;
+    border-radius: 16px;
+    background: ${({ theme }) => theme.colors.navbarBg};
+    border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  }
 `;
 
 export const LocationPin = styled.div`
@@ -138,7 +156,17 @@ export const LocationPin = styled.div`
   justify-content: center;
   color: #fff;
   flex-shrink: 0;
+
   box-shadow: 0 4px 20px ${({ theme }) => theme.colors.primary1}40;
+
+  ${({ theme }) => theme.media.sm} {
+    width: 44px;
+    height: 44px;
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
 `;
 
 export const LocationInfo = styled.div`

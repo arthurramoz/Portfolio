@@ -52,6 +52,8 @@ export const StatusBadge = styled(motion.div)`
   -webkit-backdrop-filter: blur(14px);
   box-shadow: 0 2px 14px ${({ theme }) => theme.colors.navbarShadow};
   width: fit-content;
+  max-width: 100%;
+  box-sizing: border-box;
   cursor: default;
 
   span {
@@ -59,12 +61,15 @@ export const StatusBadge = styled(motion.div)`
     font-weight: 600;
     color: ${({ theme }) => theme.colors.title};
     letter-spacing: -0.01em;
+    line-height: 1.35;
   }
 
   @media (max-width: 600px) {
-    padding: 6px 12px;
+    padding: 7px 12px;
+    gap: 8px;
+    text-align: left;
     span {
-      font-size: 12px;
+      font-size: 11.5px;
     }
   }
 `;
@@ -96,7 +101,14 @@ export const Section = styled.section`
   background: transparent;
 
   ${({ theme }) => theme.media.lg} {
-    padding-top: 8rem;
+    padding-top: 7rem;
+    min-height: auto;
+    padding-bottom: 2rem;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    padding: 5.5rem 16px 2rem;
+    min-height: auto;
   }
 `;
 
@@ -114,6 +126,11 @@ export const Content = styled.div`
     flex-direction: column;
     text-align: center;
     padding-left: 0;
+    gap: 28px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    gap: 20px;
   }
 `;
 
@@ -124,6 +141,12 @@ export const TextBlock = styled.div`
 
   ${({ theme }) => theme.media.lg} {
     align-items: center;
+    gap: 20px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    gap: 16px;
+    width: 100%;
   }
 `;
 
@@ -161,10 +184,13 @@ export const Name = styled.h1`
 
   ${({ theme }) => theme.media.lg} {
     font-size: 40px;
+    margin: 6px 0 10px;
   }
 
   ${({ theme }) => theme.media.sm} {
-    font-size: 32px;
+    font-size: clamp(28px, 8vw, 36px);
+    line-height: 1.15;
+    margin: 4px 0 8px;
   }
 `;
 
@@ -193,6 +219,13 @@ export const Description = styled.p`
 
   ${({ theme }) => theme.media.lg} {
     font-size: 16px;
+    max-width: 560px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    font-size: 15px;
+    line-height: 1.55;
+    max-width: 100%;
   }
 `;
 
@@ -209,6 +242,8 @@ export const Actions = styled.div`
   ${({ theme }) => theme.media.sm} {
     flex-direction: column;
     width: 100%;
+    gap: 10px;
+    margin-top: 16px;
   }
 `;
 
@@ -247,6 +282,11 @@ export const PrimaryButton = styled(BaseLink)`
   gap: 10px;
   box-shadow: 0 8px 24px ${({ theme }) => theme.colors.btnPrimaryShadow};
 
+  ${({ theme }) => theme.media.sm} {
+    width: 100%;
+    padding: 13px 20px;
+  }
+
   &:hover {
     transform: translateY(-3px) scale(1.03);
     box-shadow: 0 16px 40px ${({ theme }) => theme.colors.btnPrimaryHoverShadow};
@@ -268,6 +308,11 @@ export const SecondaryButton = styled(BaseLink)`
   border: 1px solid ${({ theme }) => theme.colors.btnSecondaryBorder};
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
+
+  ${({ theme }) => theme.media.sm} {
+    width: 100%;
+    padding: 13px 20px;
+  }
 
   &:hover {
     background: ${({ theme }) => theme.colors.navbarBgHover};
@@ -305,6 +350,11 @@ export const ResumeButton = styled.button`
   color: ${({ theme }) => theme.colors.primary1};
   border: 1px solid ${({ theme }) => theme.colors.primary1}40;
 
+  ${({ theme }) => theme.media.sm} {
+    width: 100%;
+    padding: 13px 20px;
+  }
+
   &:focus-visible {
     outline: 2px solid ${({ theme }) => theme.colors.primary1};
     outline-offset: 3px;
@@ -313,10 +363,6 @@ export const ResumeButton = styled.button`
   @media (prefers-reduced-motion: reduce) {
     transition: none !important;
     transform: none !important;
-  }
-
-  ${({ theme }) => theme.media.sm} {
-    width: 100%;
   }
 
   &:hover {
@@ -329,79 +375,6 @@ export const ResumeButton = styled.button`
     transition: transform 0.25s ease;
   }
 `;
-
-export const ResumeDropdown = styled(motion.div)`
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  min-width: 210px;
-  padding: 8px;
-  border-radius: 16px;
-  background: ${({ theme }) => theme.colors.dropdownBg};
-  backdrop-filter: blur(28px) saturate(190%) contrast(105%);
-  -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%);
-  border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
-  box-shadow:
-    0 16px 40px ${({ theme }) => theme.colors.navbarShadow},
-    inset 0 1px 1px 0 ${({ theme }) => theme.colors.navbarGlassHighlight};
-  z-index: 50;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-
-  ${({ theme }) => theme.media.sm} {
-    width: 100%;
-    left: 0;
-    right: 0;
-  }
-`;
-
-export const ResumeOption = styled.a`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 14px;
-  border-radius: 12px;
-  text-decoration: none;
-  color: ${({ theme }) => theme.colors.navbarLinkActive};
-  transition: all 0.2s ease;
-  cursor: pointer;
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.navbarLinkBgHover};
-    transform: translateX(4px);
-  }
-`;
-
-export const ResumeOptionFlag = styled.img`
-  width: 22px;
-  height: 15px;
-  object-fit: cover;
-  border-radius: 3px;
-  flex-shrink: 0;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
-`;
-
-export const ResumeOptionInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  flex: 1;
-`;
-
-export const ResumeOptionTitle = styled.span`
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.2;
-`;
-
-export const ResumeOptionMeta = styled.span`
-  font-size: 11px;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.navbarLinkInactive};
-  line-height: 1.2;
-`;
-
 export const IllustrationBlock = styled.div`
   flex-shrink: 0;
   display: flex;

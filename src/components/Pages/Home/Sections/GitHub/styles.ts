@@ -16,7 +16,11 @@ export const Section = styled.section`
   margin: 0 auto;
 
   ${({ theme }) => theme.media.md} {
-    padding: 80px 16px 64px;
+    padding: 72px 16px 56px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    padding: 56px 16px 40px;
   }
 `;
 
@@ -28,6 +32,10 @@ export const TitleWrapper = styled.div`
 
   ${({ theme }) => theme.media.md} {
     margin-bottom: 32px;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    margin-bottom: 24px;
   }
 `;
 
@@ -70,6 +78,12 @@ export const GitHubCard = styled.div`
     border-radius: 20px;
     gap: 32px;
   }
+
+  ${({ theme }) => theme.media.sm} {
+    padding: 24px 16px;
+    border-radius: 18px;
+    gap: 24px;
+  }
 `;
 
 export const GitHubBgLogo = styled.div`
@@ -102,6 +116,12 @@ export const CardHeader = styled.div`
   flex-wrap: wrap;
   position: relative;
   z-index: 1;
+
+  ${({ theme }) => theme.media.sm} {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
 `;
 
 export const HeaderLeft = styled.div`
@@ -149,6 +169,7 @@ export const HeaderUsername = styled.span`
 export const ProfileLink = styled.a`
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   padding: 8px 18px;
   border-radius: 9999px;
@@ -163,6 +184,11 @@ export const ProfileLink = styled.a`
   &:hover {
     color: ${({ theme }) => theme.colors.title};
     border-color: ${({ theme }) => theme.colors.title};
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    width: 100%;
+    padding: 10px 16px;
   }
 `;
 
@@ -250,6 +276,12 @@ export const GraphHeader = styled.div`
   justify-content: space-between;
   gap: 12px;
   flex-wrap: wrap;
+
+  ${({ theme }) => theme.media.sm} {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
 `;
 
 export const GraphLabel = styled.span`

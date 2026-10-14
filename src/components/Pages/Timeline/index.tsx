@@ -14,7 +14,9 @@ import {
 import {
   TIMELINE_ENTRIES,
   CATEGORY_COLORS,
+  COMPANY_BRANDS,
   TimelineCategory,
+  CompanyKey,
 } from '@/config/timeline';
 import {
   FilterBar,
@@ -32,10 +34,16 @@ import {
   PillDot,
   NodeDot,
   Card,
+  CardHeaderRow,
   CategoryTag,
+  CompanyBadge,
+  CompanyBadgeLogo,
+  CompanyBadgeName,
   CardTitle,
   CompanyAccent,
+  CompanyTitleLogo,
   CardDescription,
+  InlineCompanyChip,
 } from './styles';
 
 type TranslationKey = Parameters<ReturnType<typeof useLanguage>['t']>[0];
@@ -70,6 +78,45 @@ const splitTitle = (title: string) => {
     };
   }
   return { main: title, accent: '' };
+};
+
+const getCompanyFromText = (text: string): CompanyKey | undefined => {
+  const lower = text.toLowerCase();
+  if (lower.includes('mestres')) return 'mestres';
+  if (lower.includes('codotech')) return 'codotech';
+  return undefined;
+};
+
+const renderDescription = (text: string) => {
+  const regex = /(Mestres da Web|CodoTech|Codotech)/g;
+  const parts = text.split(regex);
+
+  if (parts.length === 1) {
+    return text;
+  }
+
+  return parts.map((part, index) => {
+    const lower = part.toLowerCase();
+    if (lower === 'mestres da web') {
+      const brand = COMPANY_BRANDS.mestres;
+      return (
+        <InlineCompanyChip key={index} $company="mestres" title={brand.name}>
+          <img src={brand.logoIcon} alt={brand.name} />
+          {part}
+        </InlineCompanyChip>
+      );
+    }
+    if (lower === 'codotech') {
+      const brand = COMPANY_BRANDS.codotech;
+      return (
+        <InlineCompanyChip key={index} $company="codotech" title={brand.name}>
+          <img src={brand.logoIcon} alt={brand.name} />
+          {part}
+        </InlineCompanyChip>
+      );
+    }
+    return part;
+  });
 };
 
 const TimelinePage = () => {
@@ -170,6 +217,7 @@ const TimelinePage = () => {
             const Icon = entry.icon;
             const cardLeft = index % 2 === 1;
             const { main, accent } = splitTitle(t(entry.titleKey as TranslationKey));
+            const accentCompany = accent ? (getCompanyFromText(accent) || entry.company) : undefined;
 
             return (
               <TimelineRow
@@ -194,17 +242,42 @@ const TimelinePage = () => {
                 </NodeCell>
 
                 <CardCell $cardLeft={cardLeft}>
-                  <Card $color={color}>
-                    <CategoryTag $color={color}>
-                      {Icon && <Icon size={14} />}
-                      {t(`timeline.cat.${entry.category}` as TranslationKey)}
-                    </CategoryTag>
+                  <Card $color={color} $company={entry.company}>
+                    <CardHeaderRow>
+                      <CategoryTag $color={color}>
+                        {Icon && <Icon size={14} />}
+                        {t(`timeline.cat.${entry.category}` as TranslationKey)}
+                      </CategoryTag>
+                      {entry.company && (
+                        <CompanyBadge $company={entry.company}>
+                          <CompanyBadgeLogo
+                            src={COMPANY_BRANDS[entry.company].logoIcon}
+                            alt={COMPANY_BRANDS[entry.company].name}
+                            $company={entry.company}
+                          />
+                          <CompanyBadgeName $company={entry.company}>
+                            {COMPANY_BRANDS[entry.company].name}
+                          </CompanyBadgeName>
+                        </CompanyBadge>
+                      )}
+                    </CardHeaderRow>
                     <CardTitle>
                       {main}
-                      {accent && <CompanyAccent>{accent}</CompanyAccent>}
+                      {accent && (
+                        <CompanyAccent $company={accentCompany}>
+                          {accentCompany && (
+                            <CompanyTitleLogo
+                              src={COMPANY_BRANDS[accentCompany].logoIcon}
+                              alt={COMPANY_BRANDS[accentCompany].name}
+                              $company={accentCompany}
+                            />
+                          )}
+                          {accent}
+                        </CompanyAccent>
+                      )}
                     </CardTitle>
                     <CardDescription>
-                      {t(entry.descriptionKey as TranslationKey)}
+                      {renderDescription(t(entry.descriptionKey as TranslationKey))}
                     </CardDescription>
                   </Card>
                 </CardCell>

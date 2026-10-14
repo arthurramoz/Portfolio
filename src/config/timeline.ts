@@ -10,10 +10,46 @@ import {
 } from 'react-icons/fi';
 
 export type TimelineCategory = 'work' | 'milestone' | 'education';
+export type CompanyKey = 'mestres' | 'codotech';
+
+export interface CompanyBrandInfo {
+  key: CompanyKey;
+  name: string;
+  color: string;
+  colorGlow: string;
+  bg: string;
+  border: string;
+  logo: string;
+  logoIcon: string;
+}
+
+export const COMPANY_BRANDS: Record<CompanyKey, CompanyBrandInfo> = {
+  mestres: {
+    key: 'mestres',
+    name: 'Mestres da Web',
+    color: '#0AB580',
+    colorGlow: '#21FFB5',
+    bg: 'rgba(10, 181, 128, 0.12)',
+    border: 'rgba(33, 255, 181, 0.35)',
+    logo: '/logos/mestres.svg',
+    logoIcon: '/logos/mestres.svg',
+  },
+  codotech: {
+    key: 'codotech',
+    name: 'CodoTech',
+    color: '#FF6B00',
+    colorGlow: '#FF8533',
+    bg: 'rgba(255, 107, 0, 0.12)',
+    border: 'rgba(255, 107, 0, 0.35)',
+    logo: '/logos/codotech.svg',
+    logoIcon: '/logos/codotech-icon.svg',
+  },
+};
 
 export interface TimelineEntry {
   id: string;
   category: TimelineCategory;
+  company?: CompanyKey;
   icon?: IconType;
   year: number;
   month?: number;
@@ -26,6 +62,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
   {
     id: '2026-codotech',
     category: 'work',
+    company: 'codotech',
     icon: FiBriefcase,
     year: 2026,
     month: 4,
@@ -36,6 +73,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
   {
     id: '2026-mestres-exit',
     category: 'milestone',
+    company: 'mestres',
     icon: FiCheckCircle,
     year: 2026,
     month: 4,
@@ -46,6 +84,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
   {
     id: '2026-mestres-fullstack',
     category: 'work',
+    company: 'mestres',
     icon: FiServer,
     year: 2026,
     month: 2,
@@ -56,6 +95,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
   {
     id: '2025-hired-junior',
     category: 'work',
+    company: 'mestres',
     icon: FiTrendingUp,
     year: 2025,
     month: 10,
@@ -66,6 +106,7 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
   {
     id: '2024-mestres-intern',
     category: 'work',
+    company: 'mestres',
     icon: FiBriefcase,
     year: 2024,
     month: 10,

@@ -39,11 +39,20 @@ export const NavbarContainer = styled.header`
   }
 `;
 
-export const NavLogo = styled.div`
+export const NavLogo = styled.button`
   display: flex;
   align-items: center;
   gap: 8px;
   cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.primary1};
+    outline-offset: 3px;
+    border-radius: 8px;
+  }
 `;
 
 export const NavLogoMark = styled.div`
@@ -71,19 +80,27 @@ export const HomeSectionsWrapper = styled.div`
   position: relative;
 `;
 
-export const HomeSectionLink = styled.p<NavLinkProps>`
+export const HomeSectionLink = styled.button<NavLinkProps>`
   position: relative;
   padding: 12px 14px;
   border-radius: 9999px;
   font-size: 14px;
   font-weight: 500;
   white-space: nowrap;
+  background: none;
+  border: none;
+  font-family: inherit;
   color: ${({ $selected, theme }) =>
     $selected
       ? theme.colors.navbarLinkActive
       : theme.colors.navbarLinkInactive};
   transition: color 0.2s ease;
   cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.primary1};
+    outline-offset: 2px;
+  }
 
   &:hover {
     color: ${({ theme }) => theme.colors.navbarLinkActive};
@@ -94,12 +111,15 @@ interface NavLinkProps {
   $selected?: boolean;
 }
 
-export const NavLink = styled.p<NavLinkProps>`
+export const NavLink = styled.button<NavLinkProps>`
   position: relative;
   padding: 12px 16px;
   border-radius: 9999px;
   font-size: 16px;
   font-weight: 600;
+  background: none;
+  border: none;
+  font-family: inherit;
   color: ${({ $selected, theme }) =>
     $selected
       ? theme.colors.navbarLinkActive
@@ -107,6 +127,11 @@ export const NavLink = styled.p<NavLinkProps>`
   transition: color 0.2s ease;
   cursor: pointer;
   user-select: none;
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.primary1};
+    outline-offset: 2px;
+  }
 
   &:hover {
     color: ${({ theme }) => theme.colors.navbarLinkActive};

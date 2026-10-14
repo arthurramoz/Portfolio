@@ -26,6 +26,8 @@ import {
   Section,
   TextBlock,
   InfoBlock,
+  StatusBadge,
+  StatusDot,
 } from './styles';
 
 const Hero = () => {
@@ -44,8 +46,18 @@ const Hero = () => {
       }
     };
 
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsResumeOpen(false);
+      }
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
   return (
@@ -53,6 +65,15 @@ const Hero = () => {
       {!reduceAnimations && <InteractiveOrb />}
       <Content>
         <TextBlock>
+          <StatusBadge
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.4 }}
+          >
+            <StatusDot aria-hidden="true" />
+            <span>{t('hero.status' as Parameters<typeof t>[0])}</span>
+          </StatusBadge>
+
           <Greeting>{t('hero.greeting')}</Greeting>
 
           <Name>Arthur Moreira Ramos</Name>
@@ -61,36 +82,28 @@ const Hero = () => {
             <Description>{t('hero.description')}</Description>
 
             <Actions>
-              <PrimaryButton
-                onClick={() => {
-                  const next = document.getElementById('sobre-mim');
-                  next?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
+              <PrimaryButton href="/contato">
                 {t('hero.btn.primary')}
-                <ArrowDownIcon size={18} />
+                <ArrowDownIcon size={18} aria-hidden="true" />
               </PrimaryButton>
-              <SecondaryButton
-                onClick={() => {
-                  const el = document.getElementById('novidade');
-                  if (el) {
-                    const y = el.getBoundingClientRect().top + window.scrollY - 270;
-                    window.scrollTo({ top: y, behavior: 'smooth' });
-                  }
-                }}
-              >
+
+              <SecondaryButton href="/cases">
                 {t('hero.btn.secondary')}
               </SecondaryButton>
 
               <ResumeWrapper ref={resumeRef}>
                 <ResumeButton
                   type="button"
+                  aria-haspopup="true"
+                  aria-expanded={isResumeOpen}
+                  aria-label={t('hero.btn.resume' as Parameters<typeof t>[0])}
                   onClick={() => setIsResumeOpen(prev => !prev)}
                 >
-                  <FiDownload size={16} />
+                  <FiDownload size={16} aria-hidden="true" />
                   {t('hero.btn.resume' as Parameters<typeof t>[0])}
                   <FiChevronDown
                     size={14}
+                    aria-hidden="true"
                     style={{
                       transform: isResumeOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                       transition: 'transform 0.25s ease',
@@ -115,7 +128,9 @@ const Hero = () => {
                       >
                         <ResumeOptionFlag
                           src="https://flagcdn.com/w40/br.png"
-                          alt="BR"
+                          alt="Bandeira do Brasil"
+                          width={20}
+                          height={15}
                         />
                         <ResumeOptionInfo>
                           <ResumeOptionTitle>
@@ -123,7 +138,7 @@ const Hero = () => {
                           </ResumeOptionTitle>
                           <ResumeOptionMeta>PDF • PT-BR</ResumeOptionMeta>
                         </ResumeOptionInfo>
-                        <FiDownload size={14} style={{ opacity: 0.5 }} />
+                        <FiDownload size={14} style={{ opacity: 0.5 }} aria-hidden="true" />
                       </ResumeOption>
 
                       <ResumeOption
@@ -134,7 +149,9 @@ const Hero = () => {
                       >
                         <ResumeOptionFlag
                           src="https://flagcdn.com/w40/us.png"
-                          alt="US"
+                          alt="US Flag"
+                          width={20}
+                          height={15}
                         />
                         <ResumeOptionInfo>
                           <ResumeOptionTitle>
@@ -142,7 +159,7 @@ const Hero = () => {
                           </ResumeOptionTitle>
                           <ResumeOptionMeta>PDF • EN-US</ResumeOptionMeta>
                         </ResumeOptionInfo>
-                        <FiDownload size={14} style={{ opacity: 0.5 }} />
+                        <FiDownload size={14} style={{ opacity: 0.5 }} aria-hidden="true" />
                       </ResumeOption>
                     </ResumeDropdown>
                   )}

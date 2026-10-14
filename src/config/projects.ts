@@ -556,6 +556,7 @@ export const PERSONAL_PROJECTS: ProjectItem[] = [
     images: ['/projects/paragrafeado.png'],
     tags: ['React', 'JavaScript', 'JSX', 'HTML', 'CSS'],
     link: 'https://arthurramoz.github.io/paragrafeado-react/',
+    hidden: true,
   },
 ];
 
@@ -569,6 +570,7 @@ export const UNIVERSITY_PROJECTS: ProjectItem[] = [
     platformType: 'web',
     images: ['/projects/netflix.jpg'],
     tags: ['JavaScript', 'JQuery', 'PHP', 'MySQL', 'HTML', 'CSS'],
+    hidden: true,
   },
   {
     title: 'Super Calculadora C',
@@ -578,6 +580,7 @@ export const UNIVERSITY_PROJECTS: ProjectItem[] = [
     projectType: 'other',
     platformType: 'web',
     tags: ['C'],
+    hidden: true,
   },
 ];
 

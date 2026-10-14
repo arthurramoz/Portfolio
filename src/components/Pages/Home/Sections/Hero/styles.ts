@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { FiArrowRight } from 'react-icons/fi';
 import { motion } from 'motion/react';
 import styled, { keyframes } from 'styled-components';
@@ -21,6 +22,64 @@ const fadeInUp20 = keyframes`
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+`;
+
+const pulseDot = keyframes`
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 7px rgba(34, 197, 94, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+`;
+
+export const StatusBadge = styled(motion.div)`
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: ${({ theme }) => theme.colors.navbarBg};
+  border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 2px 14px ${({ theme }) => theme.colors.navbarShadow};
+  width: fit-content;
+  cursor: default;
+
+  span {
+    font-size: 13px;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.title};
+    letter-spacing: -0.01em;
+  }
+
+  @media (max-width: 600px) {
+    padding: 6px 12px;
+    span {
+      font-size: 12px;
+    }
+  }
+`;
+
+export const StatusDot = styled.span`
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: #22c55e;
+  display: inline-block;
+  flex-shrink: 0;
+  animation: ${pulseDot} 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
   }
 `;
 
@@ -153,46 +212,69 @@ export const Actions = styled.div`
   }
 `;
 
-const BaseButton = styled.button`
+const BaseLink = styled(Link)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 32px;
+  padding: 14px 28px;
   border-radius: 50px;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  text-decoration: none;
   border: none;
   letter-spacing: -0.01em;
+  transition: transform 0.25s cubic-bezier(0.25, 0.1, 0.25, 1),
+              background 0.25s ease,
+              border-color 0.25s ease,
+              box-shadow 0.25s ease,
+              color 0.25s ease;
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.primary1};
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none !important;
+    transform: none !important;
+  }
 `;
 
-export const PrimaryButton = styled(BaseButton)`
+export const PrimaryButton = styled(BaseLink)`
   background: ${({ theme }) => theme.colors.btnPrimaryBg};
   color: ${({ theme }) => theme.colors.btnPrimaryText};
   gap: 10px;
   box-shadow: 0 8px 24px ${({ theme }) => theme.colors.btnPrimaryShadow};
 
   &:hover {
-    transform: translateY(-4px) scale(1.06);
+    transform: translateY(-3px) scale(1.03);
     box-shadow: 0 16px 40px ${({ theme }) => theme.colors.btnPrimaryHoverShadow};
     background: ${({ theme }) => theme.colors.btnPrimaryHoverBg};
+    color: ${({ theme }) => theme.colors.btnPrimaryText};
   }
 `;
 
 export const ArrowDownIcon = styled(FiArrowRight)`
-  transition: transform 0.3s ease;
+  transition: transform 0.25s ease;
   ${PrimaryButton}:hover & {
-    transform: rotate(90deg);
+    transform: translateX(4px);
   }
 `;
 
-export const SecondaryButton = styled(BaseButton)`
+export const SecondaryButton = styled(BaseLink)`
   background: ${({ theme }) => theme.colors.btnSecondaryBg};
   color: ${({ theme }) => theme.colors.btnSecondaryText};
   border: 1px solid ${({ theme }) => theme.colors.btnSecondaryBorder};
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.navbarBgHover};
+    border-color: ${({ theme }) => theme.colors.primary1}60;
+    transform: translateY(-2px);
+    color: ${({ theme }) => theme.colors.title};
+  }
 `;
 
 export const ResumeWrapper = styled.div`
@@ -209,16 +291,29 @@ export const ResumeButton = styled.button`
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px 24px;
+  padding: 14px 22px;
   border-radius: 50px;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition: transform 0.25s ease,
+              background 0.25s ease,
+              border-color 0.25s ease,
+              color 0.25s ease;
   letter-spacing: -0.01em;
   background: transparent;
   color: ${({ theme }) => theme.colors.primary1};
   border: 1px solid ${({ theme }) => theme.colors.primary1}40;
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.primary1};
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none !important;
+    transform: none !important;
+  }
 
   ${({ theme }) => theme.media.sm} {
     width: 100%;
@@ -231,7 +326,7 @@ export const ResumeButton = styled.button`
   }
 
   svg {
-    transition: transform 0.3s ease;
+    transition: transform 0.25s ease;
   }
 `;
 

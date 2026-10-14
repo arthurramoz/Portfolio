@@ -59,41 +59,44 @@ const Footer = () => {
               href="https://github.com/arthurramoz"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="GitHub"
             >
-              <FiGithub size={18} />
+              <FiGithub size={18} aria-hidden="true" />
             </SocialLink>
             <SocialLink
               href="https://www.linkedin.com/in/arthur-moreira-ramos/"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="LinkedIn"
             >
-              <FiLinkedin size={18} />
+              <FiLinkedin size={18} aria-hidden="true" />
             </SocialLink>
             <SocialLink
               href="https://www.instagram.com/arthurmoreira.7/"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Instagram"
             >
-              <FiInstagram size={18} />
+              <FiInstagram size={18} aria-hidden="true" />
             </SocialLink>
           </SocialRow>
         </FooterBrand>
 
         <FooterColumn>
           <ColumnTitle>{t('footer.navigation')}</ColumnTitle>
-          <FooterLink onClick={() => handleScrollTo('home')}>
+          <FooterLink type="button" onClick={() => handleScrollTo('home')}>
             {t('nav.home')}
           </FooterLink>
 
-          <FooterLink onClick={() => router.push('/projetos')}>
+          <FooterLink type="button" onClick={() => router.push('/projetos')}>
             {t('nav.projects')}
           </FooterLink>
 
-          <FooterLink onClick={() => router.push('/jornada')}>
+          <FooterLink type="button" onClick={() => router.push('/jornada')}>
             {t('nav.timeline' as Parameters<typeof t>[0])}
           </FooterLink>
 
-          <FooterLink onClick={() => router.push('/cases')}>
+          <FooterLink type="button" onClick={() => router.push('/cases')}>
             {t('nav.cases' as Parameters<typeof t>[0])}
           </FooterLink>
 

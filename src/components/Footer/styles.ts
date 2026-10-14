@@ -67,7 +67,17 @@ export const SocialLink = styled.a`
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.colors.footerBorder};
   color: ${({ theme }) => theme.colors.footerIcon};
-  transition: all 0.25s ease;
+  transition: transform 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.primary1};
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none !important;
+    transform: none !important;
+  }
 
   &:hover {
     color: ${({ theme }) => theme.colors.footerIconHover};
@@ -91,11 +101,21 @@ export const ColumnTitle = styled.h4`
   margin-bottom: 4px;
 `;
 
-export const FooterLink = styled.span`
+export const FooterLink = styled.button`
   font-size: 15px;
   color: ${({ theme }) => theme.colors.footerLink};
   cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+  font-family: inherit;
   transition: color 0.2s ease;
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.primary1};
+    outline-offset: 2px;
+  }
 
   &:hover {
     color: ${({ theme }) => theme.colors.footerLinkHover};

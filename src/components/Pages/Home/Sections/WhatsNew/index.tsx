@@ -54,6 +54,7 @@ const itemVariants = {
 };
 
 const ACTIONS: Record<string, (router: ReturnType<typeof useRouter>) => void> = {
+  'projects-page': (router) => router.push('/projects'),
   'cases-page': (router) => router.push('/cases'),
   'skills-page': (router) => router.push('/skills'),
   'cursor-settings': (router) => {

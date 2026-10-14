@@ -7,10 +7,67 @@ export interface VersionEntry {
   highlights: Record<Exclude<Language, 'es'>, string[]> & { es?: string[] };
 }
 
-export const CURRENT_VERSION = 'v2.0';
-export const CURRENT_LABEL = 'Lumina';
+export const CURRENT_VERSION = 'v3.0';
+export const CURRENT_LABEL = 'Apex';
 
 export const VERSION_HISTORY: VersionEntry[] = [
+  {
+    version: 'v3.0',
+    date: '14/10/2026',
+    label: 'Apex',
+    highlights: {
+      pt: [
+        'Hero de alta conversão: novo posicionamento para clientes internacionais e badge de disponibilidade em tempo real',
+        'Chamadas para ação diretas: botões comerciais "Vamos Conversar" e acesso rápido a estudos de caso',
+        'Nova plataforma Certeza que Tem Web Expert: portal para especialistas técnicos com financeiro e operações',
+        'Vitrine de projetos atualizada: novas capturas em alta resolução dos fluxos de cliente e especialista',
+        'Conformidade Web Interface Guidelines: navegação semântica, anéis de foco visíveis e leitores de tela',
+        'Suporte a movimento reduzido: respeito automático a prefers-reduced-motion em animações e partículas',
+        'Performance CSS refinada: substituição de transições genéricas por propriedades aceleradas via GPU',
+        'Curadoria profissional: vitrine focada 100% em produtos comerciais, marketplaces e SaaS corporativos',
+      ],
+      en: [
+        'High-converting Hero: new positioning tailored for international clients and real-time availability badge',
+        'Direct call-to-actions: commercial "Let\'s Talk" button and quick access to deep case studies',
+        'New Certeza que Tem Web Expert platform: technical expert portal with operations and financial dashboard',
+        'Updated project showcase: high-resolution screens for buyer and technical expert workflows',
+        'Web Interface Guidelines compliance: semantic navigation, visible focus rings, and screen reader labels',
+        'Reduced motion support: full respect for prefers-reduced-motion across keyframes and ambient effects',
+        'Refined CSS performance: replaced generic transitions with GPU-accelerated properties',
+        'Professional curation: showcase focused 100% on commercial products, marketplaces, and enterprise SaaS',
+      ],
+      fr: [
+        'Hero à haute conversion: nouveau positionnement pour clients internationaux et badge de disponibilité en temps réel',
+        'Appels à l\'action directs: bouton commercial "Discutons" et accès rapide aux études de cas',
+        'Nouvelle plateforme Certeza que Tem Web Expert: portail pour techniciens avec gestion financière et opérations',
+        'Vitrine de projets actualisée: nouvelles captures d\'écran haute résolution pour les flux client et expert',
+        'Conformité Web Interface Guidelines: navigation sémantique, anneaux de focus visibles et accessibilité',
+        'Support de mouvement réduit: respect automatique de prefers-reduced-motion sur les animations',
+        'Performance CSS optimisée: transitions accélérées par le GPU pour une fluidité maximale',
+        'Sélection professionnelle: vitrine concentrée à 100% sur les produits commerciaux et SaaS d\'entreprise',
+      ],
+      ru: [
+        'Высококонверсионный Hero: новое позиционирование для международных клиентов и бейдж доступности в реальном времени',
+        'Прямые призывы к действию: коммерческая кнопка "Обсудить проект" и быстрый переход к кейсам',
+        'Новая платформа Certeza que Tem Web Expert: портал для технических специалистов с операциями и финансами',
+        'Обновлённая витрина проектов: свежие скриншоты интерфейсов клиента и эксперта',
+        'Соответствие Web Interface Guidelines: семантическая навигация, кольца фокуса и доступность для скринридеров',
+        'Поддержка режима уменьшения движения: автоматический учёт prefers-reduced-motion',
+        'Оптимизация CSS: замена общих переходов на аппаратное ускорение GPU',
+        'Профессиональный отбор: фокус витрины исключительно на коммерческих продуктах и корпоративных SaaS',
+      ],
+      es: [
+        'Hero de alta conversión: nuevo posicionamiento para clientes internacionales y badge de disponibilidad en tiempo real',
+        'Llamados a la acción directos: botón comercial "Hablemos" y acceso rápido a casos de éxito',
+        'Nueva plataforma Certeza que Tem Web Expert: portal para especialistas técnicos con gestión financiera y operativa',
+        'Vitrina de proyectos actualizada: nuevas capturas en alta resolución de los flujos de cliente y técnico',
+        'Conformidad Web Interface Guidelines: navegación semántica, anillos de foco visibles y accesibilidad',
+        'Soporte a movimiento reducido: respeto automático a prefers-reduced-motion en animaciones y efectos',
+        'Rendimiento CSS refinado: reemplazo de transiciones genéricas por propiedades aceleradas por GPU',
+        'Curaduría profesional: vitrina enfocada al 100% en productos comerciales, marketplaces y SaaS corporativos',
+      ],
+    },
+  },
   {
     version: 'v2.0',
     date: '08/07/2026',

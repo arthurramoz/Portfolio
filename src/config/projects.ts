@@ -79,8 +79,9 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     images: [
       '/projects/certeza-cliente/1.png',
       '/projects/certeza-cliente/2.png',
-      '/projects/certeza-master/1.png',
-      '/projects/certeza-seller/1.png',
+      '/projects/certeza-cliente/6.png',
+      '/projects/certeza-expert/4.png',
+      '/projects/certeza-expert/1.png',
     ],
     tags: [
       'Next.js',
@@ -106,6 +107,8 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
           '/projects/certeza-cliente/2.png',
           '/projects/certeza-cliente/3.png',
           '/projects/certeza-cliente/4.png',
+          '/projects/certeza-cliente/5.png',
+          '/projects/certeza-cliente/6.png',
         ],
         tags: [
           'Next.js 16',
@@ -121,6 +124,29 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
         ],
         roleKey: 'project.cqt.client.role',
         featuresKey: 'project.cqt.client.features',
+      },
+      {
+        title: 'Certeza que Tem Web Expert',
+        descriptionKey: 'project.cqt.expert.desc',
+        images: [
+          '/projects/certeza-expert/1.png',
+          '/projects/certeza-expert/2.png',
+          '/projects/certeza-expert/3.png',
+          '/projects/certeza-expert/4.png',
+        ],
+        tags: [
+          'Next.js 15',
+          'React 18',
+          'TypeScript',
+          'Styled-Components',
+          'React Query',
+          'React Hook Form',
+          'Yup',
+          'Axios',
+          'Toastify',
+        ],
+        roleKey: 'project.cqt.expert.role',
+        featuresKey: 'project.cqt.expert.features',
       },
       {
         title: 'Certeza que Tem Web Master',
@@ -151,10 +177,6 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
         images: [
           '/projects/certeza-seller/1.png',
           '/projects/certeza-seller/2.png',
-          '/projects/certeza-seller/3.png',
-          '/projects/certeza-seller/4.png',
-          '/projects/certeza-seller/5.png',
-          '/projects/certeza-seller/6.png',
         ],
         tags: [
           'Next.js 15',

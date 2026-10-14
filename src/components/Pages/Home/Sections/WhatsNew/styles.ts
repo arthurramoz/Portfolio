@@ -53,19 +53,19 @@ export const SectionInner = styled.div`
 
 export const Card = styled.div`
   position: relative;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px) saturate(110%);
-  -webkit-backdrop-filter: blur(10px) saturate(110%);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 28px;
   overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 340px;
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+    0 16px 40px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.04);
   transition: box-shadow 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
 
   &::after {
@@ -75,10 +75,9 @@ export const Card = styled.div`
     border-radius: 28px;
     background: linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.12) 0%,
-      transparent 40%,
-      transparent 60%,
-      rgba(255, 255, 255, 0.06) 100%
+      rgba(255, 255, 255, 0.25) 0%,
+      transparent 45%,
+      rgba(255, 255, 255, 0.1) 100%
     );
     pointer-events: none;
   }
@@ -102,30 +101,28 @@ export const CardContent = styled.div`
 `;
 
 export const Title = styled.h3`
-  font-size: 3rem;  
+  font-size: clamp(1.8rem, 2.8vw, 2.6rem);
   text-transform: uppercase;
-  font-weight: 800;
-  color: #111;
+  font-weight: 850;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
   word-wrap: break-word;
   overflow-wrap: break-word;
 
-  ${({ theme }) => theme.media.md} {
-    font-size: 2.4rem;
-  }
-
   ${({ theme }) => theme.media.sm} {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 `;
 
 export const Description = styled.p`
-  font-size: 1.4rem;
-  line-height: 1.3;
-  font-weight: 200;
-  color: #222;
+  font-size: 1.2rem;
+  line-height: 1.65;
+  font-weight: 450;
+  color: #1e293b;
 
   ${({ theme }) => theme.media.sm} {
-    font-size: 1.15rem;
+    font-size: 1.05rem;
   }
 `;
 
@@ -134,19 +131,21 @@ export const ActionBtn = styled.button`
   align-items: center;
   gap: 8px;
   width: fit-content;
-  padding: 12px 24px;
+  padding: 13px 26px;
   border-radius: 12px;
   border: none;
-  background: ${({ theme }) => theme.colors.primary1};
-  color: #111;
-  font-size: 1.1rem;
+  background: #0f172a;
+  color: #ffffff;
+  font-size: 1.05rem;
   font-weight: 700;
   cursor: pointer;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.25);
   transition: all 0.25s ease;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.primary2};
-    transform: translateX(4px);
+    background: #1e293b;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.35);
+    transform: translateY(-2px);
   }
 
   svg {
@@ -154,7 +153,7 @@ export const ActionBtn = styled.button`
   }
 
   &:hover svg {
-    transform: translateX(3px);
+    transform: translateX(4px);
   }
 `;
 
@@ -309,20 +308,21 @@ export const FeatureGrid = styled.div`
 
 export const FeatureCard = styled.div<{ $accent: string }>`
   position: relative;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px) saturate(110%);
-  -webkit-backdrop-filter: blur(10px) saturate(110%);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 24px;
   padding: 32px 28px 28px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  justify-content: space-between;
+  gap: 16px;
   box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
+    0 12px 32px rgba(0, 0, 0, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+  transition: box-shadow 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
   overflow: hidden;
 
   &::after {
@@ -332,12 +332,19 @@ export const FeatureCard = styled.div<{ $accent: string }>`
     border-radius: 24px;
     background: linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      transparent 40%,
-      transparent 60%,
-      rgba(255, 255, 255, 0.05) 100%
+      rgba(255, 255, 255, 0.22) 0%,
+      transparent 45%,
+      rgba(255, 255, 255, 0.08) 100%
     );
     pointer-events: none;
+  }
+
+  &:hover {
+    box-shadow:
+      0 20px 42px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    border-color: rgba(255, 255, 255, 0.85);
+    transform: translateY(-4px);
   }
 
   ${({ theme }) => theme.media.md} {
@@ -360,61 +367,71 @@ export const FeatureHeader = styled.div`
 export const FeatureIcon = styled.div<{ $color: string }>`
   width: 48px;
   height: 48px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #111;
+  color: #0f172a;
+  flex-shrink: 0;
 `;
 
 export const FeatureTitle = styled.h4`
-  font-size: 2.7rem;
+  font-size: clamp(1.35rem, 1.8vw, 1.75rem);
   font-weight: 800;
   text-transform: uppercase;
-  color: #111;
-  letter-spacing: -0.02em;
-  line-height: 1.3;
+  color: #0f172a;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
   word-wrap: break-word;
   overflow-wrap: break-word;
 
   ${({ theme }) => theme.media.md} {
-    font-size: 2.2rem;
+    font-size: 1.4rem;
   }
 
   ${({ theme }) => theme.media.sm} {
-    font-size: 1.6rem;
+    font-size: 1.25rem;
   }
 `;
 
 export const FeatureDesc = styled.p`
-  font-size: 1.3rem;
-  line-height: 1.5;
-  font-weight: 200;
-  color: #222;
+  font-size: 1.12rem;
+  line-height: 1.6;
+  font-weight: 450;
+  color: #1e293b;
+  flex: 1;
 
   ${({ theme }) => theme.media.sm} {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 `;
 
 export const FeatureBtn = styled.button`
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   width: fit-content;
-  padding: 12px 24px;
+  padding: 10px 20px;
   border-radius: 10px;
-  border: none;
-  background: ${({ theme }) => theme.colors.primary1};
-  color: #111;
-  font-size: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 0.95rem;
   font-weight: 700;
   cursor: pointer;
-  margin-top: 4px;
-  transition: all 0.25s ease;
+  margin-top: 6px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
 
   &:hover {
-    background: ${({ theme }) => theme.colors.primary2};
-    transform: translateX(4px);
+    background: #0f172a;
+    color: #ffffff;
+    border-color: #0f172a;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.22);
+    transform: translateY(-2px);
   }
 
   svg {
@@ -422,6 +439,6 @@ export const FeatureBtn = styled.button`
   }
 
   &:hover svg {
-    transform: translateX(2px);
+    transform: translateX(3px);
   }
 `;

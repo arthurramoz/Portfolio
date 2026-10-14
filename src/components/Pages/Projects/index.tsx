@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   FiExternalLink,
@@ -109,6 +109,25 @@ const AllProjectsPage = ({
   const [activeTab, setActiveTab] = useState<ActiveTab>('web');
 
   const visibleProjects = projects.filter(p => !p.hidden);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const projectParam = params.get('project');
+    if (projectParam) {
+      const cleanParam = projectParam.toLowerCase().replace(/[^a-z0-9]/g, '');
+      const match = visibleProjects.find(p => {
+        const cleanTitle = p.title.toLowerCase().replace(/[^a-z0-9]/g, '');
+        return cleanTitle.includes(cleanParam) || cleanParam.includes(cleanTitle);
+      });
+      if (match) {
+        if (match.platformType !== activeTab) {
+          setActiveTab(match.platformType);
+        }
+        setSelectedProject(match);
+      }
+    }
+  }, [visibleProjects, activeTab]);
 
   const filteredProjects = useMemo(() => {
     const tabFiltered = visibleProjects.filter(p => p.platformType === activeTab);

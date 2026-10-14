@@ -43,7 +43,7 @@ export const HIGHLIGHT_CONFIG: HighlightConfig = {
   titleKey: 'whatsnew.title',
   descKey: 'whatsnew.description',
   ctaKey: 'whatsnew.cta',
-  ctaPath: '/projects',
+  ctaPath: '/projetos',
 
   mocks: [
     {
@@ -75,7 +75,7 @@ export const HIGHLIGHT_CONFIG: HighlightConfig = {
       titleKey: 'whatsnew.expert.title',
       descKey: 'whatsnew.expert.desc',
       ctaKey: 'whatsnew.expert.cta',
-      action: 'projects-page',
+      action: 'cqt-expert',
     },
     {
       icon: FiZap,

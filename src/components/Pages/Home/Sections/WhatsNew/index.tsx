@@ -54,7 +54,8 @@ const itemVariants = {
 };
 
 const ACTIONS: Record<string, (router: ReturnType<typeof useRouter>) => void> = {
-  'projects-page': (router) => router.push('/projects'),
+  'cqt-expert': (router) => router.push('/projetos?project=certeza-que-tem'),
+  'projects-page': (router) => router.push('/projetos'),
   'cases-page': (router) => router.push('/cases'),
   'skills-page': (router) => router.push('/skills'),
   'cursor-settings': (router) => {

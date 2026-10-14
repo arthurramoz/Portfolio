@@ -280,80 +280,17 @@ export const Card = styled.article<{ $color: string; $company?: 'mestres' | 'cod
   }
 `;
 
-export const CardHeaderRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
-`;
-
 export const CategoryTag = styled.span<{ $color: string }>`
   display: inline-flex;
   align-items: center;
   gap: 6px;
   height: 22px;
+  margin-bottom: 12px;
   font-size: 0.74rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: ${({ $color }) => $color};
-`;
-
-export const CompanyBadge = styled.div<{ $company: 'mestres' | 'codotech' }>`
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 4px 12px;
-  border-radius: 9999px;
-  background: ${({ $company }) =>
-    $company === 'codotech'
-      ? 'rgba(255, 107, 0, 0.12)'
-      : 'rgba(10, 181, 128, 0.12)'};
-  border: 1px solid
-    ${({ $company }) =>
-      $company === 'codotech'
-        ? 'rgba(255, 107, 0, 0.35)'
-        : 'rgba(33, 255, 181, 0.35)'};
-  box-shadow: 0 2px 10px
-    ${({ $company }) =>
-      $company === 'codotech'
-        ? 'rgba(255, 107, 0, 0.12)'
-        : 'rgba(33, 255, 181, 0.12)'};
-  transition: all 0.25s ease;
-
-  &:hover {
-    transform: translateY(-1px);
-    background: ${({ $company }) =>
-      $company === 'codotech'
-        ? 'rgba(255, 107, 0, 0.18)'
-        : 'rgba(10, 181, 128, 0.18)'};
-    box-shadow: 0 4px 16px
-      ${({ $company }) =>
-        $company === 'codotech'
-          ? 'rgba(255, 107, 0, 0.25)'
-          : 'rgba(33, 255, 181, 0.25)'};
-  }
-`;
-
-export const CompanyBadgeLogo = styled.img<{ $company: 'mestres' | 'codotech' }>`
-  height: ${({ $company }) => ($company === 'codotech' ? '15px' : '15px')};
-  width: auto;
-  object-fit: contain;
-  display: block;
-`;
-
-export const CompanyBadgeName = styled.span<{ $company: 'mestres' | 'codotech' }>`
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  color: ${({ $company, theme }) =>
-    $company === 'codotech'
-      ? '#FF6B00'
-      : theme.colors.title === '#f0f0f2'
-        ? '#21FFB5'
-        : '#0AB580'};
 `;
 
 export const CardTitle = styled.h3`
@@ -372,7 +309,7 @@ export const CardTitle = styled.h3`
 export const CompanyAccent = styled.span<{ $company?: 'mestres' | 'codotech' }>`
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   font-weight: 800;
   vertical-align: middle;
   color: ${({ $company, theme }) =>
@@ -392,7 +329,6 @@ export const CompanyTitleLogo = styled.img<{ $company: 'mestres' | 'codotech' }>
   object-fit: contain;
   vertical-align: middle;
   display: inline-block;
-  margin-right: 4px;
 `;
 
 export const CardDescription = styled.p`
@@ -403,59 +339,5 @@ export const CardDescription = styled.p`
   ${({ theme }) => theme.media.md} {
     font-size: 0.88rem;
     line-height: 1.62;
-  }
-`;
-
-export const InlineCompanyChip = styled.span<{ $company: 'mestres' | 'codotech' }>`
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  vertical-align: -2px;
-  margin: 0 3px;
-  padding: 1px 7px;
-  border-radius: 6px;
-  font-size: 0.92em;
-  font-weight: 750;
-  white-space: nowrap;
-  background: ${({ $company }) =>
-    $company === 'codotech'
-      ? 'rgba(255, 107, 0, 0.10)'
-      : 'rgba(10, 181, 128, 0.10)'};
-  border: 1px solid
-    ${({ $company }) =>
-      $company === 'codotech'
-        ? 'rgba(255, 107, 0, 0.32)'
-        : 'rgba(33, 255, 181, 0.32)'};
-  color: ${({ $company, theme }) =>
-    $company === 'codotech'
-      ? '#FF6B00'
-      : theme.colors.title === '#f0f0f2'
-        ? '#21FFB5'
-        : '#0AB580'};
-  box-shadow: 0 1px 4px
-    ${({ $company }) =>
-      $company === 'codotech'
-        ? 'rgba(255, 107, 0, 0.08)'
-        : 'rgba(33, 255, 181, 0.08)'};
-  transition: all 0.2s ease;
-
-  &:hover {
-    transform: translateY(-1px);
-    background: ${({ $company }) =>
-      $company === 'codotech'
-        ? 'rgba(255, 107, 0, 0.20)'
-        : 'rgba(10, 181, 128, 0.20)'};
-    box-shadow: 0 3px 10px
-      ${({ $company }) =>
-        $company === 'codotech'
-          ? 'rgba(255, 107, 0, 0.22)'
-          : 'rgba(33, 255, 181, 0.22)'};
-  }
-
-  img {
-    height: 13px;
-    width: auto;
-    object-fit: contain;
-    display: inline-block;
   }
 `;

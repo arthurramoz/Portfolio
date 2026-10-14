@@ -34,16 +34,11 @@ import {
   PillDot,
   NodeDot,
   Card,
-  CardHeaderRow,
   CategoryTag,
-  CompanyBadge,
-  CompanyBadgeLogo,
-  CompanyBadgeName,
   CardTitle,
   CompanyAccent,
   CompanyTitleLogo,
   CardDescription,
-  InlineCompanyChip,
 } from './styles';
 
 type TranslationKey = Parameters<ReturnType<typeof useLanguage>['t']>[0];
@@ -85,38 +80,6 @@ const getCompanyFromText = (text: string): CompanyKey | undefined => {
   if (lower.includes('mestres')) return 'mestres';
   if (lower.includes('codotech')) return 'codotech';
   return undefined;
-};
-
-const renderDescription = (text: string) => {
-  const regex = /(Mestres da Web|CodoTech|Codotech)/g;
-  const parts = text.split(regex);
-
-  if (parts.length === 1) {
-    return text;
-  }
-
-  return parts.map((part, index) => {
-    const lower = part.toLowerCase();
-    if (lower === 'mestres da web') {
-      const brand = COMPANY_BRANDS.mestres;
-      return (
-        <InlineCompanyChip key={index} $company="mestres" title={brand.name}>
-          <img src={brand.logoIcon} alt={brand.name} />
-          {part}
-        </InlineCompanyChip>
-      );
-    }
-    if (lower === 'codotech') {
-      const brand = COMPANY_BRANDS.codotech;
-      return (
-        <InlineCompanyChip key={index} $company="codotech" title={brand.name}>
-          <img src={brand.logoIcon} alt={brand.name} />
-          {part}
-        </InlineCompanyChip>
-      );
-    }
-    return part;
-  });
 };
 
 const TimelinePage = () => {
@@ -243,24 +206,10 @@ const TimelinePage = () => {
 
                 <CardCell $cardLeft={cardLeft}>
                   <Card $color={color} $company={entry.company}>
-                    <CardHeaderRow>
-                      <CategoryTag $color={color}>
-                        {Icon && <Icon size={14} />}
-                        {t(`timeline.cat.${entry.category}` as TranslationKey)}
-                      </CategoryTag>
-                      {entry.company && (
-                        <CompanyBadge $company={entry.company}>
-                          <CompanyBadgeLogo
-                            src={COMPANY_BRANDS[entry.company].logoIcon}
-                            alt={COMPANY_BRANDS[entry.company].name}
-                            $company={entry.company}
-                          />
-                          <CompanyBadgeName $company={entry.company}>
-                            {COMPANY_BRANDS[entry.company].name}
-                          </CompanyBadgeName>
-                        </CompanyBadge>
-                      )}
-                    </CardHeaderRow>
+                    <CategoryTag $color={color}>
+                      {Icon && <Icon size={14} />}
+                      {t(`timeline.cat.${entry.category}` as TranslationKey)}
+                    </CategoryTag>
                     <CardTitle>
                       {main}
                       {accent && (
@@ -277,7 +226,7 @@ const TimelinePage = () => {
                       )}
                     </CardTitle>
                     <CardDescription>
-                      {renderDescription(t(entry.descriptionKey as TranslationKey))}
+                      {t(entry.descriptionKey as TranslationKey)}
                     </CardDescription>
                   </Card>
                 </CardCell>

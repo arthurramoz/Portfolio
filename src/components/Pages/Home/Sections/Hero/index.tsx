@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useAccessibility } from '@/contexts/AccessibilityContext';
-import { FiDownload } from 'react-icons/fi';
+import { FiDownload, FiMapPin, FiGlobe } from 'react-icons/fi';
+import { VISIBLE_PROJECTS_COUNT } from '@/config/projects';
 import ResumeModal from '@/components/ResumeModal';
 import InteractiveOrb from './InteractiveOrb';
 import {
@@ -20,6 +21,8 @@ import {
   Section,
   TextBlock,
   InfoBlock,
+  Facts,
+  Fact,
   StatusBadge,
   StatusDot,
 } from './styles';
@@ -73,6 +76,25 @@ const Hero = () => {
                 </ResumeButton>
               </ResumeWrapper>
             </Actions>
+
+            <Facts>
+              <Fact>
+                <strong>3+</strong>
+                {t('projects.impact.years' as Parameters<typeof t>[0])}
+              </Fact>
+              <Fact>
+                <strong>{VISIBLE_PROJECTS_COUNT}+</strong>
+                {t('projects.impact.total' as Parameters<typeof t>[0])}
+              </Fact>
+              <Fact>
+                <FiMapPin size={14} aria-hidden="true" />
+                {t('hero.fact.location' as Parameters<typeof t>[0])}
+              </Fact>
+              <Fact>
+                <FiGlobe size={14} aria-hidden="true" />
+                {t('hero.fact.english' as Parameters<typeof t>[0])}
+              </Fact>
+            </Facts>
           </InfoBlock>
         </TextBlock>
       </Content>

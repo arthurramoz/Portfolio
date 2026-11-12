@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import styled from 'styled-components';
+import { liteMedia } from '@/styles/lite';
 
 export const Main = styled.main`
   position: relative;
@@ -9,6 +10,21 @@ export const Main = styled.main`
   flex-direction: column;
   align-items: center;
   overflow: hidden;
+
+  /* Modo leve: brilho de fundo estatico, sem blur e sem animacao */
+  ${liteMedia} {
+    background:
+      radial-gradient(
+        90% 420px at 0% 0%,
+        ${({ theme }) => theme.colors.primary2}2e 0%,
+        transparent 70%
+      ),
+      radial-gradient(
+        90% 420px at 100% 520px,
+        ${({ theme }) => theme.colors.secondary2}1f 0%,
+        transparent 70%
+      );
+  }
 `;
 
 const BlobBase = styled(motion.div)`
@@ -55,40 +71,3 @@ export const BlobCenter = styled(BlobBase)`
     transparent 70%
   );
 `;
-
-export const BlobSmall1 = styled(BlobBase)`
-  top: 40%;
-  left: 20%;
-  width: 900px;
-  height: 900px;
-  background: radial-gradient(
-    circle,
-    ${({ theme }) => theme.colors.secondary1}35 0%,
-    transparent 70%
-  );
-`;
-
-export const BlobSmall2 = styled(BlobBase)`
-  top: 10%;
-  right: 30%;
-  width: 900px;
-  height: 900px;
-  background: radial-gradient(
-    circle,
-    ${({ theme }) => theme.colors.primary1}30 0%,
-    transparent 70%
-  );
-`;
-
-export const BlobSmall3 = styled(BlobBase)`
-  bottom: 15%;
-  left: 40%;
-  width: 900px;
-  height: 900px;
-  background: radial-gradient(
-    circle,
-    ${({ theme }) => theme.colors.secondary2}30 0%,
-    transparent 70%
-  );
-`;
-

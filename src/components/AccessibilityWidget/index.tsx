@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import styled from 'styled-components';
+import { solidOnLite } from '@/styles/lite';
 import { useAccessibility } from '@/contexts/AccessibilityContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -18,6 +19,7 @@ const Fab = styled(motion.button)`
   background: ${({ theme }) => theme.colors.navbarBg};
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  ${solidOnLite}
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,6 +52,7 @@ const Panel = styled(motion.div)`
   background: ${({ theme }) => theme.colors.navbarBg};
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  ${solidOnLite}
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
   padding: 20px;
   display: flex;

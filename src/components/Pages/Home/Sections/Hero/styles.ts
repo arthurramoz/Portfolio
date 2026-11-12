@@ -385,3 +385,53 @@ export const IllustrationBlock = styled.div`
     max-width: 320px;
   }
 `;
+
+export const Facts = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 20px 0 0;
+  max-width: 560px;
+  border-top: 1px solid ${({ theme }) => theme.colors.btnSecondaryBorder};
+
+  ${({ theme }) => theme.media.lg} {
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 16px;
+    margin-top: 20px;
+    padding-top: 16px;
+    text-align: left;
+  }
+`;
+
+export const Fact = styled.li`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.subtitle};
+
+  strong {
+    font-size: 16px;
+    font-weight: 800;
+    color: ${({ theme }) => theme.colors.title};
+  }
+
+  svg {
+    flex-shrink: 0;
+    color: ${({ theme }) => theme.colors.accentText};
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    font-size: 13px;
+  }
+`;

@@ -195,3 +195,23 @@ export const LocationCity = styled.span`
   color: ${({ theme }) => theme.colors.navbarLinkInactive};
   opacity: 0.7;
 `;
+
+export const StatsRow = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 40px;
+
+  ${({ theme }) => theme.media.sm} {
+    gap: 8px;
+    margin-top: 28px;
+  }
+`;
+
+export const StacksBlock = styled.div`
+  margin-top: 32px;
+
+  ${({ theme }) => theme.media.sm} {
+    margin-top: 24px;
+  }
+`;

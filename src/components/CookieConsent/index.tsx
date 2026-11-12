@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import styled from 'styled-components';
+import { solidOnLite } from '@/styles/lite';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const ConsentBanner = styled(motion.div)`
@@ -17,6 +18,7 @@ const ConsentBanner = styled(motion.div)`
   background: ${({ theme }) => theme.colors.navbarBg};
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  ${solidOnLite}
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
   padding: 24px;
   display: flex;

@@ -1,26 +1,11 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import {
-  FiExternalLink,
-  FiLinkedin,
-  FiClock,
-  FiZap,
-  FiLayers,
-  FiStar,
-  FiShoppingCart,
-  FiGrid,
-  FiLayout,
-  FiBox,
-  FiMoreHorizontal,
-  FiSmartphone,
-  FiMail,
-} from 'react-icons/fi';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { FiMail } from 'react-icons/fi';
 import { useRouter } from 'next/navigation';
-import { useLanguage } from '@/contexts/LanguageContext';
-import type { ProjectItem, ProjectType, ProjectPlatformType } from '@/config/projects';
-import ImageCarousel from './ImageCarousel';
+import { useLanguage, type DictionaryKeys } from '@/contexts/LanguageContext';
+import type { ProjectItem, ProjectType } from '@/config/projects';
+import ProjectCard from './ProjectCard';
 import ProjectModal from './ProjectModal';
 import {
   PageWrapper,
@@ -29,38 +14,16 @@ import {
   PageDescription,
 } from '@/components/Pages/global';
 import {
-  AppsEmptyState,
-  CardContent,
-  CardDescription,
-  CardMeta,
-  CardTitle,
-  TypeBadge,
   EmptyState,
-  FeaturedBadge,
   FilterBar,
   FilterButton,
-  ImpactBanner,
-  ImpactCta,
-  ImpactDivider,
-  ImpactLabel,
-  ImpactMetric,
-  ImpactMetrics,
-  ImpactNumber,
-  InfoPill,
-  InfoPillsRow,
-  PlatformBadge,
-  ProjectCard,
+  HireButton,
   ProjectsGrid,
-  TabBar,
-  TabButton,
-  Tag,
-  TagsRow,
-  TimelineWrapper,
-  YearCount,
-  YearHeader,
-  YearLabel,
-  YearLine,
-  YearSection,
+  Section,
+  SectionLabel,
+  Stat,
+  Stats,
+  StatsRow,
 } from './styles';
 
 export type { ProjectItem };
@@ -71,368 +34,160 @@ interface AllProjectsPageProps {
 }
 
 type FilterType = 'all' | ProjectType;
-type ActiveTab = ProjectPlatformType;
 
-const TYPE_ICONS: Record<ProjectType, typeof FiShoppingCart> = {
-  ecommerce: FiShoppingCart,
-  dashboard: FiGrid,
-  landing: FiLayout,
-  saas: FiBox,
-  other: FiMoreHorizontal,
-};
+const FILTER_KEYS: FilterType[] = [
+  'all',
+  'ecommerce',
+  'saas',
+  'dashboard',
+  'landing',
+  'other',
+];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08 },
-  },
-};
+const normalize = (value: string) =>
+  value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[^a-z0-9]/g, '');
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, ease: [0.25, 0.1, 0.25, 1] as const },
-  },
-};
-
-const AllProjectsPage = ({
-  projects,
-  productionCount = 5,
-}: AllProjectsPageProps) => {
+const AllProjectsPage = ({ projects, productionCount = 5 }: AllProjectsPageProps) => {
   const { t } = useLanguage();
+  const tr = (key: string) => t(key as DictionaryKeys);
   const router = useRouter();
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const [activeFilter, setActiveFilter] = useState<FilterType>('all');
-  const [activeTab, setActiveTab] = useState<ActiveTab>('web');
 
-  const visibleProjects = projects.filter(p => !p.hidden);
+  const visibleProjects = useMemo(
+    () => projects.filter(project => !project.hidden),
+    [projects],
+  );
 
+  // Abre o projeto vindo de /projetos?project=nome (links da home e externos)
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const params = new URLSearchParams(window.location.search);
-    const projectParam = params.get('project');
-    if (projectParam) {
-      const cleanParam = projectParam.toLowerCase().replace(/[^a-z0-9]/g, '');
-      const match = visibleProjects.find(p => {
-        const cleanTitle = p.title.toLowerCase().replace(/[^a-z0-9]/g, '');
-        return cleanTitle.includes(cleanParam) || cleanParam.includes(cleanTitle);
-      });
-      if (match) {
-        if (match.platformType !== activeTab) {
-          setActiveTab(match.platformType);
-        }
-        setSelectedProject(match);
-      }
-    }
-  }, [visibleProjects, activeTab]);
+    const param = new URLSearchParams(window.location.search).get('project');
+    if (!param) return;
 
-  const filteredProjects = useMemo(() => {
-    const tabFiltered = visibleProjects.filter(p => p.platformType === activeTab);
-    return activeFilter === 'all'
-      ? tabFiltered
-      : tabFiltered.filter(p => p.projectType === activeFilter);
-  }, [visibleProjects, activeFilter, activeTab]);
-
-  const projectsByYear = useMemo(() => {
-    const map = new Map<number, ProjectItem[]>();
-    filteredProjects.forEach(p => {
-      const list = map.get(p.year) ?? [];
-      list.push(p);
-      map.set(p.year, list);
+    const wanted = normalize(param);
+    const match = visibleProjects.find(project => {
+      const title = normalize(project.title);
+      return title.includes(wanted) || wanted.includes(title);
     });
-    return Array.from(map.entries()).sort(([a], [b]) => b - a);
-  }, [filteredProjects]);
+    if (match) setSelectedProject(match);
+  }, [visibleProjects]);
 
-  const totalCount = visibleProjects.length;
+  const counts = useMemo(() => {
+    const map = new Map<FilterType, number>([['all', visibleProjects.length]]);
+    visibleProjects.forEach(project => {
+      map.set(project.projectType, (map.get(project.projectType) ?? 0) + 1);
+    });
+    return map;
+  }, [visibleProjects]);
+
   const yearsActive = useMemo(() => {
     if (visibleProjects.length === 0) return 3;
-    const years = visibleProjects.map(p => p.year);
+    const years = visibleProjects.map(project => project.year);
     return Math.max(...years) - Math.min(...years) + 1;
   }, [visibleProjects]);
 
-  const FILTERS: { key: FilterType; label: string }[] = [
-    { key: 'all', label: t('projects.filter.all' as Parameters<typeof t>[0]) },
-    { key: 'ecommerce', label: t('projects.filter.ecommerce' as Parameters<typeof t>[0]) },
-    { key: 'dashboard', label: t('projects.filter.dashboard' as Parameters<typeof t>[0]) },
-    { key: 'landing', label: t('projects.filter.landing' as Parameters<typeof t>[0]) },
-    { key: 'saas', label: t('projects.filter.saas' as Parameters<typeof t>[0]) },
-    { key: 'other', label: t('projects.filter.other' as Parameters<typeof t>[0]) },
-  ];
+  const filtered = useMemo(
+    () =>
+      activeFilter === 'all'
+        ? visibleProjects
+        : visibleProjects.filter(project => project.projectType === activeFilter),
+    [visibleProjects, activeFilter],
+  );
 
-  const renderCard = (project: ProjectItem, index: number) => {
-    const TypeIcon = TYPE_ICONS[project.projectType];
-    const isClickable = !!project.platforms && project.platforms.length > 0;
+  // Projetos com capa primeiro, depois os que tem print, mantendo a ordem por data
+  const mediaRank = (project: ProjectItem) =>
+    project.cover ? 0 : project.images?.length ? 1 : 2;
+  const byMedia = (a: ProjectItem, b: ProjectItem) => mediaRank(a) - mediaRank(b);
 
-    return (
-      <motion.div key={`${project.title}-${index}`} variants={itemVariants}>
-        <ProjectCard
-          $clickable={isClickable}
-          $featured={project.featured}
-          onClick={() => {
-            if (isClickable) setSelectedProject(project);
-          }}
-        >
-          {project.featured && (
-            <FeaturedBadge>
-              <FiStar size={10} />
-              {t('projects.section.featured' as Parameters<typeof t>[0])}
-            </FeaturedBadge>
-          )}
+  const featured = filtered.filter(project => project.featured).sort(byMedia);
+  const others = filtered.filter(project => !project.featured).sort(byMedia);
 
-          {project.images && project.images.length > 0 && (
-            <ImageCarousel images={project.images} alt={project.title} />
-          )}
-
-          <CardContent>
-            <CardMeta>
-              <TypeBadge $type={project.projectType}>
-                <TypeIcon size={10} />
-                {t(`projects.type.${project.projectType}` as Parameters<typeof t>[0])}
-              </TypeBadge>
-              {project.platforms && project.platforms.length > 0 && (
-                <PlatformBadge>
-                  <FiLayers size={10} />
-                  {project.platforms.length}{' '}
-                  {t('projects.platforms' as Parameters<typeof t>[0])}
-                </PlatformBadge>
-              )}
-            </CardMeta>
-
-            <CardTitle>
-              {project.title}
-              {project.link && (
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={e => e.stopPropagation()}
-                >
-                  <FiExternalLink size={15} />
-                </a>
-              )}
-              <a
-                href="https://www.linkedin.com/in/arthur-moreira-ramos/details/projects/"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={e => e.stopPropagation()}
-              >
-                <FiLinkedin size={15} />
-              </a>
-            </CardTitle>
-
-            <CardDescription>
-              {t(project.descriptionKey as Parameters<typeof t>[0])}
-            </CardDescription>
-
-            {(project.durationKey || project.highlightKey) && (
-              <InfoPillsRow>
-                {project.highlightKey && (
-                  <InfoPill>
-                    <FiZap size={12} />
-                    <strong>
-                      {t('projects.pill.highlight' as Parameters<typeof t>[0])}:
-                    </strong>{' '}
-                    {t(project.highlightKey as Parameters<typeof t>[0])}
-                  </InfoPill>
-                )}
-                {project.durationKey && (
-                  <InfoPill>
-                    <FiClock size={12} />
-                    <strong>
-                      {t('projects.pill.duration' as Parameters<typeof t>[0])}:
-                    </strong>{' '}
-                    {t(project.durationKey as Parameters<typeof t>[0])}
-                  </InfoPill>
-                )}
-              </InfoPillsRow>
-            )}
-
-            {project.tags.length > 0 && (
-              <TagsRow>
-                {project.tags.map(tag => (
-                  <Tag key={tag}>{tag}</Tag>
-                ))}
-              </TagsRow>
-            )}
-          </CardContent>
-        </ProjectCard>
-      </motion.div>
-    );
-  };
+  const closeModal = useCallback(() => setSelectedProject(null), []);
 
   return (
     <PageWrapper>
-      <motion.div variants={containerVariants} initial="hidden" animate="visible">
-        <PageTitleWrapper>
-          <motion.div variants={itemVariants}>
-            <PageHeading>
-              {t('projects.title.all' as Parameters<typeof t>[0])}
-            </PageHeading>
-          </motion.div>
-          <motion.div variants={itemVariants}>
-            <PageDescription>
-              {t('projects.subtitle.all' as Parameters<typeof t>[0])}
-            </PageDescription>
-          </motion.div>
-        </PageTitleWrapper>
+      <PageTitleWrapper>
+        <PageHeading>{tr('projects.title.all')}</PageHeading>
+        <PageDescription>{tr('projects.subtitle.all')}</PageDescription>
+      </PageTitleWrapper>
 
-        <motion.div variants={itemVariants}>
-          <ImpactBanner>
-            <ImpactMetrics>
-              <ImpactMetric>
-                <ImpactNumber>{totalCount}+</ImpactNumber>
-                <ImpactLabel>
-                  {t('projects.impact.total' as Parameters<typeof t>[0])}
-                </ImpactLabel>
-              </ImpactMetric>
+      <StatsRow>
+        <Stats>
+          <Stat>
+            <dt>{tr('projects.impact.total')}</dt>
+            <dd>{visibleProjects.length}+</dd>
+          </Stat>
+          <Stat>
+            <dt>{tr('projects.impact.prod')}</dt>
+            <dd>{productionCount}</dd>
+          </Stat>
+          <Stat>
+            <dt>{tr('projects.impact.years')}</dt>
+            <dd>{yearsActive}+</dd>
+          </Stat>
+        </Stats>
 
-              <ImpactDivider />
+        <HireButton type="button" onClick={() => router.push('/contato')}>
+          <FiMail size={15} aria-hidden="true" />
+          {tr('projects.impact.cta')}
+        </HireButton>
+      </StatsRow>
 
-              <ImpactMetric>
-                <ImpactNumber>{productionCount}</ImpactNumber>
-                <ImpactLabel>
-                  {t('projects.impact.prod' as Parameters<typeof t>[0])}
-                </ImpactLabel>
-              </ImpactMetric>
+      <FilterBar role="tablist">
+        {FILTER_KEYS.filter(key => (counts.get(key) ?? 0) > 0).map(key => (
+          <FilterButton
+            key={key}
+            type="button"
+            role="tab"
+            aria-selected={activeFilter === key}
+            $active={activeFilter === key}
+            onClick={() => setActiveFilter(key)}
+          >
+            {tr(`projects.filter.${key}`)}
+            <span>{counts.get(key)}</span>
+          </FilterButton>
+        ))}
+      </FilterBar>
 
-              <ImpactDivider />
+      {filtered.length === 0 && <EmptyState>{tr('projects.empty')}</EmptyState>}
 
-              <ImpactMetric>
-                <ImpactNumber>{yearsActive}+</ImpactNumber>
-                <ImpactLabel>
-                  {t('projects.impact.years' as Parameters<typeof t>[0])}
-                </ImpactLabel>
-              </ImpactMetric>
-            </ImpactMetrics>
+      {featured.length > 0 && (
+        <Section>
+          <SectionLabel>{tr('projects.section.featured')}</SectionLabel>
+          <ProjectsGrid>
+            {featured.map((project, index) => (
+              <ProjectCard
+                key={project.title}
+                project={project}
+                onOpen={setSelectedProject}
+                featured
+                priority={index < 3}
+              />
+            ))}
+          </ProjectsGrid>
+        </Section>
+      )}
 
-            <ImpactCta onClick={() => router.push('/contato')}>
-              <FiMail size={15} />
-              {t('projects.impact.cta' as Parameters<typeof t>[0])}
-            </ImpactCta>
-          </ImpactBanner>
-        </motion.div>
-
-        <motion.div variants={itemVariants}>
-          <TabBar>
-            <TabButton
-              $active={activeTab === 'web'}
-              onClick={() => {
-                setActiveTab('web');
-                setActiveFilter('all');
-              }}
-            >
-              {t('projects.tab.websites' as Parameters<typeof t>[0])}
-            </TabButton>
-            <TabButton
-              $active={activeTab === 'app'}
-              onClick={() => {
-                setActiveTab('app');
-                setActiveFilter('all');
-              }}
-            >
-              {t('projects.tab.apps' as Parameters<typeof t>[0])}
-            </TabButton>
-          </TabBar>
-        </motion.div>
-
-        <AnimatePresence mode="wait">
-          {activeTab === 'app' ? (
-            <motion.div
-              key="apps-empty"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 8 }}
-              transition={{ duration: 0.25 }}
-            >
-              <AppsEmptyState>
-                <FiSmartphone size={48} />
-                <span>
-                  {t('projects.apps.empty' as Parameters<typeof t>[0])}
-                </span>
-              </AppsEmptyState>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="web-content"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 8 }}
-              transition={{ duration: 0.25 }}
-            >
-              <FilterBar>
-                {FILTERS.map(filter => (
-                  <FilterButton
-                    key={filter.key}
-                    $active={activeFilter === filter.key}
-                    onClick={() => setActiveFilter(filter.key)}
-                  >
-                    {filter.label}
-                  </FilterButton>
-                ))}
-              </FilterBar>
-
-              <AnimatePresence mode="wait">
-                {filteredProjects.length === 0 ? (
-                  <motion.div
-                    key="empty"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    <EmptyState>
-                      {t('projects.empty' as Parameters<typeof t>[0])}
-                    </EmptyState>
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key={activeFilter}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 8 }}
-                    transition={{ duration: 0.25 }}
-                  >
-                    <TimelineWrapper>
-                      {projectsByYear.map(([year, yearProjects]) => (
-                        <YearSection key={year}>
-                          <YearHeader>
-                            <YearLabel>{year}</YearLabel>
-                            <YearLine />
-                            <YearCount>
-                              {yearProjects.length}{' '}
-                              {yearProjects.length === 1 ? 'projeto' : 'projetos'}
-                            </YearCount>
-                          </YearHeader>
-
-                          <motion.div
-                            variants={containerVariants}
-                            initial="hidden"
-                            animate="visible"
-                          >
-                            <ProjectsGrid>
-                              {yearProjects.map((project, index) =>
-                                renderCard(project, index),
-                              )}
-                            </ProjectsGrid>
-                          </motion.div>
-                        </YearSection>
-                      ))}
-                    </TimelineWrapper>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
+      {others.length > 0 && (
+        <Section>
+          <SectionLabel>{tr('projects.section.more')}</SectionLabel>
+          <ProjectsGrid>
+            {others.map(project => (
+              <ProjectCard
+                key={project.title}
+                project={project}
+                onOpen={setSelectedProject}
+              />
+            ))}
+          </ProjectsGrid>
+        </Section>
+      )}
 
       {selectedProject && (
-        <ProjectModal
-          project={selectedProject}
-          onClose={() => setSelectedProject(null)}
-        />
+        <ProjectModal project={selectedProject} onClose={closeModal} />
       )}
     </PageWrapper>
   );

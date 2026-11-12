@@ -169,10 +169,7 @@ const SkillsPage = () => {
                       duration: 0.45,
                       ease: [0.25, 0.1, 0.25, 1],
                     }}
-                    style={{
-                      gridColumn: `span ${span}`,
-                      gridRow: `span ${span}`,
-                    }}
+                    data-span={span}
                   >
                     <GlassCard>
                       <SkillIconWrapper

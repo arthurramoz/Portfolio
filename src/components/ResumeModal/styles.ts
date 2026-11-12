@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { solidOnLite } from '@/styles/lite';
 import { motion } from 'motion/react';
 
 export const Backdrop = styled(motion.div)`
@@ -26,6 +27,7 @@ export const ModalContainer = styled(motion.div)`
   background: ${({ theme }) => theme.colors.dropdownBg};
   backdrop-filter: blur(32px) saturate(190%);
   -webkit-backdrop-filter: blur(32px) saturate(190%);
+  ${solidOnLite}
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   border-radius: 28px;
   padding: 32px 28px 28px;

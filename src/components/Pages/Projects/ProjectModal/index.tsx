@@ -1,28 +1,28 @@
 'use client';
 
-import { useEffect, useCallback } from 'react';
-import { FiX } from 'react-icons/fi';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useEffect, useRef } from 'react';
+import { FiClock, FiExternalLink, FiX, FiZap } from 'react-icons/fi';
+import { useLanguage, type DictionaryKeys } from '@/contexts/LanguageContext';
 import type { ProjectItem } from '@/config/projects';
 import ImageCarousel from '../ImageCarousel';
 import {
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalTitle,
-  ModalCloseButton,
+  Logo,
   ModalBody,
+  ModalCloseButton,
+  ModalContent,
   ModalDescription,
-  ModalDivider,
+  ModalFacts,
+  ModalHeader,
+  ModalLive,
+  ModalOverlay,
+  ModalRole,
+  ModalSubheading,
+  ModalTags,
+  ModalTitle,
   PlatformSection,
+  PlatformText,
   PlatformTitle,
-  PlatformDescription,
-  PlatformFeatures,
-  PlatformCarouselWrapper,
-  TagsRow,
   Tag,
-  InfoPillsRow,
-  InfoPill,
 } from '../styles';
 
 interface ProjectModalProps {
@@ -32,97 +32,122 @@ interface ProjectModalProps {
 
 const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
   const { t } = useLanguage();
-
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    },
-    [onClose],
-  );
+  const tr = (key: string) => t(key as DictionaryKeys);
+  const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+
+    const previousOverflow = document.body.style.overflow;
     document.addEventListener('keydown', handleKeyDown);
     document.body.style.overflow = 'hidden';
+    closeRef.current?.focus();
+
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = '';
+      document.body.style.overflow = previousOverflow;
     };
-  }, [handleKeyDown]);
+  }, [onClose]);
 
-  const handleOverlayClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) onClose();
+  const galleryLabels = {
+    prevLabel: tr('projects.gallery.prev'),
+    nextLabel: tr('projects.gallery.next'),
   };
 
   return (
-    <ModalOverlay onClick={handleOverlayClick}>
-      <ModalContent>
+    <ModalOverlay
+      onClick={event => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+    >
+      <ModalContent role="dialog" aria-modal="true" aria-label={project.title}>
         <ModalHeader>
+          {project.logo && <Logo src={project.logo} alt="" />}
           <ModalTitle>{project.title}</ModalTitle>
-          <ModalCloseButton onClick={onClose}>
+          <ModalCloseButton
+            ref={closeRef}
+            type="button"
+            aria-label={tr('projects.modal.close')}
+            onClick={onClose}
+          >
             <FiX size={18} />
           </ModalCloseButton>
         </ModalHeader>
 
         <ModalBody>
-          <ModalDescription>
-            {t(project.descriptionKey as Parameters<typeof t>[0])}
-          </ModalDescription>
-
-          {(project.durationKey || project.highlightKey) && (
-            <InfoPillsRow>
-              {project.highlightKey && (
-                <InfoPill>
-                  <strong>{t('projects.pill.highlight' as Parameters<typeof t>[0])}:</strong>
-                  {t(project.highlightKey as Parameters<typeof t>[0])}
-                </InfoPill>
-              )}
-              {project.durationKey && (
-                <InfoPill>
-                  <strong>{t('projects.pill.duration' as Parameters<typeof t>[0])}:</strong>
-                  {t(project.durationKey as Parameters<typeof t>[0])}
-                </InfoPill>
-              )}
-            </InfoPillsRow>
+          {project.images && project.images.length > 0 && (
+            <ImageCarousel
+              images={project.images}
+              alt={project.title}
+              {...galleryLabels}
+            />
           )}
 
-          <TagsRow>
+          {project.roleKey && <ModalRole>{tr(project.roleKey)}</ModalRole>}
+
+          <ModalDescription>{tr(project.descriptionKey)}</ModalDescription>
+
+          {(project.highlightKey || project.durationKey) && (
+            <ModalFacts>
+              {project.highlightKey && (
+                <li>
+                  <FiZap size={14} aria-hidden="true" />
+                  {tr(project.highlightKey)}
+                </li>
+              )}
+              {project.durationKey && (
+                <li>
+                  <FiClock size={14} aria-hidden="true" />
+                  {tr(project.durationKey)}
+                </li>
+              )}
+            </ModalFacts>
+          )}
+
+          {project.link && (
+            <ModalLive href={project.link} target="_blank" rel="noopener noreferrer">
+              {tr('projects.card.live')}
+              <FiExternalLink size={15} aria-hidden="true" />
+            </ModalLive>
+          )}
+
+          <ModalSubheading>{tr('projects.modal.stack')}</ModalSubheading>
+          <ModalTags>
             {project.tags.map(tag => (
               <Tag key={tag}>{tag}</Tag>
             ))}
-          </TagsRow>
+          </ModalTags>
 
           {project.platforms && project.platforms.length > 0 && (
             <>
-              <ModalDivider />
+              <ModalSubheading>{tr('projects.modal.platforms')}</ModalSubheading>
 
-              {project.platforms.map((platform, idx) => (
-                <PlatformSection key={idx}>
+              {project.platforms.map(platform => (
+                <PlatformSection key={platform.title}>
                   <PlatformTitle>{platform.title}</PlatformTitle>
 
                   {platform.images && platform.images.length > 0 && (
-                    <PlatformCarouselWrapper>
-                      <ImageCarousel
-                        images={platform.images}
-                        alt={platform.title}
-                      />
-                    </PlatformCarouselWrapper>
+                    <ImageCarousel
+                      images={platform.images}
+                      alt={platform.title}
+                      portrait={platform.portrait}
+                      {...galleryLabels}
+                    />
                   )}
 
-                  <PlatformDescription>
-                    {t(platform.descriptionKey as Parameters<typeof t>[0])}
-                  </PlatformDescription>
+                  <PlatformText>{tr(platform.descriptionKey)}</PlatformText>
 
                   {platform.featuresKey && (
-                    <PlatformFeatures>
-                      {t(platform.featuresKey as Parameters<typeof t>[0])}
-                    </PlatformFeatures>
+                    <PlatformText>{tr(platform.featuresKey)}</PlatformText>
                   )}
 
-                  <TagsRow>
+                  <ModalTags>
                     {platform.tags.map(tag => (
                       <Tag key={tag}>{tag}</Tag>
                     ))}
-                  </TagsRow>
+                  </ModalTags>
                 </PlatformSection>
               ))}
             </>

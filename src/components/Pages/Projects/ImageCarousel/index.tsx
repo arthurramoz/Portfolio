@@ -1,81 +1,98 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
+import { useCallback, useRef, useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import {
-  CarouselWrapper,
+  Counter,
+  GalleryWrapper,
   NextButton,
   PrevButton,
-  ProgressFill,
-  ProgressTrack,
+  Slide,
+  Track,
 } from './styles';
 
 interface ImageCarouselProps {
   images: string[];
   alt: string;
+  /** Prints de celular: várias telas lado a lado */
+  portrait?: boolean;
+  prevLabel?: string;
+  nextLabel?: string;
 }
 
-const ImageCarousel = ({ images, alt }: ImageCarouselProps) => {
+/**
+ * Galeria com scroll-snap nativo: arrastar no toque, setas no desktop.
+ * Sem timers nem animação em JS, e as imagens carregam sob demanda.
+ */
+const ImageCarousel = ({
+  images,
+  alt,
+  portrait,
+  prevLabel = 'Previous image',
+  nextLabel = 'Next image',
+}: ImageCarouselProps) => {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef(0);
   const [current, setCurrent] = useState(0);
 
-  const goNext = useCallback(() => {
-    setCurrent(prev => (prev === images.length - 1 ? 0 : prev + 1));
-  }, [images.length]);
+  const handleScroll = useCallback(() => {
+    if (portrait) return;
+    cancelAnimationFrame(frameRef.current);
+    frameRef.current = requestAnimationFrame(() => {
+      const track = trackRef.current;
+      if (!track) return;
+      setCurrent(Math.round(track.scrollLeft / track.clientWidth));
+    });
+  }, [portrait]);
 
-  useEffect(() => {
-    if (images.length <= 1) return;
-
-    const timer = setInterval(goNext, 4000);
-    return () => clearInterval(timer);
-  }, [images.length, current, goNext]);
-
-  const handlePrev = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setCurrent(prev => (prev === 0 ? images.length - 1 : prev - 1));
+  const scrollByPage = (direction: 1 | -1) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const step = portrait ? track.clientWidth * 0.8 : track.clientWidth;
+    track.scrollBy({ left: step * direction, behavior: 'smooth' });
   };
 
-  const handleNext = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    goNext();
-  };
-
-  const progress = ((current + 1) / images.length) * 100;
+  const hasMany = images.length > 1;
 
   return (
-    <>
-      <CarouselWrapper>
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={images[current]}
-            src={images[current]}
-            alt={`${alt} ${current + 1}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4, ease: 'easeInOut' }}
-          />
-        </AnimatePresence>
+    <GalleryWrapper>
+      <Track ref={trackRef} $portrait={portrait} onScroll={handleScroll}>
+        {images.map((src, index) => (
+          <Slide key={src} $portrait={portrait}>
+            <img
+              src={src}
+              alt={`${alt} ${index + 1}`}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+          </Slide>
+        ))}
+      </Track>
 
-        {images.length > 1 && (
-          <>
-            <PrevButton onClick={handlePrev}>
-              <FiChevronLeft size={18} />
-            </PrevButton>
-
-            <NextButton onClick={handleNext}>
-              <FiChevronRight size={18} />
-            </NextButton>
-          </>
-        )}
-      </CarouselWrapper>
-
-      {images.length > 1 && (
-        <ProgressTrack>
-          <ProgressFill $progress={progress} />
-        </ProgressTrack>
+      {hasMany && (
+        <>
+          <PrevButton
+            type="button"
+            aria-label={prevLabel}
+            onClick={() => scrollByPage(-1)}
+          >
+            <FiChevronLeft size={20} />
+          </PrevButton>
+          <NextButton
+            type="button"
+            aria-label={nextLabel}
+            onClick={() => scrollByPage(1)}
+          >
+            <FiChevronRight size={20} />
+          </NextButton>
+          {!portrait && (
+            <Counter>
+              {current + 1} / {images.length}
+            </Counter>
+          )}
+        </>
       )}
-    </>
+    </GalleryWrapper>
   );
 };
 

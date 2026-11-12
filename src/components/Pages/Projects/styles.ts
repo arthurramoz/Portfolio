@@ -1,734 +1,642 @@
 import styled, { keyframes } from 'styled-components';
-
-const shimmer = keyframes`
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-`;
+import type { ProjectType } from '@/config/projects';
 
 const fadeIn = keyframes`
   from { opacity: 0; }
   to { opacity: 1; }
 `;
 
-const slideUp = keyframes`
-  from { opacity: 0; transform: translateY(40px) scale(0.97); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+const riseIn = keyframes`
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
 `;
 
-const pulseGlow = keyframes`
-  0%, 100% { box-shadow: 0 0 20px ${() => 'rgba(99,102,241,0.15)'}; }
-  50% { box-shadow: 0 0 40px ${() => 'rgba(99,102,241,0.35)'}; }
-`;
+const TYPE_COLORS: Record<ProjectType, string> = {
+  ecommerce: '#fb6f92',
+  dashboard: '#48cae4',
+  landing: '#10b981',
+  saas: '#8b5cf6',
+  other: '#f59e0b',
+};
 
-export const ImpactBanner = styled.div`
-  position: relative;
+/* ---------- Cabeçalho ---------- */
+
+export const StatsRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 28px 36px;
-  border-radius: 24px;
-  margin-bottom: 48px;
-  background: linear-gradient(
-    135deg,
-    ${({ theme }) => theme.colors.primary1}18 0%,
-    ${({ theme }) => theme.colors.secondary1}10 50%,
-    ${({ theme }) => theme.colors.primary1}08 100%
-  );
-  border: 1px solid ${({ theme }) => theme.colors.primary1}30;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      ${({ theme }) => theme.colors.primary1}08 50%,
-      transparent 100%
-    );
-    background-size: 200% 100%;
-    animation: ${shimmer} 4s linear infinite;
-    pointer-events: none;
-  }
-
-  ${({ theme }) => theme.media.md} {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 20px 24px;
-    gap: 20px;
-  }
-`;
-
-export const ImpactMetrics = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 32px;
   flex-wrap: wrap;
+  padding: 20px 0;
+  margin-bottom: 28px;
+  border-top: 1px solid ${({ theme }) => theme.colors.btnSecondaryBorder};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.btnSecondaryBorder};
 
-  ${({ theme }) => theme.media.md} {
-    gap: 20px;
+  ${({ theme }) => theme.media.sm} {
+    gap: 16px;
+    padding: 16px 0;
+    margin-bottom: 20px;
   }
 `;
 
-export const ImpactMetric = styled.div`
+export const Stats = styled.dl`
   display: flex;
-  flex-direction: column;
+  gap: 40px;
+  margin: 0;
+
+  ${({ theme }) => theme.media.sm} {
+    gap: 0;
+    width: 100%;
+    justify-content: space-between;
+  }
+`;
+
+export const Stat = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
   gap: 2px;
-`;
 
-export const ImpactNumber = styled.span`
-  font-size: 32px;
-  font-weight: 900;
-  line-height: 1;
-  background: linear-gradient(
-    135deg,
-    ${({ theme }) => theme.colors.primary1},
-    ${({ theme }) => theme.colors.secondary1}
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  dd {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: ${({ theme }) => theme.colors.title};
+  }
 
-  ${({ theme }) => theme.media.md} {
-    font-size: 26px;
+  dt {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: ${({ theme }) => theme.colors.subtitle};
+  }
+
+  ${({ theme }) => theme.media.sm} {
+    dd {
+      font-size: 1.6rem;
+    }
+    dt {
+      font-size: 0.75rem;
+    }
   }
 `;
 
-export const ImpactLabel = styled.span`
-  font-size: 13px;
-  color: ${({ theme }) => theme.colors.subtitle};
-  font-weight: 500;
-  white-space: nowrap;
-`;
-
-export const ImpactDivider = styled.div`
-  width: 1px;
-  height: 40px;
-  background: ${({ theme }) => theme.colors.btnSecondaryBorder};
-  flex-shrink: 0;
-
-  ${({ theme }) => theme.media.md} {
-    display: none;
-  }
-`;
-
-export const ImpactCta = styled.button`
-  display: flex;
+export const HireButton = styled.button`
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  padding: 12px 24px;
-  border-radius: 12px;
-  background: ${({ theme }) => theme.colors.primary1};
-  color: #fff;
-  font-size: 14px;
-  font-weight: 700;
+  padding: 12px 22px;
+  border-radius: 999px;
   border: none;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  font-size: 0.92rem;
+  font-weight: 700;
+  background: ${({ theme }) => theme.colors.btnPrimaryBg};
+  color: ${({ theme }) => theme.colors.btnPrimaryText};
+  transition: background 0.2s ease, transform 0.2s ease;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px ${({ theme }) => theme.colors.primary1}40;
-    opacity: 0.92;
+    background: ${({ theme }) => theme.colors.btnPrimaryHoverBg};
+    transform: translateY(-1px);
   }
 
-  &:active {
-    transform: translateY(0);
+  ${({ theme }) => theme.media.sm} {
+    width: 100%;
   }
 `;
+
+/* ---------- Filtros ---------- */
 
 export const FilterBar = styled.div`
   display: flex;
-  align-items: center;
   gap: 8px;
-  margin-bottom: 40px;
   flex-wrap: wrap;
+  margin-bottom: 32px;
+
+  ${({ theme }) => theme.media.md} {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin: 0 -16px 24px;
+    padding: 0 16px 4px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 `;
 
 export const FilterButton = styled.button<{ $active: boolean }>`
-  padding: 8px 18px;
-  border-radius: 10px;
-  font-size: 13px;
+  flex-shrink: 0;
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 0.86rem;
   font-weight: 600;
-  cursor: pointer;
-  border: 1px solid ${({ theme, $active }) =>
-    $active ? theme.colors.primary1 : theme.colors.btnSecondaryBorder};
+  white-space: nowrap;
+  border: 1px solid
+    ${({ theme, $active }) =>
+      $active ? theme.colors.title : theme.colors.btnSecondaryBorder};
   background: ${({ theme, $active }) =>
-    $active ? `${theme.colors.primary1}18` : theme.colors.btnSecondaryBg};
+    $active ? theme.colors.title : 'transparent'};
   color: ${({ theme, $active }) =>
-    $active ? theme.colors.primary1 : theme.colors.subtitle};
-  transition: all 0.2s ease;
+    $active ? theme.colors.btnPrimaryText : theme.colors.subtitle};
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
 
   &:hover {
-    border-color: ${({ theme }) => theme.colors.primary1};
-    color: ${({ theme }) => theme.colors.primary1};
-    background: ${({ theme }) => theme.colors.primary1}10;
+    border-color: ${({ theme }) => theme.colors.title};
+    color: ${({ theme, $active }) =>
+      $active ? theme.colors.btnPrimaryText : theme.colors.title};
+  }
+
+  span {
+    margin-left: 6px;
+    opacity: 0.6;
+    font-weight: 500;
   }
 `;
 
-export const TimelineWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 56px;
-`;
+/* ---------- Seções e grid ---------- */
 
-export const YearSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-`;
-
-export const YearHeader = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 16px;
-`;
-
-export const YearLabel = styled.div`
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
+export const SectionLabel = styled.h2`
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.primary1};
-  background: ${({ theme }) => theme.colors.primary1}15;
-  padding: 6px 16px;
-  border-radius: 8px;
-  border: 1px solid ${({ theme }) => theme.colors.primary1}30;
-  white-space: nowrap;
+  color: ${({ theme }) => theme.colors.accentText};
+  margin: 0 0 16px;
 `;
 
-export const YearLine = styled.div`
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    ${({ theme }) => theme.colors.btnSecondaryBorder},
-    transparent
-  );
-`;
+export const Section = styled.section`
+  margin-bottom: 56px;
 
-export const YearCount = styled.span`
-  font-size: 12px;
-  color: ${({ theme }) => theme.colors.subtitle};
-  white-space: nowrap;
+  ${({ theme }) => theme.media.md} {
+    margin-bottom: 40px;
+  }
 `;
 
 export const ProjectsGrid = styled.div`
-  columns: 2;
-  column-gap: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
 
-  > * {
-    break-inside: avoid;
-    margin-bottom: 24px;
+  ${({ theme }) => theme.media.lg} {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
   }
 
-  ${({ theme }) => theme.media.md} {
-    columns: 1;
-    column-gap: 0;
-
-    > * {
-      margin-bottom: 20px;
-    }
+  @media (max-width: 640px) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
   }
 `;
 
-export const ProjectCard = styled.div<{ $clickable?: boolean; $featured?: boolean }>`
-  background: ${({ theme }) => theme.colors.btnSecondaryBg};
-  border: 1px solid ${({ theme, $featured }) =>
-    $featured ? `${theme.colors.primary1}40` : theme.colors.btnSecondaryBorder};
+/* ---------- Card ---------- */
+
+export const Card = styled.article`
+  position: relative;
+  display: flex;
+  flex-direction: column;
   border-radius: 20px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  cursor: ${({ $clickable }) => ($clickable ? 'pointer' : 'default')};
-  position: relative;
+  background: ${({ theme }) => theme.colors.btnSecondaryBg};
+  border: 1px solid ${({ theme }) => theme.colors.btnSecondaryBorder};
+  cursor: pointer;
+  animation: ${riseIn} 0.4s ease both;
+  transition: transform 0.25s ease, border-color 0.25s ease,
+    box-shadow 0.25s ease;
 
-  ${({ $featured, theme }) =>
-    $featured &&
-    `
-    box-shadow: 0 0 0 1px ${theme.colors.primary1}20, 0 4px 24px ${theme.colors.primary1}10;
-  `}
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-4px);
+      border-color: ${({ theme }) => theme.colors.primary1}70;
+      box-shadow: 0 16px 40px ${({ theme }) => theme.colors.btnPrimaryShadow};
+    }
 
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px ${({ theme }) => theme.colors.btnPrimaryShadow};
-    border-color: ${({ theme }) => theme.colors.primary1}50;
+    &:hover img {
+      transform: scale(1.03);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.accentText};
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    transition: none;
   }
 `;
 
-export const FeaturedBadge = styled.div`
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 10px;
-  border-radius: 8px;
+export const CardMedia = styled.div<{ $type: ProjectType; $empty?: boolean }>`
+  position: relative;
+  aspect-ratio: 4 / 3;
+
+  @media (max-width: 640px) {
+    aspect-ratio: ${({ $empty }) => ($empty ? '16 / 7' : '4 / 3')};
+  }
+
+  overflow: hidden;
   background: linear-gradient(
     135deg,
-    ${({ theme }) => theme.colors.primary1},
-    ${({ theme }) => theme.colors.secondary1}
+    ${({ $type }) => TYPE_COLORS[$type]}33 0%,
+    ${({ theme }) => theme.colors.bgPrimary2} 100%
   );
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  box-shadow: 0 4px 12px ${({ theme }) => theme.colors.primary1}40;
-`;
-
-export const TypeBadge = styled.span<{ $type: 'ecommerce' | 'dashboard' | 'landing' | 'saas' | 'other' }>`
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 10px;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-
-  ${({ $type, theme }) => {
-    switch ($type) {
-      case 'ecommerce':
-        return `
-          background: ${theme.colors.secondary1}18;
-          color: ${theme.colors.secondary1};
-        `;
-      case 'dashboard':
-        return `
-          background: ${theme.colors.primary1}18;
-          color: ${theme.colors.primary1};
-        `;
-      case 'landing':
-        return `
-          background: #10b98118;
-          color: #10b981;
-        `;
-      case 'saas':
-        return `
-          background: #8b5cf618;
-          color: #8b5cf6;
-        `;
-      case 'other':
-        return `
-          background: #f59e0b18;
-          color: #f59e0b;
-        `;
-      default:
-        return '';
-    }
-  }}
-`;
-
-export const CardImage = styled.div`
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: ${({ theme }) => theme.colors.btnSecondaryBorder};
-  overflow: hidden;
 
   img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top left;
+    transition: transform 0.4s ease;
   }
 `;
 
-export const CardContent = styled.div`
-  padding: 20px 24px 24px;
+export const CardPlaceholder = styled.div<{ $type: ProjectType }>`
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 12px;
+  color: ${({ $type }) => TYPE_COLORS[$type]};
+
+  strong {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: ${({ theme }) => theme.colors.title};
+    text-align: center;
+    padding: 0 16px;
+  }
+`;
+
+export const TypeBadge = styled.span<{ $type: ProjectType }>`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.text};
+
+  &::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: ${({ $type }) => TYPE_COLORS[$type]};
+  }
+`;
+
+export const CardBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 20px 20px;
+  flex: 1;
 
   ${({ theme }) => theme.media.sm} {
     padding: 16px;
   }
 `;
 
+export const CardHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+`;
+
+export const Logo = styled.img`
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  flex-shrink: 0;
+  object-fit: cover;
+  background: #14172a;
+`;
+
 export const CardTitle = styled.h3`
-  font-size: 18px;
+  flex: 1;
+  min-width: 0;
+  font-size: 1.15rem;
   font-weight: 700;
+  letter-spacing: -0.02em;
   color: ${({ theme }) => theme.colors.title};
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-
-  a {
-    color: ${({ theme }) => theme.colors.subtitle};
-    display: flex;
-    transition: color 0.2s ease;
-
-    &:hover {
-      color: ${({ theme }) => theme.colors.primary1};
-    }
-  }
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
-export const CardMeta = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-`;
-
-export const CardDescription = styled.p`
-  font-size: 14px;
-  line-height: 1.6;
+export const CardYear = styled.span`
+  flex-shrink: 0;
+  font-size: 0.82rem;
+  font-weight: 600;
   color: ${({ theme }) => theme.colors.text};
+  font-variant-numeric: tabular-nums;
+`;
+
+export const CardRole = styled.p`
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.accentText};
+`;
+
+export const CardDescription = styled.p<{ $lines?: number }>`
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: ${({ theme }) => theme.colors.subtitle};
+  display: -webkit-box;
+  -webkit-line-clamp: ${({ $lines }) => $lines ?? 2};
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+`;
+
+export const Facts = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.title};
+    min-width: 0;
+  }
+
+  svg {
+    flex-shrink: 0;
+    color: ${({ theme }) => theme.colors.accentText};
+  }
 `;
 
 export const TagsRow = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 4px;
+`;
+
+/* No celular as tecnologias ficam so no detalhe do projeto */
+export const CardTags = styled(TagsRow)`
+  @media (max-width: 640px) {
+    display: none;
+  }
 `;
 
 export const Tag = styled.span`
-  font-size: 11px;
+  font-size: 0.74rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  padding: 3px 10px;
+  padding: 4px 9px;
   border-radius: 6px;
-  background: ${({ theme }) => theme.colors.primary1}15;
-  color: ${({ theme }) => theme.colors.primary1};
+  background: ${({ theme }) => theme.colors.navbarLinkBgActive};
+  color: ${({ theme }) => theme.colors.subtitle};
+  white-space: nowrap;
+`;
+
+export const CardFooter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 8px;
+`;
+
+export const DetailsLink = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.title};
+
+  svg {
+    transition: transform 0.2s ease;
+  }
+
+  ${Card}:hover & svg {
+    transform: translateX(3px);
+  }
+`;
+
+export const LiveLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.accentText};
+  border: 1px solid ${({ theme }) => theme.colors.primary1}55;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.primary1}1f;
+  }
 `;
 
 export const EmptyState = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 80px 24px;
-  font-size: 18px;
-  color: ${({ theme }) => theme.colors.subtitle};
+  padding: 64px 24px;
   text-align: center;
-  border: 2px dashed ${({ theme }) => theme.colors.btnSecondaryBorder};
+  font-size: 1rem;
+  color: ${({ theme }) => theme.colors.subtitle};
+  border: 1px dashed ${({ theme }) => theme.colors.btnSecondaryBorder};
   border-radius: 20px;
-
-  ${({ theme }) => theme.media.md} {
-    padding: 48px 16px;
-    font-size: 16px;
-  }
 `;
 
-export const InfoPillsRow = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 2px;
-`;
-
-export const InfoPill = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 12px;
-  border-radius: 8px;
-  background: ${({ theme }) => theme.colors.btnSecondaryBg};
-  border: 1px solid ${({ theme }) => theme.colors.btnSecondaryBorder};
-  font-size: 12px;
-  color: ${({ theme }) => theme.colors.text};
-  line-height: 1;
-
-  svg {
-    flex-shrink: 0;
-    color: ${({ theme }) => theme.colors.primary1};
-  }
-
-  strong {
-    color: ${({ theme }) => theme.colors.title};
-    font-weight: 600;
-  }
-`;
-
-export const PlatformBadge = styled.span`
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 10px;
-  border-radius: 6px;
-  background: ${({ theme }) => theme.colors.secondary1}18;
-  color: ${({ theme }) => theme.colors.secondary1};
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-`;
-
-export const SectionHeader = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 24px;
-
-  h2 {
-    font-size: 20px;
-    font-weight: 700;
-    color: ${({ theme }) => theme.colors.title};
-    white-space: nowrap;
-  }
-
-  &::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(
-      to right,
-      ${({ theme }) => theme.colors.btnSecondaryBorder},
-      transparent
-    );
-  }
-
-  svg {
-    color: ${({ theme }) => theme.colors.primary1};
-    flex-shrink: 0;
-  }
-`;
-
-export const SectionSpacer = styled.div`
-  margin-top: 48px;
-`;
+/* ---------- Modal ---------- */
 
 export const ModalOverlay = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px);
+  inset: 0;
+  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
   padding: 24px;
-  animation: ${fadeIn} 0.25s ease;
+  background: rgba(0, 0, 0, 0.72);
+  animation: ${fadeIn} 0.2s ease;
 
-  ${({ theme }) => theme.media.sm} {
-    padding: 12px;
+  @media (max-width: 640px) {
+    padding: 0;
+    align-items: stretch;
   }
 `;
 
 export const ModalContent = styled.div`
-  background: ${({ theme }) => theme.colors.dropdownBg};
-  border: 1px solid ${({ theme }) => theme.colors.btnSecondaryBorder};
-  border-radius: 24px;
   width: 100%;
-  max-width: 900px;
-  max-height: 85vh;
-  overflow-y: auto;
-  animation: ${slideUp} 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+  max-width: 920px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  overflow: hidden;
+  background: ${({ theme }) => theme.colors.footerBg};
+  color: #f0f0f2;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+  animation: ${riseIn} 0.3s ease;
 
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme.colors.btnSecondaryBorder};
-    border-radius: 3px;
-  }
-
-  ${({ theme }) => theme.media.sm} {
-    max-height: 90vh;
-    border-radius: 16px;
+  @media (max-width: 640px) {
+    max-height: none;
+    height: 100%;
+    border-radius: 0;
+    border: none;
   }
 `;
 
 export const ModalHeader = styled.div`
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 32px 32px 0;
-  gap: 16px;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
 
   ${({ theme }) => theme.media.sm} {
-    padding: 20px 20px 0;
+    padding: 14px 16px;
   }
 `;
 
 export const ModalTitle = styled.h2`
-  font-size: 28px;
+  flex: 1;
+  min-width: 0;
+  font-size: 1.3rem;
   font-weight: 800;
-  color: ${({ theme }) => theme.colors.title};
-  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   ${({ theme }) => theme.media.sm} {
-    font-size: 22px;
+    font-size: 1.1rem;
   }
 `;
 
 export const ModalCloseButton = styled.button`
-  display: flex;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  border: 1px solid ${({ theme }) => theme.colors.btnSecondaryBorder};
-  background: ${({ theme }) => theme.colors.btnSecondaryBg};
-  color: ${({ theme }) => theme.colors.subtitle};
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: all 0.2s ease;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: transparent;
+  color: #fff;
+  transition: background 0.2s ease;
 
   &:hover {
-    color: ${({ theme }) => theme.colors.title};
-    border-color: ${({ theme }) => theme.colors.primary1};
+    background: rgba(255, 255, 255, 0.1);
   }
 `;
 
 export const ModalBody = styled.div`
-  padding: 24px 32px 32px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
+  padding: 24px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+
+  /* Itens de uma coluna flex com scroll nao podem encolher (a galeria sumia) */
+  & > * {
+    flex-shrink: 0;
+  }
 
   ${({ theme }) => theme.media.sm} {
-    padding: 16px 20px 24px;
-    gap: 20px;
+    padding: 16px 16px 32px;
+    gap: 16px;
   }
+`;
+
+export const ModalRole = styled.p`
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.primary1};
 `;
 
 export const ModalDescription = styled.p`
-  font-size: 15px;
-  line-height: 1.7;
-  color: ${({ theme }) => theme.colors.text};
+  font-size: 1rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.78);
 `;
 
-export const ModalDivider = styled.hr`
-  border: none;
-  height: 1px;
-  background: ${({ theme }) => theme.colors.btnSecondaryBorder};
-  margin: 4px 0;
-`;
-
-export const PlatformSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 20px;
-  border-radius: 16px;
-  background: ${({ theme }) => theme.colors.btnSecondaryBg};
-  border: 1px solid ${({ theme }) => theme.colors.btnSecondaryBorder};
-`;
-
-export const PlatformTitle = styled.h3`
-  font-size: 18px;
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors.title};
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  ${({ theme }) => theme.media.sm} {
-    font-size: 16px;
+export const ModalFacts = styled(Facts)`
+  li {
+    color: #fff;
+    font-size: 0.9rem;
   }
-`;
-
-export const PlatformDescription = styled.p`
-  font-size: 14px;
-  line-height: 1.6;
-  color: ${({ theme }) => theme.colors.text};
-`;
-
-export const PlatformFeatures = styled.p`
-  font-size: 13px;
-  line-height: 1.7;
-  color: ${({ theme }) => theme.colors.subtitle};
-  font-style: italic;
-`;
-
-export const PlatformRoleBadge = styled.span`
-  font-size: 12px;
-  font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 8px;
-  background: ${({ theme }) => theme.colors.primary1}15;
-  color: ${({ theme }) => theme.colors.primary1};
-  align-self: flex-start;
-`;
-
-export const PlatformCarouselWrapper = styled.div`
-  border-radius: 12px;
-  overflow: hidden;
-`;
-
-export const TabBar = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px;
-  border-radius: 14px;
-  background: ${({ theme }) => theme.colors.btnSecondaryBg};
-  border: 1px solid ${({ theme }) => theme.colors.btnSecondaryBorder};
-  margin-bottom: 32px;
-  width: fit-content;
-`;
-
-export const TabButton = styled.button<{ $active: boolean }>`
-  position: relative;
-  padding: 10px 28px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  border: none;
-  background: ${({ $active, theme }) =>
-    $active ? theme.colors.primary1 : 'transparent'};
-  color: ${({ $active, theme }) =>
-    $active ? '#fff' : theme.colors.subtitle};
-  transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
-  white-space: nowrap;
-
-  &:hover {
-    color: ${({ $active, theme }) =>
-      $active ? '#fff' : theme.colors.title};
-    background: ${({ $active, theme }) =>
-      $active ? theme.colors.primary1 : `${theme.colors.primary1}10`};
-  }
-
-  ${({ theme }) => theme.media.sm} {
-    padding: 8px 20px;
-    font-size: 13px;
-  }
-`;
-
-export const AppsEmptyState = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  padding: 100px 24px;
-  text-align: center;
-  border: 2px dashed ${({ theme }) => theme.colors.btnSecondaryBorder};
-  border-radius: 24px;
-  background: ${({ theme }) => theme.colors.primary1}05;
 
   svg {
     color: ${({ theme }) => theme.colors.primary1};
-    opacity: 0.4;
   }
+`;
 
-  span {
-    font-size: 18px;
-    font-weight: 600;
-    color: ${({ theme }) => theme.colors.subtitle};
-    max-width: 320px;
-    line-height: 1.5;
+export const ModalTags = styled(TagsRow)`
+  ${Tag} {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.85);
   }
+`;
 
-  ${({ theme }) => theme.media.md} {
-    padding: 64px 16px;
+export const ModalSubheading = styled.h3`
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: -8px;
+`;
 
-    span {
-      font-size: 16px;
-    }
+export const ModalLive = styled.a`
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  background: ${({ theme }) => theme.colors.primary1};
+  color: #0a0a0b;
+
+  ${({ theme }) => theme.media.sm} {
+    align-self: stretch;
+    justify-content: center;
   }
+`;
+
+export const PlatformSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+`;
+
+export const PlatformTitle = styled.h4`
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+`;
+
+export const PlatformText = styled.p`
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
 `;

@@ -19,7 +19,40 @@ import {
   LocationCountry,
   LocationState,
   LocationCity,
+  StatsRow,
+  StacksBlock,
 } from './styles';
+import {
+  StatCard,
+  StatNumber,
+  StatLabel,
+  StacksLabel,
+  StacksRow,
+  StackChip,
+} from '../Experience/styles';
+
+const STACKS = [
+  'React.js',
+  'Next.js',
+  'TypeScript',
+  'JavaScript',
+  'Node.js',
+  'Prisma',
+  'PostgreSQL',
+  'Styled-Components',
+  'Firebase',
+  'REST APIs',
+  'Figma',
+  'Git',
+  'Docker',
+  'AWS',
+];
+
+const STATS = [
+  { value: '15+', labelKey: 'exp.stats.corporate' },
+  { value: '4', labelKey: 'exp.stats.products' },
+  { value: '28', labelKey: 'exp.stats.certifications' },
+];
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -51,10 +84,10 @@ const About = () => {
       >
         <TitleWrapper>
           <motion.div variants={itemVariants}>
-            <SectionSubtitle>{t('who.subtitle' as Parameters<typeof t>[0])}</SectionSubtitle>
+            <SectionSubtitle>{t('about.subtitle' as Parameters<typeof t>[0])}</SectionSubtitle>
           </motion.div>
           <motion.div variants={itemVariants}>
-            <SectionTitle>{t('who.title' as Parameters<typeof t>[0])}</SectionTitle>
+            <SectionTitle>{t('about.title' as Parameters<typeof t>[0])}</SectionTitle>
           </motion.div>
         </TitleWrapper>
 
@@ -77,7 +110,7 @@ const About = () => {
               <BioParagraph>{t('who.bio.p1' as Parameters<typeof t>[0])}</BioParagraph>
             </motion.div>
             <motion.div variants={itemVariants}>
-              <BioParagraph>{t('who.bio.p2' as Parameters<typeof t>[0])}</BioParagraph>
+              <BioParagraph>{t('about.p1' as Parameters<typeof t>[0])}</BioParagraph>
             </motion.div>
 
             <motion.div variants={itemVariants}>
@@ -94,6 +127,28 @@ const About = () => {
             </motion.div>
           </BioColumn>
         </PhotoBioWrapper>
+
+        <motion.div variants={itemVariants}>
+          <StatsRow>
+            {STATS.map(({ value, labelKey }) => (
+              <StatCard key={labelKey}>
+                <StatNumber>{value}</StatNumber>
+                <StatLabel>{t(labelKey as Parameters<typeof t>[0])}</StatLabel>
+              </StatCard>
+            ))}
+          </StatsRow>
+        </motion.div>
+
+        <motion.div variants={itemVariants}>
+          <StacksBlock>
+            <StacksLabel>{t('exp.stacks.label' as Parameters<typeof t>[0])}</StacksLabel>
+            <StacksRow>
+              {STACKS.map(stack => (
+                <StackChip key={stack}>{stack}</StackChip>
+              ))}
+            </StacksRow>
+          </StacksBlock>
+        </motion.div>
       </motion.div>
     </Section>
   );

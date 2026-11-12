@@ -16,6 +16,7 @@ import {
 import { useAppTheme } from '@/contexts/ThemeContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useCursor } from '@/contexts/CursorContext';
+import { useLiteMode } from '@/hooks/useLiteMode';
 import {
   PageTitleWrapper,
   PageTag,
@@ -68,6 +69,8 @@ const SettingsPage = () => {
   const { themeMode, toggleTheme } = useAppTheme();
   const { language, setLanguage, t } = useLanguage();
   const { cursorMode, toggleCursor } = useCursor();
+  // Cursor customizado so existe com mouse: a opcao some no toque e em telas estreitas
+  const lite = useLiteMode();
   const [langOpen, setLangOpen] = useState(false);
 
   return (
@@ -119,6 +122,7 @@ const SettingsPage = () => {
         <Switch active={themeMode === 'dark'} />
       </DirectRedirectCard>
 
+      {!lite && (
       <DirectRedirectCard
         custom={1}
         variants={cardVariants}
@@ -143,6 +147,7 @@ const SettingsPage = () => {
         </RedirectLeft>
         <Switch active={cursorMode === 'modern'} />
       </DirectRedirectCard>
+      )}
 
       <LangCollapsibleCard
         custom={2}

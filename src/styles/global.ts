@@ -1,6 +1,7 @@
 'use client';
 
 import { createGlobalStyle } from 'styled-components';
+import { liteMedia } from './lite';
 
 export const GlobalStyle = createGlobalStyle`
   *, *::after, *::before {
@@ -17,12 +18,23 @@ export const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
-  html.modern-cursor, html.modern-cursor body {
-    cursor: none;
+  /* Cursor customizado so existe com mouse em tela larga */
+  @media (hover: hover) and (pointer: fine) and (min-width: 1025px) {
+    html.modern-cursor, html.modern-cursor body {
+      cursor: none;
+    }
+
+    html.modern-cursor * {
+      cursor: none !important;
+    }
   }
 
-  html.modern-cursor * {
-    cursor: none !important;
+  /* Modo leve: blur de fundo custa caro na GPU do celular */
+  ${liteMedia} {
+    *, *::before, *::after {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
   }
 
   body {

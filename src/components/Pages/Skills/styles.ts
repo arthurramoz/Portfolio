@@ -62,6 +62,17 @@ export const GlassGrid = styled.div`
     min-height: 0;
   }
 
+  /* Quanto maior o dominio, maior o bloco */
+  & > [data-span='2'] {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  & > [data-span='3'] {
+    grid-column: span 3;
+    grid-row: span 3;
+  }
+
   ${({ theme }) => theme.media.lg} {
     grid-template-columns: repeat(6, 1fr);
     gap: 12px;
@@ -72,8 +83,16 @@ export const GlassGrid = styled.div`
     gap: 10px;
   }
 
+  ${({ theme }) => theme.media.md} {
+    /* No celular o bloco maior ocupa 2 colunas, nao a largura toda */
+    & > [data-span='3'] {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+  }
+
   ${({ theme }) => theme.media.sm} {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 8px;
   }
 `;
@@ -185,6 +204,12 @@ export const SkillIconWrapper = styled.div<{ $size: number }>`
   svg {
     filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.08));
   }
+
+  /* No toque nao ha hover: o nome fica sempre visivel, entao o icone sobe e encolhe */
+  @media (hover: none) {
+    font-size: ${({ $size }) => ($size > 60 ? Math.min($size, 84) : 32)}px;
+    transform: translateY(-9px);
+  }
 `;
 
 export const SkillTooltip = styled.div`
@@ -210,6 +235,18 @@ export const SkillTooltip = styled.div`
   ${GlassCard}:hover & {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
+  }
+
+  @media (hover: none) {
+    opacity: 1;
+    transform: translateX(-50%);
+    background: none;
+    bottom: 6px;
+    padding: 0 4px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 10px;
   }
 
   ${({ theme }) => theme.media.sm} {

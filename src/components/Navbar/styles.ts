@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { motion } from 'motion/react';
 import styled from 'styled-components';
+import { solidOnLite } from '@/styles/lite';
 
 export const NavbarContainer = styled.header`
   position: fixed;
@@ -23,6 +24,7 @@ export const NavbarContainer = styled.header`
   background: ${({ theme }) => theme.colors.navbarBg};
   backdrop-filter: blur(28px) saturate(190%) contrast(105%);
   -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(105%);
+  ${solidOnLite}
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   box-shadow: ${({ theme }) => theme.colors.navbarGlassShadow};
 
@@ -211,6 +213,7 @@ export const MobileDrawer = styled(motion.div)`
       : 'rgba(16, 16, 24, 0.76)'};
   backdrop-filter: blur(32px) saturate(190%) contrast(105%);
   -webkit-backdrop-filter: blur(32px) saturate(190%) contrast(105%);
+  ${solidOnLite}
   border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
   border-radius: 28px;
   box-shadow: 
@@ -458,6 +461,7 @@ export const MobileLanguageModal = styled(motion.div)`
   background: ${({ theme }) => theme.colors.dropdownBg};
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  ${solidOnLite}
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
   padding: 20px;
   display: flex;

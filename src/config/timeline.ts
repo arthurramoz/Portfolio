@@ -41,8 +41,8 @@ export const COMPANY_BRANDS: Record<CompanyKey, CompanyBrandInfo> = {
     colorGlow: '#FF8533',
     bg: 'rgba(255, 107, 0, 0.12)',
     border: 'rgba(255, 107, 0, 0.35)',
-    logo: '/logos/codotech.svg',
-    logoIcon: '/logos/codotech-icon.svg',
+    logo: '/logos/codotech.webp',
+    logoIcon: '/logos/codotech-icon.webp',
   },
 };
 

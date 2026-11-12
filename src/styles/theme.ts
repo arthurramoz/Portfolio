@@ -60,6 +60,7 @@ export const lightTheme = {
     navbarCtaText: '#333',
 
     dropdownBg: 'rgba(255, 255, 255, 0.82)',
+    glassSolid: 'rgba(255, 255, 255, 0.96)',
 
     footerBg: '#1a1a1f',
     footerText: 'rgba(255, 255, 255, 0.5)',
@@ -121,6 +122,7 @@ export const darkTheme = {
     navbarCtaText: '#0a0a0b',
 
     dropdownBg: 'rgba(22, 22, 30, 0.78)',
+    glassSolid: 'rgba(20, 20, 27, 0.97)',
 
     footerBg: '#111114',
     footerText: 'rgba(255, 255, 255, 0.4)',

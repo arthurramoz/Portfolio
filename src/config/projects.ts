@@ -5,6 +5,8 @@ export interface ProjectPlatform {
   tags: string[];
   roleKey?: string;
   featuresKey?: string;
+  /** Prints de celular (retrato) */
+  portrait?: boolean;
 }
 
 export type ProjectType =
@@ -18,6 +20,10 @@ export type ProjectPlatformType = 'web' | 'app';
 export interface ProjectItem {
   title: string;
   descriptionKey: string;
+  /** Capa 4:3 usada nos cards */
+  cover?: string;
+  /** Icone/logo do projeto */
+  logo?: string;
   images?: string[];
   tags: string[];
   link?: string;
@@ -43,15 +49,15 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     projectType: 'saas',
     platformType: 'web',
     images: [
-      '/projects/avs/1.png',
-      '/projects/avs/2.png',
-      '/projects/avs/3.png',
-      '/projects/avs/4.png',
-      '/projects/avs/5.png',
-      '/projects/avs/6.png',
-      '/projects/avs/7.png',
-      '/projects/avs/8.png',
-      '/projects/avs/9.png',
+      '/projects/avs/1.webp',
+      '/projects/avs/2.webp',
+      '/projects/avs/3.webp',
+      '/projects/avs/4.webp',
+      '/projects/avs/5.webp',
+      '/projects/avs/6.webp',
+      '/projects/avs/7.webp',
+      '/projects/avs/8.webp',
+      '/projects/avs/9.webp',
     ],
     tags: [
       'Next.js 15',
@@ -76,12 +82,14 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     month: 7,
     projectType: 'ecommerce',
     platformType: 'web',
+    cover: '/projects/covers/cqt.webp',
+    logo: '/projects/logos/cqt.png',
     images: [
-      '/projects/certeza-cliente/1.png',
-      '/projects/certeza-cliente/2.png',
-      '/projects/certeza-cliente/6.png',
-      '/projects/certeza-expert/4.png',
-      '/projects/certeza-expert/1.png',
+      '/projects/certeza-cliente/1.webp',
+      '/projects/certeza-cliente/2.webp',
+      '/projects/certeza-cliente/6.webp',
+      '/projects/certeza-expert/4.webp',
+      '/projects/certeza-expert/1.webp',
     ],
     tags: [
       'Next.js',
@@ -103,12 +111,12 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
         title: 'Certeza que Tem Web Cliente',
         descriptionKey: 'project.cqt.client.desc',
         images: [
-          '/projects/certeza-cliente/1.png',
-          '/projects/certeza-cliente/2.png',
-          '/projects/certeza-cliente/3.png',
-          '/projects/certeza-cliente/4.png',
-          '/projects/certeza-cliente/5.png',
-          '/projects/certeza-cliente/6.png',
+          '/projects/certeza-cliente/1.webp',
+          '/projects/certeza-cliente/2.webp',
+          '/projects/certeza-cliente/3.webp',
+          '/projects/certeza-cliente/4.webp',
+          '/projects/certeza-cliente/5.webp',
+          '/projects/certeza-cliente/6.webp',
         ],
         tags: [
           'Next.js 16',
@@ -129,10 +137,10 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
         title: 'Certeza que Tem Web Expert',
         descriptionKey: 'project.cqt.expert.desc',
         images: [
-          '/projects/certeza-expert/1.png',
-          '/projects/certeza-expert/2.png',
-          '/projects/certeza-expert/3.png',
-          '/projects/certeza-expert/4.png',
+          '/projects/certeza-expert/1.webp',
+          '/projects/certeza-expert/2.webp',
+          '/projects/certeza-expert/3.webp',
+          '/projects/certeza-expert/4.webp',
         ],
         tags: [
           'Next.js 15',
@@ -152,11 +160,11 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
         title: 'Certeza que Tem Web Master',
         descriptionKey: 'project.cqt.master.desc',
         images: [
-          '/projects/certeza-master/1.png',
-          '/projects/certeza-master/2.png',
-          '/projects/certeza-master/3.png',
-          '/projects/certeza-master/4.png',
-          '/projects/certeza-master/5.png',
+          '/projects/certeza-master/1.webp',
+          '/projects/certeza-master/2.webp',
+          '/projects/certeza-master/3.webp',
+          '/projects/certeza-master/4.webp',
+          '/projects/certeza-master/5.webp',
         ],
         tags: [
           'Next.js 15',
@@ -175,8 +183,8 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
         title: 'Certeza que Tem Web Seller',
         descriptionKey: 'project.cqt.seller.desc',
         images: [
-          '/projects/certeza-seller/1.png',
-          '/projects/certeza-seller/2.png',
+          '/projects/certeza-seller/1.webp',
+          '/projects/certeza-seller/2.webp',
         ],
         tags: [
           'Next.js 15',
@@ -189,6 +197,84 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
         ],
         roleKey: 'project.cqt.seller.role',
         featuresKey: 'project.cqt.seller.features',
+      },
+      {
+        title: 'Certeza que Tem App',
+        descriptionKey: 'project.cqt.app.desc',
+        portrait: true,
+        images: [
+          '/projects/certeza-app/1.webp',
+          '/projects/certeza-app/2.webp',
+          '/projects/certeza-app/3.webp',
+          '/projects/certeza-app/4.webp',
+          '/projects/certeza-app/5.webp',
+          '/projects/certeza-app/6.webp',
+          '/projects/certeza-app/7.webp',
+        ],
+        tags: ['Mobile App'],
+      },
+    ],
+  },
+  {
+    title: 'Queimando o Bacon',
+    descriptionKey: 'project.qb.desc',
+    featured: true,
+    year: 2026,
+    month: 6,
+    projectType: 'ecommerce',
+    platformType: 'web',
+    cover: '/projects/covers/qb.webp',
+    logo: '/projects/logos/qb.png',
+    images: [
+      '/projects/queimando-bacon/1.webp',
+      '/projects/queimando-bacon/2.webp',
+      '/projects/queimando-bacon/3.webp',
+      '/projects/queimando-bacon/4.webp',
+      '/projects/queimando-bacon/5.webp',
+      '/projects/queimando-bacon/6.webp',
+    ],
+    tags: [
+      'Next.js 15',
+      'React',
+      'React Native',
+      'Expo',
+      'TypeScript',
+      'Styled-Components',
+      'Strapi',
+      'PostgreSQL',
+      'Pagarme',
+      'Firebase',
+    ],
+    roleKey: 'project.qb.role',
+    durationKey: 'project.qb.duration',
+    highlightKey: 'project.qb.highlight',
+    platforms: [
+      {
+        title: 'Queimando o Bacon App Cliente',
+        descriptionKey: 'project.qb.app.desc',
+        portrait: true,
+        images: [
+          '/projects/queimando-bacon-app/1.webp',
+          '/projects/queimando-bacon-app/2.webp',
+          '/projects/queimando-bacon-app/3.webp',
+          '/projects/queimando-bacon-app/4.webp',
+          '/projects/queimando-bacon-app/5.webp',
+          '/projects/queimando-bacon-app/6.webp',
+          '/projects/queimando-bacon-app/7.webp',
+          '/projects/queimando-bacon-app/8.webp',
+        ],
+        tags: ['React Native', 'Expo', 'TypeScript'],
+      },
+      {
+        title: 'Queimando o Bacon App Entregador',
+        descriptionKey: 'project.qb.courier.desc',
+        portrait: true,
+        images: [
+          '/projects/queimando-bacon-entregador/1.webp',
+          '/projects/queimando-bacon-entregador/2.webp',
+          '/projects/queimando-bacon-entregador/3.webp',
+        ],
+        tags: ['React Native', 'Expo', 'TypeScript'],
       },
     ],
   },
@@ -269,13 +355,13 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     projectType: 'dashboard',
     platformType: 'web',
     images: [
-      '/projects/popgov/1.png',
-      '/projects/popgov/2.png',
-      '/projects/popgov/3.png',
-      '/projects/popgov/4.png',
-      '/projects/popgov/5.png',
-      '/projects/popgov/6.png',
-      '/projects/popgov/7.png',
+      '/projects/popgov/1.webp',
+      '/projects/popgov/2.webp',
+      '/projects/popgov/3.webp',
+      '/projects/popgov/4.webp',
+      '/projects/popgov/5.webp',
+      '/projects/popgov/6.webp',
+      '/projects/popgov/7.webp',
     ],
     tags: [
       'Next.js',
@@ -300,11 +386,11 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     projectType: 'dashboard',
     platformType: 'web',
     images: [
-      '/projects/edugest/1.png',
-      '/projects/edugest/2.png',
-      '/projects/edugest/3.png',
-      '/projects/edugest/4.png',
-      '/projects/edugest/5.png',
+      '/projects/edugest/1.webp',
+      '/projects/edugest/2.webp',
+      '/projects/edugest/3.webp',
+      '/projects/edugest/4.webp',
+      '/projects/edugest/5.webp',
     ],
     tags: [
       'Next.js',
@@ -351,10 +437,10 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     projectType: 'landing',
     platformType: 'web',
     images: [
-      '/projects/gotasks/1.png',
-      '/projects/gotasks/2.png',
-      '/projects/gotasks/3.png',
-      '/projects/gotasks/4.png',
+      '/projects/gotasks/1.webp',
+      '/projects/gotasks/2.webp',
+      '/projects/gotasks/3.webp',
+      '/projects/gotasks/4.webp',
     ],
     tags: ['Next.js', 'React', 'TypeScript', 'Styled-Components', 'QRCode'],
     roleKey: 'project.gotasks.role',
@@ -472,14 +558,14 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     projectType: 'landing',
     platformType: 'web',
     images: [
-      '/projects/meuacesso/1.png',
-      '/projects/meuacesso/2.png',
-      '/projects/meuacesso/3.png',
-      '/projects/meuacesso/4.png',
-      '/projects/meuacesso/5.png',
-      '/projects/meuacesso/6.png',
-      '/projects/meuacesso/7.png',
-      '/projects/meuacesso/8.png',
+      '/projects/meuacesso/1.webp',
+      '/projects/meuacesso/2.webp',
+      '/projects/meuacesso/3.webp',
+      '/projects/meuacesso/4.webp',
+      '/projects/meuacesso/5.webp',
+      '/projects/meuacesso/6.webp',
+      '/projects/meuacesso/7.webp',
+      '/projects/meuacesso/8.webp',
     ],
     tags: [
       'Next.js',
@@ -502,13 +588,15 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
     projectType: 'landing',
     platformType: 'web',
     link: 'https://adv-solange-pied.vercel.app/',
+    cover: '/projects/covers/solange.webp',
+    logo: '/projects/logos/solange.svg',
     images: [
-      '/projects/advogada/1.png',
-      '/projects/advogada/2.png',
-      '/projects/advogada/3.png',
-      '/projects/advogada/4.png',
-      '/projects/advogada/5.png',
-      '/projects/advogada/6.png',
+      '/projects/advogada/1.webp',
+      '/projects/advogada/2.webp',
+      '/projects/advogada/3.webp',
+      '/projects/advogada/4.webp',
+      '/projects/advogada/5.webp',
+      '/projects/advogada/6.webp',
     ],
     tags: [
       'Next.js',
@@ -527,18 +615,94 @@ export const COMPANY_PROJECTS: ProjectItem[] = [
 
 export const PERSONAL_PROJECTS: ProjectItem[] = [
   {
+    title: 'Portfólio v3',
+    descriptionKey: 'project.portfolio3.desc',
+    featured: true,
+    year: 2026,
+    month: 10,
+    projectType: 'landing',
+    platformType: 'web',
+    link: 'https://www.arthur-moreira-ramos.com.br',
+    cover: '/projects/covers/portfolio.webp',
+    logo: '/projects/logos/portfolio.svg',
+    images: [
+      '/projects/portfolio-v3/1.webp',
+      '/projects/portfolio-v3/2.webp',
+      '/projects/portfolio-v3/3.webp',
+    ],
+    tags: [
+      'Next.js 15',
+      'React',
+      'TypeScript',
+      'Styled-Components',
+      'Motion',
+      'i18n',
+      'Accessibility',
+    ],
+    roleKey: 'project.portfolio3.role',
+    highlightKey: 'project.portfolio3.highlight',
+    platforms: [
+      {
+        title: 'Mobile',
+        descriptionKey: 'project.portfolio3.mobile.desc',
+        portrait: true,
+        images: [
+          '/projects/portfolio-v3/m/1.webp',
+          '/projects/portfolio-v3/m/2.webp',
+          '/projects/portfolio-v3/m/3.webp',
+          '/projects/portfolio-v3/m/4.webp',
+          '/projects/portfolio-v3/m/5.webp',
+        ],
+        tags: ['Responsive', 'Light & Dark'],
+      },
+    ],
+  },
+  {
+    title: 'Elementa',
+    descriptionKey: 'project.elementa.desc',
+    year: 2025,
+    month: 10,
+    projectType: 'saas',
+    platformType: 'web',
+    cover: '/projects/covers/elementa.webp',
+    logo: '/projects/logos/elementa.svg',
+    images: [
+      '/projects/elementa/7.webp',
+      '/projects/elementa/8.webp',
+      '/projects/elementa/9.webp',
+      '/projects/elementa/10.webp',
+      '/projects/elementa/1.webp',
+      '/projects/elementa/3.webp',
+      '/projects/elementa/5.webp',
+      '/projects/elementa/4.webp',
+      '/projects/elementa/6.webp',
+      '/projects/elementa/2.webp',
+    ],
+    tags: [
+      'Next.js 15',
+      'React',
+      'TypeScript',
+      'Styled-Components',
+      'Firebase',
+      'Framer Motion',
+      'Gamification',
+    ],
+  },
+  {
     title: 'ElevenLabs',
     descriptionKey: 'project.elevenlabs.desc',
     year: 2025,
     month: 9,
     projectType: 'landing',
     platformType: 'web',
+    cover: '/projects/covers/elevenlabs.webp',
+    logo: '/projects/logos/elevenlabs.svg',
     images: [
-      '/projects/eleven-labs.jpg',
-      '/projects/eleven-labs2.jpg',
-      '/projects/eleven-labs3.jpg',
-      '/projects/eleven-labs4.jpg',
-      '/projects/eleven-labs6.jpg',
+      '/projects/eleven-labs.webp',
+      '/projects/eleven-labs2.webp',
+      '/projects/eleven-labs3.webp',
+      '/projects/eleven-labs4.webp',
+      '/projects/eleven-labs6.webp',
     ],
     tags: [
       'Next.js',
@@ -560,10 +724,10 @@ export const PERSONAL_PROJECTS: ProjectItem[] = [
     projectType: 'landing',
     platformType: 'web',
     images: [
-      '/projects/first-portfolio.png',
-      '/projects/first-portfolio2.png',
-      '/projects/first-portfolio3.png',
-      '/projects/first-portfolio4.png',
+      '/projects/first-portfolio.webp',
+      '/projects/first-portfolio2.webp',
+      '/projects/first-portfolio3.webp',
+      '/projects/first-portfolio4.webp',
     ],
     tags: ['JavaScript', 'HTML', 'CSS'],
     link: 'https://arthurramoz.github.io/Portfolio-1/index.html',
@@ -575,7 +739,7 @@ export const PERSONAL_PROJECTS: ProjectItem[] = [
     month: 8,
     projectType: 'other',
     platformType: 'web',
-    images: ['/projects/paragrafeado.png'],
+    images: ['/projects/paragrafeado.webp'],
     tags: ['React', 'JavaScript', 'JSX', 'HTML', 'CSS'],
     link: 'https://arthurramoz.github.io/paragrafeado-react/',
     hidden: true,
@@ -590,7 +754,7 @@ export const UNIVERSITY_PROJECTS: ProjectItem[] = [
     month: 6,
     projectType: 'other',
     platformType: 'web',
-    images: ['/projects/netflix.jpg'],
+    images: ['/projects/netflix.webp'],
     tags: ['JavaScript', 'JQuery', 'PHP', 'MySQL', 'HTML', 'CSS'],
     hidden: true,
   },
@@ -615,3 +779,18 @@ export const ALL_PROJECTS: ProjectItem[] = [
   const dateB = b.year * 100 + (b.month ?? 0);
   return dateB - dateA;
 });
+
+/** Projetos mostrados na home, na ordem em que aparecem */
+const HOME_FEATURED_TITLES = [
+  'Certeza que Tem',
+  'Queimando o Bacon',
+  'Dra. Solange',
+];
+
+export const HOME_FEATURED_PROJECTS: ProjectItem[] = HOME_FEATURED_TITLES.map(
+  title => ALL_PROJECTS.find(project => project.title === title),
+).filter((project): project is ProjectItem => !!project);
+
+export const VISIBLE_PROJECTS_COUNT = ALL_PROJECTS.filter(
+  project => !project.hidden,
+).length;

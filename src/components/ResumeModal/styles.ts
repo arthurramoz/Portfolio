@@ -45,6 +45,9 @@ export const ModalContainer = styled(motion.div)`
     border-radius: 28px 28px 0 0;
     padding: 16px 20px 32px;
     max-height: 90vh;
+    max-height: 90dvh;
+    padding-bottom: max(32px, env(safe-area-inset-bottom));
+    overscroll-behavior: contain;
     overflow-y: auto;
     border-bottom: none;
     box-shadow: 0 -12px 48px rgba(0, 0, 0, 0.45);

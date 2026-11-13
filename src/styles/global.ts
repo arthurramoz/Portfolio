@@ -73,6 +73,12 @@ export const GlobalStyle = createGlobalStyle`
     font-family: inherit;
   }
 
+  @media (max-width: 640px) {
+    main :is(h1, h2, h3, p, a) { overflow-wrap: anywhere; }
+    main :is(input, textarea, select) { font-size: max(1rem, 16px); }
+    main img { max-width: 100%; }
+  }
+
   html.a11y-large-text {
     font-size: 120%;
   }

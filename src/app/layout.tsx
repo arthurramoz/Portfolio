@@ -31,9 +31,6 @@ export const metadata: Metadata = {
   icons: {
     icon: '/logo.png',
   },
-  alternates: {
-    canonical: 'https://www.arthur-moreira-ramos.com.br',
-  },
   openGraph: {
     title: 'Arthur Ramos | Frontend Developer',
     description:

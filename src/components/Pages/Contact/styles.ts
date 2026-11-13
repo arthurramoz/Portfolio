@@ -174,7 +174,9 @@ export const InfoCardValue = styled.span`
   white-space: nowrap;
 
   ${({ theme }) => theme.media.md} {
-    font-size: 0.85rem;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    font-size: 0.95rem;
   }
 `;
 

@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { FiArrowRight } from 'react-icons/fi';
-import { motion } from 'motion/react';
 import styled, { keyframes } from 'styled-components';
 
 const fadeInUp30 = keyframes`
@@ -25,67 +24,25 @@ const fadeInUp20 = keyframes`
   }
 `;
 
-const pulseDot = keyframes`
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6);
-  }
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 7px rgba(34, 197, 94, 0);
-  }
-  100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
-  }
-`;
-
-export const StatusBadge = styled(motion.div)`
-  display: inline-flex;
+export const Availability = styled.p`
+  display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 16px;
-  border-radius: 9999px;
-  background: ${({ theme }) => theme.colors.navbarBg};
-  border: 1px solid ${({ theme }) => theme.colors.navbarBorder};
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 2px 14px ${({ theme }) => theme.colors.navbarShadow};
-  width: fit-content;
-  max-width: 100%;
-  box-sizing: border-box;
-  cursor: default;
+  gap: 8px;
+  margin: 20px 0 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: ${({ theme }) => theme.colors.text};
 
-  span {
-    font-size: 13px;
-    font-weight: 600;
-    color: ${({ theme }) => theme.colors.title};
-    letter-spacing: -0.01em;
-    line-height: 1.35;
-  }
-
-  @media (max-width: 600px) {
-    padding: 7px 12px;
-    gap: 8px;
-    text-align: left;
-    span {
-      font-size: 11.5px;
-    }
+  ${({ theme }) => theme.media.lg} {
+    justify-content: center;
   }
 `;
 
 export const StatusDot = styled.span`
-  width: 9px;
-  height: 9px;
+  flex: 0 0 7px;
+  height: 7px;
   border-radius: 50%;
-  background-color: #22c55e;
-  display: inline-block;
-  flex-shrink: 0;
-  animation: ${pulseDot} 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
-
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-  }
+  background: #22c55e;
 `;
 
 export const Section = styled.section`

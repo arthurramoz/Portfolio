@@ -23,7 +23,7 @@ import {
   InfoBlock,
   Facts,
   Fact,
-  StatusBadge,
+  Availability,
   StatusDot,
 } from './styles';
 
@@ -37,21 +37,17 @@ const Hero = () => {
       {!reduceAnimations && <InteractiveOrb />}
       <Content>
         <TextBlock>
-          <StatusBadge
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.4 }}
-          >
-            <StatusDot aria-hidden="true" />
-            <span>{t('hero.status' as Parameters<typeof t>[0])}</span>
-          </StatusBadge>
-
           <Greeting>{t('hero.greeting')}</Greeting>
 
           <Name>Arthur Moreira Ramos</Name>
 
           <InfoBlock>
             <Description>{t('hero.description')}</Description>
+
+            <Availability>
+              <StatusDot aria-hidden="true" />
+              {t('hero.status' as Parameters<typeof t>[0])}
+            </Availability>
 
             <Actions>
               <PrimaryButton href="/contato">

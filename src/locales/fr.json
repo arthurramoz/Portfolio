@@ -1,7 +1,8 @@
 {
   "hero.status": "Disponible pour des projets à distance",
   "hero.greeting": "Ingénieur Front-End & Spécialiste Produit",
-  "hero.description": "Je développe des applications web rapides, accessibles et évolutives avec React, Next.js et TypeScript. Je transforme des exigences complexes en interfaces fluides et performantes.",
+  "hero.description": "Je développe des interfaces web avec React, Next.js et TypeScript.",
+  "hero.details": "Expérience et langues",
   "hero.btn.primary": "Discutons",
   "hero.btn.secondary": "Voir les Études de Cas",
   "hero.btn.resume": "Télécharger CV",

@@ -64,7 +64,7 @@ export const Section = styled.section`
   }
 
   ${({ theme }) => theme.media.sm} {
-    padding: 5.5rem 16px 2rem;
+    padding: 8.5rem clamp(20px, 6vw, 32px) 3rem;
     min-height: auto;
   }
 `;
@@ -197,9 +197,9 @@ export const Actions = styled.div`
   }
 
   ${({ theme }) => theme.media.sm} {
-    flex-direction: column;
+    align-items: center;
     width: 100%;
-    gap: 10px;
+    gap: 8px 16px;
     margin-top: 16px;
   }
 `;
@@ -267,8 +267,13 @@ export const SecondaryButton = styled(BaseLink)`
   -webkit-backdrop-filter: blur(6px);
 
   ${({ theme }) => theme.media.sm} {
-    width: 100%;
-    padding: 13px 20px;
+    width: auto;
+    padding: 10px 2px;
+    min-height: 44px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    backdrop-filter: none;
   }
 
   &:hover {
@@ -284,7 +289,7 @@ export const ResumeWrapper = styled.div`
   display: inline-flex;
 
   ${({ theme }) => theme.media.sm} {
-    width: 100%;
+    width: auto;
   }
 `;
 
@@ -308,8 +313,13 @@ export const ResumeButton = styled.button`
   border: 1px solid ${({ theme }) => theme.colors.primary1}40;
 
   ${({ theme }) => theme.media.sm} {
-    width: 100%;
-    padding: 13px 20px;
+    width: auto;
+    padding: 10px 2px;
+    min-height: 44px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    backdrop-filter: none;
   }
 
   &:focus-visible {
@@ -340,6 +350,22 @@ export const IllustrationBlock = styled.div`
 
   ${({ theme }) => theme.media.lg} {
     max-width: 320px;
+  }
+`;
+
+export const ProfileDetails = styled.details`
+  margin-top: 24px;
+  color: ${({ theme }) => theme.colors.subtitle};
+
+  summary {
+    width: fit-content;
+    padding-block: 12px;
+    font-size: 0.875rem;
+    cursor: pointer;
+  }
+
+  ${({ theme }) => theme.media.lg} {
+    summary { margin-inline: auto; }
   }
 `;
 

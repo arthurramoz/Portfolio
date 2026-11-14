@@ -25,6 +25,7 @@ import {
   Fact,
   Availability,
   StatusDot,
+  ProfileDetails,
 } from './styles';
 
 const Hero = () => {
@@ -73,7 +74,9 @@ const Hero = () => {
               </ResumeWrapper>
             </Actions>
 
-            <Facts>
+            <ProfileDetails>
+              <summary>{t('hero.details')}</summary>
+              <Facts>
               <Fact>
                 <strong>3+</strong>
                 {t('projects.impact.years' as Parameters<typeof t>[0])}
@@ -90,7 +93,8 @@ const Hero = () => {
                 <FiGlobe size={14} aria-hidden="true" />
                 {t('hero.fact.english' as Parameters<typeof t>[0])}
               </Fact>
-            </Facts>
+              </Facts>
+            </ProfileDetails>
           </InfoBlock>
         </TextBlock>
       </Content>

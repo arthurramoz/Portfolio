@@ -34,8 +34,8 @@ export const PageTitleWrapper = styled.div`
   margin-bottom: 48px;
 
   ${({ theme }) => theme.media.md} {
-    gap: 10px;
-    margin-bottom: 32px;
+    gap: 16px;
+    margin-bottom: 44px;
   }
 `;
 

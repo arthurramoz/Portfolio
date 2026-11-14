@@ -52,7 +52,7 @@
     "prettier": "^2.7.1",
     "typescript": "^5"
   },
-  "description": "Personal portfolio of Arthur Ramos — Frontend Developer. Built with Next.js, TypeScript, styled-components, and Framer Motion.",
+  "description": "Personal portfolio of Arthur Ramos, frontend developer. Built with Next.js, TypeScript, styled-components, and Framer Motion.",
   "main": "next.config.js",
   "repository": {
     "type": "git",

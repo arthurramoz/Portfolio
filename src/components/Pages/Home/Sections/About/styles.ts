@@ -13,7 +13,7 @@ export const Section = styled.section`
   overflow-x: hidden;
 
   ${({ theme }) => theme.media.md} {
-    padding: 80px 16px 64px;
+    padding: 80px 6vw 64px;
     min-height: auto;
   }
 

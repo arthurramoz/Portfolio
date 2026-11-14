@@ -2,7 +2,7 @@
 
   <img src="public/logo.png" alt="Arthur Ramos Logo" width="80" height="80" />
 
-  # Arthur Ramos — Web Portfolio & Engineering Showcase
+  # Arthur Ramos: Web Portfolio
 
   <p align="center">
     <strong>High-performance, interactive personal web platform engineered with modern frontend architecture.</strong>

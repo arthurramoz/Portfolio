@@ -20,7 +20,7 @@ export const Section = styled.section`
   }
 
   ${({ theme }) => theme.media.sm} {
-    padding: 56px 16px 40px;
+    padding: 64px 6vw 64px;
   }
 `;
 

@@ -77,7 +77,7 @@ export const lightTheme = {
   pagePadding: {
     default: '140px 40px 96px',
     lg: '120px 24px 64px',
-    sm: '100px 16px 48px',
+    sm: '128px clamp(20px, 6vw, 32px) 72px',
   },
 } as const;
 
@@ -139,7 +139,7 @@ export const darkTheme = {
   pagePadding: {
     default: '140px 40px 96px',
     lg: '120px 24px 64px',
-    sm: '100px 16px 48px',
+    sm: '128px clamp(20px, 6vw, 32px) 72px',
   },
 } as const;
 

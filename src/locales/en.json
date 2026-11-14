@@ -1,7 +1,8 @@
 {
   "hero.status": "Open to remote work",
   "hero.greeting": "Frontend Engineer & Product Specialist",
-  "hero.description": "I build fast, accessible, and scalable web applications using React, Next.js, and TypeScript. Turning complex product requirements into clean interfaces that retain users and drive real business growth.",
+  "hero.description": "I build web interfaces with React, Next.js and TypeScript.",
+  "hero.details": "Experience and languages",
   "hero.btn.primary": "Let's Talk",
   "hero.btn.secondary": "View Case Studies",
   "hero.btn.resume": "Download CV",

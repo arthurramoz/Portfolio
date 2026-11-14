@@ -11,7 +11,7 @@ export const Section = styled.section`
   }
 
   ${({ theme }) => theme.media.sm} {
-    padding: 8px 16px 40px;
+    padding: 32px 6vw 56px;
   }
 `;
 

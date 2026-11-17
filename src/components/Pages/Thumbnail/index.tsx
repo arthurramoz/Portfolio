@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'motion/react';
+import BrandMark from '@/components/BrandMark';
 import {
   ThumbnailContainer,
   GridBackground,
@@ -173,14 +174,7 @@ const ThumbnailPage = () => {
         >
           <LogoGlow />
           <LogoSvg>
-            <Image
-              src="/logo.png"
-              alt="Arthur Ramos Logo"
-              width={140}
-              height={140}
-              priority
-              style={{ objectFit: 'contain' }}
-            />
+            <BrandMark size={140} ink="#FFFFFF" dot="#48CAE4" label="Arthur Ramos Logo" />
           </LogoSvg>
         </LogoWrapper>
 

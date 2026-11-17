@@ -24,6 +24,7 @@ import {
 import { useAppTheme } from '@/contexts/ThemeContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { CURRENT_VERSION, CURRENT_LABEL } from '@/config/versions';
+import BrandMark from '@/components/BrandMark';
 import {
   DropdownDivider,
   DropdownLabel,
@@ -257,7 +258,7 @@ const Navbar = () => {
         >
           <NavLogo onClick={() => handleScrollNav('home')}>
             <NavLogoMark>
-              <img src="/logo.png" alt="A" width={30} height={30} style={{ objectFit: 'contain' }} />
+              <BrandMark size={34} label="Arthur Ramos" />
             </NavLogoMark>
           </NavLogo>
         </motion.div>
@@ -641,7 +642,7 @@ const Navbar = () => {
               <MobileDrawerContent>
                 <MobileDrawerHeader>
                   <NavLogoMark>
-                    <img src="/logo.png" alt="A" width={30} height={30} style={{ objectFit: 'contain' }} />
+                    <BrandMark size={34} label="Arthur Ramos" />
                   </NavLogoMark>
                   <MobileDrawerClose
                     type="button"

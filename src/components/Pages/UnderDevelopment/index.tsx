@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { HiArrowLeft } from 'react-icons/hi';
+import BrandMark from '@/components/BrandMark';
 import {
   AboutBio,
   AboutCard,
@@ -69,7 +70,7 @@ const UnderDevelopment = () => {
 
       <motion.div {...fade(0)}>
         <WipLogoMark>
-          <img src="/logo.png" alt="A" width={64} height={64} style={{ objectFit: 'contain' }} />
+          <BrandMark size={72} label="Arthur Ramos" />
         </WipLogoMark>
       </motion.div>
 

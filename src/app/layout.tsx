@@ -29,7 +29,11 @@ export const metadata: Metadata = {
   authors: [{ name: 'Arthur Ramos', url: 'https://www.arthur-moreira-ramos.com.br' }],
   creator: 'Arthur Ramos',
   icons: {
-    icon: '/logo.png',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/logo.png', type: 'image/png' },
+    ],
+    apple: '/logo.png',
   },
   openGraph: {
     title: 'Arthur Ramos | Frontend Developer',
